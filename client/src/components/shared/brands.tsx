@@ -26,7 +26,7 @@ export const Brands = () => {
     <div className=" bg-[#e7e7e7]">
        <div className="py-8 px-[5%]">
          <h1 className="text-3xl font-bold">Explore Our Premium Brands</h1>
-        <div className="flex gap-10 mt-8 items-center ">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 mt-8 items-center lg:grid-cols-5">
             {brands.map((brand) => (
                 <div key={brand.name} className="flex flex-col bg-white  font-bold items-center shadow-md p-4 px-8z rounded-md">
                     <img src={brand.img} alt={brand.name} className="w-24 h-24 object-contain" />

@@ -123,3 +123,7 @@ li,
 button {
   z-index: 10;
 }
+
+html {
+  scroll-behavior: smooth;
+}
