@@ -39,9 +39,10 @@
                                     Used
                             </Button>
                     </div>
-                    <div className="flex items-center gap-2 md:gap-4 p-3 mt-4 z-20 rounded-full bg-white">
-                            <Select value={brand} onValueChange={setBrand}>
-                                    <SelectTrigger className="w-[90px] md:w-[180px] text-[10px] md:text-lg">
+                    {/* <div className="flex items-center gap-2 md:gap-4 p-3 mt-4 z-20 rounded-full bg-white"> */}
+                    <div className="grid grid-cols-1 w-3/4 md:w-auto md:flex md:items-center rounded-lg md:rounded-full md:p-4  gap-2 md:gap-4 p-3 mt-4 z-20  bg-white">
+                            <Select value={brand} onValueChange={setBrand} >
+                                    <SelectTrigger className="md:w-[180px] md:text-lg  flex items-center justify-center w-full">
                                             <SelectValue placeholder="Any Makes" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -58,7 +59,7 @@
                             </Select>
                             <Separator orientation="vertical" />
                             <Select value={year === "any" ? "any" : String(year)} onValueChange={val => setYear(val === "any" ? "any" : Number(val))}>
-                                    <SelectTrigger className="w-[90px] md:w-[180px] text-[10px] md:text-lg">
+                                    <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
                                             <SelectValue placeholder="Any Years" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -73,7 +74,7 @@
                             </Select>
                             <Separator orientation="vertical" />
                             <Select value={price === "any" ? "any" : String(price)} onValueChange={val => setPrice(val === "any" ? "any" : Number(val))}>
-                                    <SelectTrigger className="w-[90px] md:w-[180px] text-[10px] md:text-lg">
+                                    <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
                                             <SelectValue placeholder="Any Price" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -85,12 +86,9 @@
                                     </SelectContent>    
                             </Select>
                             <a href={"#search"} className="scroll-smooth">
-                                <Button className="bg-blue-500 hidden md:flex text-white hover:bg-blue-600 ">
+                                <Button className="bg-blue-500 w-full md:w-auto  text-white hover:bg-blue-600 ">
                                     <Search />
                                     Search
-                                </Button>
-                                <Button className="bg-blue-500 block md:hidden text-white hover:bg-blue-600 ">
-                                    <Search />
                                 </Button>
                             </a>
                     </div>

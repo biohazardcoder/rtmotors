@@ -30,7 +30,7 @@ export const Navbar = () => {
 
   return (
     <div className="absolute top-0 left-0 w-full h-[10vh] bg-transparent flex items-center justify-between px-[5%] text-white z-50">
-      <h1 className="font-bold text-2xl">RT MOTORS</h1>
+      <img src="/logo.png" alt="RT Motors"className="w-20" />
       <div className="hidden md:flex items-center gap-4">
         <ul className="flex gap-8">
           {items.map(item => (
