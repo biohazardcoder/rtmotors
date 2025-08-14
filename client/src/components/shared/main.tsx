@@ -39,9 +39,9 @@
                                     Used
                             </Button>
                     </div>
-                    <div className="flex items-center gap-2 md:gap-4 p-4 mt-4 z-20 rounded-full bg-white">
+                    <div className="flex items-center gap-2 md:gap-4 p-3 mt-4 z-20 rounded-full bg-white">
                             <Select value={brand} onValueChange={setBrand}>
-                                    <SelectTrigger className="w-[106px] md:w-[180px] text-xs md:text-lg">
+                                    <SelectTrigger className="w-[90px] md:w-[180px] text-[10px] md:text-lg">
                                             <SelectValue placeholder="Any Makes" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -58,7 +58,7 @@
                             </Select>
                             <Separator orientation="vertical" />
                             <Select value={year === "any" ? "any" : String(year)} onValueChange={val => setYear(val === "any" ? "any" : Number(val))}>
-                                    <SelectTrigger className="w-[106px] md:w-[180px] text-xs md:text-lg">
+                                    <SelectTrigger className="w-[90px] md:w-[180px] text-[10px] md:text-lg">
                                             <SelectValue placeholder="Any Years" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -73,7 +73,7 @@
                             </Select>
                             <Separator orientation="vertical" />
                             <Select value={price === "any" ? "any" : String(price)} onValueChange={val => setPrice(val === "any" ? "any" : Number(val))}>
-                                    <SelectTrigger className="w-[106px] md:w-[180px] text-xs md:text-lg">
+                                    <SelectTrigger className="w-[90px] md:w-[180px] text-[10px] md:text-lg">
                                             <SelectValue placeholder="Any Price" />
                                     </SelectTrigger>
                                     <SelectContent>
