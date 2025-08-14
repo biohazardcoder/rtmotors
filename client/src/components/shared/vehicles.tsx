@@ -134,12 +134,16 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
   });
 
   return (
-    <div className="bg-[#e7e7e7] min-h-screen" id="search">
+    <div className="bg-[#e7e7e7] min-h-[20vh]" id="search">
       <div className="py-8 px-[5%]">
         <h1 className="text-3xl font-bold">Explore All Vehicles</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {filteredVehicles.map(
+          {
+            filteredVehicles.length === 0 ? (
+              <p>No vehicles found</p>
+            ) : (
+                filteredVehicles.map(
             ({
               _id,
               currentPrice,
@@ -231,7 +235,7 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
                 </div>
               </div>
             )
-          )}
+          ))}
         </div>
       </div>
     </div>

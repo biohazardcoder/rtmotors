@@ -41,7 +41,7 @@
                     </div>
                     <div className="flex items-center gap-2 md:gap-4 p-4 mt-4 z-20 rounded-full bg-white">
                             <Select value={brand} onValueChange={setBrand}>
-                                    <SelectTrigger className="w-[100px] md:w-[180px] text-xs md:text-lg">
+                                    <SelectTrigger className="w-[106px] md:w-[180px] text-xs md:text-lg">
                                             <SelectValue placeholder="Any Makes" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -58,7 +58,7 @@
                             </Select>
                             <Separator orientation="vertical" />
                             <Select value={year === "any" ? "any" : String(year)} onValueChange={val => setYear(val === "any" ? "any" : Number(val))}>
-                                    <SelectTrigger className="w-[100px] md:w-[180px] text-xs md:text-lg">
+                                    <SelectTrigger className="w-[106px] md:w-[180px] text-xs md:text-lg">
                                             <SelectValue placeholder="Any Years" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -73,7 +73,7 @@
                             </Select>
                             <Separator orientation="vertical" />
                             <Select value={price === "any" ? "any" : String(price)} onValueChange={val => setPrice(val === "any" ? "any" : Number(val))}>
-                                    <SelectTrigger className="w-[100px] md:w-[180px] text-xs md:text-lg">
+                                    <SelectTrigger className="w-[106px] md:w-[180px] text-xs md:text-lg">
                                             <SelectValue placeholder="Any Price" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -85,9 +85,12 @@
                                     </SelectContent>    
                             </Select>
                             <a href={"#search"} className="scroll-smooth">
-                                <Button className="bg-blue-500 text-white hover:bg-blue-600 ">
+                                <Button className="bg-blue-500 hidden md:flex text-white hover:bg-blue-600 ">
                                     <Search />
                                     Search
+                                </Button>
+                                <Button className="bg-blue-500 block md:hidden text-white hover:bg-blue-600 ">
+                                    <Search />
                                 </Button>
                             </a>
                     </div>
