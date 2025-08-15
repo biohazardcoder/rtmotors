@@ -51,8 +51,8 @@ return (
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-400"/>
-                        <CarouselNext className="bg-blue-500 text-white hover:bg-blue-400"/>
+                        <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600"/>
+                        <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600"/>
                     </Carousel>
                 </div>
                 <div className="hidden sm:grid grid-cols-2 sm:grid-cols-3 gap-10 mt-8 items-center lg:grid-cols-5">

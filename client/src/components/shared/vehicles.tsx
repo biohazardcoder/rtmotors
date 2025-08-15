@@ -175,8 +175,8 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-400"/>
-                    <CarouselNext className="bg-blue-500 text-white hover:bg-blue-400"/>
+                    <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600"/>
+                    <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600"/>
                   </Carousel>
 
                     {stock === 0 ? (<span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">

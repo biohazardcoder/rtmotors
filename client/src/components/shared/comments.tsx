@@ -71,8 +71,8 @@ export const Comments = () => {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-400" />
-                <CarouselNext className="bg-blue-500 text-white hover:bg-blue-400" />
+                <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
+                <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
             </Carousel>
         </div>
         </div>
