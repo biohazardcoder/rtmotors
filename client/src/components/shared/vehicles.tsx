@@ -136,7 +136,7 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
   return (
     <div className="bg-[#e7e7e7] min-h-[20vh]" id="search">
       <div className="py-8 px-[5%]">
-        <h1 className="text-3xl font-bold">Explore All Vehicles</h1>
+        <h1 className="text-xl md:text-3xl font-bold">Explore All Vehicles</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {
@@ -170,13 +170,13 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
                           <img
                             src={image}
                             alt={name}
-                            className="w-full h-64 object-cover"
+                            className="w-full h-56 md:h-64 object-cover"
                           />
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
+                    <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-400"/>
+                    <CarouselNext className="bg-blue-500 text-white hover:bg-blue-400"/>
                   </Carousel>
 
                     {stock === 0 ? (<span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
