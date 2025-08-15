@@ -8,7 +8,7 @@ function Footer() {
             <div className='grid grid-cols-1 md:grid-cols-3 py-5'>
                 <div className=''>
                     <h1 className=' text-xl sm:text-3xl text-primary font-bold sm:text-left text-justify mb-3'>Be Ready To Grow</h1>
-                    <p className='text-primary'>Get Exclusive <span className='font-bold text-primary'>Updatestraigt</span> to your inbox.</p>
+                    <p className='text-primary'>Get Exclusive <span className='font-bold text-blue-500'>Updatestraigt</span> to your inbox.</p>
                     <br />
                     <div className='flex items-center h-10'>
                         <input type="text" placeholder='Email' className='w-full h-full pl-4 rounded-none bg-secondary border-2 border-primary outline-none '/>
@@ -81,10 +81,10 @@ function Footer() {
                     </div>
                 </div>
             </div>
-            <div className='  sm:block border-t-2 bt-white py-8'>
+            <div className='border-t-2 py-8'>
                 <div className=' flex justify-between'>
                     <span className='text-primary text-sm'>All Rights Reserved © 2025.</span>
-                <div className='flex  flex-col gap-1'>
+                <div className='flex  flex-col gap-1 md:flex-row'>
                     <span className='text-primary text-sm'>Privacy Policy </span><span className='ml-2'> </span>   <span className='text-primary text-sm'>Terms & Conditions</span>
                 </div>
                 </div>
