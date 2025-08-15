@@ -1,0 +1,84 @@
+import { CarFront, ClipboardList,  GalleryHorizontalEnd, Handshake,  MessageSquareMore,   Users } from "lucide-react"
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar"
+import { Link,  useLocation } from "react-router-dom"
+
+const items = [
+  {
+    title: "Orders",
+    url: "/",
+    icon: ClipboardList,
+  },
+  {
+    title: "Cars",
+    url: "/cars",
+    icon: CarFront,
+  },
+  {
+    title: "Users",
+    url: "/users",
+    icon: Users,
+  },
+  {
+    title: "Brands",
+    url: "/brands",
+    icon: GalleryHorizontalEnd,
+  },
+  {
+    title: "Customers",
+    url: "/customers",
+    icon: MessageSquareMore,
+  },
+  {
+    title: "Partners",
+    url: "/partners",
+    icon: Handshake,
+  },
+]
+
+export function AppSidebar({ title }: { title?: string }) {
+
+  const {pathname} = useLocation()
+
+  return (
+    <Sidebar>
+      <SidebarContent className="bg-[#e7e7e7] gap-0">
+        <SidebarGroup>
+          <SidebarGroupLabel >
+            {title || "Application"}
+          </SidebarGroupLabel>
+          <SidebarGroupContent >
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild className="h-full py-4 font-semibold px-6 text-lg rounded-none rounded-r-2xl">
+                    <Link
+                      to={item.url}
+                      className={
+                        pathname === item.url
+                          ? "flex items-center gap-2 bg-[#003939] text-white"
+                          : "flex items-center gap-2"
+                      }
+                    >
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+              </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+  )
+}
