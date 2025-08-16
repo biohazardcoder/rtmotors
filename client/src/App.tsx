@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import { Home } from "./pages/home"
+import { Menus } from "./components/shared/menus"
 
 const App = () => {
   return (
@@ -7,6 +8,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
+      <Menus/>
     </div>
   )
 }

@@ -1,4 +1,6 @@
+import { Auction } from "@/components/shared/auction"
 import { Brands } from "@/components/shared/brands"
+import { Choose } from "@/components/shared/choose"
 import { Comments } from "@/components/shared/comments"
 import Footer from "@/components/shared/footer"
 import { Main } from "@/components/shared/main"
@@ -21,7 +23,9 @@ export const Home = () => {
         <Brands />
         <Vehicles type={type} year={year} price={price} brand={brand} />
         <Team/>
+        <Choose />
         <Partners/>
+        <Auction/>
         <Comments />
         <Footer/>
     </div>
