@@ -37,7 +37,9 @@ export const Navbar = () => {
 
   return (
     <div className={cn("absolute top-0 left-0 w-full h-[10vh] bg-transparent flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
-      <img src="/logo.png" alt="RT Motors"className="w-20" />
+      <Link to={"/"}>
+       <img src="/logo.png" alt="RT Motors"className="w-20" />
+       </Link>
       <div className="hidden md:flex items-center gap-4">
         <ul className="flex gap-8">
           {items.map(item => (
@@ -69,7 +71,7 @@ export const Navbar = () => {
       </div>
       <div className="flex items-center gap-2 md:hidden">
       {
-        !isSignedIn && (
+        !isSignedIn ? (
         <Link to={pathname === "/sign-in" ? "/sign-up" : "/sign-in"}>
           <Button
           disabled={!isLoaded}
@@ -78,8 +80,13 @@ export const Navbar = () => {
          {isLoaded ? <User size={28} /> : <Loader2 className="animate-spin text-white" />}
          {pathname === "/sign-in" ? "Sign Up" : "Sign In"}
        </Button>
-        </Link>
-      )}
+        </Link> 
+      ) : (  <Link to={"/profile"}>
+                    {isLoaded ? (<Avatar>
+                      <AvatarImage src={user?.imageUrl} />
+                      <AvatarFallback>RT</AvatarFallback>
+                    </Avatar>) : <Loader2 className="animate-spin text-white" />}
+              </Link>)}
       <Button
         variant={"secondary"}
         className="md:hidden flex items-center bg-blue-500 hover:bg-blue-600 text-white "
@@ -103,15 +110,6 @@ export const Navbar = () => {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                  to={isSignedIn ? "/profile" : "/sign-in"}
-                  className="font-semibold"
-                  onClick={() => setToggle(false)}
-                >
-                  {isSignedIn ? "Profile" : "Sign in"}
-                </Link>
-            </li>
           </ul>
         </div>
       )}
