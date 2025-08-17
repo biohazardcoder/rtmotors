@@ -4,6 +4,7 @@ import { Choose } from "@/components/shared/choose"
 import { Comments } from "@/components/shared/comments"
 import Footer from "@/components/shared/footer"
 import { Main } from "@/components/shared/main"
+import { Menus } from "@/components/shared/menus"
 import { Navbar } from "@/components/shared/navbar"
 import { Partners } from "@/components/shared/partners"
 import { Team } from "@/components/shared/team"
@@ -28,6 +29,8 @@ export const Home = () => {
         <Auction/>
         <Comments />
         <Footer/>
+      <Menus/>
+
     </div>
   )
 }
