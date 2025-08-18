@@ -1,8 +1,9 @@
-import { CarFront, ClipboardList,  GalleryHorizontalEnd, Handshake,  MessageSquareMore,   Users } from "lucide-react"
+import { BanknoteArrowUp, CarFront, ClipboardList,  GalleryHorizontalEnd, Handshake,  LogOut,  MessageSquareMore,   Users } from "lucide-react"
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -11,6 +12,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Link,  useLocation } from "react-router-dom"
+import { Button } from "../ui/button"
 
 const items = [
   {
@@ -43,11 +45,21 @@ const items = [
     url: "/partners",
     icon: Handshake,
   },
+  {
+    title: "Auctions",
+    url: "/auctions",
+    icon: BanknoteArrowUp,
+  },
 ]
 
 export function AppSidebar({ title }: { title?: string }) {
 
   const {pathname} = useLocation()
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
 
   return (
     <Sidebar>
@@ -79,6 +91,14 @@ export function AppSidebar({ title }: { title?: string }) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+        <SidebarFooter className="bg-[#e7e7e7] pb-4">
+          <Button 
+          onClick={handleLogout}
+          variant={"ghost"} className="justify-start cursor-pointer">
+            <LogOut size={20}/>
+            <span className="font-semibold">Logout</span>
+          </Button>
+        </SidebarFooter>
     </Sidebar>
   )
 }
