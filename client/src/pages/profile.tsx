@@ -8,6 +8,7 @@ import React, { useState } from "react"
 import { toast } from "sonner"
 import { Input } from "../components/ui/input"
 import { Navbar } from "@/components/shared/navbar"
+import { ImageCropper } from "@/components/shared/image-cropper"
 
 export const Profile = () => {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -19,21 +20,18 @@ export const Profile = () => {
   const [lastName, setLastName] = useState('')
   const [lastNameLoading, setLastNameLoading] = useState(false)
   const [editLastName, setEditLastName] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    try {
-      setLoading(true)
-      await user?.setProfileImage({ file }) // update user profile image
-      toast.success("Profile image updated successfully!")
-    } catch (err) {
-      console.error("Error uploading image:", err)
-      toast.error("An error occurred while uploading the image.")
-    } finally {
-      setLoading(false)
-    }
-  }
+  const file = e.target.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    setSelectedImage(reader.result as string);
+  };
+  reader.readAsDataURL(file);
+};
+
 
   const handleChangeFirstName = async () => {
     if (!firstName.trim()) return toast.warning("First name cannot be empty")
@@ -73,6 +71,22 @@ export const Profile = () => {
     }
   }
 
+  const handleSaveCropped = async (croppedBase64: string) => {
+  try {
+    setLoading(true);
+    const response = await fetch(croppedBase64);
+    const blob = await response.blob();
+    const file = new File([blob], "avatar.jpg", { type: "image/jpeg" });
+    await user?.setProfileImage({ file });
+    toast.success("Profile image updated successfully!");
+    setSelectedImage(null);
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to update profile image.");
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   if (!isLoaded) {
@@ -172,6 +186,14 @@ export const Profile = () => {
             </div>
           </div>
         </div>
+        {selectedImage && (
+        <ImageCropper
+          image={selectedImage}
+          onCancel={() => setSelectedImage(null)}
+          onSave={handleSaveCropped}
+          loading={loading}
+        />
+      )}
       </div>
     </div>
   )

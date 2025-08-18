@@ -1,13 +1,12 @@
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "../ui/button"
-import { User, Menu, X,  Loader2,  } from "lucide-react"
-import { useState } from "react";
+import { User,  Loader2,  } from "lucide-react"
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Menu } from "./menu";
 
 export const Navbar = () => {
-  const [toggle, setToggle] = useState(false);
 
   const { user,isLoaded,isSignedIn } = useUser()
 
@@ -70,49 +69,20 @@ export const Navbar = () => {
         }
       </div>
       <div className="flex items-center gap-2 md:hidden">
-      {
-        !isSignedIn ? (
-        <Link to={pathname === "/sign-in" ? "/sign-up" : "/sign-in"}>
+        {
+          !isSignedIn && (
+             <Link to={pathname === "/sign-in" ? "/sign-up" : "/sign-in"}>
           <Button
           disabled={!isLoaded}
-        className="md:hidden flex items-center bg-blue-500 hover:bg-blue-600 text-white "
-        >
-         {isLoaded ? <User size={28} /> : <Loader2 className="animate-spin text-white" />}
-         {pathname === "/sign-in" ? "Sign Up" : "Sign In"}
-       </Button>
-        </Link> 
-      ) : (  <Link to={"/profile"}>
-                    {isLoaded ? (<Avatar>
-                      <AvatarImage src={user?.imageUrl} />
-                      <AvatarFallback>RT</AvatarFallback>
-                    </Avatar>) : <Loader2 className="animate-spin text-white" />}
-              </Link>)}
-      <Button
-        variant={"secondary"}
-        className="md:hidden flex items-center bg-blue-500 hover:bg-blue-600 text-white "
-        onClick={() => setToggle(!toggle)}
-        aria-label="Toggle menu"
-      >
-        {toggle ? <X size={28} /> : <Menu size={28} />}
-      </Button>
+          className="md:hidden flex items-center bg-blue-500 hover:bg-blue-600 text-white "
+          >
+            {isLoaded ? <User size={28} /> : <Loader2 className="animate-spin text-white" />}
+            {pathname === "/sign-in" ? "Sign Up" : "Sign In"}
+        </Button>
+          </Link>
+        )}
+        <Menu />
       </div>
-      {toggle && (
-        <div className="fixed top-20 left-0 w-full h-1/2 bg-black text-white opacity-80 flex flex-col  justify-center p-4 gap-8 md:hidden z-50">
-          <ul className="flex flex-col gap-6 text-2xl">
-            {items.map(item => (
-              <li key={item.label}>
-                <Link
-                  to={item.url}
-                  className="font-semibold"
-                  onClick={() => setToggle(false)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   )
 }
