@@ -9,6 +9,7 @@ import BrandRoute from "./api/routes/brand-route.js"
 import CarRoute from "./api/routes/car-route.js"
 import PartnerRoute from "./api/routes/partner-route.js"
 import AuctionRoute from "./api/routes/auction-route.js"
+import CustomerRoute from "./api/routes/customer-route.js"
 import isExisted from "./middlewares/isExisted.js"
 
 const app = express()
@@ -25,6 +26,7 @@ app.use("/api/admin", AdminRoute)
 app.use("/api/brand", BrandRoute);
 app.use("/api/partner", PartnerRoute);
 app.use("/api/car", CarRoute);
+app.use("/api/customer", CustomerRoute);
 app.use("/api/auction", AuctionRoute);
 app.get("/api/user", isExisted, async (_, res) => {
   const {data} = await clerkClient.users.getUserList();

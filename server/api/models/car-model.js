@@ -25,7 +25,7 @@ const CarSchema = new mongoose.Schema({
         status: {
             color: { type: String, enum: ["fff", "000"], default: "fff" },
             bg: { type: String, default: "00f" },
-            text: { type: String },
+            text: { type: String, default:""},
         },
         type: { type: String, enum: ["new", "used"], required: true },
     },
