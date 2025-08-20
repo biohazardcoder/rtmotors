@@ -10,7 +10,7 @@ export interface AdminTypes {
 }
 
 export interface CarTypes {
-  _id: string;
+  _id?: string;
   name: string;
   images?: string[];
   brand: string;
@@ -24,9 +24,9 @@ export interface CarTypes {
   stock: number;
   comments?: CommentTypes[];
   status?: {
-      color: "fff" | "000";
-      bg: string;
-      text: string;
+      color?: "fff" | "000";
+      bg?: string;
+      text?: string;
   }; 
   type: "new" | "used";
 }
@@ -73,4 +73,12 @@ export interface AuctionTypes {
   url: string
   createdAt: number
   updatedAt: number
+}
+
+export interface CustomerTypes {
+  _id?: string
+  image: string
+  name: string
+  job: string
+  message: string
 }

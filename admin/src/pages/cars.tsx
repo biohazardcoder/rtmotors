@@ -42,7 +42,7 @@ export const Cars = () => {
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
         </div>;
-
+        
         const handleDelete = async (id: string) => {
                 try {
                         await Fetch.delete(`/car/${id}`);
@@ -71,7 +71,7 @@ export const Cars = () => {
                         <TableHead>Name</TableHead>
                         <TableHead>Brand</TableHead>
                         <TableHead>Current Price</TableHead>
-                        <TableHead>Year</TableHead>
+                        <TableHead>Old Price</TableHead>
                         <TableHead>Stock</TableHead>
                         <TableHead>Status</TableHead>
                         </TableRow>
@@ -88,7 +88,7 @@ export const Cars = () => {
                                                 <img
                                                         src={image}
                                                         alt={name}
-                                                        className="w-full h-20 rounded-md"
+                                                        className="w-full h-28 rounded-md"
                                                 />
                                                 </CarouselItem>
                                                 ))}
@@ -107,15 +107,22 @@ export const Cars = () => {
                                                 {currentPrice}
                                         </TableCell>
                                         <TableCell>
-                                                {year}
+                                                {oldPrice}
                                         </TableCell>
                                         <TableCell>
                                                 {stock}
                                         </TableCell>
                                         <TableCell>
-                                                <div className={`px-2 py-1 rounded-full text-xs font-semibold bg-[#${status?.bg}] text-[#${status?.color}]`}>
+                                                {stock === 0 ? (<span className="bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
+                                                Out of Stock
+                                                </span>) : status?.text?.length && status?.text?.length > 0 ? (
+                                                <span
+                                                className="text-sm font-semibold px-3 py-1 rounded-full shadow"
+                                                style={{ color: `#${status?.color}`, backgroundColor: `#${status?.bg}` }}
+                                                >
                                                 {status?.text}
-                                                </div>
+                                                </span>
+                                                ) : "No Status"}
                                         </TableCell>
                                         <TableCell className="max-w-[100px] flex items-center gap-2 relative">
                                                         <DropdownMenu>
@@ -136,7 +143,7 @@ export const Cars = () => {
                                                                         className="flex items-center gap-2 text-red-600 cursor-pointer"
                                                                 >
                                                                         <Button 
-                                                                        onClick={() => handleDelete(_id)}
+                                                                        onClick={() => handleDelete(_id || "")}
                                                                         variant={"destructive"} className="w-full">
                                                                                 <Trash2 className="text-white"/>
                                                                         </Button>

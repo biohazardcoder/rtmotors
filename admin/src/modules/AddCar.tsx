@@ -84,8 +84,9 @@ export function AddCar() {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      mutate((data: any) => [...(data || []), res.data], false); // optimistik update
+      mutate((data: any) => [...(data || []), res.data], false); 
       toast.success("Car added successfully!");
+      window.location.reload();
       setIsSheetOpen(false);
     } catch (error) {
       toast.error("Error adding car.");

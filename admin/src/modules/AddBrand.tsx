@@ -26,7 +26,7 @@ export function AddBrand() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { mutate } = useSWR("/brand", fetcher)
   
-
+  
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.url.trim()) newErrors.url = "Url is required.";
