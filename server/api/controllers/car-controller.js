@@ -1,6 +1,7 @@
 import Car from '../models/car-model.js';
 import fs from "fs/promises";
 import path from "path";
+import {clerkClient} from "@clerk/express"
 
 const IMAGES_DIR = path.resolve("uploads/images");
 
@@ -123,3 +124,47 @@ export const deleteCar = async (req, res) => {
     res.status(400).json({ message: "Problem deleting car" });
   }
 };
+
+export const AddCommentary = async (req, res) => {
+    try {
+        const { id, userId, message,rating} = req.body
+
+        const car = await Car.findById(id)
+        const user =  await clerkClient.users.getUser(userId);
+        car.comments.push({
+               user:{
+                    name: user.fullName,
+                    userId: user.id,
+                    avatar : user.imageUrl,
+                },
+                message: message,
+                rating: rating || 5
+        })
+
+        await car.save()
+        res.status(200).json({ message: "Comment added successfully" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error adding comment" });
+    }
+} 
+
+
+export const deleteComment = async (req, res) => {
+    try {
+        const { id, commentId } = req.params;
+
+        const car = await Car.findById(id);
+        if (!car) {
+            return res.status(404).json({ message: "Car not found" });
+        }
+
+        car.comments = car.comments.filter(comment => comment._id.toString() !== commentId);
+        await car.save();
+
+        res.status(200).json({ message: "Comment deleted successfully" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error deleting comment" });
+    }
+}
