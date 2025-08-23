@@ -15,6 +15,7 @@ import { Fetch } from "@/middlewares/Fetch";
 import useSWR from "swr";
 import { fetcher } from "@/middlewares/Fetcher";
 import type { CarTypes } from "@/types/RootTypes";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export function AddCar() {
   const [formData, setFormData] = useState<CarTypes>({
@@ -52,12 +53,12 @@ export function AddCar() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: id === "year" || id.toLowerCase().includes("price") || id === "miles" || id === "stock"
-        ? Number(value) // raqamli inputlar
+    setFormData((prev) => ({
+      ...prev,
+      [id]: ["year", "currentPrice", "oldPrice", "miles", "stock"].includes(id)
+        ? Number(value)
         : value,
-    });
+    }));
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +72,13 @@ export function AddCar() {
     try {
       const body = new FormData();
       Object.entries(formData).forEach(([key, val]) => {
-        body.append(key, String(val));
+        if (typeof val === "object" && val !== null) {
+          Object.entries(val).forEach(([k, v]) => {
+            body.append(`status[${k}]`, String(v));
+          });
+        } else {
+          body.append(key, String(val));
+        }
       });
 
       if (images && images.length > 0) {
@@ -84,10 +91,24 @@ export function AddCar() {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      mutate((data: any) => [...(data || []), res.data], false); 
+      mutate((data: any) => [...(data || []), res.data], false);
       toast.success("Car added successfully!");
-      window.location.reload();
       setIsSheetOpen(false);
+      setFormData({
+        _id: "",
+        currentPrice: 0,
+        description: "",
+        fuelType: "",
+        miles: 0,
+        name: "",
+        oldPrice: 0,
+        stock: 0,
+        transmission: "",
+        type: "new",
+        year: 0,
+        brand: "",
+      });
+      setImages(null);
     } catch (error) {
       toast.error("Error adding car.");
       console.error(error);
@@ -109,42 +130,91 @@ export function AddCar() {
           <SheetDescription>All fields are required</SheetDescription>
         </SheetHeader>
 
-        <div className="flex flex-col gap-4 px-4 mt-2">
-          {["name", "brand", "description", "fuelType", "transmission", "type", "year", "currentPrice", "oldPrice", "miles", "stock"].map((field) => (
+        <div className="flex flex-col gap-4 overflow-y-auto max-h-[90vh] p-4">
+          {["name", "description", "brand", "year", "currentPrice", "miles", "oldPrice", "stock"].map((field) => (
             <div className="space-y-1" key={field}>
               <Label htmlFor={field}>
-                {field.charAt(0).toUpperCase() + field.slice(1)} *
-              </Label>
+                {{
+                  name: "Name *",
+                  description: "Description *",
+                  brand: "Brand *",
+                  currentPrice: "Current Price *",
+                  miles: "Miles *",
+                  oldPrice: "Old Price *",
+                  stock: "Stock *",
+                  year: "Year *",
+                }[field]}</Label>
               <Input
                 id={field}
+                value={
+                  typeof formData[field as keyof typeof formData] === "number"
+                    ? formData[field as keyof typeof formData] === 0
+                      ? ""
+                      : String(formData[field as keyof typeof formData])
+                    : (formData[field as keyof typeof formData] as string)
+                }
                 type={["year", "currentPrice", "oldPrice", "miles", "stock"].includes(field) ? "number" : "text"}
-                value={(formData as any)[field]}
                 onChange={handleInputChange}
-                className={errors[field] ? "border-red-500" : ""}
               />
-              {errors[field] && <span className="text-red-500 text-sm">{errors[field]}</span>}
+              {errors[field] && <span className="text-red-500 text-xs">{errors[field]}</span>}
             </div>
           ))}
-
-          <div className="space-y-1">
-            <Label htmlFor="images">Images *</Label>
-            <Input
-              id="images"
-              type="file"
-              multiple
-              onChange={handleImageChange}
-              className={errors.images ? "border-red-500" : ""}
-            />
-            {errors.images && <span className="text-red-500 text-sm">{errors.images}</span>}
+          <div className="flex items-center gap-2">
+            <div>
+              <Label className="mb-2">Type *</Label>
+              <Select value={formData.type} onValueChange={(value) => setFormData((prev) => ({ ...prev, type: value as "used" | "new" }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="used">Used</SelectItem>
+                  <SelectItem value="new">New</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="mb-2">Fuel Type *</Label>
+              <Select value={formData.fuelType} onValueChange={(value) => setFormData((prev) => ({ ...prev, fuelType: value }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select fuel type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="electric">Electric</SelectItem>
+                  <SelectItem value="gasoline">Gasoline</SelectItem>
+                  <SelectItem value="hybrid">Hybrid</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="mb-2">Transmission *</Label>
+              <Select value={formData.transmission} onValueChange={(value) => setFormData((prev) => ({ ...prev, transmission: value }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select transmission" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="manual">Manual</SelectItem>
+                  <SelectItem value="automatic">Automatic</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-
+          <div>
+            <Label>Image *</Label>
+            <Input
+              name="images"
+              type="file"
+              className="file:cursor-pointer file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"
+              onChange={handleImageChange}
+              multiple
+            />
+            {errors.images && <span className="text-red-500 text-xs">{errors.images}</span>}
+          </div>
           <Button
-            type="button"
-            variant="secondary"
+            className="mt-4 bg-blue-500 text-white hover:bg-blue-600 hover:text-white"
             onClick={handleSubmit}
             disabled={isLoading}
           >
-            {isLoading ? "Creating..." : "Create"}
+            {isLoading ? "Adding..." : "Add Car"}
           </Button>
         </div>
       </SheetContent>

@@ -42,7 +42,8 @@ export const Cars = () => {
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
         </div>;
-        
+                console.log(data);
+                
         const handleDelete = async (id: string) => {
                 try {
                         await Fetch.delete(`/car/${id}`);

@@ -17,7 +17,7 @@ import { format } from "date-fns";
 
 export const Users = () => {
     const { data, error,isLoading } = useSWR("user", fetcher)
-
+    
     const users = data as UserTypes[] || []
 
     if (error) return <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">

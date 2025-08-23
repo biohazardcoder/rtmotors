@@ -15,6 +15,8 @@ import { Partners } from "./pages/partner";
 import { Auctions } from "./pages/auctions";
 import { Cars } from "./pages/cars";
 import { Customers } from "./pages/customers";
+import { Logistics } from "./pages/logistic";
+import { Blog } from "./pages/blog";
 
 function App() {
   const { isPending, isAuth } = useSelector((state: RootState) => state.user);
@@ -78,13 +80,21 @@ function App() {
         path: "/customers",
         element: <Customers />,
       },
+      {
+        path: "/Logistics",
+        element: <Logistics />,
+      },
        {
         path: "/auctions",
         element: <Auctions />,
       },
+       {
+        path: "/blog",
+        element: <Blog />,
+      },
       {
         path: "*",
-        element: <Orders />,
+        element: <Error />,
       },
     ],
   },

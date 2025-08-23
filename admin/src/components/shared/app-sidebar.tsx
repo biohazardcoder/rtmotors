@@ -1,4 +1,4 @@
-import { BanknoteArrowUp, CarFront, ClipboardList,  GalleryHorizontalEnd, Handshake,  LogOut,  MessageSquareMore,   Users } from "lucide-react"
+import { BanknoteArrowUp, CarFront, ClipboardList,  GalleryHorizontalEnd, Handshake,  LogOut,  MessageSquareMore,   Package,   TvMinimalPlay,   Users } from "lucide-react"
 
 import {
   Sidebar,
@@ -49,6 +49,16 @@ const items = [
     title: "Auctions",
     url: "/auctions",
     icon: BanknoteArrowUp,
+  },
+  {
+    title: "Logistics",
+    url: "/Logistics",
+    icon: Package,
+  },
+  {
+    title: "Blog",
+    url: "/blog",
+    icon: TvMinimalPlay,
   },
 ]
 
