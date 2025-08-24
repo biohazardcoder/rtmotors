@@ -38,7 +38,7 @@ export const Cars = () => {
 
         if (isLoading) return <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
             <Navbar/>
-            <div className="flex items-center justify-center bg  h-[50vh]">
+            <div className="flex items-center justify-center h-[80vh]">
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
         </div>;

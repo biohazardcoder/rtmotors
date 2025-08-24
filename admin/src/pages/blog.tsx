@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/shared/navbar"
 import { fetcher } from "@/middlewares/Fetcher";
-import { EllipsisVertical, Loader2, Pen, Trash2 } from "lucide-react";
+import {  EllipsisVertical, Loader2, Pen, Trash2, Video, VideoOff } from "lucide-react";
 import useSWR from "swr";
 import {
   DropdownMenu,
@@ -12,15 +12,17 @@ import type { BlogTypes } from "@/types/RootTypes";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-// import { useState } from "react";
-// import { EditBlog } from "@/modules/EditBlog";
+import { useState } from "react";
+import { EditBlog } from "@/modules/EditBlog";
 import { AddBlog } from "@/modules/AddBlog";
+import { AddVideo } from "@/modules/AddVideo";
 
 export const Blog = () => {
   const { data, error, isLoading, mutate } = useSWR("/blog", fetcher);
   const blogs = (data as BlogTypes[]) || [];
-//   const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false);
-//   const [selectedMenu, setSelectedMenu] = useState<BlogTypes | null>(null);
+  const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false);
+  const [addVideo, setAddVideo] = useState<boolean>(false);
+  const [selectedMenu, setSelectedMenu] = useState<BlogTypes | null>(null);
         console.log(data);
         
   if (error)
@@ -47,17 +49,33 @@ export const Blog = () => {
     try {
       await Fetch.delete(`/blog/${id}`);
       toast.success("Blog deleted successfully!");
-      mutate();
+       await mutate();
     } catch (error) {
       toast.error("Error deleting blog.");
       console.error(error);
     }
   };
 
-//   const handleEditMenu = (blog: BlogTypes) => {
-//     setSelectedMenu(blog);
-//     setEditMenuOpen(true);
-//   };
+  const handleEditMenu = (blog: BlogTypes) => {
+    setSelectedMenu(blog);
+    setEditMenuOpen(true);
+  };
+
+  const handleAddVideo = (blog: BlogTypes) => {
+    setSelectedMenu(blog);
+    setAddVideo(true);
+  };
+
+  const handleDeleteVideo = async (id: string) => {
+    try {
+      await Fetch.delete(`/blog/video/${id}`);
+      toast.success("Video deleted successfully!");
+      await mutate();
+    } catch (error) {
+      toast.error("Error deleting video.");
+      console.error(error);
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
@@ -69,9 +87,11 @@ export const Blog = () => {
             key={_id}
             className="bg-gray-50 border border-gray-200 rounded-lg shadow p-4 flex flex-col relative"
           >
-            {/* agar video bo‘lsa video chiqsin, bo‘lmasa image */}
             {video ? (
               <video
+                loop
+                autoPlay
+                muted
                 controls
                 className="w-full h-40 object-cover object-center rounded-md mt-6"
               >
@@ -97,18 +117,34 @@ export const Blog = () => {
                   />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="border-none">
+                  <DropdownMenuItem className="flex items-center gap-2 text-green-600 cursor-pointer">
+                    <Button
+                      className={`w-full ${video ? "bg-pink-500 hover:bg-pink-600" : "bg-green-500 hover:bg-green-600"}`}
+                      onClick={() =>
+                      { video ? handleDeleteVideo(_id || "") : handleAddVideo({
+                          _id,
+                          image,
+                          video,
+                          title,
+                          text,
+                        } as BlogTypes)
+                      }}
+                    >
+                      {video ? <VideoOff className="text-white" /> : <Video className="text-white" />}
+                    </Button>
+                  </DropdownMenuItem>
                   <DropdownMenuItem className="flex items-center gap-2 text-blue-600 cursor-pointer">
                     <Button
                       className="bg-blue-500 hover:bg-blue-600 w-full"
-                //       onClick={() =>
-                //         handleEditMenu({
-                //           _id,
-                //           image,
-                //           video,
-                //           title,
-                //           text,
-                //         } as BlogTypes)
-                //       }
+                      onClick={() =>
+                        handleEditMenu({
+                          _id,
+                          image,
+                          video,
+                          title,
+                          text,
+                        } as BlogTypes)
+                      }
                     >
                       <Pen className="text-white" />
                     </Button>
@@ -129,13 +165,21 @@ export const Blog = () => {
         ))}
       </div>
 
-      {/* {editMenuOpen && selectedMenu && (
+      {editMenuOpen && selectedMenu && (
         <EditBlog
           blog={selectedMenu!}
           open={editMenuOpen}
           onOpenChange={setEditMenuOpen}
         />
-      )} */}
+      )}
+
+      {addVideo && selectedMenu && (
+        <AddVideo
+          open={addVideo}
+          id={selectedMenu._id||""}
+          onOpenChange={setAddVideo}
+        />
+      ) }
     </div>
   );
 };

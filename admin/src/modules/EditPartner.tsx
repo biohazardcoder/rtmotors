@@ -96,7 +96,7 @@ export function EditPartner({ partner, open, onOpenChange }: EditPartnerProps) {
             <Input
               name="images"
               type="file"
-              className="file:cursor-pointer file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"
+              className="file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"
               onChange={handleImageChange}
             />
           </div>

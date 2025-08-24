@@ -91,8 +91,8 @@ export interface LogisticTypes {
 
 export interface OrderTypes {
   _id?: string
-  car: CarTypes
-  user: {
+  car?: CarTypes
+  user?: {
     name: string,
     avatar: string,
     email: string,
@@ -102,15 +102,15 @@ export interface OrderTypes {
   trackingNumber: string
   contact: string
   status: "pending" | "delivering" | "completed" | "canceled"
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export interface BlogTypes {
-  _id: string;
-  createdAt: string;
+  _id?: string;
+  createdAt?: string;
   title: string;
   text:string;
-  image:string;
-  video:string
+  image?:string;
+  video?:string
 }

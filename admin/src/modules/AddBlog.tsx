@@ -19,7 +19,6 @@ import { Textarea } from "@/components/ui/textarea";
 
 export function AddBlog() {
   const [images, setImages] = useState<FileList | null>(null);
-  const [video, setVideo] = useState<FileList | null>(null);
   const [formData, setFormData] = useState<Partial<BlogTypes>>({
     title: "",
     text: "",
@@ -33,11 +32,8 @@ export function AddBlog() {
     const newErrors: Record<string, string> = {};
     if (!formData.title) newErrors.title = "Title is required.";
     if (!formData.text) newErrors.text = "Text is required.";
-    if ((!images || images.length === 0) && (!video || video.length === 0)) {
-      newErrors.media = "You must select an image or a video.";
-    }
-    if (images && video) {
-      newErrors.media = "Please select only one type: image OR video.";
+    if (!images || images.length === 0) {
+      newErrors.media = "You must select an image.";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -51,7 +47,6 @@ export function AddBlog() {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImages(e.target.files);
-    setVideo(null);
   };
 
   const handleSubmit = async () => {
@@ -70,10 +65,6 @@ export function AddBlog() {
       }
 
 
-      if (video && video.length > 0) {
-        body.append("video", video[0]);
-      }
-
       await Fetch.post("/blog", body, {
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -83,7 +74,6 @@ export function AddBlog() {
       setIsSheetOpen(false);
       setFormData({ title: "", text: "" });
       setImages(null);
-      setVideo(null);
     } catch (error) {
       toast.error("Error adding Blog.");
       console.error(error);
@@ -140,7 +130,7 @@ export function AddBlog() {
 
           <div className="space-y-1">
             <Label htmlFor="images">Choose Image</Label>
-            <Input id="images" type="file" multiple onChange={handleImageChange} />
+            <Input id="images" type="file" className="file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"  multiple onChange={handleImageChange} />
             {images && (
               <div className="mt-2 flex flex-wrap gap-2">
                 {Array.from(images).map((file, i) => (

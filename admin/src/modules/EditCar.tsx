@@ -138,7 +138,7 @@ export function EditCar({ car, open, onOpenChange }: EditCarProps) {
                 />
             </div>
           ))}
-          <div className="flex items-center gap-2">
+          <div className="flex gap-2 flex-col md:flex-row md:items-center">
             <div>
             <Label className="mb-2">Type *</Label>
             <Select  value={formData.type} onValueChange={(value) => setFormData((prev) => ({ ...prev, type: value as "used" | "new" }))}>
@@ -220,7 +220,7 @@ export function EditCar({ car, open, onOpenChange }: EditCarProps) {
             <Input
               name="images"
               type="file"
-              className="file:cursor-pointer file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"
+              className="file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"
               onChange={handleImageChange}
             />
           </div>
