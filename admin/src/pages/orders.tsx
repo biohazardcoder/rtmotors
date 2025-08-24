@@ -110,9 +110,7 @@ const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
                     <img src={car?.images?.[0] || ""} alt={car?.name} className="w-32 h-20 py-2 object-contain border rounded-md"/>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <img src={user?.avatar} alt="" className="w-8 h-8 rounded-full"/> {user?.name}
-                    </div>
+                      {user?.name}
                   </TableCell>
                   <TableCell>{user?.email}</TableCell>
                   <TableCell>{contact}</TableCell>

@@ -82,7 +82,7 @@ export function AppSidebar({ title }: { title?: string }) {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="h-full py-4 font-semibold px-6 text-lg rounded-none rounded-r-2xl">
+                  <SidebarMenuButton asChild className="h-full py-3 font-semibold px-6 text-lg rounded-none rounded-r-2xl">
                     <Link
                       to={item.url}
                       className={

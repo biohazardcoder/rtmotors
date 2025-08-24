@@ -89,8 +89,6 @@ export const Blog = () => {
           >
             {video ? (
               <video
-                loop
-                autoPlay
                 muted
                 controls
                 className="w-full h-40 object-cover object-center rounded-md mt-6"
