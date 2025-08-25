@@ -5,9 +5,9 @@ import { Link } from "react-router-dom"
 
 export const Error = () => {
     return (
-        <div>
+        <div className="bg-[#e7e7e7]">
             <Navbar />
-            <div className="w-full h-[90vh] flex flex-col gap-2 items-center justify-center text-3xl">
+            <div className="w-full h-[100vh] flex flex-col gap-2 items-center justify-center text-3xl">
                 <div className="flex flex-col items-center gap-2">
                     <TriangleAlert size={64} />
                      Page not found

@@ -20,6 +20,16 @@ export interface VehicleTypes{
     type: "new" | "used";
 }
 
+
+export interface BlogTypes {
+    _id: string;
+    image: string;
+    video: string;
+    title: string;
+    text: string;
+}
+
+
 export interface CommentTypes {
     _id: string;
     user:{
@@ -27,6 +37,48 @@ export interface CommentTypes {
         userId: string;
         avatar : string;
     },
+    rating: number;
     message: string;
-    createdAt: Date;
+    createdAt: string;
+}
+
+export interface BrandTypes {
+    _id: string;
+    title: string;
+    image: string;
+    url: string;
+}
+
+export interface PartnerTypes {
+    _id: string;
+    image: string;
+    url: string;
+}
+export interface AuctionTypes {
+    _id: string;
+    image: string;
+    url: string;
+}
+
+export interface LogisticTypes {
+    _id: string;
+    image: string;
+}
+
+
+export interface OrderTypes {
+  _id?: string
+  car?: VehicleTypes
+  user?: {
+    name: string,
+    avatar: string,
+    email: string,
+    id:string
+  }
+  orderId: string
+  trackingNumber: string
+  contact: string
+  status: "pending" | "delivering" | "completed" | "canceled"
+  createdAt?: Date
+  updatedAt?: Date
 }

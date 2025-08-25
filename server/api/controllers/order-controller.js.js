@@ -41,10 +41,13 @@ export const createOrder = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     const { id } = req.params;
+    
     try {
         const updatedOrder = await Order.findByIdAndUpdate(id, req.body, { new: true });
         res.status(200).json(updatedOrder);
     } catch (error) {
+        console.log(error);
+        
         res.status(500).json({ message: "Problem updating order" });
     }
 };
@@ -57,5 +60,15 @@ export const deleteOrder = async (req, res) => {
         res.status(204).send();
     } catch (error) {
         res.status(500).json({ message: "Problem deleting order" });
+    }
+};
+
+export const getMyOrder = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const orders = await Order.find({ "user.id": userId });
+        res.status(200).json(orders);
+    } catch (error) {
+        res.status(500).json({ message: "Problem getting orders" });
     }
 };

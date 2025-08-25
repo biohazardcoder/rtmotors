@@ -2,53 +2,84 @@ import {
 Carousel,
 CarouselContent,
 CarouselItem,
-CarouselNext,
-CarouselPrevious,
 } from "@/components/ui/carousel";
+import { fetcher } from "@/middlewares/Fetcher";
+import type { AuctionTypes } from "@/types/types";
+import AutoScroll from "embla-carousel-auto-scroll";
+import { Link } from "react-router-dom";
+import useSWR from "swr";
+import { Skeleton } from "../ui/skeleton";
 
 export const Auction = () => {
-const auctions = [
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_heydealer.png",
-    },
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_autohub.png",
-    },
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_lotte.png",
-    },
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_autobell.png",
-    },
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_aucttion.png",
-    },
-];
+    const {data,isLoading} = useSWR("/auction", fetcher)
 
-return (
-    <div className="bg-[#e7e7e7]">
+    const auctions = data as AuctionTypes[] || [];
+
+
+   if (isLoading) {
+    return (
+      <div className="bg-[#e7e7e7]">
         <div className="py-8 px-[5%]">
-            <h1 className="text-xl md:text-3xl font-bold">Auction Holder</h1>
-            <div>
-                <div className="mt-8">
-                    <Carousel>
-                        <CarouselContent>
-                            {auctions.map((brand,index) => (
-                                <CarouselItem key={index} className="basis-1/2 md:basis-1/4 lg:basis-1/5">
-                                        <img
-                                            src={brand.img}
-                                            alt={index.toString()}
-                                            className="w-full h-full object-contain object-center"
-                                        />
+          <h1 className="text-xl md:text-3xl font-bold">Auction Holders</h1>
+          <div className="mt-8">
+            <Carousel
+              opts={{
+                loop: true,
+                align: "start",
+              }}
+            >
+              <CarouselContent>
+                {[...Array(5)].map((_, i) => (
+                  <CarouselItem
+                    key={i}
+                    className="basis-1/2 md:basis-1/4 lg:basis-1/5"
+                  >
+                    <Skeleton className="w-full h-24 rounded-lg" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
+    return (
+        <div className="bg-[#e7e7e7]">
+            <div className="py-8 px-[5%]">
+                <h1 className="text-xl md:text-3xl font-bold">Auction Holders</h1>
+                {auctions.length === 0 ? <div className="pt-4 text-center text-muted-foreground">No auctions found</div>:
+                <div>
+                    <div className="mt-8">
+                            <Carousel  opts={{
+                                     loop: true,
+                                     align: "start",
+                                   }}
+                                   plugins={[
+                                     AutoScroll({
+                                       speed: 1, 
+                                       stopOnInteraction: false, 
+                                     }),
+                                   ]}>
+                            <CarouselContent>
+                                {auctions.map(({_id,image,url}) => (
+                                 <CarouselItem key={_id} className="basis-1/2 md:basis-1/4 lg:basis-1/5">
+                                        <Link to={url} target="_blank">
+                                            <img
+                                                src={image}
+                                                alt={url}
+                                                className="w-full h-full object-contain object-center bg-white rounded-lg"
+                                            />
+                                        </Link>
                                 </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                        <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600"/>
-                        <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600"/>
-                    </Carousel>
-                </div>
+                                ))}
+                            </CarouselContent>
+                        </Carousel>
+                    </div>
+                </div>}
             </div>
         </div>
-    </div>
-);
+    );
 };

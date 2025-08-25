@@ -8,7 +8,7 @@ export const SignInPage = () => {
 
 
     if (isSignedIn && isLoaded) {
-        return <Navigate to="/profile" />;
+        return <Navigate to="/dashboard" />;
     }
 
   return (

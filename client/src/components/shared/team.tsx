@@ -13,7 +13,7 @@ export const Team = () => {
         {
             _id: "1",
             author: {
-                name: "John Doe",
+                name: "Ahliddin Teshaboev",
                 avatar: "/team/ceo.jpg",
                 job: "CEO"
             }
@@ -44,7 +44,7 @@ export const Team = () => {
                  {team.map(team => (
                             <div key={team._id} className="bg-white  rounded-md shadow p-4">
                                 <div className="flex  gap-4 flex-col">
-                                    <img src={team.author.avatar} alt={team.author.name} className="w-full h-[400px] rounded-md object-center object-cover" />
+                                    <img src={team.author.avatar} alt={team.author.name} className="w-full h-[500px] rounded-md object-center object-cover" />
                                     <div>
                                         <p className="font-semibold">{team.author.name}</p>
                                         <p className="text-sm text-muted-foreground">{team.author.job}</p>

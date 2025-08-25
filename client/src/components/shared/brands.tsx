@@ -2,75 +2,86 @@ import {
 Carousel,
 CarouselContent,
 CarouselItem,
-CarouselNext,
-CarouselPrevious,
 } from "@/components/ui/carousel";
-
+import { fetcher } from "@/middlewares/Fetcher";
+import type { BrandTypes } from "@/types/types";
+import { Link } from "react-router-dom";
+import useSWR from "swr";
+import AutoScroll from "embla-carousel-auto-scroll";
+import { Skeleton } from "../ui/skeleton";
 export const Brands = () => {
-const brands = [
-    {
-        img: "/audi.png",
-        name: "Audi",
-    },
-    {
-        img: "https://images.seeklogo.com/logo-png/24/2/bmw-logo-png_seeklogo-240426.png",
-        name: "BMW",
-    },
-    {
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Ford-Motor-Company-Logo.png/1200px-Ford-Motor-Company-Logo.png",
-        name: "Ford",
-    },
-    {
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/2048px-Mercedes-Logo.svg.png",
-        name: "Mercedes Benz",
-    },
-    {
-        img: "https://img.icons8.com/androidL/512/FD7E14/mclaren.png",
-        name: "McLaren",
-    },
-];
 
+const { data, isLoading } = useSWR("/brand", fetcher);
+
+    if (isLoading) {
+        return (
+            <div className="bg-[#e7e7e7]">
+            <div className="py-8 px-[5%]">
+                <h1 className="text-xl md:text-3xl font-bold">Explore Our Premium Brands</h1>
+                <div className="block mt-8">
+                <Carousel
+                    opts={{
+                    loop: true,
+                    align: "start",
+                    }}
+                >
+                    <CarouselContent>
+                    {[...Array(5)].map((_, idx) => (
+                        <CarouselItem
+                        key={idx}
+                        className="basis-1/2 md:basis-1/4 lg:basis-1/5"
+                        >
+                        <div className="flex flex-col bg-white font-bold items-center p-4 rounded-md">
+                            <Skeleton className="w-24 h-24 rounded-md" />
+                            <Skeleton className="h-4 w-20 mt-2" />
+                        </div>
+                        </CarouselItem>
+                    ))}
+                    </CarouselContent>
+                </Carousel>
+                </div>
+            </div>
+            </div>
+        );
+    }
+const brands= data as BrandTypes[] || [];
 return (
     <div className="bg-[#e7e7e7]">
         <div className="py-8 px-[5%]">
             <h1 className="text-xl md:text-3xl font-bold">Explore Our Premium Brands</h1>
+            {brands.length === 0 ? <div className="pt-4 text-center text-muted-foreground">No brands found</div>:
             <div>
-                <div className="block sm:hidden mt-8">
-                    <Carousel >
+                <div className="block mt-8">
+                    <Carousel  opts={{
+              loop: true,
+              align: "start",
+            }}
+            plugins={[
+              AutoScroll({
+                speed: 1, 
+                stopOnInteraction: false, 
+              }),
+            ]}>
                         <CarouselContent>
-                            {brands.map((brand) => (
-                                <CarouselItem key={brand.name} className="basis-1/2">
-                                    <div className="flex flex-col bg-white font-bold items-center shadow-md p-4 rounded-md">
+                            {brands.map(({_id,image,title,url}) => (
+                                <CarouselItem  key={_id} className="basis-1/2 md:basis-1/4 lg:basis-1/5">
+                                    <div className="flex flex-col bg-white font-bold items-center p-4 rounded-md">
                                         <img
-                                            src={brand.img}
-                                            alt={brand.name}
+                                            src={image}
+                                            alt={title}
                                             className="w-24 h-24 object-contain"
                                         />
-                                        <span className="mt-2">{brand.name}</span>
+                                        <Link to={url} target="_blank" >
+                                                <span className="mt-2 text-xs underline">{title}</span>
+                                        </Link>
                                     </div>
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600"/>
-                        <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600"/>
                     </Carousel>
                 </div>
-                <div className="hidden sm:grid grid-cols-2 sm:grid-cols-3 gap-10 mt-8 items-center lg:grid-cols-5">
-                    {brands.map((brand) => (
-                        <div
-                            key={brand.name}
-                            className="flex flex-col bg-white font-bold items-center shadow-md p-4 rounded-md"
-                        >
-                            <img
-                                src={brand.img}
-                                alt={brand.name}
-                                className="w-24 h-24 object-contain"
-                            />
-                            <span className="mt-2">{brand.name}</span>
-                        </div>
-                    ))}
-                </div>
             </div>
+            }
         </div>
     </div>
 );

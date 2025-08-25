@@ -2,7 +2,9 @@ import { Auction } from "@/components/shared/auction"
 import { Brands } from "@/components/shared/brands"
 import { Choose } from "@/components/shared/choose"
 import { Comments } from "@/components/shared/comments"
+import { Exchange } from "@/components/shared/exchange"
 import Footer from "@/components/shared/footer"
+import { Logistic } from "@/components/shared/logistics"
 import { Main } from "@/components/shared/main"
 import { Menus } from "@/components/shared/menus"
 import { Navbar } from "@/components/shared/navbar"
@@ -23,10 +25,12 @@ export const Home = () => {
         <Main type={type} brand={brand} year={year} price={price} setType={setType} setBrand={setBrand} setYear={setYear} setPrice={setPrice} />
         <Brands />
         <Vehicles type={type} year={year} price={price} brand={brand} />
+        <Exchange/>
         <Team/>
         <Choose />
         <Partners/>
         <Auction/>
+        <Logistic/>
         <Comments />
         <Footer/>
       <Menus/>

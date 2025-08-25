@@ -4,6 +4,10 @@ import { Error } from "./pages/error"
 import { SignInPage } from "./pages/sign-in";
 import { SignUpPage } from "./pages/sign-up";
 import { Profile } from "./pages/profile";
+import { Cars } from "./pages/cars";
+import { CarDetail } from "./pages/car-detail";
+import { About } from "./pages/about";
+import { Blog } from "./pages/blog";
 
 const App = () => {
   return (
@@ -12,9 +16,12 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/sign-in/*" element={<SignInPage />} />
         <Route path="/sign-up/*" element={<SignUpPage />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Profile />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/cars" element={<Cars />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/cars/:id" element={<CarDetail />} />
         <Route path="*" element={<Error />} />
-
       </Routes>
     </div>
   )

@@ -15,47 +15,22 @@ function Footer() {
                         <Button className='rounded-none h-full'>OK</Button>
                     </div>
                 </div>
-                <div className="flex  justify-start md:justify-between gap-10 flex-wrap md:pl-10 col-span-2">
+                <div className="flex  justify-start gap-4  lg:gap-30 flex-wrap md:pl-30 col-span-2">
                     <div>
-                        <div className="mt-4 ">
+                        <div className="mt-4">
                             <h1 className='text-xl font-bold mb-3 text-primary'>Quick Links</h1>
                             <ul className='flex flex-col text-primary gap-3'>
                                 <li>
                                     <a href="#">Home</a>
                                 </li>
                                 <li>
-                                    <a href="#">Cars</a>
+                                    <a href="/cars">Cars</a>
                                 </li>
                                 <li>
-                                    <a href="#">About</a>
+                                    <a href="/about">About</a>
                                 </li>
                                 <li>
-                                    <a href="#">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="#">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="mt-4">
-                            <h1 className='text-xl font-bold mb-3 text-primary'>Important Links</h1>
-                            <ul className='flex flex-col gap-3 text-primary'>
-                                <li>
-                                    <a href="#">Login</a>
-                                </li>
-                                <li>
-                                    <a href="#">Brands</a>
-                                </li>
-                                <li>
-                                    <a href="#">Our team</a>
-                                </li>
-                                <li>
-                                    <a href="#">Partners</a>
-                                </li>
-                                <li>
-                                    <a href="#">Comments</a>
+                                    <a href="/blog">Blog</a>
                                 </li>
                             </ul>
                         </div>

@@ -12,6 +12,7 @@ import AuctionRoute from "./api/routes/auction-route.js"
 import LogisticRoute from "./api/routes/logistic-route.js"
 import CustomerRoute from "./api/routes/customer-route.js"
 import OrderRoute from "./api/routes/order-route.js"
+import BlogRoute from "./api/routes/blog-route.js"
 import isExisted from "./middlewares/isExisted.js"
 
 const app = express()
@@ -32,6 +33,7 @@ app.use("/api/customer", CustomerRoute);
 app.use("/api/auction", AuctionRoute);
 app.use("/api/logistic", LogisticRoute);
 app.use("/api/order", OrderRoute);
+app.use("/api/blog", BlogRoute);
 app.get("/api/user", isExisted, async (_, res) => {
   const {data} = await clerkClient.users.getUserList();
   const users = data.map(user => ({
@@ -54,6 +56,8 @@ app.get("/api/exchange", async (_, res) => {
         RUB: data.rates.RUB,
         KRW: data.rates.KRW,
         UZS: data.rates.UZS,
+        EUR: data.rates.EUR,
+        CNY: data.rates.CNY,
       },
       time: data.time_last_update_utc,
     });

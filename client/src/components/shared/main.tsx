@@ -85,7 +85,7 @@
                                             <SelectItem value="4000">4000$</SelectItem>
                                     </SelectContent>    
                             </Select>
-                            <a href={"#search"} className="scroll-smooth">
+                            <a href={"./#search"} className="scroll-smooth">
                                 <Button className="bg-blue-500 w-full md:w-auto  text-white hover:bg-blue-600 ">
                                     <Search />
                                     Search
@@ -94,22 +94,15 @@
                     </div>
                     <div className="z-20 text-white text-center space-y-4">
                             <h1>
-                                    Or Browse Featured Model
+                                    Or Browse All Models
                             </h1>
-                            <div className="flex gap-4 ">
+                            <a href={"/cars"}>
+                            <div className="flex items-center justify-center gap-4 ">
                                     <Button className="bg-[#f48912] text-white hover:bg-[#d9780f] rounded-full">
-                                            SUV
-                                    </Button>
-                                    <Button className="bg-[#f48912] text-white hover:bg-[#d9780f] rounded-full">
-                                            Sedan
-                                    </Button>
-                                    <Button className="bg-[#f48912] text-white hover:bg-[#d9780f] rounded-full">
-                                            Hybrid
-                                    </Button>
-                                    <Button className="bg-[#f48912] text-white hover:bg-[#d9780f] rounded-full">
-                                            Coupe
+                                        All Cars
                                     </Button>
                             </div>
+                            </a>
                     </div>
             </div>
     )

@@ -6,124 +6,49 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Car, Fuel, MapPin } from "lucide-react";
+import { Car, Fuel,  MapPin } from "lucide-react";
+import useSWR from "swr";
+import { fetcher } from "@/middlewares/Fetcher";
+import { Link } from "react-router-dom";
+import { Skeleton } from "../ui/skeleton";
 
 export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price:number,brand:string}) => {
-  const vehicles: VehicleTypes[] = [
-    {
-      _id: "1",
-      brand: "mclaren",
-      name: "McLaren Artura 3.0",
-      images: ["/cars/mclaren1.jpg", "/cars/mclaren2.jpg", "/cars/mclaren3.jpg"],
-      description: "Coupe Pure Innovation on Four Wheels",
-      oldPrice: 20000,
-      currentPrice: 18000,
-      miles: 790,
-      fuelType: "Hybrid",
-      transmission: "Manual",
-      year: 2024,
-      stock: 2,    
-      comments: [],
-      status: {
-        color: "000",
-        bg: "00ff00",
-        text: "On Sale"
-      },
-      type: "new"
-    },
-    {
-      _id: "2",
-      brand: "rolls-royce",
-      name: "Rolls-Royce Spectre",
-      images: ["/cars/rolls-royce1.jpg", "/cars/rolls-royce2.jpg", "/cars/rolls-royce3.jpg", "/cars/rolls-royce4.jpg", "/cars/rolls-royce5.jpg"],
-      description: "The First All-Electric Ultra-Luxury Coupe",
-      oldPrice: 0,
-      currentPrice: 20000,
-      miles: 723,
-      fuelType: "Electric",
-      transmission: "Manual",
-      year: 2021,
-      stock: 10,
-      comments: [],
-      status: {
-        color: "000",
-        bg: "ff0",
-        text: "Great price"
-      },
-      type: "new"
-    },
-    {
-      _id: "3",
-      brand: "bmw",
-      name: " BMW X7 ",
-      images: ["/cars/bmw1.jpg", "/cars/bmw2.jpg", "/cars/bmw3.jpg", "/cars/bmw4.jpg"],
-      description: "XDRIVE",
-      oldPrice: 0,
-      currentPrice: 22000,
-      miles: 11800,
-      fuelType: "Gasoline",
-      transmission: "Manual",
-      year: 2021,
-      stock: 10,
-      comments: [],
-      type: "used"
-    },
-     {
-      _id: "4",
-      brand: "bugatti",
-      name: " Bugatti Chiron ",
-      images: ["/cars/bugatti1.jpg", "/cars/bugatti2.jpg", "/cars/bugatti3.jpg"],
-      description: "A Century of Speed",
-      oldPrice: 0,
-      currentPrice: 16000,
-      miles: 5300,
-      fuelType: "Gasoline",
-      transmission: "Manual",
-      year: 2021,
-      stock: 10,
-      comments: [],
-      type: "used"
-    },
-     {
-      _id: "5",
-      brand: "range-rover",
-      name: "Range Rover",
-      images: ["/cars/range-rover1.jpg", "/cars/range-rover2.jpg", "/cars/range-rover3.jpg", "/cars/range-rover4.jpg"],
-      description: "Luxury SUV",
-      oldPrice: 0,
-      currentPrice: 12000,
-      miles: 7100,
-      fuelType: "Gasoline",
-      transmission: "Manual",
-      year: 2021,
-      stock: 10,
-      comments: [],
-      type: "used"
-    },
-     {
-      _id: "6",
-      brand: "lamborghini",
-      name: "Lamborghini Urus",
-      images: ["/cars/lamborghini1.jpg", "/cars/lamborghini2.jpg", "/cars/lamborghini3.jpg"],
-      description: "Yellow Luxury SUV",
-      oldPrice: 32000,
-      currentPrice: 28000,
-      miles: 23634,
-      fuelType: "Gasoline",
-      transmission: "Manual",
-      year: 2024,
-      stock: 10,
-      comments: [],
-      type: "new",
-      status: {
-        color: "fff",
-        bg: "00f",
-        text: "New Arrival"
-      }
-    },
-  ];
+  
+  const { data,isLoading} = useSWR("/car", fetcher)
+  
+        if (isLoading) {
+    return (
+      <div className="bg-[#e7e7e7] min-h-[20vh]">
+        <div className="py-8 px-[5%]">
+          <div className="flex items-center justify-between">
+            <h1 className="text-xl md:text-3xl font-bold">Our Cars</h1>
+          </div>
 
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-xl overflow-hidden shadow-md p-4"
+              >
+                <Skeleton className="w-full h-40  rounded-md" />
+                <div className="p-4 space-y-3">
+                  <Skeleton className="h-5 w-2/3" />
+                  <Skeleton className="h-4 w-full" />
+                  <div className="flex justify-between gap-3">
+                    <Skeleton className="h-10 w-16" />
+                    <Skeleton className="h-10 w-16" />
+                    <Skeleton className="h-10 w-16" />
+                  </div>
+                  <Skeleton className="h-6 w-24" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  const vehicles = data as VehicleTypes[] || []
   const filteredVehicles = vehicles.filter(vehicle => {
     return (
       (type === "all" || vehicle.type === type) &&
@@ -133,17 +58,28 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
     );
   });
 
+  // Shuffle and pick 6 random vehicles
+  const shuffledVehicles = filteredVehicles
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 6);
+  const filteredVehiclesToShow = shuffledVehicles;
+
   return (
     <div className="bg-[#e7e7e7] min-h-[20vh]" id="search">
       <div className="py-8 px-[5%]">
-        <h1 className="text-xl md:text-3xl font-bold">Explore All Vehicles</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-xl md:text-3xl font-bold">Our Cars</h1>
+          <Link to="/cars">
+            <h1 className="text-sm md:text-xl text-blue-500 underline font-semibold">Show more</h1>
+          </Link>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {
-            filteredVehicles.length === 0 ? (
+            filteredVehiclesToShow.length === 0 ? (
               <p>No vehicles found</p>
             ) : (
-                filteredVehicles.map(
+                filteredVehiclesToShow.map(
             ({
               _id,
               currentPrice,
@@ -181,12 +117,12 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
 
                     {stock === 0 ? (<span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
                     Out of Stock
-                  </span>) : status ? (
+                  </span>) : status && status?.text?.length > 0 ? (
                     <span
                       className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-full shadow"
-                      style={{ color: `#${status.color}`, backgroundColor: `#${status.bg}` }}
+                      style={{ color: `#${status?.color}`, backgroundColor: `#${status?.bg}` }}
                     >
-                      {status.text}
+                      {status?.text}
                     </span>
                   ) : ""}
                 </div>
@@ -202,11 +138,11 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
                       <span><MapPin/></span>
                       {miles.toLocaleString()} Miles
                     </div>
-                    <div className="flex flex-col items-center gap-1 font-semibold">
+                    <div className="flex flex-col items-center gap-1 font-semibold capitalize">
                       <span><Fuel/></span>
                       {fuelType}
                     </div>
-                    <div className="flex flex-col items-center gap-1 font-semibold">
+                    <div className="flex flex-col items-center gap-1 font-semibold capitalize">
                       <span><Car/></span>
                       {transmission}
                     </div>
@@ -225,12 +161,12 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
                       ${currentPrice.toLocaleString()}
                     </p>
                    </div>
-                    <a
-                      href="#"
+                    <Link
+                      to={`/cars/${_id}`}
                       className="text-blue-600 text-sm hover:underline"
                     >
                       View Details
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

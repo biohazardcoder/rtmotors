@@ -9,6 +9,11 @@ import { toast } from "sonner"
 import { Input } from "../components/ui/input"
 import { Navbar } from "@/components/shared/navbar"
 import { ImageCropper } from "@/components/shared/image-cropper"
+import { Skeleton } from "@/components/ui/skeleton"
+import useSWR from "swr"
+import type { OrderTypes } from "@/types/types"
+import { fetcher } from "@/middlewares/Fetcher"
+import { format } from "date-fns";
 
 export const Profile = () => {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -21,7 +26,7 @@ export const Profile = () => {
   const [lastNameLoading, setLastNameLoading] = useState(false)
   const [editLastName, setEditLastName] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
+  
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
   const file = e.target.files?.[0];
   if (!file) return;
@@ -31,7 +36,6 @@ export const Profile = () => {
   };
   reader.readAsDataURL(file);
 };
-
 
   const handleChangeFirstName = async () => {
     if (!firstName.trim()) return toast.warning("First name cannot be empty")
@@ -88,13 +92,35 @@ export const Profile = () => {
   }
 };
 
+const { data, isLoading, error } = useSWR(`/order/my-orders/${user?.id}`, fetcher);
 
-  if (!isLoaded) {
+const myOrders = data as OrderTypes[] || [];
+
+if (!isLoaded ) {
     return (
       <div>
         <Navbar />
-        <div className="flex items-center justify-center h-[90vh]">
-          <Loader />
+        <div className="p-6 px-[5%] space-y-6 mt-14">
+          <Skeleton className="h-8 w-40" />
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-6 w-28" />
+              <Skeleton className="h-6 w-48" />
+            </div>
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-6 w-28" />
+              <Skeleton className="h-6 w-48" />
+            </div>
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-6 w-28" />
+              <Skeleton className="h-10 w-10 rounded-full" />
+              <Skeleton className="h-9 w-24" />
+            </div>
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-6 w-28" />
+              <Skeleton className="h-9 w-24" />
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -107,7 +133,7 @@ export const Profile = () => {
   return (
     <div>
       <Navbar />
-      <div className="h-screen p-2 pt-20 px-[5%]">
+      <div className="h-screen p-2 pt-20  px-[5%]">
         <h1 className="text-2xl font-bold">Your Profile</h1>
         <div className="mt-2 flex items-center gap-2 text-sm">
           <h1>First Name:</h1>
@@ -194,6 +220,99 @@ export const Profile = () => {
           loading={loading}
         />
       )}
+      <div className="mt-6 pb-10">
+        <h1 className="text-2xl font-bold">Your Orders</h1>
+        {isLoading ? (
+           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-4">
+      {[...Array(2)].map((_, i) => (
+        <div
+          key={i}
+          className="bg-white shadow-sm rounded-2xl border p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4"
+        >
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-5 w-40" /> 
+            <Skeleton className="h-4 w-32" /> 
+            <Skeleton className="h-4 w-28" /> 
+            <Skeleton className="h-4 w-28" /> 
+            <Skeleton className="h-4 w-36" />
+          </div>
+
+          <div className="flex items-center md:flex-col md:items-end gap-4">
+            <div className="flex items-center gap-2">
+              <Skeleton className="w-10 h-10 rounded-full hidden md:block" />
+              <div className="space-y-1">
+                <Skeleton className="h-4 w-24" /> 
+                <Skeleton className="h-3 w-32" />
+              </div>
+            </div>
+            <Skeleton className="h-6 w-20 rounded-full" />
+          </div>
+        </div>
+      ))}
+    </div>
+        ) : error ? (
+          <div>Error loading orders</div>
+        ) : (
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-4">
+      {myOrders.map((order: OrderTypes) => (
+        <div
+          key={order._id}
+          className="bg-white shadow-sm rounded-2xl border p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 "
+        >
+          <div className="flex-1 ">
+            <h2 className="text-lg font-semibold ">
+              {order.car?.name}
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Order ID:{" "}
+              <span className="uppercase font-medium text-black ">
+                #{order.orderId}
+              </span>
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Tracking:{" "}
+              <span className="font-medium text-black">${Number(order.trackingNumber).toLocaleString()}</span>
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Contact:{" "}
+              <span className="font-medium text-black">{order.contact}</span>
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Date:{" "}
+              <span className="font-medium text-black">
+                {order.createdAt ? format(new Date(order.createdAt), "dd MMMM yyyy") : ""}
+              </span>
+            </p>
+          </div>
+
+          <div className="flex items-center md:flex-col md:items-end gap-4">
+            <div className="flex items-center gap-2">
+              <div className="block">
+                <p className="text-sm font-medium">{order.user?.name}</p>
+                <p className="text-xs text-muted-foreground">{order.user?.email}</p>
+              </div>
+            </div>
+
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-semibold capitalize
+              ${
+                order.status === "pending"
+                  ? "bg-yellow-100 text-yellow-500"
+                  : order.status === "delivering"
+                  ? "bg-blue-100 text-blue-500"
+                  : order.status === "completed"
+                  ? "bg-green-100 text-green-500"
+                  : "bg-red-100 text-red-500"
+              }`}
+            >
+              {order.status}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+        )}
+      </div>
       </div>
     </div>
   )

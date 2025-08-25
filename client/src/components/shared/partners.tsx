@@ -2,49 +2,78 @@ import {
 Carousel,
 CarouselContent,
 CarouselItem,
-CarouselNext,
-CarouselPrevious,
 } from "@/components/ui/carousel";
+import { fetcher } from "@/middlewares/Fetcher";
+import type { PartnerTypes } from "@/types/types";
+import AutoScroll from "embla-carousel-auto-scroll";
+import { Link } from "react-router-dom";
+import useSWR from "swr";
+import { Skeleton } from "../ui/skeleton";
 
 export const Partners = () => {
-const partners = [
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_encar.png",
-    },
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_kb.png",
-    },
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_deutsch.png",
-    },
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_mpark.png",
-    },
-    {
-        img: "https://myshop-img2.carmanager.co.kr/myshop3/custom/seobuk/images/index/img_brand_kcar.png",
-    },
-];
 
-return (
-    <div className="bg-[#e7e7e7]">
+    const {data,isLoading} = useSWR("/partner", fetcher)
+
+const partners = data as PartnerTypes[] || [];
+
+     if (isLoading) {
+    return (
+      <div className="bg-[#e7e7e7]">
         <div className="py-8 px-[5%]">
-            <h1 className="text-xl md:text-3xl font-bold">Our Partners</h1>
+          <h1 className="text-xl md:text-3xl font-bold">Our Partners</h1>
+          <div className="mt-8">
+            <Carousel
+              opts={{
+                loop: true,
+                align: "start",
+              }}
+            >
+              <CarouselContent>
+                {[...Array(5)].map((_, i) => (
+                  <CarouselItem
+                    key={i}
+                    className="basis-1/2 md:basis-1/4 lg:basis-1/5"
+                  >
+                    <Skeleton className="w-full h-24  rounded-lg" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+    return (
+        <div className="bg-[#e7e7e7]">
+            <div className="py-8 px-[5%]">
+                <h1 className="text-xl md:text-3xl font-bold">Our Partners</h1>
             <div>
                 <div className="mt-8">
-                    <Carousel>
+                        <Carousel  opts={{
+                                 loop: true,
+                                 align: "start",
+                               }}
+                               plugins={[
+                                 AutoScroll({
+                                   speed: 1, 
+                                   stopOnInteraction: false, 
+                                 }),
+                               ]}>
                         <CarouselContent>
-                            {partners.map((brand,index) => (
-                                <CarouselItem key={index} className="basis-1/2 md:basis-1/4 lg:basis-1/5">
-                                        <img
-                                            src={brand.img}
-                                            alt={index.toString()}
-                                            className="w-full h-full object-contain object-center"
-                                        />
+                            {partners.map(({_id,image,url}) => (
+                                <CarouselItem key={_id} className="basis-1/2 md:basis-1/4 lg:basis-1/5">
+                                        <Link to={url} target="_blank">
+                                            <img
+                                                src={image}
+                                                alt={url}
+                                                className="w-full h-full object-contain object-center bg-white rounded-lg"
+                                            />
+                                        </Link>
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600"/>
-                        <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600"/>
                     </Carousel>
                 </div>
             </div>
