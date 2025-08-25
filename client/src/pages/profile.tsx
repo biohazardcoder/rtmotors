@@ -3,12 +3,11 @@ import {  useNavigate } from "react-router-dom"
 import Loader from "../components/ui/loader"
 import { Separator } from "../components/ui/separator"
 import { Button } from "../components/ui/button"
-import { CheckCheck, Image, LogOut, Pencil, PencilOff, } from "lucide-react"
+import { CheckCheck, LogOut, Pencil, PencilOff, } from "lucide-react"
 import React, { useState } from "react"
 import { toast } from "sonner"
 import { Input } from "../components/ui/input"
 import { Navbar } from "@/components/shared/navbar"
-import { ImageCropper } from "@/components/shared/image-cropper"
 import { Skeleton } from "@/components/ui/skeleton"
 import useSWR from "swr"
 import type { OrderTypes } from "@/types/types"
@@ -18,24 +17,13 @@ import { format } from "date-fns";
 export const Profile = () => {
   const { isLoaded, isSignedIn, user } = useUser()
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(false)
   const [firstName, setFirstName] = useState('')
   const [firstNameLoading, setFirstNameLoading] = useState(false)
   const [editName, setEditName] = useState(false)
   const [lastName, setLastName] = useState('')
   const [lastNameLoading, setLastNameLoading] = useState(false)
   const [editLastName, setEditLastName] = useState(false)
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  const file = e.target.files?.[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onloadend = () => {
-    setSelectedImage(reader.result as string);
-  };
-  reader.readAsDataURL(file);
-};
 
   const handleChangeFirstName = async () => {
     if (!firstName.trim()) return toast.warning("First name cannot be empty")
@@ -75,22 +63,6 @@ export const Profile = () => {
     }
   }
 
-  const handleSaveCropped = async (croppedBase64: string) => {
-  try {
-    setLoading(true);
-    const response = await fetch(croppedBase64);
-    const blob = await response.blob();
-    const file = new File([blob], "avatar.jpg", { type: "image/jpeg" });
-    await user?.setProfileImage({ file });
-    toast.success("Profile image updated successfully!");
-    setSelectedImage(null);
-  } catch (err) {
-    console.error(err);
-    toast.error("Failed to update profile image.");
-  } finally {
-    setLoading(false);
-  }
-};
 
 const { data, isLoading, error } = useSWR(`/order/my-orders/${user?.id}`, fetcher);
 
@@ -170,31 +142,6 @@ if (!isLoaded ) {
             </div>
           }
         </div>
-        <Separator className="mt-2" />
-        <div className="flex items-center gap-2 text-sm">
-          <h1>Image:</h1>
-          <div className="mt-2 flex items-center gap-4">
-            {loading ? <div className="w-10 h-10 flex items-center justify-center border-2 rounded-full"><Loader /></div> : <img src={user?.imageUrl} alt="logo" className="w-8 h-8 rounded-full" />}
-            <div>
-              <label htmlFor="profile-upload" className="cursor-pointer">
-                <Button variant={"outline"} asChild>
-                  <div className="flex items-center gap-2">
-                    <Image />
-                    Upload
-                    <input
-                      id="profile-upload"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      disabled={loading}
-                      className="hidden"
-                    />
-                  </div>
-                </Button>
-              </label>
-            </div>
-          </div>
-        </div>
         <Separator className="my-2" />
 
         <div className="flex items-center gap-2 text-sm">
@@ -212,14 +159,6 @@ if (!isLoaded ) {
             </div>
           </div>
         </div>
-        {selectedImage && (
-        <ImageCropper
-          image={selectedImage}
-          onCancel={() => setSelectedImage(null)}
-          onSave={handleSaveCropped}
-          loading={loading}
-        />
-      )}
       <div className="mt-6 pb-10">
         <h1 className="text-2xl font-bold">Your Orders</h1>
         {isLoading ? (

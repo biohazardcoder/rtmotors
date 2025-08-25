@@ -115,7 +115,7 @@ export const Cars = () => {
                                         </TableCell>
                                         <TableCell>
                                                 {stock === 0 ? (<span className="bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-                                                Out of Stock
+                                                Sold out
                                                 </span>) : status?.text?.length && status?.text?.length > 0 ? (
                                                 <span
                                                 className="text-sm font-semibold px-3 py-1 rounded-full shadow"

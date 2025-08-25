@@ -116,7 +116,7 @@ export const Vehicles = ({type,year,price, brand}:{type:string,year:number,price
                   </Carousel>
 
                     {stock === 0 ? (<span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-                    Out of Stock
+                    Sold out
                   </span>) : status && status?.text?.length > 0 ? (
                     <span
                       className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-full shadow"

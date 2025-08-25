@@ -201,7 +201,7 @@ return (
                   </Carousel>
 
                     {stock === 0 ? (<span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-                    Out of Stock
+                    Sold out
                   </span>) : status && status?.text?.length > 0 ? (
                     <span
                       className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-full shadow"
@@ -231,8 +231,8 @@ return (
                         <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
                           <Gauge size={20}/> Miles
                         </div>
-                      <div className="font-semibold capitalize">
-                      {miles.toLocaleString()} 
+                      <div className="font-semibold">
+                      {miles.toLocaleString()} km
                     </div>
                     <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
                       <Fuel size={20}/> Fuel Type
@@ -268,9 +268,12 @@ return (
                     }
                     </div>
                     <Button 
-                    onClick={() => setMenu(true)}
-                    className="bg-blue-500 text-white hover:bg-blue-600">
-                        Buy Now
+                    onClick={() => setMenu(true)} 
+                    disabled={stock === 0}
+                    className={`${stock === 0 ? "bg-red-500 text-white hover:bg-red-600" : "bg-blue-500 text-white hover:bg-blue-600"}`}>
+                        {
+                          stock === 0 ? "Sold out" : "Buy Now"
+                        }
                     </Button>
                   </div>
                 </div>
@@ -489,7 +492,7 @@ return (
                   </Carousel>
 
                     {stock === 0 ? (<span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-                    Out of Stock
+                   Sold out
                   </span>) : status && status?.text?.length > 0 ? (
                     <span
                       className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-full shadow"
@@ -509,7 +512,7 @@ return (
                   <div className="flex justify-between text-muted-foreground text-sm border-t border-b py-4 mb-3">
                     <div className="flex flex-col items-center gap-1 font-semibold">
                       <span><Gauge/></span>
-                      {miles.toLocaleString()} Miles
+                      {miles.toLocaleString()} km
                     </div>
                     <div className="flex flex-col items-center gap-1 font-semibold capitalize">
                       <span><Fuel/></span>
