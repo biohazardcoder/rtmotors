@@ -23,7 +23,6 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
 import { useState } from "react";
-import { AddAuction } from "@/modules/AddAuction";
 import { EditAuction } from "@/modules/EditAuction";
 
 export const Auctions = () => {
@@ -60,8 +59,7 @@ export const Auctions = () => {
         }
 
     return (
-         <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-            <Navbar button={true} component={<AddAuction/>}/>
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
             <div>
                 <Table>
                 <TableCaption>A list of your auctions.</TableCaption>

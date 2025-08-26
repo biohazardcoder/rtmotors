@@ -18,7 +18,6 @@ import {
     DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import type { BrandTypes } from "@/types/RootTypes";
-import { AddBrand } from "@/modules/AddBrand";
 import { Link} from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -60,8 +59,7 @@ export const Brands = () => {
     }
 
   return (
-     <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar button={true} component={<AddBrand/>}/>
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
       <div>
         <Table>
         <TableCaption>A list of your brands.</TableCaption>

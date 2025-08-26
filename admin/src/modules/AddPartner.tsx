@@ -61,8 +61,9 @@ export function AddPartner() {
         });
         mutate((data: any) => [...(data || []), { url: formData.url }], false);
         toast.success("Partner added successfully!");
+setTimeout(() => {
         window.location.reload();
-    } catch (error) {
+      }, 2000);    } catch (error) {
       toast.error("Error adding partner.");
       console.error(error);
     } finally {

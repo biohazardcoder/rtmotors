@@ -50,8 +50,9 @@ export function AddLogistic() {
       });
       mutate();
       toast.success("Logistic images added successfully!");
-      window.location.reload();
-    } catch (error) {
+setTimeout(() => {
+        window.location.reload();
+      }, 2000);    } catch (error) {
       toast.error("Error adding logistic images.");
       console.error(error);
     } finally {

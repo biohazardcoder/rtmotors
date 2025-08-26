@@ -114,3 +114,11 @@ export interface BlogTypes {
   image?:string;
   video?:string
 }
+
+export interface ErrorTypes{
+  response:{
+    data:{
+      message: string
+    }
+  }
+}

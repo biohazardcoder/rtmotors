@@ -70,8 +70,9 @@ export function AddCustomer() {
       });
       mutate();
       toast.success("Customer added successfully!");
-      window.location.reload();
-    } catch (error) {
+setTimeout(() => {
+        window.location.reload();
+      }, 2000);    } catch (error) {
       toast.error("Error adding customer.");
       console.error(error);
     } finally {

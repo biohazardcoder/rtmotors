@@ -22,7 +22,6 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
 import { useState } from "react";
-import { AddCustomer } from "@/modules/AddCustomer";
 import { EditCustomer } from "@/modules/EditCustomer";
 
 export const Customers = () => {
@@ -59,8 +58,7 @@ export const Customers = () => {
         }
 
     return (
-         <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-            <Navbar button={true} component={<AddCustomer/>}/>
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
             <div>
                 <Table>
                 <TableCaption>A list of your customers.</TableCaption>

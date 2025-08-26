@@ -21,7 +21,6 @@ import type { CarTypes } from "@/types/RootTypes";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import { AddCar } from "@/modules/AddCar";
 import { useState } from "react";
 import { EditCar } from "@/modules/EditCar";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -42,7 +41,6 @@ export const Cars = () => {
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
         </div>;
-                console.log(data);
                 
         const handleDelete = async (id: string) => {
                 try {
@@ -61,8 +59,7 @@ export const Cars = () => {
         }
 
     return (
-         <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-            <Navbar button={true} component={<AddCar/>}/>
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
             <div>
                 <Table>
                 <TableCaption>A list of your cars.</TableCaption>

@@ -48,7 +48,6 @@ const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
 
   return (
     <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar />
       <div>
         <Input placeholder="Search by Order ID" className="w-auto mb-4" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
 

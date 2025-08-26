@@ -14,7 +14,6 @@ import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
 import { useState } from "react";
 import { EditBlog } from "@/modules/EditBlog";
-import { AddBlog } from "@/modules/AddBlog";
 import { AddVideo } from "@/modules/AddVideo";
 
 export const Blog = () => {
@@ -23,7 +22,6 @@ export const Blog = () => {
   const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false);
   const [addVideo, setAddVideo] = useState<boolean>(false);
   const [selectedMenu, setSelectedMenu] = useState<BlogTypes | null>(null);
-        console.log(data);
         
   if (error)
     return (
@@ -78,9 +76,7 @@ export const Blog = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar button={true} component={<AddBlog />} />
-
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
         {blogs.map(({ _id, image, video, title, text }) => (
           <div

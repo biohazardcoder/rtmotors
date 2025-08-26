@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Fetch } from "../middlewares/Fetch";
-import type { AdminTypes } from "@/types/RootTypes";
+import type { AdminTypes, ErrorTypes } from "@/types/RootTypes";
 
 interface LoginResponse {
   token: string;
@@ -41,7 +41,7 @@ export default function Login() {
       newErrors.password = "Password is required.";
       valid = false;
     } else if (password.length < 4) {
-      newErrors.password = "Password must be at least 6 characters.";
+      newErrors.password = "Password must be at least 4 characters.";
       valid = false;
     }
 
@@ -66,8 +66,9 @@ export default function Login() {
       window.location.href = "/";
       
     } catch (error) {
-        const err = error as Error;
-        setGlobalError(err.message || "Unknown Token");
+        const err = error as ErrorTypes;
+
+        setGlobalError(err.response.data.message || "Unknown Token");
         console.error(error);
       }
   };
@@ -83,7 +84,7 @@ export default function Login() {
         <CardContent>
           <form className="space-y-4" onSubmit={handleFormSubmit}>
             {globalError && (
-              <Alert variant="destructive" className="bg-red-300">
+              <Alert variant="default" className="bg-destructive text-white">
                 <AlertDescription>{globalError}</AlertDescription>
               </Alert>
             )}

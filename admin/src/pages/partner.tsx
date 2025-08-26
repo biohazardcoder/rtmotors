@@ -22,7 +22,6 @@ import { Link} from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import { AddPartner } from "@/modules/AddPartner";
 import { useState } from "react";
 import { EditPartner } from "@/modules/EditPartner";
 
@@ -60,8 +59,7 @@ export const Partners = () => {
     }
 
   return (
-     <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar button={true} component={<AddPartner/>}/>
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
       <div>
         <Table>
         <TableCaption>A list of your partners.</TableCaption>

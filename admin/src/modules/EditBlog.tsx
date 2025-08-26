@@ -45,8 +45,9 @@ export function EditBlog({ blog, open, onOpenChange }: EditBlogProps) {
       });
       onOpenChange(false);
       toast.success("Blog updated successfully");
-      window.location.reload();
-    } catch (error) {
+setTimeout(() => {
+        window.location.reload();
+      }, 2000);    } catch (error) {
       console.error(error);
       const err = error as { response: { data: { message: string } } };
       toast.error(err.response.data.message || "Failed to update blog");

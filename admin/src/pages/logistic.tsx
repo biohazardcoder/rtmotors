@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
 import { useState } from "react";
-import { AddLogistic } from "@/modules/AddLogistic";
 import { EditLogistic } from "@/modules/EditLogistic";
 
 export const Logistics = () => {
@@ -50,8 +49,7 @@ export const Logistics = () => {
                 }
 
         return (
-                 <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-                        <Navbar button={true} component={<AddLogistic/>}/>
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
                                 {logistics.map(({ _id, image }) => (
                                         <div key={_id} className="bg-gray-50 border border-gray-200 rounded-lg shadow p-4 flex flex-col items-center relative">

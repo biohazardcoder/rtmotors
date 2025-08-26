@@ -52,7 +52,7 @@ const items = [
   },
   {
     title: "Logistics",
-    url: "/Logistics",
+    url: "/logistics",
     icon: Package,
   },
   {

@@ -67,7 +67,9 @@ export function AddBrand() {
       });
       mutate()
       toast.success("Brand added successfully!");
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       toast.error("Error adding brand.");
       console.error(error);
@@ -132,8 +134,6 @@ export function AddBrand() {
             {isLoading ? "Creating..." : "Create"}
           </Button>
         </div>
-
-
       </SheetContent>
     </Sheet>
   );

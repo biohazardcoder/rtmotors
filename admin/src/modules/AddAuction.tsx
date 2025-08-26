@@ -61,7 +61,9 @@ export function AddAuction() {
         });
         mutate((data: any) => [...(data || []), { url: formData.url }], false);
         toast.success("Auction added successfully!");
+        setTimeout(() => {
         window.location.reload();
+      }, 2000);
     } catch (error) {
       toast.error("Error adding auction.");
       console.error(error);

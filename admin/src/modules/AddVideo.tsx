@@ -61,8 +61,9 @@ export function AddVideo({ open, id, onOpenChange }: AddVideoProps) {
       onOpenChange(false);
       setVideo(null);
       toast.success("Video uploaded successfully");
-      window.location.reload();
-    } catch (error) {
+setTimeout(() => {
+        window.location.reload();
+      }, 2000);    } catch (error) {
       console.error(error);
       const err = error as { response?: { data?: { message?: string } } };
       toast.error(err.response?.data?.message || "Failed to upload video");
