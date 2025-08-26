@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/shared/navbar"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -18,17 +17,15 @@ export const Orders = () => {
   const orders = (data as OrderTypes[]) || []
 const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
         const [selectedMenu, setSelectedMenu] = useState<OrderTypes | null>(null)
-  if (error) return <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-    <Navbar/>
-    <h1 className="text-center text-destructive">Error loading order data</h1>
-  </div>;
+     if (error) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+            <h1 className="text-center text-destructive">Error loading order data</h1>
+        </div>;
 
-  if (isLoading) return <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-    <Navbar/>
-    <div className="flex items-center justify-center h-[80vh]">
-      <Loader2 className="animate-spin text-blue-500" size={30}/>
-    </div>
-  </div>;
+        if (isLoading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+            <div className="flex items-center justify-center h-[calc(100vh-150px)]">
+                <Loader2 className="animate-spin text-blue-500" size={30}/>
+            </div>
+        </div>;
     const handleEditMenu = (order:OrderTypes) => {
                 setSelectedMenu(order)
                 setEditMenuOpen(true)
@@ -47,7 +44,7 @@ const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
   const filteredOrders = orders.filter(order => order?.orderId.includes(searchTerm));
 
   return (
-    <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
       <div>
         <Input placeholder="Search by Order ID" className="w-auto mb-4" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
 

@@ -91,6 +91,9 @@ export function EditCar({ car, open, onOpenChange }: EditCarProps) {
       mutate();
       onOpenChange(false);
       toast.success("Car updated successfully");
+      setTimeout(() => {
+        mutate();
+      }, 2000);
     } catch (error) {
       console.error(error);
       const err = error as { response: { data: { message: string } } };
@@ -220,6 +223,7 @@ export function EditCar({ car, open, onOpenChange }: EditCarProps) {
             <Input
               name="images"
               type="file"
+              multiple
               className="file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"
               onChange={handleImageChange}
             />

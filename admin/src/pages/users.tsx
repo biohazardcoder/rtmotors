@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/shared/navbar"
 import { fetcher } from "@/middlewares/Fetcher";
 import {  Loader2 } from "lucide-react";
 import useSWR from "swr";
@@ -20,21 +19,18 @@ export const Users = () => {
     
     const users = data as UserTypes[] || []
 
-    if (error) return <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar button={false}/>
-      <h1 className="text-center text-destructive">Error loading user data</h1>
-    </div>;
+      if (error) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+            <h1 className="text-center text-destructive">Error loading user data</h1>
+        </div>;
 
-    if (isLoading) return <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar />
-      <div className="flex items-center justify-center bg  h-[50vh]">
-        <Loader2 className="animate-spin text-blue-500" size={30}/>
-      </div>
-    </div>;
+        if (isLoading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+            <div className="flex items-center justify-center h-[calc(100vh-150px)]">
+                <Loader2 className="animate-spin text-blue-500" size={30}/>
+            </div>
+        </div>;
 
   return (
-     <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar/>
+         <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
       <div>
         <Table>
         <TableCaption>A list of your users.</TableCaption>

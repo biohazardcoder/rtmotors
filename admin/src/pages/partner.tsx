@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/shared/navbar"
 import { fetcher } from "@/middlewares/Fetcher";
 import {  EllipsisVertical, Loader2, Pen, Trash2 } from "lucide-react";
 import useSWR from "swr";
@@ -30,17 +29,15 @@ export const Partners = () => {
     const partners = data as PartnerTypes[] || []
     const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
     const [selectedMenu, setSelectedMenu] = useState<PartnerTypes | null>(null)
-    if (error) return <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar/>
-      <h1 className="text-center text-destructive">Error loading partner data</h1>
-    </div>;
+       if (error) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+            <h1 className="text-center text-destructive">Error loading partner data</h1>
+        </div>;
 
-    if (isLoading) return <div className="min-h-[calc(100vh-32px)] p-4 bg-white rounded-md shadow-lg">
-      <Navbar/>
-      <div className="flex items-center justify-center bg  h-[50vh]">
-        <Loader2 className="animate-spin text-blue-500" size={30}/>
-      </div>
-    </div>;
+        if (isLoading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+            <div className="flex items-center justify-center h-[calc(100vh-150px)]">
+                <Loader2 className="animate-spin text-blue-500" size={30}/>
+            </div>
+        </div>;
 
     const handleDelete = async (id: string) => {
         try {
