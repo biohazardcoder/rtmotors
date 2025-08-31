@@ -62,10 +62,10 @@ export const Comments = () => {
             <Carousel className="mt-8">
                 <CarouselContent>
                     {comments.map(comment => (
-                        <CarouselItem key={comment._id} className="md:basis-1/3 lg:basis-1/4">
-                            <div className="bg-white py-10  rounded-md shadow px-10">
+                        <CarouselItem key={comment._id} className="md:basis-1/3 lg:basis-1/4 ">
+                            <div className=" bg-white h-auto py-4  rounded-md shadow px-4">
                                 <div className="flex  gap-4 flex-col">
-                                    <img src={comment.image} alt={comment.name} className="w-full h-64 rounded-md mr-3 object-center object-cover" />
+                                    <img src={comment.image} alt={comment.name} className="w-full h-80 rounded-md mr-3 object-top object-cover" />
                                     <div>
                                         <p className="font-semibold">{comment.name}</p>
                                         <p className="text-sm text-muted-foreground">{comment.job}</p>

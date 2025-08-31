@@ -72,7 +72,7 @@ return (
                                             className="w-24 h-24 object-contain"
                                         />
                                         <Link to={url} target="_blank" >
-                                                <span className="mt-2 text-xs underline">{title}</span>
+                                                <span className="mt-2 text-xs ">{title}</span>
                                         </Link>
                                     </div>
                                 </CarouselItem>

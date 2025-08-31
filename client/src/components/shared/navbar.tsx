@@ -31,12 +31,12 @@ export const Navbar = () => {
   ]
 
   return (
-    <div className={cn("absolute top-0 left-0 w-full h-[10vh] bg-transparent flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
+    <div className={cn("absolute top-0 left-0 w-full h-[8vh] bg-transparent flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
       <Link to={"/"}>
        <img src="/logo.png" alt="RT Motors"className="w-20" />
        </Link>
       <div className="hidden md:flex items-center gap-4">
-        <ul className="flex items-center gap-12">
+        <ul className="flex items-center gap-8">
           {items.map(item => (
             <li key={item.label}>
               <Link to={item.url} className="font-semibold">{item.label}</Link>
@@ -73,23 +73,23 @@ export const Navbar = () => {
         </ul>
       </div>
       <div className="md:flex items-center gap-2 hidden">
-            <Link to={"https://t.me/rtmotors_trade"} target="_blank" className="bg-blue-500 rounded-full w-12 h-12 ">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png" alt="" className="w-full h-full object-center border-2 border-white rounded-full" />
+            <Link to={"https://t.me/rtmotors_trade"} target="_blank" className="bg-blue-500 rounded-md w-8 h-8 ">
+                <img src="https://static.vecteezy.com/system/resources/previews/026/127/326/non_2x/telegram-logo-telegram-icon-transparent-social-media-icons-free-png.png" alt="" className="w-full h-full object-center rounded-md" />
             </Link>
-         <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-green-500 rounded-full w-12 h-12 ">
-                <img src="/whatsapp.png" alt="" className="w-full h-full object-center" />
-            </Link>
-             <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-green-500 rounded-full w-12 h-12 ">
-                <img src="https://www.citypng.com/public/uploads/preview/tiktok-circle-round-logo-brand-video-tik-tok-7017516947932520ecgdidi6e.png?v=2025072701" alt="" className="w-full h-full object-center rounded-full" />
+         <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-white rounded-full w-8 h-8 ">
+                <img src="https://cdn-icons-png.freepik.com/512/2496/2496112.png" alt="" className="w-full h-full object-center rounded-md" />
             </Link>
          <Link target="_blank" to={"https://www.instagram.com/rtmotors_trade"}>
-            <img src="https://img.freepik.com/premium-vector/round-youtube-logo-isolated-white-background_469489-983.jpg?semt=ais_hybrid&w=740&q=80"
-             alt="YouTube" className="w-12 h-12 rounded-full bg-white object-contain"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/YouTube_play_button_square_%282013-2017%29.svg/250px-YouTube_play_button_square_%282013-2017%29.svg.png"
+             alt="YouTube" className="w-8 h-8 rounded-md bg-white object-contain"/>
         </Link>
          <Link target="_blank" to={"https://www.instagram.com/rtmotors_trade"}>
-            <img src="https://i.pinimg.com/736x/24/37/73/2437730f7e3a5705e205e67fa2cd1020.jpg" alt="Instagram" 
-            className="w-12 h-12 rounded-full bg-white object-cover object-center border-2  border-white"/>
+            <img src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-instagram-new-square2-512.png" alt="Instagram" 
+            className="w-8 h-8 rounded-md object-cover object-center "/>
         </Link>
+             <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-white rounded-full w-8 h-8 ">
+                <img src="https://thumbs.dreamstime.com/b/tiktok-social-media-app-icon-tiktok-social-media-app-icon-square-shape-vector-illustration-269930887.jpg" alt="" className="w-full h-full object-center rounded-md border" />
+            </Link>
       </div>
       <div className="flex items-center gap-2 md:hidden">
         {
