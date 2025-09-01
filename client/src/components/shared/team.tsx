@@ -1,3 +1,6 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 interface Team {
     _id: string;
@@ -9,6 +12,13 @@ interface Team {
 }
 
 export const Team = () => {
+
+    
+      useEffect(() => {
+        AOS.init({ duration: 800});
+      }, []);
+    
+
     const team: Team[] = [
         {
             _id: "1",
@@ -38,7 +48,7 @@ export const Team = () => {
 
     return (
         <div className="bg-[#e7e7e7]">
-            <div className="py-8 px-[5%]">
+            <div className="py-8 px-[5%]" data-aos="fade-up">
             <h1 className="text-xl md:text-3xl font-bold">Our Team</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
                  {team.map(team => (

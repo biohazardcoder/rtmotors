@@ -10,16 +10,19 @@ export const About = () => {
     {
       name: "John Doe",
       img: "/comments/developer.jpg",
+      number:"336116383",
       social: "#",
     },
     {
       name: "Jane Smith",
       img: "/comments/man.jpg",
+      number:"336116383",
       social: "#",
     },
      {
       name: "Emily Johnson",
       img: "/comments/designer.jpg",
+      number:"336116383",
       social: "#",
     },
   ];
@@ -36,14 +39,9 @@ export const About = () => {
         />
         <h1 className="text-3xl font-bold mb-4">RT Motors Company</h1>
         <p className="max-w-2xl mx-auto text-muted-foreground">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-          Ad veritatis at sed qui. Aspernatur similique ullam recusandae, 
-          officiis molestias suscipit nobis explicabo porro quod fuga enim sapiente voluptatum, 
-          quis qui placeat iusto maiores assumenda sed excepturi. Doloremque nemo accusamus magni.
+          RT MOTORS specializes in delivering high-quality vehicles from South Korea to customers worldwide. As a supplier over the years of experience, we have established strong partnerships with some of Korea’s top manufacturers, and also maintain reliable connections with trusted and competitively priced dealers in the automotive sector. We believe that through our many years of experience in this country, our partnership will reach new heights, and we will successfully enter the Korean automotive market.
         </p>
       </section>
-
-      
       <section className="py-12 px-6">
         <h2 className="text-2xl font-bold text-center mb-8">Selers Team</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -71,12 +69,22 @@ export const About = () => {
         </div>
       </section>
 
+       <section className="py-12 px-6">
+          <h1 className="mt-4 text-2xl font-bold text-center">Our Services and Strengths Include:</h1>
+          <div className="flex justify-center">
+        <ul className="flex flex-col"> 
+          <li className="list-disc mt-2">Direct sourcing from top Korean manufacturers and verified auctions</li>
+          <li className="list-disc mt-2">Export of a wide range of vehicles: sedans, SUVs, EVs</li>
+          <li className="list-disc mt-2">Personalized vehicle sourcing based on your market demand</li>
+          <li className="list-disc mt-2">Full customs clearance and international logistics support</li>
+          <li className="list-disc mt-2">Competitive pricing and long-term partner incentives</li>
+        </ul>
+          </div>
+      </section>
+      
+
       <section className="py-12 px-6 text-center">
         <h2 className="text-2xl font-bold mb-6">How We Work</h2>
-        <p className="max-w-3xl mx-auto text-muted-foreground">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia praesentium est distinctio atque magnam. 
-          Assumenda similique, natus explicabo reprehenderit omnis distinctio dolorum molestiae nihil ipsa aspernatur aliquam.
-        </p>
         <div className="grid md:grid-cols-3 gap-8 mt-8 max-w-5xl mx-auto">
           <div className="p-6 bg-white shadow rounded-xl">
             <h3 className="font-bold mb-2 text-xl">1. Order</h3>
