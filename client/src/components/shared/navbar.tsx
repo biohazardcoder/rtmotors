@@ -73,7 +73,7 @@ export const Navbar = () => {
         </ul>
       </div>
       <div className="md:flex items-center gap-2 hidden">
-            <Link to={"https://t.me/rtmotors_trade"} target="_blank" className="bg-blue-500 rounded-md w-8 h-8 ">
+            <Link to={"https://t.me/rtmotors_trade"} target="_blank" className="bg-[#2da4db] rounded-md w-8 h-8 ">
                 <img src="https://static.vecteezy.com/system/resources/previews/026/127/326/non_2x/telegram-logo-telegram-icon-transparent-social-media-icons-free-png.png" alt="" className="w-full h-full object-center rounded-md" />
             </Link>
          <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-white rounded-full w-8 h-8 ">
@@ -88,7 +88,7 @@ export const Navbar = () => {
             className="w-8 h-8 rounded-md object-cover object-center "/>
         </Link>
              <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-white rounded-full w-8 h-8 ">
-                <img src="https://thumbs.dreamstime.com/b/tiktok-social-media-app-icon-tiktok-social-media-app-icon-square-shape-vector-illustration-269930887.jpg" alt="" className="w-full h-full object-center rounded-md border" />
+                <img src="https://thumbs.dreamstime.com/b/tiktok-social-media-app-icon-tiktok-social-media-app-icon-square-shape-vector-illustration-269930887.jpg" alt="" className="w-full h-full object-center rounded-md " />
             </Link>
       </div>
       <div className="flex items-center gap-2 md:hidden">

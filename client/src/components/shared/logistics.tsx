@@ -21,7 +21,7 @@ export const Logistic = () => {
     return (
       <div className="bg-[#e7e7e7]">
         <div className="py-8 px-[5%]">
-          <h1 className="text-xl md:text-3xl font-bold">Logistics</h1>
+          <h1 className="text-xl md:text-3xl font-bold">Container loadings</h1>
           <div className="mt-8">
             <Carousel>
               <CarouselContent>
@@ -47,8 +47,8 @@ export const Logistic = () => {
     return (
         <div className="bg-[#e7e7e7]">
             <div className="py-8 px-[5%]">
-                <h1 className="text-xl md:text-3xl font-bold">Logistics</h1>
-                {logistics.length === 0 ? <div className="pt-4 text-center text-muted-foreground">No logistics found</div>:
+                <h1 className="text-xl md:text-3xl font-bold">Container loadings</h1>
+                {logistics.length === 0 ? <div className="pt-4 text-center text-muted-foreground">No container loading found</div>:
                     <div>
                         <div className="mt-8">
                             <Carousel>
@@ -58,7 +58,7 @@ export const Logistic = () => {
                                             <img
                                                 src={image}
                                                 alt="logistic"
-                                                className="w-full h-full object-cover object-center  rounded-lg"
+                                                className="w-full h-56 object-cover object-center  rounded-lg"
                                             />
                                         </CarouselItem>
                                     ))}
