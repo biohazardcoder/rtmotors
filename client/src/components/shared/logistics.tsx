@@ -1,10 +1,4 @@
-import {
-Carousel,
-CarouselContent,
-CarouselItem,
-CarouselNext,
-CarouselPrevious,
-} from "@/components/ui/carousel";
+
 import { fetcher } from "@/middlewares/Fetcher";
 import type { LogisticTypes } from "@/types/types";
 import useSWR from "swr";
@@ -21,22 +15,15 @@ export const Logistic = () => {
       <div className="bg-[#e7e7e7]">
         <div className="py-8 px-[5%]" data-aos="fade-up">
           <h1 className="text-xl md:text-3xl font-bold">Container loadings</h1>
-          <div className="mt-8">
-            <Carousel>
-              <CarouselContent>
-                {[...Array(5)].map((_, i) => (
-                  <CarouselItem
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+                {[...Array(4)].map((_, i) => (
+                  <div
                     key={i}
                     className="basis-1/2 md:basis-1/4"
-                    data-aos="fade-up"
                   >
                     <Skeleton className="w-full h-36 md:h-56 rounded-lg animate-pulse" />
-                  </CarouselItem>
+                  </div>
                 ))}
-              </CarouselContent>
-              <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
-              <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
-            </Carousel>
           </div>
         </div>
       </div>

@@ -20,23 +20,21 @@ export const Comments = () => {
           <h1 className="text-xl md:text-3xl font-bold">
             What our customers say
           </h1>
-          <Carousel className="mt-8">
+          <Carousel className="mt-4">
             <CarouselContent>
               {[...Array(5)].map((_, i) => (
                 <CarouselItem key={i} className="md:basis-1/3 lg:basis-1/4">
-                  <div className="bg-white py-10 rounded-md shadow px-10">
+                  <div className="bg-white py-4 rounded-md shadow px-4">
                     <div className="flex gap-4 flex-col">
                       <div className="space-y-2">
                         <Skeleton className="h-4 w-32" />
-                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-12 w-full" />
                       </div>
                     </div>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
-            <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
           </Carousel>
         </div>
       </div>
