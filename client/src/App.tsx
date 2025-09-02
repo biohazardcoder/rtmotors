@@ -8,6 +8,7 @@ import { Cars } from "./pages/cars";
 import { CarDetail } from "./pages/car-detail";
 import { About } from "./pages/about";
 import { Blog } from "./pages/blog";
+import { ContainerLoadings } from "./pages/container-loadings";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/dashboard" element={<Profile />} />
         <Route path="/about" element={<About />} />
         <Route path="/cars" element={<Cars />} />
+        <Route path="/container-loadings" element={<ContainerLoadings />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/cars/:id" element={<CarDetail />} />
         <Route path="*" element={<Error />} />
