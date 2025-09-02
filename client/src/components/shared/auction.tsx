@@ -81,7 +81,6 @@ export const Auction = () => {
                   <CarouselItem
                     key={_id}
                     className="basis-1/2 md:basis-1/4 lg:basis-1/5"
-                    data-aos="fade-up"
                   >
                     <Link to={url} target="_blank">
                       <img
