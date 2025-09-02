@@ -71,7 +71,7 @@ export const Team = () => {
                                         </p>
                                         <div className="flex items-center justify-center gap-2">
                                             {team.lang.map((item)=>(
-                                                <img src={`/lang/${item}`} alt=""  className="w-10 h-6 border border-muted-foreground"/>
+                                                <img src={`/lang/${item}`} alt=""  className="w-10 h-10 object-cover object-center rounded-full"/>
                                             ))}
                                         </div>
                                     </div>
