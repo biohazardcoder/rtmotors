@@ -4,15 +4,6 @@ const CustomerSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
-    },
-    image:{
-        type: String,
-        required: true,
-    },
-    job:{
-             type: String,
-        required: true,
     },
     message:{
         type: String,

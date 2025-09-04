@@ -18,16 +18,17 @@ export const getAllBrand = async (_, res) => {
 };
 
 export const createBrand = async (req, res) => {
+  console.log(req.uploadedImages[0]);
+  
   try {
-    const { title, url } = req.body;
     const brand = new Brand({
-      title,
-      url,
       image: req.uploadedImages[0], 
     });
     await brand.save();
     res.status(201).json(brand);
   } catch (error) {
+    console.log(error);
+    
     res.status(400).json({ message: "Problem creating brand" });
   }
 };
@@ -87,6 +88,7 @@ export const deleteBrand = async (req, res) => {
 
     res.status(200).json({ message: "Brand deleted" });
   } catch (error) {
-    res.status(400).json({ message: "Problem deleting brand" });
+    res.status(500).json({ message: "Problem deleting brand"});
+    console.log(error);
   }
 };
