@@ -3,29 +3,77 @@ import Footer from "@/components/shared/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Send } from "lucide-react";
+import { BriefcaseBusiness, CreditCard, FileCheck, FileText, Phone, Search, Ship, } from "lucide-react";
+interface Team {
+    _id: string;
+    name: string;
+    avatar: string;
+    job: string;
+    number:string,
+    lang : string[]
+
+}
+const team: Team[] = [
+        {
+            _id: "1",
+            name: "Ahliddin Teshaboev",
+            avatar: "/team/ceo.jpg",
+            job: "CEO",
+            number: "+8210-2989-8641",
+            lang :["kr.png", "en.png"]
+        },
+        {
+            _id: "2",
+            name: "Rakhmatilla Akhmedov",
+            avatar: "/team/operation_m.jpg",
+            job: "Operation Manager",
+            number:"+8210-9687-9796",
+            lang :["kr.png", "en.png", "ru.png"]
+
+        },
+        {
+            _id: "3",
+            name: "Abdullaev Bekmurod",
+            avatar: "/team/sales_m.jpg",
+            job: "Sales Manager",
+            number:"+8210-8465-8085",
+            lang :["kr.png", "en.png"]
+        },
+    ];
+const howWeWork = [
+  {
+    icon: Search,
+    title: "Step 1. Explore Vehicles",
+    description:
+      "Browse and discover cars through RT Motors – from reliable dealers, verified platforms, and official auto auctions.",
+  },
+  {
+    icon: FileText,
+    title: "Step 2. Get an Estimate",
+    description:
+      "Request a detailed cost estimate in USD or EUR, covering both the vehicle price and shipping charges, prepared by our team.",
+  },
+  {
+    icon: CreditCard,
+    title: "Step 3. Confirm & Pay",
+    description:
+      "Finalize your order and complete the payment securely via international bank transfer for the provided invoice.",
+  },
+  {
+    icon: Ship,
+    title: "Step 4. Arrange Shipment",
+    description:
+      "We organize the quickest and most efficient shipping option for you, whether via container or Ro-Ro service.",
+  },
+  {
+    icon: FileCheck,
+    title: "Step 5. Track & Receive Documents",
+    description:
+      "Monitor your shipment with the container number and receive all necessary import documents through express courier for customs clearance.",
+  },
+];
 
 export const About = () => {
-  const team = [
-    {
-      name: "John Doe",
-      img: "/comments/developer.jpg",
-      number:"336116383",
-      social: "#",
-    },
-    {
-      name: "Jane Smith",
-      img: "/comments/man.jpg",
-      number:"336116383",
-      social: "#",
-    },
-     {
-      name: "Emily Johnson",
-      img: "/comments/designer.jpg",
-      number:"336116383",
-      social: "#",
-    },
-  ];
 
   return (
     <div className="w-full bg-[#e7e7e7] pt-14">
@@ -42,32 +90,36 @@ export const About = () => {
           RT MOTORS specializes in delivering high-quality vehicles from South Korea to customers worldwide. As a supplier over the years of experience, we have established strong partnerships with some of Korea’s top manufacturers, and also maintain reliable connections with trusted and competitively priced dealers in the automotive sector. We believe that through our many years of experience in this country, our partnership will reach new heights, and we will successfully enter the Korean automotive market.
         </p>
       </section>
-      <section className="py-12 px-6">
-        <h2 className="text-2xl font-bold text-center mb-8">Selers Team</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {team.map((member,index) => (
-            <div
-              key={index}
-              className="bg-white shadow-md rounded-2xl p-6 text-center"
-            >
-              <img
-                src={member.img}
-                alt={member.name}
-                className="w-24 h-24 md:h-48 md:w-48 rounded-full mx-auto mb-4 object-center object-cover"
-              />
-              <h3 className="text-lg font-semibold">{member.name}</h3>
-              <div className="flex justify-center space-x-4 text-xl text-muted-foreground">
-                <a href={member.social} target="_blank">
-                 <Button className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white mt-4">
-                  <Send/>
-                   Contact
-                 </Button>
-                </a>
-              </div>
+         <section className="w-full">
+             <div className="py-8 px-[5%]  flex flex-col items-center justify-center" >
+            <h1 className="text-xl md:text-3xl font-bold text-center">Our Team</h1>
+            <div className="flex flex-col md:flex-row gap-4 mt-8">
+                 {team.map(team => (
+                            <div key={team._id} className="bg-white  rounded-md shadow p-4">
+                                <div className="flex  gap-4 flex-col">
+                                    <img src={team.avatar} alt={team.name} className="w-full h-[400px] md:h-[300px] rounded-md object-center object-cover" />
+                                    <div className="space-y-2">
+                                        <p className="font-semibold">{team.name}</p>
+                                        <p className="text-sm text-muted-foreground flex items-center gap-2">
+                                            <BriefcaseBusiness size={20}/> 
+                                            {team.job}
+                                        </p>
+                                         <p className="text-sm text-muted-foreground flex items-center gap-2">
+                                            <Phone size={20}/> 
+                                            {team.number}
+                                        </p>
+                                        <div className="flex items-center justify-center gap-2">
+                                            {team.lang.map((item)=>(
+                                                <img src={`/lang/${item}`} alt=""  className="w-10 h-10 object-cover object-center rounded-full"/>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    ))}
             </div>
-          ))}
         </div>
-      </section>
+         </section>
 
        <section className="py-12 px-6">
           <h1 className="mt-4 text-2xl font-bold text-center">Our Services and Strengths Include:</h1>
@@ -83,23 +135,21 @@ export const About = () => {
       </section>
       
 
-      <section className="py-12 px-6 text-center">
-        <h2 className="text-2xl font-bold mb-6">How We Work</h2>
-        <div className="grid md:grid-cols-3 gap-8 mt-8 max-w-5xl mx-auto">
-          <div className="p-6 bg-white shadow rounded-xl">
-            <h3 className="font-bold mb-2 text-xl">1. Order</h3>
-            <p className="text-muted-foreground">We find a car that meets the buyer's needs.</p>
+   <section className="py-12 px-6 text-center">
+      <h2 className="text-2xl font-bold mb-6">How We Work</h2>
+      <div className="grid md:grid-cols-3 gap-8 mt-8 max-w-5xl mx-auto">
+        {howWeWork.map((step, index) => (
+          <div
+            key={index}
+            className="p-6 bg-white rounded-xl "
+          >
+            <step.icon className="w-10 h-10 mx-auto mb-4 text-primary" />
+            <h3 className="font-bold mb-2 text-xl">{step.title}</h3>
+            <p className="text-muted-foreground">{step.description}</p>
           </div>
-          <div className="p-6 bg-white shadow rounded-xl">
-            <h3 className="font-bold mb-2 text-xl">2. Inspection</h3>
-            <p className="text-muted-foreground">The car undergoes technical and legal inspection.</p>
-          </div>
-          <div className="p-6 bg-white shadow rounded-xl">
-            <h3 className="font-bold mb-2 text-xl">3. Delivery</h3>
-            <p className="text-muted-foreground">Delivery and registration for buyers.</p>
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </section>
 
       <section className="py-12 px-6">
         <h2 className="text-2xl font-bold text-center mb-6">Our Location</h2>
