@@ -75,14 +75,14 @@ export const Brands = () => {
             No brands found
           </div>
         ) : (
-          <div className="mt-8 flex flex-wrap gap-2 items-center">
+          <div className="mt-8 flex flex-wrap gap-2 items-center gap-4">
             {brands.map(({ _id, image, title }) => (
               <div key={_id} data-aos="fade-up">
                 <div className="flex flex-col font-bold items-center p-4 rounded-md">
                   <img
                     src={image}
                     alt={title}
-                    className="w-14 h-14 object-contain"
+                    className="w-auto h-14 object-cover"
                   />
                 </div>
               </div>
