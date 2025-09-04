@@ -2,7 +2,6 @@ import { fetcher } from "@/middlewares/Fetcher";
 import type { LogisticTypes } from "@/types/types";
 import useSWR from "swr";
 import { Skeleton } from "../ui/skeleton";
-import { Link } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -11,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "../ui/button";
+import { HashLink } from "react-router-hash-link";
 
 export const Logistic = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
@@ -51,13 +51,13 @@ export const Logistic = () => {
           <Carousel className="mt-8 relative">
             <div className="flex items-center justify-between  mb-4">
           <h1 className="text-lg md:text-3xl font-bold">Container loadings</h1>
-          <Link to="/container-loadings">
+          <HashLink to="/container-loadings/#all">
             <Button
             className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
             >
               More
             </Button>
-          </Link>
+          </HashLink>
         </div>
               <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[18px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
               <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />

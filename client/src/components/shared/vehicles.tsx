@@ -83,7 +83,7 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
           <h1 className="text-lg md:text-3xl font-bold" data-aos="fade-up">
             Our Cars
           </h1>
-          <HashLink to="/cars#all">
+          <HashLink to="/cars/#all">
               <Button
               data-aos="fade-up"
             className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
@@ -227,7 +227,7 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
             <h1 className="text-xl md:text-3xl font-bold" >
               Sold Out
             </h1>
-          <HashLink  smooth to="/cars#sold-out">
+          <HashLink  smooth to="/cars/#sold-out">
             <Button
             className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
             >
