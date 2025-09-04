@@ -9,7 +9,6 @@ import { Main } from "@/components/shared/main"
 import { Menus } from "@/components/shared/menus"
 import { Navbar } from "@/components/shared/navbar"
 import { Partners } from "@/components/shared/partners"
-import { Team } from "@/components/shared/team"
 import { Vehicles } from "@/components/shared/vehicles"
 import { useState } from "react"
 
@@ -25,12 +24,11 @@ export const Home = () => {
         <Main type={type} brand={brand} year={year} price={price} setType={setType} setBrand={setBrand} setYear={setYear} setPrice={setPrice} />
         <Brands />
         <Vehicles type={type} year={year} price={price} brand={brand} />
-        <Exchange/>
-        <Team/>
+        <Logistic/>
         <Choose />
+        <Exchange/>
         <Partners/>
         <Auction/>
-        <Logistic/>
         <Comments />
         <Footer/>
       <Menus/>

@@ -26,7 +26,7 @@ export const Auction = () => {
     return (
       <div className="bg-[#e7e7e7]">
         <div className="py-8 px-[5%]" data-aos="fade-up">
-          <h1 className="text-xl md:text-3xl font-bold">Auction Holders</h1>
+        <h1 className="text-lg md:text-3xl font-bold">Auction Holders</h1>
           <div className="mt-8">
             <Carousel
               opts={{
@@ -54,7 +54,7 @@ export const Auction = () => {
   return (
     <div className="bg-[#e7e7e7]">
       <div className="py-8 px-[5%]" data-aos="fade-up">
-        <h1 className="text-xl md:text-3xl font-bold">Auction Holders</h1>
+        <h1 className="text-lg md:text-3xl font-bold">Auction Holders</h1>
         {auctions.length === 0 ? (
           <div
             className="pt-4 text-center text-muted-foreground"

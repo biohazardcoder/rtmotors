@@ -8,7 +8,7 @@ export const Choose = () => {
           }, []);
         
   return (
-    <div style={{ backgroundImage: "url('https://smart-motoring.com/wp-content/uploads/2022/03/Are-Modern-Cars-Over-Styled-2.jpg')", padding: "20px 5%" }} 
+    <div style={{ backgroundImage: "url('/choose.jpg')", padding: "20px 5%" }} 
         className="relative bg-cover bg-left text-white flex flex-col items-center justify-center min-h-[70vh]"
     >
         <div className="absolute inset-0 bg-black opacity-50" />

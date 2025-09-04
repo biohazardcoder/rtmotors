@@ -14,6 +14,8 @@ import { Skeleton } from "../ui/skeleton";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Button } from "../ui/button";
+import { HashLink } from "react-router-hash-link";
 
 export const Vehicles = ({ type, year, price, brand }: { type: string; year: number; price: number; brand: string }) => {
   const { data, isLoading } = useSWR("/car", fetcher);
@@ -27,7 +29,7 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
       <div className="bg-[#e7e7e7] min-h-[20vh]">
         <div className="py-8 px-[5%]">
           <div className="flex items-center justify-between">
-            <h1 className="text-xl md:text-3xl font-bold" data-aos="fade-up">
+            <h1 className="text-lg md:text-3xl font-bold" data-aos="fade-up">
               Our Cars
             </h1>
           </div>
@@ -60,7 +62,8 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
 
   const vehicles = (data as VehicleTypes[]) || [];
   const inStock = vehicles.filter((item) => item.stock > 0);
-  const soldOut = vehicles.filter((item) => item.stock === 0);
+  const soldOutCars = vehicles.filter((item) => item.stock === 0);
+  const soldOut =  soldOutCars.slice(0,8)
   const filteredVehicles = inStock.filter((vehicle) => {
     return (
       (type === "all" || vehicle.type === type) &&
@@ -77,13 +80,16 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
     <div className="bg-[#e7e7e7] min-h-[20vh]" id="search">
       <div className="py-8 px-[5%]">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl md:text-3xl font-bold" data-aos="fade-up">
+          <h1 className="text-lg md:text-3xl font-bold" data-aos="fade-up">
             Our Cars
           </h1>
           <Link to="/cars">
-            <h1 className="text-sm md:text-xl text-blue-500 underline font-semibold" data-aos="fade-up">
-              Show more
-            </h1>
+              <Button
+              data-aos="fade-up"
+            className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
+            >
+              More
+            </Button>
           </Link>
         </div>
 
@@ -215,15 +221,23 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
       </div>
 
       {soldOut.length > 0 && (
-        <div className="py-8 px-[5%]">
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl md:text-3xl font-bold" data-aos="fade-up">
+        <div className="py-8 px-[5%]" data-aos="fade-up">
+            <Carousel>
+          <div className="flex items-center justify-between  mb-8">
+            <h1 className="text-xl md:text-3xl font-bold" >
               Sold Out
             </h1>
+          <HashLink  smooth to="/cars#sold-out">
+            <Button
+            className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
+            >
+              More
+            </Button>
+          </HashLink>
           </div>
-          <div className="mt-8" data-aos="fade-up">
-            <Carousel>
-              <CarouselContent>
+            <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[18px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
+              <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
+                  <CarouselContent>
                 {soldOut.map(({ _id, images, name }) => (
                   <CarouselItem key={_id} className="md:basis-1/4">
                     <img
@@ -234,11 +248,8 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
-              <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
             </Carousel>
           </div>
-        </div>
       )}
     </div>
   );

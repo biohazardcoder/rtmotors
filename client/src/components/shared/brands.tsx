@@ -23,7 +23,7 @@ export const Brands = () => {
       <div className="bg-[#e7e7e7]">
         <div className="py-8 px-[5%]">
           <h1
-            className="text-xl md:text-3xl font-bold"
+            className="text-lg md:text-3xl font-bold"
             data-aos="fade-up"
           >
             Explore Our Premium Brands
@@ -62,7 +62,7 @@ export const Brands = () => {
     <div className="bg-[#e7e7e7]">
       <div className="py-8 px-[5%]">
         <h1
-          className="text-xl md:text-3xl font-bold"
+          className="text-lg md:text-3xl font-bold"
           data-aos="fade-up"
         >
           Our Premium Brands

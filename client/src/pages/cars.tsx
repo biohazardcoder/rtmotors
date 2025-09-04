@@ -63,7 +63,6 @@ export const Cars = () => {
       ? vehicles
       : vehicles.filter((vehicle) => vehicle.brand === selectedBrand);
 
-  // 🔹 Stock bo‘yicha ajratamiz
   const availableCars = filteredVehicles.filter((car) => car.stock > 0);
   const soldOutCars = filteredVehicles.filter((car) => car.stock === 0);
 
@@ -206,7 +205,7 @@ export const Cars = () => {
 
                {
             soldOutCars.length >0 && (
-       <div className="py-8">
+       <div className="py-8" id="sold-out">
         <div className="flex items-center justify-between">
           <h1 className="text-xl md:text-3xl font-bold">Sold Out</h1>
         </div>
@@ -214,7 +213,7 @@ export const Cars = () => {
                    <Carousel>
                     <CarouselContent>
                         {soldOutCars.map(({_id, images,name}) => (
-                            <CarouselItem key={_id} className="basis-1/2 md:basis-1/4 ">
+                            <CarouselItem key={_id} className="basis-1/1 md:basis-1/4 ">
                                <img
                                     src={images[0]}
                                     alt={name}

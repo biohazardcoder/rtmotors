@@ -20,7 +20,7 @@ export const Exchange = () => {
         className="py-8 px-[5%] bg-[#e7e7e7] rounded-xl"
         data-aos="fade-up"
       >
-        <h1 className="text-xl md:text-3xl font-bold">1 USD Exchange Rates</h1>
+        <h1 className="text-lg md:text-3xl font-bold">1 USD Exchange Rates</h1>
         <ul className="flex flex-col gap-4 mt-12 text-xl font-semibold md:flex-row md:items-center md:justify-between">
           {[...Array(5)].map((_, i) => (
             <li key={i} className="flex items-center gap-2">
@@ -40,9 +40,9 @@ export const Exchange = () => {
       <div 
       data-aos="fade-up"
       className="flex flex-col gap-2 md:flex-row md:justify-between md:items-center">
-        <h1 className="text-xl md:text-3xl font-bold">Exchange Rates</h1>
+        <h1 className="text-lg md:text-3xl font-bold">Exchange Rates</h1>
         <div className="flex items-center gap-2">
-          <h1 className="text-lg font-semibold">Enter amount in USD:</h1>
+          <h1 className="text-sm font-semibold">Enter amount in USD:</h1>
           <Input
             type="number"
             className="w-32 bg-secondary border-primary"

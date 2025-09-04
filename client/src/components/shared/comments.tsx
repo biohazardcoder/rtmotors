@@ -17,7 +17,7 @@ export const Comments = () => {
     return (
       <div className="bg-[#e7e7e7]">
         <div className="py-8 px-[5%]" data-aos="fade-up">
-          <h1 className="text-xl md:text-3xl font-bold">
+          <h1 className="text-lg md:text-3xl font-bold">
             What our customers say
           </h1>
           <Carousel className="mt-4">
@@ -52,9 +52,9 @@ export const Comments = () => {
           </div>
         ) : (
           <Carousel >
-        <h1 className="text-xl md:text-3xl font-bold mb-4">What our customers say</h1>
-              <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-3 md:top-6 right-14 left-[100%-20px]" />
-              <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-3 md:top-6 right-0 left-[100%-30px]" />
+        <h1 className="text-lg md:text-3xl font-bold mb-4">What our customers say</h1>
+                <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[14px]  md:top-5 right-10 rounded-md  left-[100%-20px]" />
+              <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[14px] md:top-5 right-0 rounded-md left-[100%-30px]" />
             <CarouselContent>
               {comments.map((comment) => (
                 <CarouselItem
