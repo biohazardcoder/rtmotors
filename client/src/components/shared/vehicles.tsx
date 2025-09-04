@@ -83,14 +83,14 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
           <h1 className="text-lg md:text-3xl font-bold" data-aos="fade-up">
             Our Cars
           </h1>
-          <Link to="/cars">
+          <HashLink to="/cars#all">
               <Button
               data-aos="fade-up"
             className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
             >
               More
             </Button>
-          </Link>
+          </HashLink>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">

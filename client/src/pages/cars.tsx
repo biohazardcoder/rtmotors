@@ -172,7 +172,7 @@ export const Cars = () => {
   return (
     <div className="bg-[#e7e7e7] pt-14">
       <Navbar />
-      <div className="py-8 px-[5%]">
+      <div className="py-8 px-[5%]" id="all">
         <div className="flex items-center justify-between">
           <h1 className="text-xl md:text-3xl font-bold">All Cars</h1>
           <div>
