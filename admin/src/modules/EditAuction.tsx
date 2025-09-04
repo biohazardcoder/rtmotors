@@ -4,9 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Fetch } from "@/middlewares/Fetch";
 import { toast } from "sonner";
-import type { AuctionTypes } from "@/types/RootTypes";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
+import type { AuctionTypes, ErrorTypes } from "@/types/RootTypes";
+import { useDispatch } from "react-redux";
+import { setAuction, setError } from "@/toolkit/auctionSlicer";
 
 interface EditAuctionProps {
   auction: AuctionTypes;
@@ -17,7 +17,17 @@ interface EditAuctionProps {
 export function EditAuction({ auction, open, onOpenChange }: EditAuctionProps) {
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState<FileList | null>(null);
-  const { mutate } = useSWR('auction', fetcher);
+       const dispatch = useDispatch()
+    const GetAuctions = async () => {
+        try {
+            const response = (await Fetch.get("auction")).data
+            dispatch(setAuction(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all auction"))
+            console.log(error);
+        }
+    }
   const [formData, setFormData] = useState<{
     url: string
   }>({
@@ -54,7 +64,7 @@ export function EditAuction({ auction, open, onOpenChange }: EditAuctionProps) {
       await Fetch.put(`auction/${auction._id}`, body, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      mutate();
+      GetAuctions();
       onOpenChange(false);
       toast.success("Auction updated successfully");
     } catch (error) {

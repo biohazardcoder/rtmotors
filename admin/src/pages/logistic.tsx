@@ -1,21 +1,37 @@
-import { fetcher } from "@/middlewares/Fetcher";
 import {  EllipsisVertical, Loader2, Pen, Trash2 } from "lucide-react";
-import useSWR from "swr";
 import {
 DropdownMenu,
 DropdownMenuTrigger,
 DropdownMenuContent,
 DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import type { LogisticTypes } from "@/types/RootTypes";
+import type { ErrorTypes, LogisticTypes } from "@/types/RootTypes";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditLogistic } from "@/modules/EditLogistic";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@/store/RootStore";
+import { setError, setLoading, setLogistic } from "@/toolkit/logisticSlicer";
 
 export const Logistics = () => {
-                const { data, error, isLoading, mutate } = useSWR("logistic", fetcher)
+    const dispatch = useDispatch()
+    const {data, loading,error } = useSelector((state:RootState)=>state.logistic)
+    const GetLogistics = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("logistic")).data
+            dispatch(setLogistic(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all logistics"))
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        GetLogistics()
+    }, [])
                 const logistics = data as LogisticTypes[] || []
                 const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
                 const [selectedMenu, setSelectedMenu] = useState<LogisticTypes | null>(null)
@@ -23,7 +39,7 @@ export const Logistics = () => {
             <h1 className="text-center text-destructive">Error loading logistic data</h1>
         </div>;
 
-        if (isLoading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+        if (loading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
             <div className="flex items-center justify-center h-[calc(100vh-150px)]">
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
@@ -33,7 +49,7 @@ export const Logistics = () => {
                                 try {
                                                 await Fetch.delete(`/logistic/${id}`);
                                                 toast.success("Logistic deleted successfully!");
-                                                mutate();
+                                                GetLogistics();
                                 } catch (error) {
                                                 toast.error("Error deleting logistic.");
                                                 console.error(error);

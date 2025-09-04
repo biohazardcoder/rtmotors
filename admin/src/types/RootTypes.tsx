@@ -1,12 +1,13 @@
 
 export interface AdminTypes {
-  createdAt: string;
+  createdAt?: string;
   firstName: string;
   email: string;
-  role: string;
-  updatedAt: string;
-  __v: number;
-  _id: string;
+  role?: string;
+  password: string;
+  updatedAt?: string;
+  __v?: number;
+  _id?: string;
 }
 
 export interface CarTypes {
@@ -53,9 +54,7 @@ export interface UserTypes {
 
 export interface BrandTypes {
   _id: string
-  title: string
   image: string
-  url: string
   createdAt: number
   updatedAt: number
 }
@@ -77,9 +76,7 @@ export interface AuctionTypes {
 
 export interface CustomerTypes {
   _id?: string
-  image: string
   name: string
-  job: string
   message: string
 }
 

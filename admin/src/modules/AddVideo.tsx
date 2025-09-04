@@ -5,9 +5,10 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Fetch } from "@/middlewares/Fetch";
 import { toast } from "sonner";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
 import type { AxiosProgressEvent } from "axios";
+import { useDispatch } from "react-redux";
+import { setBlog, setError } from "@/toolkit/blogSlicer";
+import type { ErrorTypes } from "@/types/RootTypes";
 
 interface AddVideoProps {
   open: boolean;
@@ -21,8 +22,17 @@ export function AddVideo({ open, id, onOpenChange }: AddVideoProps) {
   const [progress, setProgress] = useState(0);
   const [uploadedMB, setUploadedMB] = useState(0);
   const [totalMB, setTotalMB] = useState(0);
-
-  const { mutate } = useSWR("blog", fetcher);
+  const dispatch = useDispatch()
+  const GetBlogs = async () => {
+    try {
+        const response = (await Fetch.get("blog")).data
+        dispatch(setBlog(response))
+    } catch (error) {
+        const err = error as ErrorTypes
+        dispatch(setError(err.response.data.message|| "Error in get all blogs"))
+        console.log(error);
+    }
+  }
 
   const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -57,13 +67,11 @@ export function AddVideo({ open, id, onOpenChange }: AddVideoProps) {
         },
       });
 
-      mutate();
+      GetBlogs();
       onOpenChange(false);
       setVideo(null);
       toast.success("Video uploaded successfully");
-setTimeout(() => {
-        window.location.reload();
-      }, 2000);    } catch (error) {
+    } catch (error) {
       console.error(error);
       const err = error as { response?: { data?: { message?: string } } };
       toast.error(err.response?.data?.message || "Failed to upload video");

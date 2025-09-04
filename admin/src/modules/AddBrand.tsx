@@ -12,34 +12,37 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
+import { cn } from "@/lib/utils";
+import { useDispatch } from "react-redux";
+import { setBrand, setError, setLoading } from "@/toolkit/brandSlicer";
+import type { ErrorTypes } from "@/types/RootTypes";
 
 export function AddBrand() {
-  const [formData, setFormData] = useState({
-    url: "",
-    title: ""
-  });
   const [images, setImages] = useState<FileList | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { mutate } = useSWR("/brand", fetcher)
+  const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
   
+    const dispatch = useDispatch()
+    const GetBrands = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("brand")).data
+            dispatch(setBrand(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all brands"))
+            console.log(error);
+        }
+    }
   
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.url.trim()) newErrors.url = "Url is required.";
-    if (!formData.title.trim()) newErrors.title = "Title is required.";
     if (!images || images.length === 0) newErrors.images = "At least one image is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
-  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImages(e.target.files);
@@ -51,8 +54,6 @@ export function AddBrand() {
 
     try {
       const body = new FormData();
-      body.append("url", formData.url);
-      body.append("title", formData.title);
 
       if (images && images.length > 0) {
         for (let i = 0; i < images.length; i++) {
@@ -60,16 +61,16 @@ export function AddBrand() {
         }
       }
 
-      await Fetch.post("/brand", body, {
+       await Fetch.post("/brand", body, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      mutate()
+      GetBrands()
       toast.success("Brand added successfully!");
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      setIsSheetOpen(false)
+      console.log(isSheetOpen);
+      
     } catch (error) {
       toast.error("Error adding brand.");
       console.error(error);
@@ -95,31 +96,13 @@ export function AddBrand() {
         <SheetDescription>All fields are required</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 px-4 mt-2">
-          {["url", "title"].map((field) => (
-            <div className="space-y-1" key={field}>
-              <Label htmlFor={field}>
-                {{
-                  url: "Url *",
-                  title: "Title *",
-                }[field]}
-              </Label>
-              <Input
-                  id={field}
-                  value={(formData as any)[field]}
-                  onChange={handleInputChange}
-                  className={errors[field] ? "border-red-500" : ""}
-                />
-              {errors[field] && <span className="text-red-500 text-sm">{errors[field]}</span>}
-            </div>
-          ))}
-
           <div className="space-y-1">
             <Label htmlFor="images">Logo</Label>
             <Input
               id="images"
               type="file"
               onChange={handleImageChange}
-              className={errors.images ? "border-red-500" : ""}
+              className={cn("file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200", errors.images ? "border-red-500" : "" )}
             />
             {errors.images && (
               <span className="text-red-500 text-sm">{errors.images}</span>

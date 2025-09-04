@@ -4,9 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Fetch } from "@/middlewares/Fetch";
 import { toast } from "sonner";
-import type { LogisticTypes } from "@/types/RootTypes";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
+import type { ErrorTypes, LogisticTypes } from "@/types/RootTypes";
+import { useDispatch } from "react-redux";
+import { setError, setLogistic } from "@/toolkit/logisticSlicer";
 
 interface EditLogisticProps {
   logistic: LogisticTypes;
@@ -17,7 +17,17 @@ interface EditLogisticProps {
 export function EditLogistic({ logistic, open, onOpenChange }: EditLogisticProps) {
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState<FileList | null>(null);
-  const { mutate } = useSWR('logistic', fetcher);
+  const dispatch = useDispatch()
+    const GetLogistics = async () => {
+        try {
+            const response = (await Fetch.get("logistic")).data
+            dispatch(setLogistic(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all logistics"))
+            console.log(error);
+        }
+    }
 
   useEffect(() => {
     setImages(null);
@@ -40,7 +50,7 @@ export function EditLogistic({ logistic, open, onOpenChange }: EditLogisticProps
       await Fetch.put(`logistic/${logistic._id}`, body, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      mutate();
+      GetLogistics();
       onOpenChange(false);
       toast.success("Logistic updated successfully");
     } catch (error) {

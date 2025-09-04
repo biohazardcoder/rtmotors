@@ -12,8 +12,10 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
+import { useDispatch } from "react-redux";
+import { setAuction, setError, setLoading } from "@/toolkit/auctionSlicer";
+import type { ErrorTypes } from "@/types/RootTypes";
+import { cn } from "@/lib/utils";
 
 export function AddAuction() {
   const [formData, setFormData] = useState({
@@ -23,7 +25,18 @@ export function AddAuction() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { mutate } = useSWR("/auction", fetcher)
+       const dispatch = useDispatch()
+    const GetAuctions = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("auction")).data
+            dispatch(setAuction(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all auction"))
+            console.log(error);
+        }
+    }
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -59,11 +72,9 @@ export function AddAuction() {
         await Fetch.post("/auction", body, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        mutate((data: any) => [...(data || []), { url: formData.url }], false);
+        GetAuctions()
         toast.success("Auction added successfully!");
-        setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+        setIsSheetOpen(false)
     } catch (error) {
       toast.error("Error adding auction.");
       console.error(error);
@@ -112,7 +123,7 @@ export function AddAuction() {
               id="images"
               type="file"
               onChange={handleImageChange}
-              className={errors.images ? "border-red-500" : ""}
+              className={cn("file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200", errors.images ? "border-red-500" : "" )}
             />
             {errors.images && (
               <span className="text-red-500 text-sm">{errors.images}</span>

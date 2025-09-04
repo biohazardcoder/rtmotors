@@ -12,10 +12,10 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
-import type { BlogTypes } from "@/types/RootTypes";
+import type { BlogTypes, ErrorTypes } from "@/types/RootTypes";
 import { Textarea } from "@/components/ui/textarea";
+import { useDispatch } from "react-redux";
+import { setBlog,setError } from "@/toolkit/blogSlicer";
 
 export function AddBlog() {
   const [images, setImages] = useState<FileList | null>(null);
@@ -26,7 +26,17 @@ export function AddBlog() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { mutate } = useSWR("/blog", fetcher);
+ const dispatch = useDispatch()
+    const GetBlogs = async () => {
+        try {
+            const response = (await Fetch.get("blog")).data
+            dispatch(setBlog(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all blogs"))
+            console.log(error);
+        }
+    }
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -68,8 +78,7 @@ export function AddBlog() {
       await Fetch.post("/blog", body, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
-      mutate();
+      GetBlogs();
       toast.success("Blog added successfully!");
       setIsSheetOpen(false);
       setFormData({ title: "", text: "" });

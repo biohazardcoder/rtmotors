@@ -1,6 +1,4 @@
-import { fetcher } from "@/middlewares/Fetcher";
 import {  EllipsisVertical, Loader2, Pen, Trash2 } from "lucide-react";
-import useSWR from "swr";
 import {
     Table,
     TableBody,
@@ -16,16 +14,34 @@ import {
         DropdownMenuContent,
         DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import type { AuctionTypes } from "@/types/RootTypes";
+import type { AuctionTypes, ErrorTypes } from "@/types/RootTypes";
 import { Link} from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditAuction } from "@/modules/EditAuction";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@/store/RootStore";
+import { setAuction, setError, setLoading } from "@/toolkit/auctionSlicer";
 
 export const Auctions = () => {
-        const { data, error, isLoading, mutate } = useSWR("auction", fetcher)
+        const dispatch = useDispatch()
+    const {data, loading,error } = useSelector((state:RootState)=>state.auction)
+    const GetAuctions = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("auction")).data
+            dispatch(setAuction(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all auction"))
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        GetAuctions()
+    }, [])
         const auctions = data as AuctionTypes[] || []
         const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
         const [selectedMenu, setSelectedMenu] = useState<AuctionTypes | null>(null)
@@ -33,7 +49,7 @@ export const Auctions = () => {
             <h1 className="text-center text-destructive">Error loading auction data</h1>
         </div>;
 
-        if (isLoading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+        if (loading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
             <div className="flex items-center justify-center h-[calc(100vh-150px)]">
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
@@ -43,7 +59,7 @@ export const Auctions = () => {
                 try {
                         await Fetch.delete(`/auction/${id}`);
                         toast.success("Auction deleted successfully!");
-                        mutate();
+                        GetAuctions();
                 } catch (error) {
                         toast.error("Error deleting auction.");
                         console.error(error);

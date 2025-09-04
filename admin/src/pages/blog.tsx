@@ -1,22 +1,38 @@
-import { fetcher } from "@/middlewares/Fetcher";
 import {  EllipsisVertical, Loader2, Pen, Trash2, Video, VideoOff } from "lucide-react";
-import useSWR from "swr";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import type { BlogTypes } from "@/types/RootTypes";
+import type { BlogTypes, ErrorTypes } from "@/types/RootTypes";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditBlog } from "@/modules/EditBlog";
 import { AddVideo } from "@/modules/AddVideo";
+import { useDispatch, useSelector } from "react-redux";
+import { setBlog, setError, setLoading } from "@/toolkit/blogSlicer";
+import type { RootState } from "@/store/RootStore";
 
 export const Blog = () => {
-  const { data, error, isLoading, mutate } = useSWR("/blog", fetcher);
+   const dispatch = useDispatch()
+    const {data, loading,error } = useSelector((state:RootState)=>state.blog)
+    const GetBlogs = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("blog")).data
+            dispatch(setBlog(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all blogs"))
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        GetBlogs()
+    }, [])
   const blogs = (data as BlogTypes[]) || [];
   const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false);
   const [addVideo, setAddVideo] = useState<boolean>(false);
@@ -26,7 +42,7 @@ export const Blog = () => {
             <h1 className="text-center text-destructive">Error loading blog data</h1>
         </div>;
 
-        if (isLoading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+        if (loading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
             <div className="flex items-center justify-center h-[calc(100vh-150px)]">
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
@@ -36,7 +52,7 @@ export const Blog = () => {
     try {
       await Fetch.delete(`/blog/${id}`);
       toast.success("Blog deleted successfully!");
-       await mutate();
+      GetBlogs();
     } catch (error) {
       toast.error("Error deleting blog.");
       console.error(error);
@@ -57,7 +73,7 @@ export const Blog = () => {
     try {
       await Fetch.delete(`/blog/video/${id}`);
       toast.success("Video deleted successfully!");
-      await mutate();
+      GetBlogs();
     } catch (error) {
       toast.error("Error deleting video.");
       console.error(error);

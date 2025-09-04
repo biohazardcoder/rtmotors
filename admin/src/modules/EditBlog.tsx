@@ -4,7 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Fetch } from "@/middlewares/Fetch";
 import { toast } from "sonner";
-import type { BlogTypes } from "@/types/RootTypes";
+import type { BlogTypes, ErrorTypes } from "@/types/RootTypes";
+import { useDispatch } from "react-redux";
+import { setBlog, setError } from "@/toolkit/blogSlicer";
 
 
 interface EditBlogProps {
@@ -14,6 +16,18 @@ interface EditBlogProps {
 }
 
 export function EditBlog({ blog, open, onOpenChange }: EditBlogProps) {
+   const dispatch = useDispatch()
+    const GetBlogs = async () => {
+        try {
+            const response = (await Fetch.get("blog")).data
+            dispatch(setBlog(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all blogs"))
+            console.log(error);
+        }
+    }
+
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState<FileList | null>(null);
   const [formData, setFormData] = useState<BlogTypes>({
@@ -45,9 +59,8 @@ export function EditBlog({ blog, open, onOpenChange }: EditBlogProps) {
       });
       onOpenChange(false);
       toast.success("Blog updated successfully");
-setTimeout(() => {
-        window.location.reload();
-      }, 2000);    } catch (error) {
+      GetBlogs()
+}   catch (error) {
       console.error(error);
       const err = error as { response: { data: { message: string } } };
       toast.error(err.response.data.message || "Failed to update blog");
@@ -70,7 +83,7 @@ setTimeout(() => {
           ✕
         </Button>
 
-        <h2 className="text-2xl mb-4">Edit logistic</h2>
+        <h2 className="text-2xl mb-4">Edit blog</h2>
 
         <div className="flex flex-col gap-4">
           <div>

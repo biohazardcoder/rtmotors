@@ -12,30 +12,35 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
-import type { CustomerTypes } from "@/types/RootTypes";
+import type { CustomerTypes, ErrorTypes } from "@/types/RootTypes";
+import { useDispatch } from "react-redux";
+import { setCustomer, setError, setLoading } from "@/toolkit/customerSlicer";
 
 export function AddCustomer() {
   const [formData, setFormData] = useState<CustomerTypes>({
     _id: "",
     name: "",
-    job: "",
     message: "",
-    image: "",
   });
-  const [images, setImages] = useState<FileList | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { mutate } = useSWR("/customer", fetcher);
-
+    const dispatch = useDispatch()
+    const GetCusomers = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("customer")).data
+            dispatch(setCustomer(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all customers"))
+            console.log(error);
+        }
+    }
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Name is required.";
-    if (!formData.job.trim()) newErrors.job = "Job is required.";
     if (!formData.message.trim()) newErrors.message = "Message is required.";
-    if (!images) newErrors.image = "Image is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -45,34 +50,17 @@ export function AddCustomer() {
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImages(e.target.files);
-  };
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
     setIsLoading(true);
 
     try {
-      const body = new FormData();
-      body.append("name", formData.name);
-      body.append("job", formData.job);
-      body.append("message", formData.message);
-           if (images && images.length > 0) {
-        for (let i = 0; i < images.length; i++) {
-          body.append("images", images[i]);
-        }
-      }
-      await Fetch.post("/customer", body, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      mutate();
+      await Fetch.post("/customer", formData,);
+      GetCusomers();
       toast.success("Customer added successfully!");
-setTimeout(() => {
-        window.location.reload();
-      }, 2000);    } catch (error) {
+      setIsSheetOpen(false)
+   } catch (error) {
       toast.error("Error adding customer.");
       console.error(error);
     } finally {
@@ -96,12 +84,11 @@ setTimeout(() => {
           <SheetDescription>All fields are required</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 px-4 mt-2">
-          {["name", "job", "message"].map((field) => (
+          {["name", "message"].map((field) => (
             <div className="space-y-1" key={field}>
               <Label htmlFor={field}>
                 {{
                   name: "Name *",
-                  job: "Job *",
                   message: "Message *",
                 }[field]}
               </Label>
@@ -115,18 +102,6 @@ setTimeout(() => {
             </div>
           ))}
 
-          <div className="space-y-1">
-            <Label htmlFor="image">Image *</Label>
-            <Input
-              id="image"
-              type="file"
-              onChange={handleImageChange}
-              className={errors.image ? "border-red-500" : ""}
-            />
-            {errors.image && (
-              <span className="text-red-500 text-sm">{errors.image}</span>
-            )}
-          </div>
           <Button
             type="button"
             variant="secondary"

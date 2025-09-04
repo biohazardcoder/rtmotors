@@ -1,6 +1,4 @@
-import { fetcher } from "@/middlewares/Fetcher";
 import {  EllipsisVertical, Loader2, Pen, Trash2 } from "lucide-react";
-import useSWR from "swr";
 import {
   Table,
   TableBody,
@@ -16,16 +14,34 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import type { PartnerTypes } from "@/types/RootTypes";
+import type { ErrorTypes, PartnerTypes } from "@/types/RootTypes";
 import { Link} from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditPartner } from "@/modules/EditPartner";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@/store/RootStore";
+import { setLoading, setPartner,setError } from "@/toolkit/partnerSlicer";
 
 export const Partners = () => {
-    const { data, error,isLoading,mutate } = useSWR("partner", fetcher)
+    const dispatch = useDispatch()
+    const {data, loading,error } = useSelector((state:RootState)=>state.partner)
+    const GetPartners = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("partner")).data
+            dispatch(setPartner(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all partners"))
+            console.log(error);
+        }
+    }
+  useEffect(() => {
+        GetPartners()
+    }, [])
     const partners = data as PartnerTypes[] || []
     const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
     const [selectedMenu, setSelectedMenu] = useState<PartnerTypes | null>(null)
@@ -33,7 +49,7 @@ export const Partners = () => {
             <h1 className="text-center text-destructive">Error loading partner data</h1>
         </div>;
 
-        if (isLoading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+        if (loading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
             <div className="flex items-center justify-center h-[calc(100vh-150px)]">
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
@@ -43,7 +59,7 @@ export const Partners = () => {
         try {
             await Fetch.delete(`/partner/${id}`);
             toast.success("Partner deleted successfully!");
-            mutate();
+            GetPartners();
         } catch (error) {
             toast.error("Error deleting partner.");
             console.error(error);

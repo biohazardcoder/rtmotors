@@ -1,6 +1,4 @@
-import { fetcher } from "@/middlewares/Fetcher";
 import {  EllipsisVertical, Loader2, Pen, Trash2 } from "lucide-react";
-import useSWR from "swr";
 import {
     Table,
     TableBody,
@@ -16,15 +14,34 @@ import {
         DropdownMenuContent,
         DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import type { CustomerTypes } from "@/types/RootTypes";
+import type { CustomerTypes, ErrorTypes } from "@/types/RootTypes";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditCustomer } from "@/modules/EditCustomer";
+import { setCustomer, setLoading,setError } from "@/toolkit/customerSlicer";
+import type { RootState } from "@/store/RootStore";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Customers = () => {
-        const { data, error, isLoading, mutate } = useSWR("customer", fetcher)
+    const dispatch = useDispatch()
+    const {data, loading,error } = useSelector((state:RootState)=>state.customer)
+    const GetCusomers = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("customer")).data
+            dispatch(setCustomer(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all customers"))
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        GetCusomers()
+    }, [])
+
         const customers = data as CustomerTypes[] || []
         const [editMenuOpen, setEditMenuOpen] = useState<boolean>(false)
         const [selectedMenu, setSelectedMenu] = useState<CustomerTypes | null>(null)
@@ -33,7 +50,7 @@ export const Customers = () => {
             <h1 className="text-center text-destructive">Error loading customer data</h1>
         </div>;
 
-        if (isLoading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
+        if (loading) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
             <div className="flex items-center justify-center h-[calc(100vh-150px)]">
                 <Loader2 className="animate-spin text-blue-500" size={30}/>
             </div>
@@ -43,7 +60,7 @@ export const Customers = () => {
                 try {
                         await Fetch.delete(`/customer/${id}`);
                         toast.success("Customer deleted successfully!");
-                        mutate();
+                        GetCusomers()
                 } catch (error) {
                         toast.error("Error deleting customer.");
                         console.error(error);
@@ -61,29 +78,21 @@ export const Customers = () => {
                 <TableCaption>A list of your customers.</TableCaption>
                 <TableHeader>
                         <TableRow>
-                        <TableHead>Avatar</TableHead>
                         <TableHead>Name</TableHead>
-                        <TableHead>Job</TableHead>
                         <TableHead>Message</TableHead>
                         </TableRow>
                 </TableHeader>
                 <TableBody>
                         {
-                                customers.map(({_id, image,name,job,message}) => (
+                                customers.map(({_id,name,message}) => (
                                         <TableRow key={_id} className="cursor-pointer ">
-                                                <TableCell>
-                                                        <img src={image} alt={name} className="w-22 h-32 py-2 object-contain border border-[#003939] rounded-md"/>
-                                                </TableCell>
                                                 <TableCell>{name}</TableCell>
-                                                <TableCell>
-                                                                {job}
-                                                </TableCell>
                                                 <TableCell>
                                                                 {message}
                                                 </TableCell>
                                                 <TableCell className="max-w-[100px] flex items-center gap-2 relative">
                                                          <DropdownMenu>
-                                                                <DropdownMenuTrigger className="absolute top-4 right-3">
+                                                                <DropdownMenuTrigger className="absolute top-2 right-3">
                                                                         <EllipsisVertical size={24} className="text-zinc-400 cursor-pointer" />
                                                                 </DropdownMenuTrigger>
                                                                 <DropdownMenuContent className="border-none">
@@ -91,7 +100,7 @@ export const Customers = () => {
                                                                                 className="flex items-center gap-2 text-red-600 cursor-pointer"
                                                                         >
                                                                                  <Button className="bg-blue-500 hover:bg-blue-600 w-full"
-                                                                                 onClick={()=>handleEditMenu({ _id, image, name, job,message } as CustomerTypes)}
+                                                                                 onClick={()=>handleEditMenu({ _id,  name, message } as CustomerTypes)}
                                                                                  >
                                                                                         <Pen className="text-white"/>
                                                                                 </Button>

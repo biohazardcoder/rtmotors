@@ -4,9 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Fetch } from "@/middlewares/Fetch";
 import { toast } from "sonner";
-import type { PartnerTypes } from "@/types/RootTypes";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
+import type { ErrorTypes, PartnerTypes } from "@/types/RootTypes";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@/store/RootStore";
+import { setPartner,setError,setLoading } from "@/toolkit/partnerSlicer";
 
 interface EditPartnerProps {
   partner: PartnerTypes;
@@ -15,9 +16,22 @@ interface EditPartnerProps {
 }
 
 export function EditPartner({ partner, open, onOpenChange }: EditPartnerProps) {
-  const [loading, setLoading] = useState(false);
   const [images, setImages] = useState<FileList | null>(null);
-  const { mutate } = useSWR('partner', fetcher);
+
+      const dispatch = useDispatch()
+    const {loading } = useSelector((state:RootState)=>state.partner)
+    const GetPartners = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("partner")).data
+            dispatch(setPartner(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all partners"))
+            console.log(error);
+        }
+    }
+
   const [formData, setFormData] = useState<{
     url: string
   }>({
@@ -42,7 +56,6 @@ export function EditPartner({ partner, open, onOpenChange }: EditPartnerProps) {
   };
   const handleUpdate = async () => {
     try {
-      setLoading(true);
       const body = new FormData();
       body.append("url", formData.url);
       if (images && images.length > 0) {
@@ -54,15 +67,13 @@ export function EditPartner({ partner, open, onOpenChange }: EditPartnerProps) {
       await Fetch.put(`partner/${partner._id}`, body, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      mutate();
-      onOpenChange(false);
+      GetPartners();
       toast.success("Partner updated successfully");
+      onOpenChange(false);
     } catch (error) {
       console.error(error);
       const err = error as { response: { data: { message: string } } };
       toast.error(err.response.data.message || "Failed to update partner");
-    } finally {
-      setLoading(false);
     }
   };
 

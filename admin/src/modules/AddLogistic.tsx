@@ -12,15 +12,27 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
+import { setError, setLogistic } from "@/toolkit/logisticSlicer";
+import { useDispatch } from "react-redux";
+import type { ErrorTypes } from "@/types/RootTypes";
+import { cn } from "@/lib/utils";
 
 export function AddLogistic() {
   const [images, setImages] = useState<FileList | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { mutate } = useSWR("/logistic", fetcher);
+    const dispatch = useDispatch()
+    const GetLogistics = async () => {
+        try {
+            const response = (await Fetch.get("logistic")).data
+            dispatch(setLogistic(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all logistics"))
+            console.log(error);
+        }
+    }
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -48,11 +60,10 @@ export function AddLogistic() {
       await Fetch.post("/logistic", body, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      mutate();
+      GetLogistics();
       toast.success("Logistic images added successfully!");
-setTimeout(() => {
-        window.location.reload();
-      }, 2000);    } catch (error) {
+      setIsSheetOpen(false)
+    } catch (error) {
       toast.error("Error adding logistic images.");
       console.error(error);
     } finally {
@@ -83,7 +94,7 @@ setTimeout(() => {
               type="file"
               multiple
               onChange={handleImageChange}
-              className={errors.images ? "border-red-500" : ""}
+              className={cn("file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200", errors.images ? "border-red-500" : "" )}
             />
             {errors.images && (
               <span className="text-red-500 text-sm">{errors.images}</span>

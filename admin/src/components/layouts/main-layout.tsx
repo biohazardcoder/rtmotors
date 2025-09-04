@@ -9,6 +9,7 @@ import { AddBlog } from "@/modules/AddBlog";
 import { AddLogistic } from "@/modules/AddLogistic";
 import { AddPartner } from "@/modules/AddPartner";
 import { AddCustomer } from "@/modules/AddCustomer";
+import { AddAdmin } from "@/modules/AddAdmin";
 
 export default function Layout() {
 
@@ -29,6 +30,10 @@ export default function Layout() {
     {
       path: "/cars",
       button: <AddCar />
+    },
+    {
+      path: "/users",
+      button: <AddAdmin />
     },
      {
       path: "/logistics",

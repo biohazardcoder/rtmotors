@@ -13,10 +13,19 @@ import {
 import type { UserTypes } from "@/types/RootTypes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { format } from "date-fns";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Admins } from "./admins";
 
 export const Users = () => {
     const { data, error,isLoading } = useSWR("user", fetcher)
+    const [toggle, setToggle] = useState(false)
+    const handleToggle =() =>{
+        setToggle(!toggle)
+    }
+
     
+
     const users = data as UserTypes[] || []
 
       if (error) return <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
@@ -29,7 +38,8 @@ export const Users = () => {
             </div>
         </div>;
 
-  return (
+
+return   ( toggle ? <Admins setToggle={setToggle} toggle={toggle}/> :   (
          <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
       <div>
         <Table>
@@ -40,7 +50,11 @@ export const Users = () => {
             <TableHead>First name</TableHead>
             <TableHead>Last name</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Joined</TableHead>
+            <TableHead className="flex items-center justify-between">Joined 
+                <Button onClick={handleToggle}>
+                    {!toggle ? "Admins" : "Users"}
+                </Button>
+            </TableHead>
             </TableRow>
         </TableHeader>
         <TableBody>
@@ -66,5 +80,4 @@ export const Users = () => {
         </Table>
       </div>
     </div>
-  )
-}
+  ))}

@@ -4,9 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Fetch } from "@/middlewares/Fetch";
 import { toast } from "sonner";
-import type { CustomerTypes } from "@/types/RootTypes";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
+import type { CustomerTypes, ErrorTypes } from "@/types/RootTypes";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@/store/RootStore";
+import { setCustomer, setError, setLoading } from "@/toolkit/customerSlicer";
 
 interface EditCustomerProps {
   customer: CustomerTypes;
@@ -15,55 +16,44 @@ interface EditCustomerProps {
 }
 
 export function EditCustomer({ customer, open, onOpenChange }: EditCustomerProps) {
-  const [loading, setLoading] = useState(false);
-  const [images, setImages] = useState<FileList | null>(null);
-  const { mutate } = useSWR('customer', fetcher);
+    const dispatch = useDispatch()
+    const {loading } = useSelector((state:RootState)=>state.customer)
+    const GetCusomers = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("customer")).data
+            dispatch(setCustomer(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all customers"))
+            console.log(error);
+        }
+    }
   const [formData, setFormData] = useState({
     name: customer.name,
-    job: customer.job,
     message: customer.message,
-    image: customer.image,
   });
 
   useEffect(() => {
     setFormData({
       name: customer.name,
-      job: customer.job,
       message: customer.message,
-      image: customer.image,
     });
-    setImages(null);
   }, [customer]);
   
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImages(e.target.files);
-  };
 
   const handleUpdate = async () => {
     try {
-      setLoading(true);
-      const body = new FormData();
-      body.append("name", formData.name);
-      body.append("job", formData.job);
-      body.append("message", formData.message);
-
-      if (images && images.length > 0) {
-        body.append("images", images[0]);
-      }
-
-      await Fetch.put(`customer/${customer._id}`, body, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      mutate();
-      onOpenChange(false);
+   
+      await Fetch.put(`customer/${customer._id}`, formData)
+      GetCusomers();
       toast.success("Customer updated successfully");
+      onOpenChange(false);
     } catch (error) {
       console.error(error);
       const err = error as { response?: { data?: { message?: string } } };
       toast.error(err.response?.data?.message || "Failed to update customer");
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   if (!open) return null;
@@ -91,28 +81,11 @@ export function EditCustomer({ customer, open, onOpenChange }: EditCustomerProps
             />
           </div>
           <div>
-            <Label>Job</Label>
-            <Input
-              name="job"
-              value={formData.job}
-              onChange={(e) => setFormData((prev) => ({ ...prev, job: e.target.value }))}
-            />
-          </div>
-          <div>
             <Label>Message</Label>
             <Input
               name="message"
               value={formData.message}
               onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
-            />
-          </div>
-          <div>
-            <Label>Image</Label>
-            <Input
-              name="image"
-              type="file"
-              className="file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"
-              onChange={handleImageChange}
             />
           </div>
         </div>

@@ -12,8 +12,9 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
+import { useDispatch } from "react-redux";
+import { setError, setLoading, setPartner } from "@/toolkit/partnerSlicer";
+import type { ErrorTypes } from "@/types/RootTypes";
 
 export function AddPartner() {
   const [formData, setFormData] = useState({
@@ -23,8 +24,18 @@ export function AddPartner() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { mutate } = useSWR("/partner", fetcher)
-
+    const dispatch = useDispatch()
+    const GetPartners = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("partner")).data
+            dispatch(setPartner(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all partners"))
+            console.log(error);
+        }
+    }
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.url.trim()) newErrors.url = "Url is required.";
@@ -59,11 +70,10 @@ export function AddPartner() {
         await Fetch.post("/partner", body, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        mutate((data: any) => [...(data || []), { url: formData.url }], false);
+        GetPartners()
         toast.success("Partner added successfully!");
-setTimeout(() => {
-        window.location.reload();
-      }, 2000);    } catch (error) {
+        setIsSheetOpen(false)
+      }catch (error) {
       toast.error("Error adding partner.");
       console.error(error);
     } finally {
