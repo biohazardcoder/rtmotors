@@ -88,7 +88,7 @@ export const Navbar = () => {
             className="w-9 h-9 rounded-md object-cover object-center  mr-2"/>
         </Link>
              <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" >
-                <img src="/3d/tiktok.png" alt="" className="w-[36px] h-[36px] object-center rounded-md " />
+                <img src="/3d/" alt="" className="w-[36px] h-[36px] object-center rounded-md " />
             </Link>
       </div>
       <div className="flex items-center gap-2 md:hidden">

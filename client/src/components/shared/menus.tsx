@@ -19,18 +19,19 @@ export const Menus = () => {
 
     return (
         <div className="fixed bottom-20 right-10 z-50 flex flex-col gap-2">
-            <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-green-500 rounded-full w-12 h-12 ">
+            <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-green-500 rounded-full w-14 h-14 ">
                 <img src="/whatsapp.png" alt="" className="w-full h-full object-center p-4" />
             </Link>
-            <Link to={"https://t.me/rtmotors_trade"} target="_blank" className="bg-blue-500 rounded-full w-12 h-12 ">
+            <Link to={"https://t.me/rtmotors_trade"} target="_blank" className="bg-blue-500 rounded-full w-14 h-14 ">
                 <img src="/telegram.png" alt="" className="w-full h-full object-center p-4" />
             </Link>
             {showChevron && (
                 <button
                     onClick={scrollToTop}
-                    className="bg-[#f48912] cursor-pointer rounded-full w-12 h-12 flex items-center justify-center"
+                    className="border relative border-primary bg-white flex-col  cursor-pointer rounded-full  w-14 h-14 flex items-center p-2"
                 >
-                    <ChevronUp size={32} className="text-white" />
+                    <ChevronUp size={20}  />
+                    <span className="absolute bottom-3 text-sm">TOP</span>
                 </button>
             )}
         </div>
