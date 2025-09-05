@@ -3,14 +3,29 @@ import Footer from "@/components/shared/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { BriefcaseBusiness, CreditCard, FileCheck, FileText, Phone, Search, Ship, } from "lucide-react";
+import { BriefcaseBusiness, Check, CreditCard, FileCheck, FileText, Search, Ship, Smartphone, } from "lucide-react";
 interface Team {
     _id: string;
     name: string;
     avatar: string;
     job: string;
     number:string,
-    lang : string[]
+    social : [
+      {
+        telegram:{
+          image:string,
+          url:string
+        },
+        whatsapp:{
+          image:string,
+          url:string
+        },
+        instagram:{
+          image:string,
+          url:string
+        },
+      }
+    ]
 
 }
 const team: Team[] = [
@@ -20,7 +35,22 @@ const team: Team[] = [
             avatar: "/team/ceo.jpg",
             job: "CEO",
             number: "+8210-2989-8641",
-            lang :["kr.png", "en.png"]
+            social:[
+              {
+                telegram:{
+                  image:"/3d/telegram.webp",
+                  url:"nimadur"
+                },
+                 instagram:{
+                  image:"/3d/instagram.webp",
+                  url:"nimadur"
+                },
+                 whatsapp:{
+                  image:"/3d/whatsapp.png",
+                  url:"nimadur"
+                },
+              }
+            ]
         },
         {
             _id: "2",
@@ -28,7 +58,22 @@ const team: Team[] = [
             avatar: "/team/operation_m.jpg",
             job: "Operation Manager",
             number:"+8210-9687-9796",
-            lang :["kr.png", "en.png", "ru.png"]
+            social:[
+              {
+                telegram:{
+                  image:"/3d/telegram.webp",
+                  url:"nimadur"
+                },
+                 instagram:{
+                  image:"/3d/instagram.webp",
+                  url:"nimadur"
+                },
+                 whatsapp:{
+                  image:"/3d/whatsapp.png",
+                  url:"nimadur"
+                },
+              }
+            ]
 
         },
         {
@@ -37,7 +82,22 @@ const team: Team[] = [
             avatar: "/team/sales_m.jpg",
             job: "Sales Manager",
             number:"+8210-8465-8085",
-            lang :["kr.png", "en.png"]
+            social:[
+              {
+                telegram:{
+                  image:"/3d/telegram.webp",
+                  url:"nimadur"
+                },
+                 instagram:{
+                  image:"/3d/instagram.webp",
+                  url:"nimadur"
+                },
+                 whatsapp:{
+                  image:"/3d/whatsapp.png",
+                  url:"nimadur"
+                },
+              }
+            ]
         },
     ];
 const howWeWork = [
@@ -78,7 +138,7 @@ export const About = () => {
   return (
     <div className="w-full bg-[#e7e7e7] pt-14">
       <Navbar />
-      <div className="py-8 px-[5%]">
+      <div className="py-8 ">
        <section className=" text-center">
         <img
           src="/logo.png"
@@ -87,7 +147,7 @@ export const About = () => {
         />
         <h1 className="text-3xl font-bold mb-4">RT Motors Company</h1>
         <p className="max-w-2xl mx-auto text-muted-foreground">
-          RT MOTORS specializes in delivering high-quality vehicles from South Korea to customers worldwide. As a supplier over the years of experience, we have established strong partnerships with some of Korea’s top manufacturers, and also maintain reliable connections with trusted and competitively priced dealers in the automotive sector. We believe that through our many years of experience in this country, our partnership will reach new heights, and we will successfully enter the Korean automotive market.
+          RT MOTORS specializes in delivering high-quality vehicles from South Korea to customers worldwide. As a supplier over the years of experience, we have established strong partnerships with some of Korea’s top manufacturers, and also maintain reliable connections with trusted and competitively priced dealers in the automotive sector. 
         </p>
       </section>
          <section className="w-full">
@@ -105,13 +165,35 @@ export const About = () => {
                                             {team.job}
                                         </p>
                                          <p className="text-sm text-muted-foreground flex items-center gap-2">
-                                            <Phone size={20}/> 
+                                            <Smartphone size={20}/> 
                                             {team.number}
                                         </p>
                                         <div className="flex items-center justify-center gap-2">
-                                            {team.lang.map((item)=>(
-                                                <img src={`/lang/${item}`} alt=""  className="w-10 h-10 object-cover object-center rounded-full"/>
-                                            ))}
+                                          {team.social.map((social, idx) => (
+                                            <div key={idx} className="flex gap-2 items-center">
+                                              <a href={social.telegram.url} target="_blank" rel="noopener noreferrer">
+                                                <img
+                                                  src={social.telegram.image}
+                                                  alt="telegram"
+                                                  className="w-9 h-9 object-center "
+                                                />
+                                              </a>
+                                              <a href={social.whatsapp.url} target="_blank" rel="noopener noreferrer">
+                                                <img
+                                                  src={social.whatsapp.image}
+                                                  alt="whatsapp"
+                                                  className="w-12 h-12 object-center "
+                                                />
+                                              </a>
+                                              <a href={social.instagram.url} target="_blank" rel="noopener noreferrer">
+                                                <img
+                                                  src={social.instagram.image}
+                                                  alt="instagram"
+                                                  className="w-9 h-9 "
+                                                />
+                                              </a>
+                                            </div>
+                                          ))}
                                         </div>
                                     </div>
                                 </div>
@@ -121,18 +203,49 @@ export const About = () => {
         </div>
          </section>
 
-       <section className="py-12 px-6">
-          <h1 className="mt-4 text-2xl font-bold text-center">Our Services and Strengths Include:</h1>
-          <div className="flex justify-center">
-        <ul className="flex flex-col"> 
-          <li className="list-disc mt-2">Direct sourcing from top Korean manufacturers and verified auctions</li>
-          <li className="list-disc mt-2">Export of a wide range of vehicles: sedans, SUVs, EVs</li>
-          <li className="list-disc mt-2">Personalized vehicle sourcing based on your market demand</li>
-          <li className="list-disc mt-2">Full customs clearance and international logistics support</li>
-          <li className="list-disc mt-2">Competitive pricing and long-term partner incentives</li>
-        </ul>
-          </div>
-      </section>
+       <section className="py-16 px-6">
+  <h1 className="mt-4 text-3xl font-bold text-center text-gray-800">
+    Our Services and Strengths Include:
+  </h1>
+
+  <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    <div className="flex items-start gap-3 bg-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
+     <Check size={40} className="text-blue-500"/>
+      <p className="text-gray-700 font-medium text-sm">
+        Direct sourcing from top Korean manufacturers and verified auctions
+      </p>
+    </div>
+
+    <div className="flex items-start gap-3 bg-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
+      <Check size={40} className="text-blue-500"/>
+      <p className="text-gray-700 font-medium">
+        Export of a wide range of vehicles: sedans, SUVs, EVs
+      </p>
+    </div>
+
+    <div className="flex items-start gap-3 bg-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
+       <Check size={40} className="text-blue-500"/>
+      <p className="text-gray-700 font-medium">
+        Personalized vehicle sourcing based on your market demand
+      </p>
+    </div>
+
+    <div className="flex items-start gap-3 bg-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
+       <Check size={40} className="text-blue-500"/>
+      <p className="text-gray-700 font-medium">
+        Full customs clearance and international logistics support
+      </p>
+    </div>
+
+    <div className="flex items-start gap-3 bg-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02] md:col-span-2 lg:col-span-1">
+       <Check size={40} className="text-blue-500"/>
+      <p className="text-gray-700 font-medium">
+        Competitive pricing and long-term partner incentives
+      </p>
+    </div>
+  </div>
+</section>
+
       
 
    <section className="py-12 px-6 text-center">

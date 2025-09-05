@@ -80,15 +80,15 @@ export const Navbar = () => {
                 <img src="/3d/whatsapp.png" alt="" className="w-12 h-12 object-center rounded-md" />
             </Link>
          <Link target="_blank" to={"https://www.instagram.com/rtmotors_trade"}>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/YouTube_play_button_square_%282013-2017%29.svg/250px-YouTube_play_button_square_%282013-2017%29.svg.png"
-             alt="YouTube" className="w-8 h-8 rounded-md bg-white object-contain mr-2"/>
+            <img src="/3d/youtube.webp"
+             alt="YouTube" className="w-9 h-9 rounded-mdobject-contain mr-2"/>
         </Link>
          <Link target="_blank" to={"https://www.instagram.com/rtmotors_trade"}>
-            <img src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-instagram-new-square2-512.png" alt="Instagram" 
-            className="w-8 h-8 rounded-md object-cover object-center  mr-2"/>
+            <img src="/3d/instagram.webp" alt="Instagram" 
+            className="w-9 h-9 rounded-md object-cover object-center  mr-2"/>
         </Link>
-             <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" className="bg-white rounded-full w-8 h-8 ">
-                <img src="https://thumbs.dreamstime.com/b/tiktok-social-media-app-icon-tiktok-social-media-app-icon-square-shape-vector-illustration-269930887.jpg" alt="" className="w-full h-full object-center rounded-md " />
+             <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" >
+                <img src="/3d/tiktok.png" alt="" className="w-[36px] h-[36px] object-center rounded-md " />
             </Link>
       </div>
       <div className="flex items-center gap-2 md:hidden">
