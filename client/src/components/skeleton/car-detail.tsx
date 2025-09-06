@@ -4,7 +4,7 @@ import Footer from "@/components/shared/footer"
 
 export const CarDetailSkeleton = () => {
   return (
-    <div className="bg-[#e7e7e7] pt-14">
+    <div className="bg-[#e7e7e7] pt-20">
       <Navbar />
       <div className="py-8 px-[5%] space-y-6">
         {/* Title */}

@@ -154,7 +154,7 @@ const filteredCars = sameBrand.filter(car => car.brand === brand);
     }
 
 return (
-  <div className="bg-[#e7e7e7] pt-14" id="search">
+  <div className="bg-[#e7e7e7] pt-20" id="search">
         <Navbar />
       <div className="py-8 px-[5%]">
           <h1 className="text-xl md:text-3xl font-bold">{name}</h1>

@@ -3,12 +3,11 @@ import { Button } from "../ui/button"
 import { User,  Loader2,  } from "lucide-react"
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Menu } from "./menu";
 
 export const Navbar = () => {
 
-  const { user,isLoaded,isSignedIn } = useUser()
+  const { isLoaded,isSignedIn } = useUser()
 
   const {pathname} = useLocation()
   const items = [
@@ -31,66 +30,36 @@ export const Navbar = () => {
   ]
 
   return (
-    <div className={cn("absolute top-0 left-0 w-full h-[8vh] bg-transparent flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
+    <div className={cn("absolute bg-indigo-950  left-0 w-full top-10 h-[12vh] flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
       <Link to={"/"}>
-       <img src="/logo.png" alt="RT Motors"className="w-20" />
+       <img src="/white.png" alt="RT Motors" className="w-20" />
        </Link>
       <div className="hidden md:flex items-center gap-4">
-        <ul className="flex items-center gap-8">
+        <ul className="flex items-center gap-8 text-white">
           {items.map(item => (
             <li key={item.label}>
-              <Link to={item.url} className="font-semibold">{item.label}</Link>
+              <Link to={item.url} className="font-semibold text-xl">{item.label}</Link>
             </li>
           ))}
         {
           isLoaded && isSignedIn ? (
                          <Link to={"/dashboard"}>
-                    {isLoaded ? (<div className="flex items-center gap-2 font-semibold">
-                      <Button
-                  disabled={!isLoaded}
-                  className="flex items-center bg-blue-500 hover:bg-blue-600 text-white "
-                >
-                      <Avatar className="w-7 h-7">
-                      <AvatarImage src={user?.imageUrl} />
-                      <AvatarFallback>RT</AvatarFallback> 
-                    </Avatar>
-                      Dashboard
-              </Button>
+                    {isLoaded ? (<div className="flex items-center gap-2 font-semibold text-xl">
+                    <li >
+              <Link to={"/dashboard"} className="font-semibold">Dashboard</Link>
+            </li>
                     </div>) : <Loader2 className="animate-spin text-white" />}
               </Link>
           ) : (
-             <Link to={pathname === "/sign-in" ? "/sign-up" : "/sign-in"}>
-                <Button
-                  disabled={!isLoaded}
-                  className="flex items-center bg-blue-500 hover:bg-blue-600 text-white "
-                >
-                    {isLoaded ? <User size={28} /> : <Loader2 className="animate-spin text-white" />}
-                    {pathname === "/sign-in" ? "Sign Up" : "Sign In"}
-              </Button>
+             <Link className="font-semibold text-xl flex items-center gap-2" to={pathname === "/sign-in" ? "/sign-up" : "/sign-in"}>
+                    {isLoaded ? pathname === "/sign-in" ? "Sign Up" : "Sign In" : <Loader2 className="animate-spin text-white" />}
+                   
               </Link>
           )
         }
         </ul>
       </div>
-      <div className="md:flex items-center hidden">
-            <Link to={"https://t.me/rtmotors_trade"} target="_blank" >
-                <img src="/3d/telegram.webp" alt="" className="w-9 h-9 object-center rounded-md" />
-            </Link>
-         <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" >
-                <img src="/3d/whatsapp.png" alt="" className="w-12 h-12 object-center rounded-md" />
-            </Link>
-         <Link target="_blank" to={"https://www.instagram.com/rtmotors_trade"}>
-            <img src="/3d/youtube.webp"
-             alt="YouTube" className="w-9 h-9 rounded-mdobject-contain mr-2"/>
-        </Link>
-         <Link target="_blank" to={"https://www.instagram.com/rtmotors_trade"}>
-            <img src="/3d/instagram.webp" alt="Instagram" 
-            className="w-9 h-9 rounded-md object-cover object-center  mr-2"/>
-        </Link>
-             <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" >
-                <img src="/3d/" alt="" className="w-[36px] h-[36px] object-center rounded-md " />
-            </Link>
-      </div>
+   
       <div className="flex items-center gap-2 md:hidden">
         {
           !isSignedIn && (

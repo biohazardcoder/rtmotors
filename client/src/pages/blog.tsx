@@ -11,7 +11,7 @@ export const Blog = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7] pt-14">
+      <div className="bg-[#e7e7e7] pt-20">
         <Navbar />
         <div className="py-8 px-[5%]">
           <h1 className="text-xl md:text-3xl font-bold">Blogs</h1>
@@ -40,7 +40,7 @@ export const Blog = () => {
   const blog = data as BlogTypes[] || []
 
   return (
-    <div className="bg-[#e7e7e7] pt-14" >
+    <div className="bg-[#e7e7e7] pt-20" >
         <Navbar />
       <div className="py-8 px-[5%]">
           <h1 className="text-xl md:text-3xl font-bold">Blogs</h1>

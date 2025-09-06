@@ -155,7 +155,8 @@ body{
   box-shadow: none;
 }
 
-.cl-internal-vorlia{
+.cl-internal-vorlia,
+.cl-internal-18b18uy{
  display: none;
 }
 
@@ -169,3 +170,4 @@ img {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
 }
+

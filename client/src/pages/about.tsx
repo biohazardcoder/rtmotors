@@ -3,7 +3,7 @@ import Footer from "@/components/shared/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { BriefcaseBusiness, Check, CreditCard, FileCheck, FileText, Search, Ship, Smartphone, } from "lucide-react";
+import { BriefcaseBusiness, Check, CreditCard, FileCheck, FileText, Mail, Search, Ship, Smartphone, } from "lucide-react";
 interface Team {
     _id: string;
     name: string;
@@ -136,7 +136,7 @@ const howWeWork = [
 export const About = () => {
 
   return (
-    <div className="w-full bg-[#e7e7e7] pt-14">
+    <div className="w-full bg-[#e7e7e7] pt-20">
       <Navbar />
       <div className="py-8 ">
        <section className=" text-center">
@@ -161,36 +161,28 @@ export const About = () => {
                                     <div className="space-y-2">
                                         <p className="font-semibold">{team.name}</p>
                                         <p className="text-sm text-muted-foreground flex items-center gap-2">
-                                            <BriefcaseBusiness size={20}/> 
+                                            <BriefcaseBusiness size={18}/> 
                                             {team.job}
                                         </p>
                                          <p className="text-sm text-muted-foreground flex items-center gap-2">
-                                            <Smartphone size={20}/> 
+                                            <Smartphone size={18}/> 
                                             {team.number}
                                         </p>
-                                        <div className="flex items-center justify-center gap-2">
+                                         <p className="text-sm text-muted-foreground flex items-center gap-2">
+                                            <Mail size={18}/> 
+                                            email@gmail.com
+                                        </p>
+                                        <div className="flex items-center justify-between gap-2">
                                           {team.social.map((social, idx) => (
-                                            <div key={idx} className="flex gap-2 items-center">
+                                            <div key={idx} className="flex gap-2 items-center text-muted-foreground">
                                               <a href={social.telegram.url} target="_blank" rel="noopener noreferrer">
-                                                <img
-                                                  src={social.telegram.image}
-                                                  alt="telegram"
-                                                  className="w-9 h-9 object-center "
-                                                />
+                                               <h1 className=" font-semibold text-xs">Telegram</h1>
                                               </a>
                                               <a href={social.whatsapp.url} target="_blank" rel="noopener noreferrer">
-                                                <img
-                                                  src={social.whatsapp.image}
-                                                  alt="whatsapp"
-                                                  className="w-12 h-12 object-center "
-                                                />
+                                                <h1 className="font-semibold border-l-2 border-primary pl-2 text-xs">Whatsapp</h1>
                                               </a>
                                               <a href={social.instagram.url} target="_blank" rel="noopener noreferrer">
-                                                <img
-                                                  src={social.instagram.image}
-                                                  alt="instagram"
-                                                  className="w-9 h-9 "
-                                                />
+                                                  <h1 className=" font-semibold border-l-2 border-primary pl-2 text-xs">Instagram</h1>
                                               </a>
                                             </div>
                                           ))}

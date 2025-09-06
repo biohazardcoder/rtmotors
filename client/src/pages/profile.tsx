@@ -72,7 +72,7 @@ if (!isLoaded ) {
     return (
       <div>
         <Navbar />
-        <div className="p-6 px-[5%] space-y-6 mt-14">
+        <div className="p-6 px-[5%] space-y-6 pt-28">
           <Skeleton className="h-8 w-40" />
           <div className="space-y-4">
             <div className="flex items-center gap-4">
@@ -105,7 +105,7 @@ if (!isLoaded ) {
   return (
     <div>
       <Navbar />
-      <div className="h-screen p-2 pt-20  px-[5%]">
+      <div className="h-screen p-2 pt-28  px-[5%]">
         <h1 className="text-2xl font-bold">Your Profile</h1>
         <div className="mt-2 flex items-center gap-2 text-sm">
           <h1>First Name:</h1>
