@@ -5,12 +5,12 @@ export const Header = () => {
   return (
     <div className="w-full h-10 flex items-center justify-between px-[5%] bg-gray-950 text-muted-foreground">
         <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-sm">
-            <PhoneCall size={16} />
+            <div className="flex items-center gap-2 text-[10px] md:text-xs">
+            <PhoneCall size={12} />
             +8210-8465-8085
         </div>
-         <div className="flex items-center gap-2 text-sm border-l border-muted-foreground pl-4">
-            <Mail size={16} />
+         <div className="flex items-center gap-2 text-[10px] md:text-xs border-l border-muted-foreground pl-4">
+            <Mail size={12} />
             rtmotorssales@gmail.com
         </div>
         </div>
@@ -30,7 +30,7 @@ export const Header = () => {
             className="w-6 h-6 rounded-md object-cover object-center "/>
         </Link>
              <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" >
-                <img src="https://cdn3d.iconscout.com/3d/free/thumb/free-tiktok-3d-logo-png-download-3915178.png?f=webp" alt="" className="w-[30px] h-[30px] object-center rounded-md " />
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/tiktok-3d-icon-png-download-8550499.png" alt="" className="w-[26px] h-7 object-center rounded-md " />
             </Link>
       </div>
     </div>
