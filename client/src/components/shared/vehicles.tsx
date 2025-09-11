@@ -108,11 +108,11 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
 
 
         <div className="flex items-center justify-between border-b-2 pb-6 border-primary" data-aos="fade-up">
-          <h1 className="text-lg md:text-3xl font-bold" data-aos="fade-up">
+          <h1 className="text-lg md:text-3xl font-bold">
             Our Cars
           </h1>
           <HashLink to="/cars/#all">
-            <Button data-aos="fade-up" className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
+            <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
               More
             </Button>
           </HashLink>
