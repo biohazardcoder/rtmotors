@@ -5,6 +5,7 @@ import { Navbar } from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import VideoPlayer from "@/components/shared/video-player";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Menus } from "@/components/shared/menus";
 
 export const Blog = () => {
     const { data,isLoading} = useSWR("/blog", fetcher)
@@ -40,7 +41,8 @@ export const Blog = () => {
   const blog = data as BlogTypes[] || []
 
   return (
-    <div className="bg-[#e7e7e7] pt-20" >
+    <div className="bg-[#e7e7e7] pt-24" >
+        <Menus/>
         <Navbar />
       <div className="py-8 px-[5%]">
           <h1 className="text-xl md:text-3xl font-bold">Blogs</h1>

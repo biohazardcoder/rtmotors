@@ -16,7 +16,7 @@ import VideoPlayer from "./video-player";
 export const Logistic = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
   const logistics = (data as LogisticTypes[]) || [];
-  const firstEigth = logistics.slice(0, 8);
+  const firstEigth = logistics
 
   if (isLoading) {
     return (
@@ -50,7 +50,7 @@ export const Logistic = () => {
           </div>
         ) : (
           <Carousel className="mt-8 relative">
-            <div className="flex items-center justify-between  mb-4">
+            <div className="flex items-center justify-between pb-6 border-b-2 border-primary  mb-6" data-aos="fade-up">
           <h1 className="text-lg md:text-3xl font-bold">Container loadings</h1>
           <HashLink to="/container-loadings/#all">
             <Button

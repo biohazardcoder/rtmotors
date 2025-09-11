@@ -4,6 +4,7 @@ import { fetcher } from "@/middlewares/Fetcher";
 import { Navbar } from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Menus } from "@/components/shared/menus";
 
 export const ContainerLoadings = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
@@ -12,6 +13,7 @@ export const ContainerLoadings = () => {
   if (isLoading) {
     return (
       <div className="bg-[#e7e7e7] min-h-screen pt-20">
+        <Menus/>
         <Navbar />
         <div className="py-8 px-[5%]">
           <h1 className="text-xl md:text-3xl font-bold">Container loadings</h1>

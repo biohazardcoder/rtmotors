@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, PhoneCall } from 'lucide-react';
 import { Button } from '../ui/button';
 
 function Footer() {
@@ -7,7 +7,7 @@ function Footer() {
         <section>
             <div className='grid grid-cols-1 md:grid-cols-4 py-5'>
                 <div className=''>
-                    <h1 className=' text-xl sm:text-3xl text-primary font-bold sm:text-left text-justify mb-3'>Be Ready To Grow</h1>
+                    <h1 className=' text-xl sm:text-3xl text-primary font-bold sm:text-left text-justify mb-3'>RT MOTORS</h1>
                     <p className='text-primary'>Get Exclusive <span className='font-bold text-blue-500'>Updatestraigt</span> to your inbox.</p>
                     <br />
                     <div className='flex items-center h-10'>
@@ -15,11 +15,11 @@ function Footer() {
                         <Button className='rounded-none h-full'>OK</Button>
                     </div>
                 </div>
-                <div className="flex  justify-start gap-4  lg:gap-10  md:pl-30 col-span-3">
+                <div className="flex flex-col lg:flex-row justify-start gap-4  lg:gap-10  md:pl-30 col-span-3">
                     <div>
                         <div className="mt-4">
                             <h1 className='text-xl font-bold mb-3 text-primary text-center'>Quick Links</h1>
-                            <ul className='flex items-center text-primary gap-3 '>
+                            <ul className='flex items-center justify-evenly lg:justify-start text-primary gap-3 '>
                                 <li>
                                     <a href="#">Home</a>
                                 </li>
@@ -39,7 +39,7 @@ function Footer() {
                         <div>
                             <h1 className=' text-xl font-bold mb-3 text-primary text-center'>Contact Us</h1>
                         </div>
-                        <div className='flex items-center gap-3 '>
+                        <div className='flex flex-col lg:flex-row items-center gap-3 '>
                             <div className='flex items-center gap-2'>
                                 <MapPin />
                                 <p>Gimhae, South Korea</p>
@@ -49,7 +49,7 @@ function Footer() {
                                 <p>rtmotorssales@gmail.com</p>
                             </div>
                             <div className=' flex items-center gap-2'>
-                                <Phone />
+                                <PhoneCall />
                                 <p>+8210-8465-8085</p>
                             </div>
                         </div>

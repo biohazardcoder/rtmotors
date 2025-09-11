@@ -1,6 +1,5 @@
 import { Auction } from "@/components/shared/auction"
 import { Brands } from "@/components/shared/brands"
-import { Choose } from "@/components/shared/choose"
 import { Comments } from "@/components/shared/comments"
 import { Exchange } from "@/components/shared/exchange"
 import Footer from "@/components/shared/footer"
@@ -15,17 +14,17 @@ import { useState } from "react"
 export const Home = () => {
 
   const [type, setType] = useState("all");
-  const [year, setYear] = useState<number | any>(0);
-  const [price, setPrice] = useState<number | any>(0);
+  const [year, setYear] = useState<string>("any");
+  const [price, setPrice] = useState<string>("any");
   const [brand, setBrand] = useState("all");
   return (
     <div>
         <Navbar />
         <Main type={type} brand={brand} year={year} price={price} setType={setType} setBrand={setBrand} setYear={setYear} setPrice={setPrice} />
         <Brands />
-        <Vehicles type={type} year={year} price={price} brand={brand} />
+        <Vehicles setBrand={setBrand} setPrice={setPrice} setType={setType} setYear={setYear} type={type} year={year} price={price} brand={brand} />
         <Logistic/>
-        <Choose />
+        {/* <Choose /> */}
         <Exchange/>
         <Partners/>
         <Auction/>

@@ -57,7 +57,6 @@ export const Brands = () => {
   }
 
   const brands = (data as BrandTypes[]) || [];
-  console.log(brands);
   
   return (
     <div className="bg-[#e7e7e7] hidden md:block">

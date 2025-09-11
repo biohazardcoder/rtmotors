@@ -24,6 +24,7 @@ import { useState } from "react";
 import { Pagination, PaginationContent,  PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { CarDetailSkeleton } from "@/components/skeleton/car-detail";
 import { Input } from "@/components/ui/input";
+import { Menus } from "@/components/shared/menus";
 
 
 export const CarDetail = () => {
@@ -155,7 +156,8 @@ const filteredCars = sameBrand.filter(car => car.brand === brand);
 
 return (
   <div className="bg-[#e7e7e7] pt-20" id="search">
-        <Navbar />
+      <Menus/>
+      <Navbar />
       <div className="py-8 px-[5%]">
           <h1 className="text-xl md:text-3xl font-bold">{name}</h1>
           <div className="flex items-center justify-between">

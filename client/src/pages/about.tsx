@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { BriefcaseBusiness, Check, CreditCard, FileCheck, FileText, Mail, Search, Ship, Smartphone, } from "lucide-react";
+import { Menus } from "@/components/shared/menus";
 interface Team {
     _id: string;
     name: string;
@@ -137,6 +138,7 @@ export const About = () => {
 
   return (
     <div className="w-full bg-[#e7e7e7] pt-20">
+      <Menus/>
       <Navbar />
       <div className="pb-8 ">
   <section className="grid grid-cols-1 md:grid-cols-2 h-[calc(100vh-121px)]">

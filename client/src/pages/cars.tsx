@@ -15,6 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Menus } from "@/components/shared/menus";
 
 export const Cars = () => {
   const { data, isLoading } = useSWR("/car", fetcher);
@@ -74,7 +75,6 @@ export const Cars = () => {
     miles,
     name,
     transmission,
-    description,
     oldPrice,
     year,
     stock,
@@ -121,10 +121,9 @@ export const Cars = () => {
       </div>
 
       <div className="p-6">
-        <h2 className="text-lg font-semibold hover:text-blue-600 cursor-pointer">
+        <h2 className="text-lg font-semibold cursor-pointer">
           {name} - {year}
         </h2>
-        <p className="text-secondary-foreground text-sm mb-3">{description}</p>
 
         <div className="flex justify-between text-muted-foreground text-sm border-t border-b py-4 mb-3">
           <div className="flex flex-col items-center gap-1 font-semibold">
@@ -170,10 +169,11 @@ export const Cars = () => {
   );
 
   return (
-    <div className="bg-[#e7e7e7] pt-20">
+    <div className="bg-[#e7e7e7] pt-24">
+      <Menus/>
       <Navbar />
       <div className="py-8 px-[5%]" id="all">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between border-b-2 border-primary pb-6">
           <h1 className="text-xl md:text-3xl font-bold">All Cars</h1>
           <div>
             <Select onValueChange={setSelectedBrand}>
@@ -195,7 +195,7 @@ export const Cars = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
           {availableCars.length === 0 ? (
             <p>No available cars</p>
           ) : (
@@ -205,28 +205,26 @@ export const Cars = () => {
 
                {
             soldOutCars.length >0 && (
-       <div className="py-8" id="sold-out">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl md:text-3xl font-bold">Sold Out</h1>
+        <div className="py-8">
+          <Carousel>
+            <div className="flex items-center justify-between border-b-2 border-primary pb-6  mb-6">
+              <h1 className="text-xl md:text-3xl font-bold">Sold Out</h1>
+            </div>
+            <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[18px]  right-[45px] rounded-md  left-[100%-20px]" />
+            <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[0px] rounded-md  left-[100%-30px]" />
+            <CarouselContent>
+              {soldOutCars.map(({ _id, images, name }) => (
+                <CarouselItem key={_id} className="basis-1/1 md:basis-1/3 lg:basis-1/4">
+                  <img
+                    src={images[0]}
+                    alt={name}
+                    className="w-full h-64 object-cover object-center rounded-sm"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
-        <div className="mt-8">
-                   <Carousel>
-                    <CarouselContent>
-                        {soldOutCars.map(({_id, images,name}) => (
-                            <CarouselItem key={_id} className="basis-1/1 md:basis-1/4 ">
-                               <img
-                                    src={images[0]}
-                                    alt={name}
-                                    className="w-full h-64  object-cover object-bottom rounded-sm"
-                                />
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600"/>
-                    <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600"/>
-                </Carousel>
-        </div>
-      </div>
             )
        }
       </div>
