@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div className='bg-primary-foreground py-8 px-[5%]'>
         <section>
-            <div className='grid grid-cols-1 md:grid-cols-3 py-5'>
+            <div className='grid grid-cols-1 md:grid-cols-4 py-5'>
                 <div className=''>
                     <h1 className=' text-xl sm:text-3xl text-primary font-bold sm:text-left text-justify mb-3'>Be Ready To Grow</h1>
                     <p className='text-primary'>Get Exclusive <span className='font-bold text-blue-500'>Updatestraigt</span> to your inbox.</p>
@@ -15,11 +15,11 @@ function Footer() {
                         <Button className='rounded-none h-full'>OK</Button>
                     </div>
                 </div>
-                <div className="flex  justify-start gap-4  lg:gap-30 flex-wrap md:pl-30 col-span-2">
+                <div className="flex  justify-start gap-4  lg:gap-10  md:pl-30 col-span-3">
                     <div>
                         <div className="mt-4">
-                            <h1 className='text-xl font-bold mb-3 text-primary'>Quick Links</h1>
-                            <ul className='flex flex-col text-primary gap-3'>
+                            <h1 className='text-xl font-bold mb-3 text-primary text-center'>Quick Links</h1>
+                            <ul className='flex items-center text-primary gap-3 '>
                                 <li>
                                     <a href="#">Home</a>
                                 </li>
@@ -37,9 +37,9 @@ function Footer() {
                     </div>
                     <div className='mt-4'>
                         <div>
-                            <h1 className=' text-xl font-bold mb-3 text-primary'>Contact Us</h1>
+                            <h1 className=' text-xl font-bold mb-3 text-primary text-center'>Contact Us</h1>
                         </div>
-                        <div className='flex flex-col gap-3 '>
+                        <div className='flex items-center gap-3 '>
                             <div className='flex items-center gap-2'>
                                 <MapPin />
                                 <p>Gimhae, South Korea</p>
