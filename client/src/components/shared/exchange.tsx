@@ -55,25 +55,35 @@ export const Exchange = () => {
       </div>
 
       <ul 
-      data-aos="fade-up"
-      className="flex flex-col gap-4 mt-12 text-xl font-semibold md:flex-row md:items-center md:justify-between">
-        <li className="flex items-center gap-2">
-          <img src="/lang/ru.png" alt="RUB" className="w-10 h-10 object-cover object-center rounded-full" />
-          RUB: {data?.rates.RUB ? (data.rates.RUB * amount).toFixed(2) : "N/A"}
-        </li>
-        <li className="flex items-center gap-2">
-          <img src="/lang/kr.png" alt="KRW" className="w-10 h-10 object-cover object-center rounded-full" />
-          KRW: {data?.rates.KRW ? (data.rates.KRW * amount).toFixed(2) : "N/A"}
-        </li>
-        <li className="flex items-center gap-2">
-          <img src="/lang/eu.png" alt="EUR" className="w-9 h-9 object-cover object-center rounded-full" />
-          EUR: {data?.rates.EUR ? (data.rates.EUR * amount).toFixed(2) : "N/A"}
-        </li>
-        <li className="flex items-center gap-2">
-          <img src="/lang/uz.png" alt="UZS" className="w-10 h-10 object-cover object-center rounded-full" />
-          UZS: {data?.rates.UZS ? (data.rates.UZS * amount).toFixed(2) : "N/A"}
-        </li>
-      </ul>
+  data-aos="fade-up"
+  className="flex flex-col gap-4 mt-12 text-xl font-semibold md:flex-row md:items-center md:justify-between"
+>
+  <li className="flex items-center gap-2">
+    <img src="/lang/ru.png" alt="RUB" className="w-10 h-10 object-cover object-center rounded-full" />
+    RUB: {data?.rates.RUB 
+      ? (data.rates.RUB * amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) 
+      : "N/A"}
+  </li>
+  <li className="flex items-center gap-2">
+    <img src="/lang/kr.png" alt="KRW" className="w-10 h-10 object-cover object-center rounded-full" />
+    KRW: {data?.rates.KRW 
+      ? (data.rates.KRW * amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) 
+      : "N/A"}
+  </li>
+  <li className="flex items-center gap-2">
+    <img src="/lang/eu.png" alt="EUR" className="w-9 h-9 object-cover object-center rounded-full" />
+    EUR: {data?.rates.EUR 
+      ? (data.rates.EUR * amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) 
+      : "N/A"}
+  </li>
+  <li className="flex items-center gap-2">
+    <img src="/lang/uz.png" alt="UZS" className="w-10 h-10 object-cover object-center rounded-full" />
+    UZS: {data?.rates.UZS 
+      ? (data.rates.UZS * amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) 
+      : "N/A"}
+  </li>
+</ul>
+
     </div>
   );
 };
