@@ -43,14 +43,21 @@ export const Exchange = () => {
         <h1 className="text-lg md:text-3xl font-bold">Exchange Rates</h1>
         <div className="flex items-center gap-2">
           <h1 className="text-sm font-semibold">Enter amount in USD:</h1>
-          <Input
-            type="number"
-            className="w-32 bg-secondary border-primary"
-            placeholder="USD amount"
-            value={amount}
-            min={1}
-            onChange={(e) => setAmount(Number(e.target.value))}
-          />
+         <Input
+          type="text"
+          className="w-32 bg-secondary border-primary"
+          placeholder="USD amount"
+          value={amount ? amount.toLocaleString("en-US") : ""}
+          onChange={(e) => {
+            const rawValue = e.target.value.replace(/,/g, ""); 
+            const numericValue = Number(rawValue);
+            if (!isNaN(numericValue)) {
+              setAmount(numericValue);
+            } else {
+              setAmount(0);
+            }
+          }}
+        />
         </div>
       </div>
 
