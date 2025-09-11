@@ -27,8 +27,8 @@
             className="w-full h-screen relative bg-cover bg-center flex flex-col items-center justify-center space-y-4">
                 <video src="/video/first.mp4" className="absolute top-0 left-0 w-full h-full object-cover" autoPlay muted loop></video>
                 <div className="absolute top-0 left-0 h-full w-full bg-black opacity-50"></div>
-                    <h1 className="text-white font-bold text-sm">Find cars for sale and for rent near you</h1>
-                    <h1 className="text-white font-bold text-3xl md:text-5xl lg:text-6xl">Find Your Perfect Car</h1>
+                    <h1 className="text-white font-bold text-3xl md:text-5xl lg:text-6xl">RT MOTORS</h1>
+                    <h1 className="text-white font-bold text-xl md:text-3xl lg:text-4xl">FROM KOREA TO THE WORLD</h1>
                     <div className="flex gap-4 mt-4 items-center text-white">
                             <Button variant="ghost" onClick={() => setType("all")} className={cn(type === "all" && "border-b-4 pb-2", "rounded-none hover:bg-transparent hover:text-white")}>
                                     All
