@@ -4,6 +4,7 @@ import path from "path";
 import {clerkClient} from "@clerk/express"
 
 const IMAGES_DIR = path.resolve("uploads/images");
+const VIDEOS_DIR = path.resolve("uploads/videos");
 
 function getFileNameFromUrl(url) {
   return url.split("/").pop(); 
@@ -168,3 +169,64 @@ export const deleteComment = async (req, res) => {
         res.status(500).json({ message: "Error deleting comment" });
     }
 }
+
+
+export const AddVideo = async (req, res) => {
+    try {
+        const car = await Car.findById(req.params.id);
+        if (!car) {
+            return res.status(404).json({ message: "Car not found" });
+        }
+
+        if (req.uploadedVideo && req.uploadedVideo[0]) {
+            if (car.video) {
+                const fileName = getFileNameFromUrl(car.video);
+                const oldVideoPath = path.join(VIDEOS_DIR, fileName);
+
+                try {
+                    await fs.unlink(oldVideoPath);
+                } catch (err) {
+                    console.error("Error deleting old video:", err.message);
+                }
+            }
+            car.video = req.uploadedVideo;
+
+        }
+        
+        await car.save();
+        res.status(200).json(car);
+    } catch (error) {
+        res.status(400).json({ message: "Problem adding video" });
+    }
+}
+
+export const DeleteVideo = async (req, res) => {
+    try {
+        const car = await Car.findById(req.params.id);
+        if (!car) {
+            return res.status(404).json({ message: "Car not found" });
+        }
+
+        if (car.video) {
+            const fileName = getFileNameFromUrl(car.video);
+            const videoPath = path.join(VIDEOS_DIR, fileName);
+
+            try {
+                await fs.unlink(videoPath);
+            } catch (err) {
+                console.error("Error deleting video file:", err.message);
+            }
+        }
+
+        
+
+
+        car.video = null;
+        await car.save();
+        res.status(200).json(car);
+    } catch (error) {
+        res.status(400).json({ message: "Problem deleting video" });
+        console.log(error);
+        
+    }
+  }

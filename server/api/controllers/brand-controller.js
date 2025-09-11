@@ -18,10 +18,10 @@ export const getAllBrand = async (_, res) => {
 };
 
 export const createBrand = async (req, res) => {
-  console.log(req.uploadedImages[0]);
-  
   try {
     const brand = new Brand({
+      width:req.body.width,
+      height:req.body.height,
       image: req.uploadedImages[0], 
     });
     await brand.save();

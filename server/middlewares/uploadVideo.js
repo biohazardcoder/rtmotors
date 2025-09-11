@@ -33,7 +33,7 @@ export default function (req, res, next) {
         }
 
         if (req.file) {
-            req.uploadedVideo = `https://rt-motors.mukammal-crm.uz/api/uploads/videos/${req.file.filename}`;
+            req.uploadedVideo = `http://localhost:4000/api/uploads/videos/${req.file.filename}`;
         }
 
         next();

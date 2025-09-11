@@ -4,7 +4,10 @@ const LogisticSchema = new mongoose.Schema({
     image:{
         type: String,
         required: true,
-    }
+    },
+    video:{
+        type: String,
+    },
 },{timestamps: true});
 
 

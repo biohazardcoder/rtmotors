@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 
 const IMAGES_DIR = path.resolve("uploads/images");
+const VIDEOS_DIR = path.resolve("uploads/videos");
 
 function getFileNameFromUrl(url) {
     return url.split("/").pop(); 
@@ -87,3 +88,64 @@ export const deleteLogistic = async (req, res) => {
         res.status(400).json({ message: "Problem deleting logistic" });
     }
 };
+
+
+export const AddVideo = async (req, res) => {
+    try {
+        const logistic = await Logistic.findById(req.params.id);
+        if (!logistic) {
+            return res.status(404).json({ message: "Logistic not found" });
+        }
+
+        if (req.uploadedVideo && req.uploadedVideo[0]) {
+            if (logistic.video) {
+                const fileName = getFileNameFromUrl(logistic.video);
+                const oldVideoPath = path.join(VIDEOS_DIR, fileName);
+
+                try {
+                    await fs.unlink(oldVideoPath);
+                } catch (err) {
+                    console.error("Error deleting old video:", err.message);
+                }
+            }
+            logistic.video = req.uploadedVideo;
+
+        }
+        
+        await logistic.save();
+        res.status(200).json(logistic);
+    } catch (error) {
+        res.status(400).json({ message: "Problem adding video" });
+    }
+}
+
+export const DeleteVideo = async (req, res) => {
+    try {
+        const logistic = await Logistic.findById(req.params.id);
+        if (!logistic) {
+            return res.status(404).json({ message: "Logistic not found" });
+        }
+
+        if (logistic.video) {
+            const fileName = getFileNameFromUrl(logistic.video);
+            const videoPath = path.join(VIDEOS_DIR, fileName);
+
+            try {
+                await fs.unlink(videoPath);
+            } catch (err) {
+                console.error("Error deleting video file:", err.message);
+            }
+        }
+
+        
+
+
+        logistic.video = null;
+        await logistic.save();
+        res.status(200).json(logistic);
+    } catch (error) {
+        res.status(400).json({ message: "Problem deleting video" });
+        console.log(error);
+        
+    }
+}
