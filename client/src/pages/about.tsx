@@ -138,18 +138,36 @@ export const About = () => {
   return (
     <div className="w-full bg-[#e7e7e7] pt-20">
       <Navbar />
-      <div className="py-8 ">
-       <section className=" text-center">
-        <img
-          src="/logo.png"
-          alt="Company Logo"
-          className="mx-auto w-24 h-24 mb-4"
-        />
-        <h1 className="text-3xl font-bold mb-4">RT Motors Company</h1>
-        <p className="max-w-2xl mx-auto text-muted-foreground">
-          RT MOTORS specializes in delivering high-quality vehicles from South Korea to customers worldwide. As a supplier over the years of experience, we have established strong partnerships with some of Korea’s top manufacturers, and also maintain reliable connections with trusted and competitively priced dealers in the automotive sector. 
-        </p>
-      </section>
+      <div className="pb-8 ">
+  <section className="grid grid-cols-1 md:grid-cols-2 h-[calc(100vh-121px)]">
+  <div
+    className="relative bg-cover bg-center"
+    style={{
+      backgroundImage: `url('https://images.squarespace-cdn.com/content/v1/55f37d4ae4b06a2b4bf597a0/1675203467875-0HVGHRZSFU5O6M24OPDQ/IM5_0441.jpg')`,
+    }}
+  >
+    <div className="absolute inset-0 bg-black/40"></div>
+  </div>
+
+  <div className="flex flex-col justify-center items-center text-center px-8 py-12 bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <img
+      src="/logo.png"
+      alt="Company Logo"
+      className="w-48 h-48 drop-shadow-lg"
+    />
+    <h1 className="text-4xl font-extrabold mb-6  tracking-wide">
+      RT Motors Company
+    </h1>
+    <p className="max-w-xl  font-semibold text-lg leading-relaxed text-gray-700">
+      RT MOTORS specializes in delivering high-quality vehicles from South Korea
+      to customers worldwide. With years of experience, we have established strong
+      partnerships with Korea’s top manufacturers and maintain reliable connections
+      with trusted and competitively priced dealers in the automotive sector.
+    </p>
+  </div>
+</section>
+
+
          <section className="w-full">
              <div className="py-8 px-[5%]  flex flex-col items-center justify-center" >
             <h1 className="text-xl md:text-3xl font-bold text-center">Our Team</h1>
@@ -194,7 +212,7 @@ export const About = () => {
             </div>
         </div>
          </section>
-
+     
        <section className="py-16 px-6">
   <h1 className="mt-4 text-3xl font-bold text-center text-gray-800">
     Our Services and Strengths Include:
