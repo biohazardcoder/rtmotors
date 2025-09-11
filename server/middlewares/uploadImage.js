@@ -34,7 +34,7 @@ export default function (req, res, next) {
 
    if (req.files) {
       req.uploadedImages = req.files.map(
-  (file) => `http://localhost:4000/api/uploads/images/${file.filename}`
+  (file) => `https://server.rt-motors.com/api/uploads/images/${file.filename}`
 );
     }
 
