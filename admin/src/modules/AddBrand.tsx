@@ -22,7 +22,8 @@ export function AddBrand() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
-  
+  const [width, setWidth] = useState<number>(0)
+  const [height, setHeight] = useState<number>(0)
     const dispatch = useDispatch()
     const GetBrands = async () => {
         try {
@@ -39,6 +40,8 @@ export function AddBrand() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     if (!images || images.length === 0) newErrors.images = "At least one image is required.";
+    if (!width || width === 0) newErrors.width = "Width must be greater than 0.";
+    if (!height || height === 0) newErrors.height = "Height must be greater than 0.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -54,7 +57,8 @@ export function AddBrand() {
 
     try {
       const body = new FormData();
-
+      body.append("width", width.toString() || "");
+      body.append("height", height.toString() || "");
       if (images && images.length > 0) {
         for (let i = 0; i < images.length; i++) {
           body.append("images", images[i]);
@@ -96,6 +100,32 @@ export function AddBrand() {
         <SheetDescription>All fields are required</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 px-4 mt-2">
+          <div className="space-y-1">
+            <Label htmlFor="width">Width</Label>
+            <Input
+              id="width"
+              type="number"
+              onChange={(e) => setWidth(Number(e.target.value))}
+              className={errors.width ? "border-red-500" : ""}
+
+            />
+            {errors.width && (
+              <span className="text-red-500 text-sm">{errors.width}</span>
+            )}
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="height">Height</Label>
+            <Input
+              id="height"
+              type="number"
+              onChange={(e) => setHeight(Number(e.target.value))}
+              className={errors.height ? "border-red-500" : ""}
+
+            />
+            {errors.height && (
+              <span className="text-red-500 text-sm">{errors.height}</span>
+            )}
+          </div>
           <div className="space-y-1">
             <Label htmlFor="images">Logo</Label>
             <Input

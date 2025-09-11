@@ -18,7 +18,6 @@ export default function Login() {
     password: "",
   });
   const [globalError, setGlobalError] = useState("");
-
   const validateForm = (formData: FormData) => {
     let valid = true;
     const newErrors = {
@@ -28,7 +27,6 @@ export default function Login() {
 
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-
     if (!email) {
       newErrors.email = "Email is required.";
       valid = false;
@@ -48,7 +46,6 @@ export default function Login() {
     setErrors(newErrors);
     return valid;
   };
-
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -63,7 +60,7 @@ export default function Login() {
         })
       ).data;
       localStorage.setItem("token", response.token);
-      window.location.href = "/";
+      window.location.reload()
       
     } catch (error) {
         const err = error as ErrorTypes;

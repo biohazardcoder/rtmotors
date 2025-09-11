@@ -57,9 +57,10 @@ export const Brands = () => {
   }
 
   const brands = (data as BrandTypes[]) || [];
-
+  console.log(brands);
+  
   return (
-    <div className="bg-[#e7e7e7]">
+    <div className="bg-[#e7e7e7] hidden md:block">
       <div className="py-8 px-[5%]">
         <h1
           className="text-lg md:text-3xl font-bold"
@@ -76,13 +77,14 @@ export const Brands = () => {
           </div>
         ) : (
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            {brands.map(({ _id, image, title }) => (
+            {brands.map(({ _id, image, height,width }) => (
               <div key={_id} data-aos="fade-up">
                 <div className="flex flex-col font-bold items-center p-4 rounded-md">
                   <img
                     src={image}
-                    alt={title}
-                    className="w-auto h-14 object-cover"
+                    alt={"image"}
+                    style={{width:`${width}px`, height:`${height}px`}}
+                    className={`w-[${width}px] h-[${height}px] object-cover`}
                   />
                 </div>
               </div>

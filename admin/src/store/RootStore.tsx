@@ -6,12 +6,14 @@ import PartnerSlicer from "../toolkit/partnerSlicer";
 import AuctionSlicer from "../toolkit/auctionSlicer";
 import AdminSlicer from "../toolkit/adminSlicer";
 import BlogSlicer from "../toolkit/blogSlicer";
+import CarSlicer from "../toolkit/carSlicer";
 import LogisticSlicer from "../toolkit/logisticSlicer";
 
 export const store = configureStore({
   reducer: {
     user: UserSlicer,
     brand: BrandSlicer,
+    car: CarSlicer,
     customer:CustomerSlicer,
     partner:PartnerSlicer,
     auction:AuctionSlicer,

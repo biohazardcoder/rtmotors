@@ -16,37 +16,49 @@ interface EditBrandProps {
 }
 
 export function EditBrand({ brand, open, onOpenChange }: EditBrandProps) {
-    const [images, setImages] = useState<FileList | null>(null);
+  const [images, setImages] = useState<FileList | null>(null);
+  const [width, setWidth] = useState<number>(brand.width || 0);
+  const [height, setHeight] = useState<number>(brand.height || 0);
 
-    const dispatch = useDispatch()
-    const {loading } = useSelector((state:RootState)=>state.brand)
-    const GetBrands = async () => {
-        try {
-            dispatch(setLoading())
-            const response = (await Fetch.get("brand")).data
-            dispatch(setBrand(response))
-        } catch (error) {
-            const err = error as ErrorTypes
-            dispatch(setError(err.response.data.message|| "Error in get all brands"))
-            console.log(error);
-        }
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state: RootState) => state.brand);
+
+  const GetBrands = async () => {
+    try {
+      dispatch(setLoading());
+      const response = (await Fetch.get("brand")).data;
+      dispatch(setBrand(response));
+    } catch (error) {
+      const err = error as ErrorTypes;
+      dispatch(setError(err.response.data.message || "Error in get all brands"));
+      console.log(error);
     }
- const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImages(e.target.files);
   };
+
   const handleUpdate = async () => {
     try {
       const body = new FormData();
-       if (images && images.length > 0) {
+
+      // Rasm qo‘shish
+      if (images && images.length > 0) {
         for (let i = 0; i < images.length; i++) {
           body.append("images", images[i]);
         }
       }
 
+      // O‘lcham qo‘shish
+      body.append("width", String(width));
+      body.append("height", String(height));
+
       await Fetch.put(`brand/${brand._id}`, body, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      GetBrands()
+
+      await GetBrands();
       onOpenChange(false);
       toast.success("Brand updated successfully");
     } catch (error) {
@@ -61,11 +73,10 @@ export function EditBrand({ brand, open, onOpenChange }: EditBrandProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
       <div className="bg-[#202020] text-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
-        
         <Button
           variant="ghost"
           onClick={() => onOpenChange(false)}
-          className="absolute top-3 right-3 "
+          className="absolute top-3 right-3"
         >
           ✕
         </Button>
@@ -80,6 +91,27 @@ export function EditBrand({ brand, open, onOpenChange }: EditBrandProps) {
               type="file"
               className="file:cursor-pointer file:px-2 file:rounded file:border-0 file:bg-white file:text-sm file:text-black hover:file:bg-gray-200"
               onChange={handleImageChange}
+              multiple
+            />
+          </div>
+
+          <div>
+            <Label>Width</Label>
+            <Input
+              type="number"
+              value={width}
+              onChange={(e) => setWidth(Number(e.target.value))}
+              placeholder="Enter width"
+            />
+          </div>
+
+          <div>
+            <Label>Height</Label>
+            <Input
+              type="number"
+              value={height}
+              onChange={(e) => setHeight(Number(e.target.value))}
+              placeholder="Enter height"
             />
           </div>
         </div>

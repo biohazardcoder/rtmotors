@@ -239,7 +239,7 @@ export const Vehicles = ({ type, year, price, brand }: { type: string; year: num
               <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
                   <CarouselContent>
                 {soldOut.map(({ _id, images, name }) => (
-                  <CarouselItem key={_id} className="basis-1/2 md:basis-1/4">
+                  <CarouselItem key={_id} className="basis-1/1 md:basis-1/3 lg:basis-1/4">
                     <img
                       src={images[0]}
                       alt={name}

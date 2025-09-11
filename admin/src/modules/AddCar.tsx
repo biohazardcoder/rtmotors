@@ -12,10 +12,10 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { Fetch } from "@/middlewares/Fetch";
-import useSWR from "swr";
-import { fetcher } from "@/middlewares/Fetcher";
-import type { CarTypes } from "@/types/RootTypes";
+    import type { CarTypes, ErrorTypes } from "@/types/RootTypes";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { setCar, setError, setLoading } from "@/toolkit/carSlicer";
+import { useDispatch } from "react-redux";
 
 export function AddCar() {
   const [formData, setFormData] = useState<CarTypes>({
@@ -37,8 +37,18 @@ export function AddCar() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { mutate } = useSWR("/car", fetcher);
-
+  const dispatch = useDispatch()
+    const GetCars = async () => {
+        try {
+            dispatch(setLoading())
+            const response = (await Fetch.get("car")).data
+            dispatch(setCar(response))
+        } catch (error) {
+            const err = error as ErrorTypes
+            dispatch(setError(err.response.data.message|| "Error in get all cars"))
+            console.log(error);
+        }
+    }
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Name is required.";
@@ -87,11 +97,11 @@ export function AddCar() {
         }
       }
 
-      const res = await Fetch.post("/car", body, {
+      await Fetch.post("/car", body, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      mutate((data: any) => [...(data || []), res.data], false);
+      GetCars()
       toast.success("Car added successfully!");
       setIsSheetOpen(false);
       setFormData({

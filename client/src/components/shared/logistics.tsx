@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "../ui/button";
 import { HashLink } from "react-router-hash-link";
+import VideoPlayer from "./video-player";
 
 export const Logistic = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
@@ -62,16 +63,20 @@ export const Logistic = () => {
               <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[18px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
               <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
             <CarouselContent>
-              {firstEigth.map(({ _id, image }) => (
+              {firstEigth.map(({ _id, image,video}) => (
                 <CarouselItem
                   key={_id}
-                  className="basis-1/2 md:basis-1/3 lg:basis-1/4"
+                  className="basis-1/1 md:basis-1/3 lg:basis-1/4"
                 >
+                  { video ? (
+                  <VideoPlayer videoUrl={video} />
+                ):(
                   <img
-                    src={image}
-                    alt="logistic"
-                    className="w-full h-56 object-cover object-center rounded-lg"
-                  />
+                  src={image}
+                  alt={"image"}
+                  className="w-full h-56 md:h-64 object-cover"
+                />
+                )}
                 </CarouselItem>
               ))}
             </CarouselContent>

@@ -13,6 +13,7 @@ export interface AdminTypes {
 export interface CarTypes {
   _id?: string;
   name: string;
+  video?:string
   images?: string[];
   brand: string;
   description: string;
@@ -55,6 +56,8 @@ export interface UserTypes {
 export interface BrandTypes {
   _id: string
   image: string
+  width:number
+  height:number
   createdAt: number
   updatedAt: number
 }
@@ -82,7 +85,8 @@ export interface CustomerTypes {
 
 export interface LogisticTypes {
   _id?: string
-  image: string
+  image: string,
+  video:string
 }
 
 

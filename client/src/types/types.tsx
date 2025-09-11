@@ -44,7 +44,8 @@ export interface CommentTypes {
 
 export interface BrandTypes {
     _id: string;
-    title: string;
+    width: number;
+    height: number;
     image: string;
     url: string;
 }
@@ -62,6 +63,7 @@ export interface AuctionTypes {
 
 export interface LogisticTypes {
     _id: string;
+    video:string
     image: string;
 }
 

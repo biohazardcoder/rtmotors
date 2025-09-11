@@ -1,4 +1,4 @@
-import {  EllipsisVertical, Loader2, Pen, Trash2 } from "lucide-react";
+import {  EllipsisVertical, Loader2, Pen, Trash2, Video, VideoOff } from "lucide-react";
 import {
 DropdownMenu,
 DropdownMenuTrigger,
@@ -14,10 +14,13 @@ import { EditLogistic } from "@/modules/EditLogistic";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/store/RootStore";
 import { setError, setLoading, setLogistic } from "@/toolkit/logisticSlicer";
+import { AddVideoCL } from "@/modules/AddVideoCL";
 
 export const Logistics = () => {
     const dispatch = useDispatch()
     const {data, loading,error } = useSelector((state:RootState)=>state.logistic)
+      const [addVideo, setAddVideo] = useState<boolean>(false);
+
     const GetLogistics = async () => {
         try {
             dispatch(setLoading())
@@ -61,22 +64,62 @@ export const Logistics = () => {
                                 setEditMenuOpen(true)
                 }
 
+                const handleAddVideo = (logictic: LogisticTypes) => {
+                    setSelectedMenu(logictic);
+                    setAddVideo(true);
+                  };
+
+  const handleDeleteVideo = async (id: string) => {
+    try {
+      await Fetch.delete(`/logistic/video/${id}`);
+      toast.success("Video deleted successfully!");
+      GetLogistics();
+    } catch (error) {
+      toast.error("Error deleting video.");
+      console.error(error);
+    }
+  };
         return (
          <div className="min-h-[calc(100vh-110px)] p-4 bg-white rounded-md shadow-lg">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-                                {logistics.map(({ _id, image }) => (
+                                {logistics.map(({ _id, image,video }) => (
                                         <div key={_id} className="bg-gray-50 border border-gray-200 rounded-lg shadow p-4 flex flex-col items-center relative">
-                                                <img
-                                                        src={image}
-                                                        alt="logistic"
-                                                        className="w-full h-40 object-cover object-center rounded-md mt-6"
-                                                />
+                                               {video ? (
+                                                        <video
+                                                                muted
+                                                                controls
+                                                                className="w-full h-40 object-cover object-center rounded-md mt-6"
+                                                        >
+                                                                <source src={video} type="video/mp4" />
+                                                        </video>
+                                                        ) : (
+                                                                <img
+                                                                src={image}
+                                                                alt={"image"}
+                                                                className="w-full h-40 object-cover object-center rounded-md mt-6"
+                                                                />
+                                                        )}
+
                                                 <div className="absolute top-2 right-2">
                                                         <DropdownMenu>
                                                                 <DropdownMenuTrigger>
                                                                         <EllipsisVertical size={24} className="text-black cursor-pointer" />
                                                                 </DropdownMenuTrigger>
                                                                 <DropdownMenuContent className="border-none">
+                                                                        <DropdownMenuItem className="flex items-center gap-2 text-green-600 cursor-pointer">
+                                                                                <Button
+                                                                                className={`w-full ${video ? "bg-pink-500 hover:bg-pink-600" : "bg-green-500 hover:bg-green-600"}`}
+                                                                                onClick={() =>
+                                                                                { video ? handleDeleteVideo(_id || "") : handleAddVideo({
+                                                                                        _id,
+                                                                                        image,
+                                                                                        video,
+                                                                                        } as LogisticTypes)
+                                                                                }}
+                                                                                >
+                                                                                {video ? <VideoOff className="text-white" /> : <Video className="text-white" />}
+                                                                                </Button>
+                                                                                </DropdownMenuItem>
                                                                         <DropdownMenuItem className="flex items-center gap-2 text-blue-600 cursor-pointer">
                                                                                 <Button
                                                                                         className="bg-blue-500 hover:bg-blue-600 w-full"
@@ -107,6 +150,13 @@ export const Logistics = () => {
                                                                 onOpenChange={setEditMenuOpen} 
                                                 />
                                 )}
+                                 {addVideo && selectedMenu && (
+                                        <AddVideoCL
+                                          open={addVideo}
+                                          id={selectedMenu._id||""}
+                                          onOpenChange={setAddVideo}
+                                        />
+                                      ) }
                 </div>
         )
 }
