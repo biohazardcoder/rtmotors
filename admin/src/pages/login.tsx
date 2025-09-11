@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Fetch } from "../middlewares/Fetch";
 import type { AdminTypes, ErrorTypes } from "@/types/RootTypes";
+import { Loader2 } from "lucide-react";
 
 interface LoginResponse {
   token: string;
@@ -18,6 +19,7 @@ export default function Login() {
     password: "",
   });
   const [globalError, setGlobalError] = useState("");
+  const [loading,setLoading] = useState(false)
   const validateForm = (formData: FormData) => {
     let valid = true;
     const newErrors = {
@@ -53,6 +55,7 @@ export default function Login() {
     if (!validateForm(formData)) return;
 
     try {
+      setLoading(true)
       const response = (
         await Fetch.post<LoginResponse>("admin/login", {
           email: formData.get("email"),
@@ -67,6 +70,8 @@ export default function Login() {
 
         setGlobalError(err.response.data.message || "Unknown Token");
         console.error(error);
+      }finally{
+        setLoading(false)
       }
   };
 
@@ -75,7 +80,12 @@ export default function Login() {
       <Card className="w-full max-w-md shadow-md bg-[#fff] border-none">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-bold">
-            Login
+            {loading ? (
+              <h1 className="flex items-center text-blue-500 gap-2 justify-center">
+                 <Loader2 size={20} className="animate-spin font-bold text-blue-500"/>
+                 <span className="pb-1">Logging in...</span>
+              </h1>
+            ) : "Login"} 
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -117,7 +127,7 @@ export default function Login() {
               )}
             </div>
 
-            <Button type="submit"  className="w-full bg-blue-500 text-white hover:bg-blue-600">
+            <Button type="submit" disabled={loading}  className="w-full bg-blue-500 text-white hover:bg-blue-600">
               Login
             </Button>
           </form>
