@@ -51,7 +51,7 @@ export const Partners = () => {
   }
 
   return (
-    <div className="bg-[#e7e7e7]">
+    <div className="bg-[#171f3a] text-white">
       <div className="py-8 px-[5%]" data-aos="fade-up">
         <h1 className="text-lg md:text-3xl font-bold">Our Partners</h1>
         <div className="mt-8">

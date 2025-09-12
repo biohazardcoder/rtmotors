@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Banknote, CalendarDays,Fuel, Gauge, GitFork,  History,  Layers,  Loader2,  Share, Star, Trash2} from "lucide-react";
+import { BadgeDollarSign, CalendarCheck, CalendarDays,Fuel, Gauge, GitFork,  History,  Layers,  Loader2,  Share, Star, Trash2} from "lucide-react";
 import useSWR from "swr";
 import { fetcher } from "@/middlewares/Fetcher";
 import { Navbar } from "@/components/shared/navbar";
@@ -25,6 +25,7 @@ import { Pagination, PaginationContent,  PaginationItem, PaginationLink, Paginat
 import { CarDetailSkeleton } from "@/components/skeleton/car-detail";
 import { Input } from "@/components/ui/input";
 import { Menus } from "@/components/shared/menus";
+import { format, parse } from "date-fns";
 
 
 export const CarDetail = () => {
@@ -153,6 +154,12 @@ const filteredCars = sameBrand.filter(car => car.brand === brand);
         setLoading(false);
       }
     }
+const firstPart = year.toString().slice(0, 4);
+const secondPart = year.toString().split(".")[1]; 
+
+const parsedDate = parse(secondPart, "MMyyyy", new Date());
+const formattedDate = format(parsedDate, "MMM, yyyy"); 
+
 
 return (
   <div className="bg-[#e7e7e7] pt-20" id="search">
@@ -193,7 +200,7 @@ return (
                           <img
                             src={image}
                             alt={name}
-                            className="w-full h-40 md:h-64 object-cover rounded-md md:rounded-lg"
+                            className="w-full h-40 md:h-80 object-cover rounded-md md:rounded-lg"
                           />
                         </CarouselItem>
                       ))}
@@ -215,7 +222,17 @@ return (
                 </div>
 
                 <div className="p-6 bg-white col-span-2 space-y-2 rounded-md md:rounded-lg mt-4 md:mt-0">
-                    <h1 className="text-2xl font-semibold">Car Details</h1>
+                    <div className="flex items-center justify-between">
+                      <h1 className="text-2xl font-semibold">Car Details</h1>
+                        <Button 
+                    onClick={() => setMenu(true)} 
+                    disabled={stock === 0}
+                    className={`${stock === 0 ? "bg-red-500 text-white hover:bg-red-600" : "bg-blue-500 text-white hover:bg-blue-600"}`}>
+                        {
+                          stock === 0 ? "Sold out" : "Buy Now"
+                        }
+                    </Button>
+                    </div>
                     <Separator/>
                     <div className="space-y-4 grid grid-cols-2 md:grid-cols-4 text-xs md:text-sm mt-4">
                          <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
@@ -231,7 +248,7 @@ return (
                       {type}
                     </div>
                         <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                          <Gauge size={20}/> Miles
+                          <Gauge size={20}/> Distance
                         </div>
                       <div className="font-semibold">
                       {miles.toLocaleString()} km
@@ -249,34 +266,41 @@ return (
                       {transmission}
                     </div>
                     <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                      <CalendarDays size={20}/> Year
+                      <CalendarDays size={20}/> Release Year
                     </div>
                     <div className="font-semibold capitalize">
-                      {year}
+                      {firstPart}
+                    </div>
+
+                    <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
+                      <CalendarCheck size={20}/> Registration date
+                    </div>
+
+                    <div className="font-semibold capitalize">
+                      {formattedDate}
+                    </div>
+                     <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
+                      <BadgeDollarSign size={20}/> Price
+                    </div>
+
+                    <div className="font-semibold capitalize">
+                       {currentPrice === 777 ? (
+                        "Price Consultation"
+                      ) : (
+                        <>
+                          ${currentPrice.toLocaleString()}{" "}
+                          {oldPrice > 0 && (
+                            <span className="text-sm text-gray-500 line-through ml-2">
+                              ${oldPrice.toLocaleString()}
+                            </span>
+                          )}
+                        </>
+                      )}
                     </div>
                   </div>
                   <Separator/>
                   <div className="flex flex-col gap-2 md:flex-row justify-between">
-                    <div className="flex items-center gap-2">
-                        <p className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                      <Banknote/> Price <span className="text-black">${currentPrice.toLocaleString()}</span>
-                    </p>
-                     {
-                        oldPrice > 0 && (
-                            <p className="text-gray-500 line-through">
-                                ${oldPrice.toLocaleString()}
-                            </p>
-                        )
-                    }
-                    </div>
-                    <Button 
-                    onClick={() => setMenu(true)} 
-                    disabled={stock === 0}
-                    className={`${stock === 0 ? "bg-red-500 text-white hover:bg-red-600" : "bg-blue-500 text-white hover:bg-blue-600"}`}>
-                        {
-                          stock === 0 ? "Sold out" : "Buy Now"
-                        }
-                    </Button>
+                
                   </div>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { User,  Loader2,  } from "lucide-react"
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
 import { Menu } from "./menu";
+import { HashLink } from "react-router-hash-link";
 
 export const Navbar = () => {
 
@@ -13,24 +14,28 @@ export const Navbar = () => {
   const items = [
     {
       url: "/",
-      label: "Home"
-    },
-    {
-      url: "/cars",
-      label: "Cars"
-    },
-    {
-      url: "/about",
-      label: "About"
+      label: "Homepage"
     },
     {
       url: "/blog",
-      label: "Blog"
+      label: "Blog Posts"
+    },
+    {
+      url: "/cars",
+      label: "Find Cars"
+    },
+    {
+      url: "/about",
+      label: "About Us"
+    },
+    {
+      url: "/about/#contact",
+      label: "Contact Us"
     },
   ]
 
   return (
-    <div className={cn("absolute bg-indigo-950  left-0 w-full top-10 h-[12vh] flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
+  <div className={cn("absolute bg-[#12171d]  left-0 w-full top-10 h-[12vh] flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
       <Link to={"/"}>
        <img src="/white.png" alt="RT Motors" className="w-20" />
        </Link>
@@ -38,7 +43,7 @@ export const Navbar = () => {
         <ul className="flex items-center gap-8 text-white">
           {items.map(item => (
             <li key={item.label}>
-              <Link to={item.url} className="font-semibold text-xl">{item.label}</Link>
+              <HashLink to={item.url} className="font-semibold text-xl">{item.label}</HashLink>
             </li>
           ))}
         {

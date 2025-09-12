@@ -10,6 +10,7 @@ import { About } from "./pages/about";
 import { Blog } from "./pages/blog";
 import { ContainerLoadings } from "./pages/container-loadings";
 import { Header } from "./components/shared/header";
+import { Faq } from "./pages/faq";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/sign-up/*" element={<SignUpPage />} />
         <Route path="/dashboard" element={<Profile />} />
         <Route path="/about" element={<About />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/cars" element={<Cars />} />
         <Route path="/container-loadings" element={<ContainerLoadings />} />
         <Route path="/blog" element={<Blog />} />

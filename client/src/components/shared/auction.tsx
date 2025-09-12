@@ -24,7 +24,7 @@ export const Auction = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7]">
+      <div className="bg-[#171f3a]">
         <div className="py-8 px-[5%]" data-aos="fade-up">
         <h1 className="text-lg md:text-3xl font-bold">Auction Holders</h1>
           <div className="mt-8">
@@ -52,7 +52,7 @@ export const Auction = () => {
   }
 
   return (
-    <div className="bg-[#e7e7e7]">
+    <div className="bg-[#171f3a] text-white">
       <div className="py-8 px-[5%]" data-aos="fade-up">
         <h1 className="text-lg md:text-3xl font-bold">Auction Holders</h1>
         {auctions.length === 0 ? (

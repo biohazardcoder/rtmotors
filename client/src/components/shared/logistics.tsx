@@ -37,7 +37,7 @@ export const Logistic = () => {
   }
 
   return (
-    <div className="bg-[#e7e7e7]">
+    <div className="bg-[#171f3a] text-white">
       <div className="py-8 px-[5%]" data-aos="fade-up">
         
 
@@ -50,7 +50,7 @@ export const Logistic = () => {
           </div>
         ) : (
           <Carousel className="mt-8 relative">
-            <div className="flex items-center justify-between pb-6 border-b-2 border-primary  mb-6" >
+            <div className="flex items-center justify-between pb-6 border-b-2 border-primary-foreground  mb-6" >
           <h1 className="text-lg md:text-3xl font-bold">Container loadings</h1>
           <HashLink to="/container-loadings/#all">
             <Button

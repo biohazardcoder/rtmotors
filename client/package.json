@@ -25,6 +25,7 @@
     "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.539.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -35,6 +36,7 @@
     "swr": "^2.3.6",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
+    "tweakpane": "^4.0.5",
     "video-react": "^0.16.0"
   },
   "devDependencies": {

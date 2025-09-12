@@ -17,7 +17,7 @@ export const Exchange = () => {
   if (isLoading) {
     return (
       <div
-        className="py-8 px-[5%] bg-[#e7e7e7] rounded-xl"
+        className="py-8 px-[5%] bg-[#171f3a] rounded-xl"
         data-aos="fade-up"
       >
         <h1 className="text-lg md:text-3xl font-bold">1 USD Exchange Rates</h1>
@@ -35,7 +35,7 @@ export const Exchange = () => {
 
   return (
     <div
-      className="py-8 px-[5%] bg-[#e7e7e7] rounded-xl"
+      className="py-8 px-[5%] bg-[#171f3a] text-white"
       >
       <div 
       data-aos="fade-up"
@@ -45,7 +45,7 @@ export const Exchange = () => {
           <h1 className="text-sm font-semibold">Enter amount in USD:</h1>
          <Input
           type="text"
-          className="w-32 bg-secondary border-primary"
+          className="w-32 bg-secondary border-primary text-black"
           placeholder="USD amount"
           value={amount ? amount.toLocaleString("en-US") : ""}
           onChange={(e) => {

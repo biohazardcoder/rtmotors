@@ -59,10 +59,10 @@ export const Brands = () => {
   const brands = (data as BrandTypes[]) || [];
   
   return (
-    <div className="bg-[#e7e7e7] hidden md:block">
+    <div className="bg-[#171f3a] hidden md:block">
       <div className="py-8 px-[5%]">
         <h1
-          className="text-lg md:text-3xl font-bold"
+          className="text-lg text-white md:text-3xl font-bold"
           data-aos="fade-up"
         >
           Our Premium Brands

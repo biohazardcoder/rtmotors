@@ -1,4 +1,5 @@
 export interface VehicleTypes{
+    video:string
     _id: string;
     name: string;
     images: string[];

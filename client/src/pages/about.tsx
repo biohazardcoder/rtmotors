@@ -290,7 +290,7 @@ export const About = () => {
         </div>
       </section>
 
-      <section className="py-12">
+      <section className="py-12" id="contact">
         <h2 className="text-2xl font-bold text-center mb-6">Contact Us</h2>
         <div className="max-w-5xl mx-auto space-y-4">
           <div className="flex flex-col md:flex-row gap-2">

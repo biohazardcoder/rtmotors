@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Car, Fuel, MapPin, X } from "lucide-react";
+import {  X } from "lucide-react";
 import useSWR from "swr";
 import { fetcher } from "@/middlewares/Fetcher";
 import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { Button } from "../ui/button";
 import { HashLink } from "react-router-hash-link";
+import VideoPlayer from "./video-player";
 
 interface VehiclesProps {
   type: string;
@@ -86,6 +87,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
       (brand === "all" || vehicle.brand === brand)
     );
   });
+console.log(data);
 
   const shuffledVehicles = filteredVehicles.filter((item) => item.type === "new").slice(0, 4);
   const filteredVehiclesToShow = shuffledVehicles;
@@ -103,12 +105,10 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
   }
 
   return (
-    <div className="bg-[#e7e7e7] min-h-[20vh]" id="search">
+    <div className="bg-[#171f3a] min-h-[20vh]" id="search">
       <div className="py-8 px-[5%]">
-
-
-        <div className="flex items-center justify-between border-b-2 pb-6 border-primary" data-aos="fade-up">
-          <h1 className="text-lg md:text-3xl font-bold">
+        <div className="flex items-center justify-between border-b-2 pb-6 border-primary-foreground" data-aos="fade-up">
+          <h1 className="text-lg md:text-3xl font-bold text-white">
             Our Cars
           </h1>
           <HashLink to="/cars/#all">
@@ -140,32 +140,39 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
               ({
                 _id,
                 currentPrice,
-                fuelType,
                 images,
-                miles,
                 name,
-                transmission,
                 oldPrice,
-                year,
+                brand,
                 stock,
+                video,
                 status,
               }) => (
                 <div
                   key={_id}
-                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+                  className="bg-[#e6e6e7] rounded-xl overflow-hidden shadow-[#fff] hover:scale-105  hover:shadow-lg transition-shadow duration-300"
                   data-aos="fade-up"
                 >
                   <div className="relative">
                     <Carousel>
-                      <CarouselContent>
-                        {images.map((image, index) => (
+                        {
+                          video? (<VideoPlayer videoUrl={video} />) : (
+                            <CarouselContent>
+                          {  images.map((image, index) => (
                           <CarouselItem key={index}>
                             <img src={image} alt={name} className="w-full h-56 md:h-64 object-cover" />
                           </CarouselItem>
-                        ))}
-                      </CarouselContent>
+                        ))
+                      }
+                        </CarouselContent>
+                          )
+                        }
+                      {
+                        !video && <>
                       <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
                       <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
+                      </>
+                      }
                     </Carousel>
 
                     {stock === 0 ? (
@@ -175,9 +182,9 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                     ) : status && status?.text?.length > 0 ? (
                       <span
                         className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-md shadow"
-                        style={{
+                      style={{
                           color: `#${status?.color}`,
-                          backgroundColor: `#${status?.bg}`,
+                          backgroundColor: status?.bg === "0f0" ? "#003939" : `#${status?.bg}`,
                         }}
                       >
                         {status?.text}
@@ -187,55 +194,42 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                     )}
                   </div>
 
-                  <div className="p-6 h-full flex flex-col">
+                  <div className="p-4 h-auto justify-between   flex flex-col">
                     <div>
                       <h2
-                        className="text-lg font-semibold hover:text-blue-600 cursor-pointer"
-                        data-aos="fade-up"
+                        className="text-sm uppercase mb-1 font-semibold text-[#4ecdc4] "
+                      
                       >
-                        {name} - {year}
+                        {brand}
                       </h2>
+                    <h2
+                      className="text-base mb-1 text-black capitalize font-semibold truncate"
+                      title={name}
+                    >
+                      {name.length > 30 ? name.slice(0, 30) + "..." : name}
+                    </h2>
                     </div>
-                    <div>
-                      <div
-                        className="flex justify-between text-muted-foreground text-sm border-t border-b py-4 mb-3"
-                        data-aos="fade-up"
-                      >
-                        <div className="flex flex-col items-center gap-1 font-semibold">
-                          <span>
-                            <MapPin />
-                          </span>
-                          {miles.toLocaleString()} Miles
-                        </div>
-                        <div className="flex flex-col items-center gap-1 font-semibold capitalize">
-                          <span>
-                            <Fuel />
-                          </span>
-                          {fuelType}
-                        </div>
-                        <div className="flex flex-col items-center gap-1 font-semibold capitalize">
-                          <span>
-                            <Car />
-                          </span>
-                          {transmission}
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between" data-aos="fade-up">
+                      <div className="flex items-center justify-between">
                         <div>
-                          {oldPrice > 0 && (
-                            <p className="text-sm text-gray-500 line-through">
-                              ${oldPrice.toLocaleString()}
+                            <p className="text-base font-bold text-black">
+                              {currentPrice === 777 ? (
+                                "Price Consultation"
+                              ) : (
+                                <>
+                                  ${currentPrice.toLocaleString()}{" "}
+                                  {oldPrice > 0 && (
+                                    <span className="text-sm text-gray-500 line-through ml-2">
+                                      ${oldPrice.toLocaleString()}
+                                    </span>
+                                  )}
+                                </>
+                              )}
                             </p>
-                          )}
-                          <p className="text-2xl font-bold text-gray-900">
-                            ${currentPrice.toLocaleString()}
-                          </p>
-                        </div>
-                        <Link to={`/cars/${_id}`} className="text-blue-600 text-sm hover:underline">
+                          </div>
+                        <Link to={`/cars/${_id}`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
                           View Details
                         </Link>
                       </div>
-                    </div>
                   </div>
                 </div>
               )

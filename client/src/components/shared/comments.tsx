@@ -15,7 +15,7 @@ export const Comments = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7]">
+      <div className="bg-[#171f3a]">
         <div className="py-8 px-[5%]" data-aos="fade-up">
           <h1 className="text-lg md:text-3xl font-bold">
             What our customers say
@@ -44,7 +44,7 @@ export const Comments = () => {
   const comments = data as Comment[];
 
   return (
-    <div className="bg-[#e7e7e7]">
+    <div className="bg-[#171f3a] text-white">
       <div className="py-8 px-[5%]" data-aos="fade-up">
         {comments.length === 0 ? (
           <div className="pt-4 text-center text-muted-foreground">
@@ -62,7 +62,7 @@ export const Comments = () => {
                   className="md:basis-1/3 lg:basis-1/4"
                   data-aos="fade-up"
                 >
-                  <div className=" bg-white h-auto py-4 rounded-md shadow px-4">
+                  <div className=" bg-white text-primary h-auto py-4 rounded-md shadow px-4">
                     <div className="flex gap-4 flex-col">
                       <div>
                         <div className="flex items-center justify-between">
