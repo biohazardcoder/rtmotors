@@ -164,10 +164,10 @@ console.log(data);
               }) => (
                 <div
                   key={_id}
-                  className="bg-[#e6e6e7] rounded-xl overflow-hidden shadow-[#fff] hover:scale-105  hover:shadow-xl ease-in-out transition-shadow duration-100"
+                  className="bg-[#e6e6e7]  rounded-xl overflow-hidden shadow-[#fff] hover:scale-105  hover:shadow-xl  transition-transform duration-300 ease-in-out"
                   data-aos="fade-up"
                 >
-                  <div className="relative">
+                  <div className="relative ">
                     <Carousel>
                         {
                           video? (<VideoPlayer videoUrl={video} />) : (

@@ -158,7 +158,7 @@ export const About = () => {
           </div>
           <Textarea
             placeholder="Message"
-            className="w-full bg-[#ccc] min-h-40 border-white"
+            className="w-full bg-white min-h-40"
             rows={5}
           ></Textarea>
           <Button

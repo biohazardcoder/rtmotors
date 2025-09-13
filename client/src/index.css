@@ -185,3 +185,12 @@ h5 {
   font-size: max(4.5vw,22px);
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 0 32px rgba(255, 255, 255, 0.3);
 }
+
+h6 {
+  margin: 0 0 var(--size);
+  color: #edb324;
+  font-size: x-large;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: capitalize;
+}
