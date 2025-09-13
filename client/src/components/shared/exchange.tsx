@@ -17,10 +17,10 @@ export const Exchange = () => {
   if (isLoading) {
     return (
       <div
-        className="py-8 px-[5%] bg-[#171f3a] rounded-xl"
+        className="py-8 px-[5%]  rounded-xl"
         data-aos="fade-up"
       >
-        <h1 className="text-lg md:text-3xl font-bold">1 USD Exchange Rates</h1>
+        <h1 className="text-lg md:text-3xl font-bold text-white">Exchange Rates</h1>
         <ul className="flex flex-col gap-4 mt-12 text-xl font-semibold md:flex-row md:items-center md:justify-between">
           {[...Array(5)].map((_, i) => (
             <li key={i} className="flex items-center gap-2">

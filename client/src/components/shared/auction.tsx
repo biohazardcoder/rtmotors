@@ -24,9 +24,9 @@ export const Auction = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#171f3a]">
+      <div>
         <div className="py-8 px-[5%]" data-aos="fade-up">
-        <h1 className="text-lg md:text-3xl font-bold">Auction Holders</h1>
+        <h1 className="text-lg md:text-3xl font-bold text-white">Auction Holders</h1>
           <div className="mt-8">
             <Carousel
               opts={{
@@ -40,7 +40,7 @@ export const Auction = () => {
                     key={i}
                     className="basis-1/2 md:basis-1/4 lg:basis-1/5"
                   >
-                    <Skeleton className="w-full h-24 rounded-lg" />
+                    <Skeleton className="w-full h-28 rounded-lg" />
                   </CarouselItem>
                 ))}
               </CarouselContent>

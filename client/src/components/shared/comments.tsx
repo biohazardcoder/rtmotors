@@ -15,9 +15,9 @@ export const Comments = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#171f3a]">
+      <div>
         <div className="py-8 px-[5%]" data-aos="fade-up">
-          <h1 className="text-lg md:text-3xl font-bold">
+          <h1 className="text-lg md:text-3xl font-bold text-white">
             What our customers say
           </h1>
           <Carousel className="mt-4">

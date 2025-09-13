@@ -24,8 +24,8 @@
 
     return (
             <div 
-            className="w-full h-screen overflow-hidden relative bg-cover bg-center flex flex-col items-center justify-end pb-10 space-y-4">
-                <img src="/main/v1.png" className="absolute top-0 left-0"/>
+            className="w-full h-[70vh] md:h-screen overflow-hidden relative bg-cover bg-center flex flex-col items-center justify-end pb-10 space-y-4">
+                <img src="/main/v1.png" className="absolute w-full h-full object-cover top-0 left-0"/>
                     {/* <h1 className="text-white font-bold text-3xl md:text-5xl lg:text-6xl">RT MOTORS</h1>
                     <h1 className="text-white font-bold text-xl md:text-3xl lg:text-4xl">FROM KOREA TO THE WORLD</h1> */}
                     <div className="flex gap-4 mt-4 items-center text-white">

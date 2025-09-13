@@ -38,26 +38,26 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7] min-h-[20vh]">
+      <div className="min-h-[20vh]">
         <div className="py-8 px-[5%]">
-          <div className="flex items-center justify-between">
-            <h1 className="text-lg md:text-3xl font-bold" data-aos="fade-up">
-              Our Cars
-            </h1>
-          </div>
+         <div className="flex items-center justify-between border-b-2 pb-6 border-primary-foreground" data-aos="fade-up">
+          <h1 className="text-lg md:text-3xl font-bold text-white">
+            Our Cars
+          </h1>
+          <HashLink to="/cars/#all">
+            <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
+              More
+            </Button>
+          </HashLink>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            {[...Array(6)].map((_, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+            {[...Array(4)].map((_, i) => (
               <div key={i} className="bg-white rounded-xl overflow-hidden shadow-md p-4" data-aos="fade-up">
-                <Skeleton className="w-full h-40 rounded-md" />
+                <Skeleton className="w-full h-48 rounded-md" />
                 <div className="p-4 space-y-3">
                   <Skeleton className="h-5 w-2/3" />
                   <Skeleton className="h-4 w-full" />
-                  <div className="flex justify-between gap-3">
-                    <Skeleton className="h-10 w-16" />
-                    <Skeleton className="h-10 w-16" />
-                    <Skeleton className="h-10 w-16" />
-                  </div>
                   <Skeleton className="h-6 w-24" />
                 </div>
               </div>
@@ -148,7 +148,7 @@ console.log(data);
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
           {filteredVehiclesToShow.length === 0 ? (
-            <p data-aos="fade-up">No vehicles found</p>
+            <p data-aos="fade-up" className="text-muted-foreground col-span-4 text-center">No vehicles found</p>
           ) : (
             filteredVehiclesToShow.map(
               ({

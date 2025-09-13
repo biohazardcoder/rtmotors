@@ -12,12 +12,12 @@ export const Blog = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7] pt-20">
+      <div className="pt-24">
         <Navbar />
         <div className="py-8 px-[5%]">
-          <h1 className="text-xl md:text-3xl font-bold">Blogs</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            {[...Array(6)].map((_, i) => (
+          <h1 className="text-xl md:text-3xl font-bold text-white">Blogs</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+            {[...Array(4)].map((_, i) => (
               <div
                 key={i}
                 className="bg-white rounded-xl overflow-hidden shadow-md space-y-4"
@@ -41,12 +41,12 @@ export const Blog = () => {
   const blog = data as BlogTypes[] || []
 
   return (
-    <div className=" pt-24" >
+    <div className="pt-24" >
         <Menus/>
         <Navbar />
       <div className="py-8 px-[5%]">
           <h1 className="text-xl md:text-3xl font-bold text-white">Blogs</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {
             blog.length === 0 ? (
               <p className="text-white">No blog found</p>

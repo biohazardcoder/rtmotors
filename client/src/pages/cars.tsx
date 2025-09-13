@@ -23,29 +23,24 @@ export const Cars = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7] min-h-screen pt-14">
+      <div className="min-h-screen pt-24">
         <Navbar />
         <div className="py-8 px-[5%]">
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl md:text-3xl font-bold">All Cars</h1>
+        <div className="flex items-center justify-between border-b-2 border-primary-foreground pb-6">
+            <h1 className="text-xl md:text-3xl font-bold text-white">All Cars</h1>
             <Skeleton className="w-36 h-10" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            {[...Array(6)].map((_, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+            {[...Array(8)].map((_, i) => (
               <div
                 key={i}
                 className="bg-white rounded-xl overflow-hidden shadow-md p-4"
               >
-                <Skeleton className="w-full h-40 rounded-md" />
+                <Skeleton className="w-full h-48 rounded-md" />
                 <div className="p-4 space-y-3">
                   <Skeleton className="h-5 w-2/3" />
                   <Skeleton className="h-4 w-full" />
-                  <div className="flex justify-between gap-3">
-                    <Skeleton className="h-10 w-16" />
-                    <Skeleton className="h-10 w-16" />
-                    <Skeleton className="h-10 w-16" />
-                  </div>
                   <Skeleton className="h-6 w-24" />
                 </div>
               </div>
@@ -192,7 +187,7 @@ export const Cars = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
           {availableCars.length === 0 ? (
-            <p>No available cars</p>
+            <p className="text-white">No available cars</p>
           ) : (
             availableCars.map(renderCarCard)
           )}

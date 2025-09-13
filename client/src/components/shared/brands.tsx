@@ -1,7 +1,6 @@
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
 } from "@/components/ui/carousel";
 import { fetcher } from "@/middlewares/Fetcher";
 import type { BrandTypes } from "@/types/types";
@@ -20,13 +19,13 @@ export const Brands = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7]">
+      <div>
         <div className="py-8 px-[5%]">
           <h1
-            className="text-lg md:text-3xl font-bold"
+            className="text-lg md:text-3xl font-bold text-white"
             data-aos="fade-up"
           >
-            Explore Our Premium Brands
+            Our Premium Brands
           </h1>
           <div className="block mt-8">
             <Carousel
@@ -35,18 +34,16 @@ export const Brands = () => {
                 align: "start",
               }}
             >
-              <CarouselContent>
-                {[...Array(5)].map((_, idx) => (
-                  <CarouselItem
+              <CarouselContent className="gap-3">
+                {[...Array(10)].map((_, idx) => (
+                  <div
                     key={idx}
-                    className="basis-1/2 md:basis-1/4 lg:basis-1/5"
                     data-aos="fade-up"
                   >
-                    <div className="flex flex-col bg-white font-bold items-center p-4 rounded-md">
+                    <div className="flex flex-col font-bold items-center p-4 rounded-md">
                       <Skeleton className="w-24 h-24 rounded-md" />
-                      <Skeleton className="h-4 w-20 mt-2" />
                     </div>
-                  </CarouselItem>
+                  </div>
                 ))}
               </CarouselContent>
             </Carousel>
@@ -59,7 +56,7 @@ export const Brands = () => {
   const brands = (data as BrandTypes[]) || [];
   
   return (
-    <div className="bg-[#171f3a] hidden pt-32 md:block">
+    <div className="bg-[#171f3a] hidden md:block">
       <div className="py-8 px-[5%]">
         <h1
           className="text-lg text-white md:text-3xl font-bold"
