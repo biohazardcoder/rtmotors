@@ -1,88 +1,136 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { BriefcaseBusiness, Phone } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import "./team.css"; // CSS
 
-interface Team {
-    _id: string;
-    name: string;
-    avatar: string;
-    job: string;
-    number:string,
-    lang : string[]
-
+interface Member {
+  name: string;
+  role: string;
+  avatar: string;
 }
+
+const teamMembers: Member[] = [
+  {
+    name: "Akhliddin Teshaboev",
+    role: "CEO",
+    avatar:
+      "/team/ceo.jpg",
+  },
+  {
+    name: "Rakhmatilla Akhmedov",
+    role: "Operation Manager",
+    avatar:
+      "/team/operation_m.jpg",
+  },
+  {
+    name: "Bekmurod Abdullaev",
+    role: "Sales Manager",
+    avatar:
+      "/team/sales_m.jpg",
+  },
+  {
+    name: "Julia Gimmel",
+    role: "UX Designer",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&auto=format&fit=crop",
+  },
+  {
+    name: "Lisa Anderson",
+    role: "Marketing Manager",
+    avatar:
+      "https://images.unsplash.com/photo-1655249481446-25d575f1c054?w=900&auto=format&fit=crop",
+  },
+  {
+    name: "James Wilson",
+    role: "Product Manager",
+    avatar:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=3687&auto=format&fit=crop",
+  },
+];
 
 export const Team = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-    
-      useEffect(() => {
-        AOS.init({ duration: 800});
-      }, []);
-    
+  const updateCarousel = (newIndex: number) => {
+    const len = teamMembers.length;
+    setCurrentIndex(((newIndex % len) + len) % len); 
+  };
 
-    const team: Team[] = [
-        {
-            _id: "1",
-            name: "Ahliddin Teshaboev",
-            avatar: "/team/ceo.jpg",
-            job: "CEO",
-            number: "+8210-2989-8641",
-            lang :["kr.png", "en.png"]
-        },
-        {
-            _id: "2",
-            name: "Rakhmatilla Akhmedov",
-            avatar: "/team/operation_m.jpg",
-            job: "Operation Manager",
-            number:"+8210-9687-9796",
-            lang :["kr.png", "en.png", "ru.png"]
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") updateCarousel(currentIndex - 1);
+      if (e.key === "ArrowRight") updateCarousel(currentIndex + 1);
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [currentIndex]);
 
-        },
-        {
-            _id: "3",
-            name: "Abdullaev Bekmurod",
-            avatar: "/team/sales_m.jpg",
-            job: "Sales Manager",
-            number:"+8210-8465-8085",
-            lang :["kr.png", "en.png"]
-        },
-    ];
+  const getClassName = (offset: number) => {
+    const isMobile = window.innerWidth < 768; 
+    let className = "card";
 
-    return (
-        <div className="bg-[#e7e7e7]">
-            <div className="py-8 px-[5%]" data-aos="fade-up">
-            <h1 className="text-lg md:text-3xl font-bold">Our Team</h1>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mt-8">
-              
-                 {team.map(team => (
-                            <div key={team._id} className="bg-white  rounded-md shadow p-4">
-                                <div className="flex  gap-4 flex-col">
-                                    <img src={team.avatar} alt={team.name} className="w-full h-[400px] md:h-[300px] rounded-md object-center object-cover" />
-                                    <div className="space-y-2">
-                                        <p className="font-semibold">{team.name}</p>
-                                        <p className="text-sm text-muted-foreground flex items-center gap-2">
-                                            <BriefcaseBusiness size={20}/> 
-                                            {team.job}
-                                        </p>
-                                         <p className="text-sm text-muted-foreground flex items-center gap-2">
-                                            <Phone size={20}/> 
-                                            {team.number}
-                                        </p>
-                                        <div className="flex items-center justify-center gap-2">
-                                            {team.lang.map((item)=>(
-                                                <img src={`/lang/${item}`} alt=""  className="w-10 h-10 object-cover object-center rounded-full"/>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    ))}
-                      <div className="bg-white  rounded-md shadow p-4 col-span-1 md:col-span-2">
-                     <h1 className="mt-4 text-2xl font-bold text-center">Shu yerga nimadur yozish kerak!</h1>
-                </div>
-            </div>
+    if (offset === 0) className += " center";
+    else if (offset === 1) className += " right-1";
+    else if (offset === teamMembers.length - 1) className += " left-1";
+    else if (!isMobile) {
+      if (offset === 2) className += " right-2";
+      else if (offset === teamMembers.length - 2) className += " left-2";
+      else className += " hidden";
+    } else {
+      className += " hidden"; 
+    }
+
+    return className;
+  };
+
+  return (
+    <div className="team-wrapper pt-52">
+      <h1 className="about-title">OUR TEAM</h1>
+
+      <div className="carousel-container">
+        <button
+          className="nav-arrow left"
+          onClick={() => updateCarousel(currentIndex - 1)}
+        >
+          ‹
+        </button>
+        <div className="carousel-track">
+          {teamMembers.map((member, i) => {
+            const offset =
+              (i - currentIndex + teamMembers.length) % teamMembers.length;
+            const className = getClassName(offset);
+
+            return (
+              <div
+                key={i}
+                className={className}
+                onClick={() => updateCarousel(i)}
+              >
+                <img src={member.avatar} alt={member.name} />
+              </div>
+            );
+          })}
         </div>
-        </div>
-    );
-}
+        <button
+          className="nav-arrow right"
+          onClick={() => updateCarousel(currentIndex + 1)}
+        >
+          ›
+        </button>
+      </div>
+
+      <div className="member-info">
+        <h2 className="member-name">{teamMembers[currentIndex].name}</h2>
+        <p className="member-role">{teamMembers[currentIndex].role}</p>
+      </div>
+
+      <div className="dots">
+        {teamMembers.map((_, i) => (
+          <div
+            key={i}
+            className={`dot ${i === currentIndex ? "active" : ""}`}
+            onClick={() => updateCarousel(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};

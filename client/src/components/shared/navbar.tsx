@@ -35,7 +35,7 @@ export const Navbar = () => {
   ]
 
   return (
-  <div className={cn("absolute bg-[#12171d]  left-0 w-full top-10 h-[12vh] flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
+  <div className={cn("absolute bg-transparent  left-0 w-full top-0 h-[12vh]  flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
       <Link to={"/"}>
        <img src="/white.png" alt="RT Motors" className="w-20" />
        </Link>

@@ -18,7 +18,7 @@ import isExisted from "./middlewares/isExisted.js"
 const app = express()
 dotenv.config()
 
-app.use(cors())
+app.use(cors()) 
 app.use(express.json());
 app.use("/api/uploads", express.static("uploads"));
 
@@ -49,27 +49,22 @@ app.get("/api/user", isExisted, async (_, res) => {
 });
 app.get("/api/exchange", async (_, res) => {
   try {
-    const response = await fetch(
-      "https://v6.exchangerate-api.com/v6/cbe5a85f9fb9ff3faf564bc2/latest/USD"
-    );
+    const response = await fetch("https://open.er-api.com/v6/latest/USD");
     const data = await response.json();
-
     res.json({
       rates: {
-        RUB: data.conversion_rates.RUB,
-        KRW: data.conversion_rates.KRW,
-        UZS: data.conversion_rates.UZS,
-        EUR: data.conversion_rates.EUR,
-        CNY: data.conversion_rates.CNY,
+        RUB: data.rates.RUB,
+        KRW: data.rates.KRW,
+        UZS: data.rates.UZS,
+        EUR: data.rates.EUR,
+        CNY: data.rates.CNY,
       },
       time: data.time_last_update_utc,
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: "API’dan ma’lumot olishda xato" });
   }
 });
-
 const PORT = process.env.PORT || 3000
 const MongoDB = process.env.MongoDB || "mongodb://localhost:27017/rtmotors"
 

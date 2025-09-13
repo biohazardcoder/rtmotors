@@ -64,20 +64,25 @@ export const Logistic = () => {
               <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
             <CarouselContent>
               {firstEigth.map(({ _id, image,video}) => (
-                <CarouselItem
-                  key={_id}
-                  className="basis-1/1 md:basis-1/3 lg:basis-1/4"
-                >
-                  { video ? (
+               <CarouselItem
+                key={_id}
+                className="basis-1/1 md:basis-1/3 lg:basis-1/4"
+              >
+                {video ? (
                   <VideoPlayer videoUrl={video} />
-                ):(
-                  <img
-                  src={image}
-                  alt={"image"}
-                  className="w-full h-56 md:h-64 object-cover"
-                />
+                ) : (
+                  <div className="group relative overflow-hidden rounded-xl">
+                    <img
+                      src={image}
+                      alt="image"
+                      className="w-full h-56 md:h-64 object-cover shadow-lg 
+                                transition-all duration-300 rounded-xl
+                                group-hover:scale-105 
+                                group-hover:shadow-[0px_4px_15px_rgba(255,255,255,0.6)]"
+                    />
+                  </div>
                 )}
-                </CarouselItem>
+              </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>

@@ -31,9 +31,10 @@ export default function (req, res, next) {
         if (err) {
             return res.status(400).json({ message: err.message });
         }
+        const BASE_URL = process.env.SERVER_URL || "http://localhost:3000";
 
         if (req.file) {
-            req.uploadedVideo = `https://server.rt-motors.com/api/uploads/videos/${req.file.filename}`;
+            req.uploadedVideo = `${BASE_URL}/api/uploads/videos/${req.file.filename}`;
         }
 
         next();

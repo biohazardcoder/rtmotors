@@ -119,16 +119,30 @@ console.log(data);
         </div>
         {activeFilters.length > 0 && (
           <div className="flex flex-wrap mt-6 gap-2 mb-4" data-aos="fade-up">
-            {activeFilters.map((filter, i) => (
+           {activeFilters.map((filter, i) => {
+            let displayLabel = filter.label;
+            if (displayLabel.includes("-")) {
+              const [min, max] = displayLabel.split("-");
+              console.log(max);
+              
+              displayLabel =
+                max === " 7,777,777$" ? `${min} - More` : `${min} - ${max}`;
+                console.log(displayLabel);
+                
+            }
+
+            return (
               <Button
                 key={i}
                 variant="outline"
                 className="flex uppercase font-semibold items-center gap-2 text-sm"
                 onClick={filter.clear}
               >
-                {filter.label} <X size={14} />
+                {displayLabel} <X size={14} />
               </Button>
-            ))}
+            );
+          })}
+
           </div>
         )}
 
@@ -150,7 +164,7 @@ console.log(data);
               }) => (
                 <div
                   key={_id}
-                  className="bg-[#e6e6e7] rounded-xl overflow-hidden shadow-[#fff] hover:scale-105  hover:shadow-lg transition-shadow duration-300"
+                  className="bg-[#e6e6e7] rounded-xl overflow-hidden shadow-[#fff] hover:scale-105  hover:shadow-xl ease-in-out transition-shadow duration-100"
                   data-aos="fade-up"
                 >
                   <div className="relative">
@@ -241,7 +255,7 @@ console.log(data);
       {soldOut.length > 0 && (
         <div className="py-8 px-[5%]" data-aos="fade-up">
           <Carousel>
-            <div className="flex items-center justify-between border-b-2 border-primary pb-6  mb-6">
+            <div className="flex items-center justify-between border-b-2 border-primary-foreground text-white pb-6  mb-6">
               <h1 className="text-xl md:text-3xl font-bold">Sold Out</h1>
               <HashLink smooth to="/cars/#sold-out">
                 <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
@@ -254,11 +268,16 @@ console.log(data);
             <CarouselContent>
               {soldOut.map(({ _id, images, name }) => (
                 <CarouselItem key={_id} className="basis-1/1 md:basis-1/3 lg:basis-1/4">
-                  <img
+                  <div className="group relative overflow-hidden rounded-xl">
+                    <img
                     src={images[0]}
                     alt={name}
-                    className="w-full h-64 object-cover object-center rounded-sm"
+                    className="w-full h-64 object-cover object-center rounded-xl shadow-lg 
+                                transition-all duration-300 hover:rounded-xl
+                                group-hover:scale-105 
+                                group-hover:shadow-[0px_4px_15px_rgba(255,255,255,0.6)]"
                   />
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>

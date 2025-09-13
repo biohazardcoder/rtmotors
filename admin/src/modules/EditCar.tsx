@@ -128,7 +128,7 @@ export function EditCar({ car, open, onOpenChange }: EditCarProps) {
                   description: "Description *",
                   brand: "Brand *",
                   currentPrice: "Current Price *",
-                  miles: "Miles *",
+                  miles: "Distance *",
                   oldPrice: "Old Price *",
                   stock: "Stock *",
                   year: "Year *",

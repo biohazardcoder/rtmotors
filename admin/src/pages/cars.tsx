@@ -116,21 +116,21 @@ export const Cars = () => {
                                         <Carousel>
                                                 <CarouselContent>
                                                 {video? (
-                                                       <CarouselItem className="w-[30px]">
+                                                       <CarouselItem className="w-[0px]">
                                                            <video
                                                                 muted
                                                                 controls
-                                                                className="w-full h-28 object-cover object-center rounded-md mt-6"
+                                                                className="w-[200px] h-28 object-cover object-center rounded-md mt-6"
                                                         >
                                                                 <source src={video} type="video/mp4" />
                                                         </video>
                                                        </CarouselItem>
                                                 ) : ( images?.map((image, index) => (
-                                                <CarouselItem key={index} className="w-[30px]">
+                                                <CarouselItem key={index} className="w-[0px]">
                                                 <img
                                                         src={image}
                                                         alt={name}
-                                                        className="w-full h-28 rounded-md"
+                                                        className="w-[200px] h-28 rounded-md"
                                                 />
                                                 </CarouselItem>)
                                                 ))}
@@ -138,7 +138,7 @@ export const Cars = () => {
                                         </Carousel>
                                         </TableCell>
                                         <TableCell>
-                                                {name}
+                                                {name.slice(0,20)}
                                         </TableCell>
                                         <TableCell>
                                                 {brand}

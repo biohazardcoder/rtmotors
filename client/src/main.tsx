@@ -11,7 +11,7 @@ if (!PUBLISHABLE_KEY) {
   throw new Error('Missing Publishable Key')
 }
 createRoot(document.getElementById('root')!).render(
-  <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
+  <ClerkProvider appearance={{theme:""}} publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
     <Toaster position='top-right'/>
     <BrowserRouter>
       <App />

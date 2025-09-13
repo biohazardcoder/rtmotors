@@ -59,7 +59,7 @@ export const Brands = () => {
   const brands = (data as BrandTypes[]) || [];
   
   return (
-    <div className="bg-[#171f3a] hidden md:block">
+    <div className="bg-[#171f3a] hidden pt-32 md:block">
       <div className="py-8 px-[5%]">
         <h1
           className="text-lg text-white md:text-3xl font-bold"

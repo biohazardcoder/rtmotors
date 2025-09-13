@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export const Header = () => {
   return (
-    <div className="w-full h-10 flex items-center justify-between px-[5%] bg-gray-950 text-muted-foreground">
+  <div className="w-full h-10 flex items-center justify-between px-[5%] bg-[#1e2550] border-b text-muted-foreground">
         <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-[10px] md:text-xs">
             <PhoneCall size={12} />

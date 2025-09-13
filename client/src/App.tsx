@@ -9,13 +9,13 @@ import { CarDetail } from "./pages/car-detail";
 import { About } from "./pages/about";
 import { Blog } from "./pages/blog";
 import { ContainerLoadings } from "./pages/container-loadings";
-import { Header } from "./components/shared/header";
+// import { Header } from "./components/shared/header";
 import { Faq } from "./pages/faq";
 
 const App = () => {
   return (
     <div>
-      <Header/>
+      {/* <Header/> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in/*" element={<SignInPage />} />
