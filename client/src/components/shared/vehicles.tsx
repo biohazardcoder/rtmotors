@@ -87,7 +87,6 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
       (brand === "all" || vehicle.brand === brand)
     );
   });
-console.log(data);
 
   const shuffledVehicles = filteredVehicles.filter((item) => item.type === "new").slice(0, 4);
   const filteredVehiclesToShow = shuffledVehicles;
