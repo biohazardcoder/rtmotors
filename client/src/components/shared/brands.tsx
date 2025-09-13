@@ -19,7 +19,7 @@ export const Brands = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div className="hidden md:block">
         <div className="py-8 px-[5%]">
           <h1
             className="text-lg md:text-3xl font-bold text-white"

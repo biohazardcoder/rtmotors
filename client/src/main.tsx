@@ -4,15 +4,24 @@ import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { Toaster } from 'sonner'
+import {experimental__simple} from '@clerk/themes'   // 🔥 shu joy qo‘shiladi
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
   throw new Error('Missing Publishable Key')
 }
+
+
 createRoot(document.getElementById('root')!).render(
-  <ClerkProvider appearance={{theme:""}} publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
-    <Toaster position='top-right'/>
+  <ClerkProvider
+    appearance={{
+      baseTheme: experimental__simple,   // 🔥 shu yerda "theme" emas "baseTheme"
+    }}
+    publishableKey={PUBLISHABLE_KEY}
+    afterSignOutUrl='/'
+  >
+    <Toaster position='top-right' />
     <BrowserRouter>
       <App />
     </BrowserRouter>

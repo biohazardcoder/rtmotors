@@ -20,14 +20,23 @@ export const Logistic = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7]">
+      <div className="">
         <div className="py-8 px-[5%]" data-aos="fade-up">
-          <h1 className="text-lg md:text-3xl font-bold">Container loadings</h1>
-          <div className="mt-8 flex gap-4">
+          <div className="flex items-center justify-between pb-6 border-b-2 border-primary-foreground  mb-6" >
+          <h1 className="text-lg md:text-3xl font-bold text-white">Container loadings</h1>
+          <HashLink to="/container-loadings/#all">
+            <Button
+            className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
+            >
+              More
+            </Button>
+          </HashLink>
+          </div>
+          <div className="mt-8 flex justify-between gap-4">
             {[...Array(4)].map((_, i) => (
               <Skeleton
                 key={i}
-                className="w-56 h-36 md:h-56 rounded-lg animate-pulse"
+                className="w-80 h-36 md:h-56 rounded-lg animate-pulse"
               />
             ))}
           </div>
