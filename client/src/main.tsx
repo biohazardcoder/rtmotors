@@ -4,7 +4,7 @@ import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { Toaster } from 'sonner'
-import {experimental__simple} from '@clerk/themes'   // 🔥 shu joy qo‘shiladi
+import {experimental__simple} from '@clerk/themes'  
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -16,7 +16,7 @@ if (!PUBLISHABLE_KEY) {
 createRoot(document.getElementById('root')!).render(
   <ClerkProvider
     appearance={{
-      baseTheme: experimental__simple,   // 🔥 shu yerda "theme" emas "baseTheme"
+      baseTheme: experimental__simple, 
     }}
     publishableKey={PUBLISHABLE_KEY}
     afterSignOutUrl='/'

@@ -12,10 +12,10 @@ import { Navbar } from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Menus } from "@/components/shared/menus";
 import VideoPlayer from "@/components/shared/video-player";
+import { HashLink } from "react-router-hash-link";
 
 export const Cars = () => {
   const { data, isLoading } = useSWR("/car", fetcher);
@@ -75,7 +75,6 @@ export const Cars = () => {
     <div
     key={_id}
     className="bg-[#e6e6e7]  rounded-xl overflow-hidden shadow-[#fff] hover:scale-105  hover:shadow-xl  transition-shadow duration-100 ease-in-out"
-    data-aos="fade-up"
   >
     <div className="relative ">
       <Carousel>
@@ -150,9 +149,9 @@ export const Cars = () => {
                 )}
               </p>
             </div>
-          <Link to={`/cars/${_id}`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
+          <HashLink to={`/cars/${_id}/#detail`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
             View Details
-          </Link>
+          </HashLink>
         </div>
     </div>
   </div>

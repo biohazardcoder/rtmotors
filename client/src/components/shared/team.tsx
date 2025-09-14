@@ -5,6 +5,7 @@ interface Member {
   name: string;
   role: string;
   avatar: string;
+  contact:string
 }
 
 const teamMembers: Member[] = [
@@ -13,36 +14,42 @@ const teamMembers: Member[] = [
     role: "CEO",
     avatar:
       "/team/ceo.jpg",
+    contact : "+8210-2989-8641"
   },
   {
     name: "Rakhmatilla Akhmedov",
     role: "Operation Manager",
     avatar:
       "/team/operation_m.jpg",
+    contact : "+8210-9687-9796"
   },
   {
     name: "Bekmurod Abdullaev",
-    role: "Sales Manager",
+    role: "Marketing Manager",
     avatar:
       "/team/sales_m.jpg",
+    contact : "+8210-8465-8085"
   },
   {
     name: "Julia Gimmel",
     role: "UX Designer",
     avatar:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&auto=format&fit=crop",
+    contact : ""
   },
   {
     name: "Lisa Anderson",
     role: "Marketing Manager",
     avatar:
       "https://images.unsplash.com/photo-1655249481446-25d575f1c054?w=900&auto=format&fit=crop",
+    contact : ""
   },
   {
     name: "James Wilson",
     role: "Product Manager",
     avatar:
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=3687&auto=format&fit=crop",
+    contact : ""
   },
 ];
 
@@ -120,6 +127,7 @@ export const Team = () => {
       <div className="member-info">
         <h2 className="member-name">{teamMembers[currentIndex].name}</h2>
         <p className="member-role">{teamMembers[currentIndex].role}</p>
+        <p className="member-role">{teamMembers[currentIndex].contact}</p>
       </div>
 
       <div className="dots">

@@ -26,6 +26,8 @@ import { CarDetailSkeleton } from "@/components/skeleton/car-detail";
 import { Input } from "@/components/ui/input";
 import { Menus } from "@/components/shared/menus";
 import { format, parse } from "date-fns";
+import VideoPlayer from "@/components/shared/video-player";
+import { HashLink } from "react-router-hash-link";
 
 
 export const CarDetail = () => {
@@ -41,9 +43,9 @@ export const CarDetail = () => {
   const [commentPage, setCommentPage] = useState(1);
 
     if (error) {
-        return   <div className="bg-[#e7e7e7]">
+        return   <div >
             <Navbar />
-            <div className="w-full h-[100vh] flex flex-col gap-2 items-center justify-center text-2xl">
+            <div className="w-full h-[100vh] flex flex-col gap-2 items-center justify-center text-2xl" id="detail">
                 <div className="flex flex-col items-center gap-2">
                      Error loading car details
                 </div>
@@ -162,13 +164,13 @@ const formattedDate = format(parsedDate, "MMM, yyyy");
 
 
 return (
-  <div className="bg-[#e7e7e7] pt-20" id="search">
+  <div className="pt-20">
       <Menus/>
       <Navbar />
-      <div className="py-8 px-[5%]">
-          <h1 className="text-xl md:text-3xl font-bold">{name}</h1>
+      <div className="py-8 px-[5%]" id="detail">
+          <h1 className="text-xl md:text-3xl font-bold text-white">{name}</h1>
           <div className="flex items-center justify-between">
-            <h1 className="text-sm md:text-lg">{description}</h1>
+            <h1 className="text-sm md:text-lg text-muted-foreground">{description}</h1>
             <div className="flex items-center gap-2">
                 <Button className="block md:hidden bg-blue-500 text-white hover:bg-blue-600"
                 onClick={handleCopy}
@@ -186,7 +188,7 @@ return (
         <div className=" mt-8">
           {
             !car ? (
-              <p>No car found</p>
+              <p className="text-white">No car found</p>
             ) : (
              <div
                 key={_id}
@@ -308,7 +310,7 @@ return (
         </div>
       <div className="grid grid-cols-1 md:grid-cols-3">
   <div>
-    <h1 className="font-bold text-xl mt-10">Comments</h1>
+    <h1 className="font-bold text-xl mt-10 text-white">Comments</h1>
     {(() => {
       const ratingCounts = [0, 0, 0, 0, 0];
       let totalRating = 0;
@@ -349,7 +351,7 @@ return (
                 </span>
               );
             })}
-            <span className="font-bold">
+            <span className="font-bold text-white">
               {avgRating.toFixed(1)} from 5 ({totalCount})
             </span>
           </div>
@@ -368,7 +370,7 @@ return (
                 className="inline-block w-6 h-6 rounded-full mr-2"
               />
             )}
-            <span className="font-semibold">{commentUser?.name || "Anonymous"}</span>
+            <span className="font-semibold text-white">{commentUser?.name || "Anonymous"}</span>
           </span>
           <span className="ml-2 text-xs text-gray-500">{createdAt?.slice(0, 10)}</span>
         </div>
@@ -376,11 +378,11 @@ return (
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className={i < (rating || 0) ? "text-blue-500 w-4 h-4" : "text-[#BFBFBF] w-4 h-4"}
+              className={i < (rating || 0) ? "text-[#f48912] w-4 h-4" : "text-[#BFBFBF] w-4 h-4"}
               fill="currentColor"
             />
           ))}
-          <span>{rating || 0} from 5</span>
+          <span className="text-white">{rating || 0} from 5</span>
         {user && user.id === commentUser.userId && (
           <Button
             className="mt-2 bg-red-500 text-white hover:bg-red-600"
@@ -390,7 +392,7 @@ return (
           </Button>
         )}
         </div>
-        <p className="text-sm mt-2">{message}</p>
+        <p className="text-sm mt-2 text-white font-semibold">{message}</p>
       </div>
             ))}
             <Pagination>
@@ -437,7 +439,7 @@ return (
   </div>
    <div className="md:mt-10">
       <div className="flex items-center gap-2  ">
-        <h1 className="text-xl font-bold">Your Rating</h1>
+        <h1 className="text-xl font-bold text-white">Your Rating</h1>
         <div className="flex items-center mt-1 gap-2">
           {[...Array(5)].map((_, i) => (
             <button
@@ -447,7 +449,7 @@ return (
               className="focus:outline-none"
             >
               <Star
-                className={i < commentRating ? "text-blue-500 w-5 h-5" : "text-[#BFBFBF] w-5 h-5"}
+                className={i < commentRating ? "text-[#f48912] w-5 h-5" : "text-[#BFBFBF] w-5 h-5"}
                 fill="currentColor"
               />
             </button>
@@ -470,10 +472,10 @@ return (
 </div>
       </div>
       <div>
-        <div className="bg-[#e7e7e7] min-h-[20vh]" id="search">
+        <div className="min-h-[20vh]" id="search">
       <div className="py-8 px-[5%]">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl md:text-3xl font-bold">
+          <h1 className="text-xl text-white md:text-3xl font-bold">
             {brand && <span><span className="uppercase">{brand}</span> cars</span>}
           </h1>
         </div>       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -485,93 +487,96 @@ return (
             ({
               _id,
               currentPrice,
-              fuelType,
               images,
-              miles,
               name,
-              transmission,
-              description,
               oldPrice,
-              year,
+              video,
               stock,
               status
             }) => (
-              <div
-                key={_id}
-                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="relative">
-                  <Carousel>
-                    <CarouselContent>
-                      {images.map((image, index) => (
-                        <CarouselItem key={index}>
-                          <img
-                            src={image}
-                            alt={name}
-                            className="w-full h-56 md:h-64 object-cover"
-                          />
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600"/>
-                    <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600"/>
-                  </Carousel>
+               <div
+                  key={_id}
+                  className="bg-[#e6e6e7]  rounded-xl overflow-hidden shadow-[#fff] hover:scale-105  hover:shadow-xl  transition-transform duration-300 ease-in-out"
+                >
+                  <div className="relative ">
+                    <Carousel>
+                        {
+                          video? (<VideoPlayer videoUrl={video} />) : (
+                            <CarouselContent>
+                          {  images.map((image, index) => (
+                          <CarouselItem key={index}>
+                            <img src={image} alt={name} className="w-full h-56 md:h-64 object-cover" />
+                          </CarouselItem>
+                        ))
+                      }
+                        </CarouselContent>
+                          )
+                        }
+                      {
+                        !video && <>
+                      <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
+                      <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
+                      </>
+                      }
+                    </Carousel>
 
-                    {stock === 0 ? (<span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-                   Sold out
-                  </span>) : status && status?.text?.length > 0 ? (
-                    <span
-                      className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-full shadow"
-                      style={{ color: `#${status?.color}`, backgroundColor: `#${status?.bg}` }}
-                    >
-                      {status?.text}
-                    </span>
-                  ) : ""}
-                </div>
-
-                <div className="p-6">
-                  <h2 className="text-lg font-semibold hover:text-blue-600 cursor-pointer">
-                    {name} - {year}
-                  </h2>
-                  <p className="text-secondary-foreground text-sm mb-3">{description}</p>
-
-                  <div className="flex justify-between text-muted-foreground text-sm border-t border-b py-4 mb-3">
-                    <div className="flex flex-col items-center gap-1 font-semibold">
-                      <span><Gauge/></span>
-                      {miles.toLocaleString()} km
-                    </div>
-                    <div className="flex flex-col items-center gap-1 font-semibold capitalize">
-                      <span><Fuel/></span>
-                      {fuelType}
-                    </div>
-                    <div className="flex flex-col items-center gap-1 font-semibold capitalize">
-                      <span><GitFork/></span>
-                      {transmission}
-                    </div>
+                    {stock === 0 ? (
+                      <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-md shadow">
+                        Sold out
+                      </span>
+                    ) : status && status?.text?.length > 0 ? (
+                      <span
+                        className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-md shadow"
+                      style={{
+                          color: `#${status?.color}`,
+                          backgroundColor: status?.bg === "0f0" ? "#003939" : `#${status?.bg}`,
+                        }}
+                      >
+                        {status?.text}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </div>
 
-                  <div className="flex items-center justify-between">
-                   <div>
-                     {
-                        oldPrice > 0 && (
-                            <p className="text-sm text-gray-500 line-through">
-                                ${oldPrice.toLocaleString()}
+                  <div className="p-4 h-auto justify-between   flex flex-col">
+                    <div>
+                      <h2
+                        className="text-sm uppercase mb-1 font-semibold text-[#4ecdc4] "
+                      
+                      >
+                        {brand}
+                      </h2>
+                    <h2
+                      className="text-base mb-1 text-black capitalize font-semibold truncate"
+                      title={name}
+                    >
+                      {name.length > 30 ? name.slice(0, 30) + "..." : name}
+                    </h2>
+                    </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-base font-bold text-black">
+                              {currentPrice === 777 ? (
+                                "Price Consultation"
+                              ) : (
+                                <>
+                                  ${currentPrice.toLocaleString()}{" "}
+                                  {oldPrice > 0 && (
+                                    <span className="text-sm text-gray-500 line-through ml-2">
+                                      ${oldPrice.toLocaleString()}
+                                    </span>
+                                  )}
+                                </>
+                              )}
                             </p>
-                        )
-                    }
-                    <p className="text-2xl font-bold text-gray-900">
-                      ${currentPrice.toLocaleString()}
-                    </p>
-                   </div>
-                    <Link
-                      to={`/cars/${_id}`}
-                      className="text-blue-600 text-sm hover:underline"
-                    >
-                      View Details
-                    </Link>
+                          </div>
+                        <HashLink to={`/cars/${_id}/#detail`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
+                          View Details
+                        </HashLink>
+                      </div>
                   </div>
                 </div>
-              </div>
             )
           ))}
         </div>
@@ -583,16 +588,30 @@ return (
           <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6">
                 <div className="flex items-center gap-2">
-                  <img src={images[0]} alt="" className="w-20 h-10 object-center object-cover" />
+                  <img src={images[0]} alt="" className="w-32 h-20 object-center object-cover" />
                   <div className="flex flex-col">
                     <span className="font-semibold">{name}</span>
-                    <span className="font-semibold">${currentPrice.toLocaleString()}</span>
+                    <p className="text-base font-bold text-black">
+                {currentPrice === 777 ? (
+                  "Price Consultation"
+                ) : (
+                  <>
+                    ${currentPrice.toLocaleString()}{" "}
+                    {oldPrice > 0 && (
+                      <span className="text-sm text-gray-500 line-through ml-2">
+                        ${oldPrice.toLocaleString()}
+                      </span>
+                    )}
+                  </>
+                )}
+              </p>
                   </div>
                 </div>
                 <Separator className="my-4 "/>
                 <h2 className="font-semibold mb-2">Phone</h2>
                 <Input value={contact} onChange={(e) => setContact(e.target.value)} placeholder="Enter your phone number" />
                 <p className="text-xs text-center text-muted-foreground mt-2 ">We will contact you shortly</p>
+                <Separator className="my-4 "/>
                 <div className="flex items-center justify-between gap-2">
                   <Button disabled={loading} onClick={() => setMenu(false)} className="mt-2" variant={"destructive"}>Cancel</Button>
                 <Button onClick={handleBuyCar} disabled={loading} className="mt-2 bg-blue-500 text-white hover:bg-blue-600 hover:text-white">

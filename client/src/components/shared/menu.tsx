@@ -4,7 +4,7 @@ import { Separator } from "../ui/separator"
 import { SignOutButton, useUser } from "@clerk/clerk-react"
 import { Link } from "react-router-dom"
 import { Button } from "../ui/button"
-import { CarFront,  FileText,  Home, LogOut, MenuIcon,  Newspaper, User  } from "lucide-react"
+import { CarFront,  Earth,  FileText,  Home, LogOut, MenuIcon,  Newspaper, User  } from "lucide-react"
 
 export const Menu = () => {
   const {user, isLoaded,isSignedIn} = useUser()
@@ -98,7 +98,7 @@ export const Menu = () => {
         <Link to={"https://t.me/RTMotors"}>
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png" alt="WhatsApp" className="w-4 h-5 object-contain"/>
+          <Earth/>
           Telegram
           </div>
         </Button>
@@ -106,7 +106,7 @@ export const Menu = () => {
         <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAac3f2TQT2NU3SmYEoJ2A7tCmZQmDK620yabGiU9J0KRQfXYevmMiR7avEuoNA_aem_SlM0LQvY9eK1891aSFwn9w"}>
           <Button variant={"ghost"} className="w-auto h-auto rounded-full">
           <div className="flex items-center gap-2">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png?20220228223904" alt="WhatsApp" className="w-4 h-6 object-cover"/>
+          <Earth/>
           Whatsapp
           </div>
         </Button>
@@ -114,7 +114,7 @@ export const Menu = () => {
          <Link to={"https://www.instagram.com/rtmotors_trade"}>
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
-          <img src="https://www.citypng.com/public/uploads/preview/tiktok-circle-round-logo-brand-video-tik-tok-7017516947932520ecgdidi6e.png?v=2025072701" alt="Instagram" className="w-4 rounded-full h-4 object-cover"/>
+          <Earth/>
           Tik Tok
           </div>
         </Button>
@@ -122,7 +122,7 @@ export const Menu = () => {
          <Link to={"https://www.instagram.com/rtmotors_trade"}>
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
-          <img src="https://img.freepik.com/premium-vector/round-youtube-logo-isolated-white-background_469489-983.jpg?semt=ais_hybrid&w=740&q=80" alt="Instagram" className="w-4 rounded-full h-4 object-contain"/>
+          <Earth/>
           YouTube
           </div>
         </Button>
@@ -130,7 +130,7 @@ export const Menu = () => {
         <Link to={"https://www.instagram.com/rtmotors_trade"}>
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
-          <img src="https://i.pinimg.com/736x/24/37/73/2437730f7e3a5705e205e67fa2cd1020.jpg" alt="Instagram" className="w-4 rounded-full h-4 object-cover"/>
+          <Earth/>
           Instagram
           </div>
         </Button>

@@ -4,22 +4,18 @@ import Footer from "@/components/shared/footer"
 
 export const CarDetailSkeleton = () => {
   return (
-    <div className="bg-[#e7e7e7] pt-20">
+    <div className="pt-20" >
       <Navbar />
-      <div className="py-8 px-[5%] space-y-6">
-        {/* Title */}
+      <div className="py-8 px-[5%] space-y-6" id="detail">
         <Skeleton className="h-8 w-48" />
         <div className="flex items-center justify-between">
           <Skeleton className="h-6 w-2/3" />
           <Skeleton className="h-9 w-28 rounded-md" />
         </div>
 
-        {/* Main Car Info */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
-          {/* Image Carousel */}
           <Skeleton className="w-full h-56 md:h-64 rounded-lg col-span-1" />
 
-          {/* Details */}
           <div className="p-6 bg-white col-span-2 rounded-lg space-y-4">
             <Skeleton className="h-6 w-40" />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -40,7 +36,6 @@ export const CarDetailSkeleton = () => {
           </div>
         </div>
 
-        {/* Comments Section */}
         <div className="mt-10 space-y-6">
           <Skeleton className="h-6 w-32" />
           <div className="space-y-4">
@@ -57,7 +52,6 @@ export const CarDetailSkeleton = () => {
           </div>
         </div>
 
-        {/* Related Cars */}
         <div className="mt-10 space-y-4">
           <Skeleton className="h-6 w-40" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

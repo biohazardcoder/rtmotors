@@ -25,7 +25,7 @@
     return (
             <div 
             className="w-full h-[70vh] md:h-screen overflow-hidden relative bg-cover bg-center flex flex-col items-center justify-end pb-10 space-y-4">
-                <img src="/main/v1.png" className="absolute w-full h-full object-cover top-0 left-0"/>
+                <img src="/main/m1.jpg" className="absolute w-full h-full object-cover top-0 left-0"/>
                     {/* <h1 className="text-white font-bold text-3xl md:text-5xl lg:text-6xl">RT MOTORS</h1>
                     <h1 className="text-white font-bold text-xl md:text-3xl lg:text-4xl">FROM KOREA TO THE WORLD</h1> */}
                     <div className="flex gap-4 mt-4 items-center text-white">
@@ -41,24 +41,26 @@
                     </div>
                     <div className="grid grid-cols-1 w-3/4 md:w-auto md:flex md:items-center rounded-lg md:rounded-full md:p-4  gap-2 md:gap-4 p-3 mt-4 z-20  bg-white">
                             <Select value={brand} onValueChange={setBrand} >
-                                    <SelectTrigger className="md:w-[180px] md:text-lg  flex items-center justify-center w-full">
+                                    <SelectTrigger className="md:w-[180px] md:text-base  flex items-center justify-center w-full">
                                             <SelectValue placeholder="Any Makes" />
                                     </SelectTrigger>
                                     <SelectContent>
                                             <SelectItem value="all">Any Makes</SelectItem>
                                             <SelectItem value="audi">Audi</SelectItem>
                                             <SelectItem value="bmw">BMW</SelectItem>
-                                            <SelectItem value="mercedes-benz">Mercedes-Benz</SelectItem>
                                             <SelectItem value="bugatti">Bugatti</SelectItem>
                                             <SelectItem value="ferrari">Ferrari</SelectItem>
                                             <SelectItem value="lamborghini">Lamborghini</SelectItem>
+                                            <SelectItem value="lexus">Lexus</SelectItem>
                                             <SelectItem value="mclaren">McLaren</SelectItem>
+                                            <SelectItem value="mercedes-benz">Mercedes-Benz</SelectItem>
                                             <SelectItem value="rolls-royce">Rolls-Royce</SelectItem>
+                                            <SelectItem value="range-rover">Range-Rover</SelectItem>
                                     </SelectContent>    
                             </Select>
                             <Separator orientation="vertical" />
                             <Select value={year === "any" ? "any" : String(year)} onValueChange={val => setYear(val === "any" ? "any" : val)}>
-                                    <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
+                                    <SelectTrigger className="md:w-[180px] md:text-base flex items-center justify-center w-full">
                                             <SelectValue placeholder="Any Years" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -73,7 +75,7 @@
                             </Select>
                             <Separator orientation="vertical" />
                             <Select value={price === "any" ? "any" : String(price)} onValueChange={val => setPrice(val === "any" ? "any" : val)}>
-                                    <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
+                                    <SelectTrigger className="md:w-[180px] md:text-base flex items-center justify-center w-full">
                                             <SelectValue placeholder="Any Price" />
                                     </SelectTrigger>
                                    <SelectContent>
@@ -82,6 +84,8 @@
                                         <SelectItem value="50000-75000">50,000$ - 75,000$</SelectItem>
                                         <SelectItem value="75000-100000">75,000$ - 100,000$</SelectItem>
                                         <SelectItem value="100000-200000">100,000$ - 200,000$</SelectItem>
+                                        <SelectItem value="100000-1000000">100,000$ - 1,000,000$</SelectItem>
+                                        <SelectItem value="100000-7777777">1,000,000$ - MORE</SelectItem>
                                    </SelectContent>    
                             </Select>
                             <a href={"./#search"} className="scroll-smooth">

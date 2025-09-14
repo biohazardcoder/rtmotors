@@ -9,7 +9,6 @@ import {
 import {  X } from "lucide-react";
 import useSWR from "swr";
 import { fetcher } from "@/middlewares/Fetcher";
-import { Link } from "react-router-dom";
 import { Skeleton } from "../ui/skeleton";
 import { useEffect } from "react";
 import AOS from "aos";
@@ -73,7 +72,6 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
   const soldOutCars = vehicles.filter((item) => item.stock === 0);
   const soldOut = soldOutCars;
 
-  // 🔥 price filter diapazon
   const filteredVehicles = inStock.filter((vehicle) => {
     let priceMatch = true;
     if (price !== "any") {
@@ -102,7 +100,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
       clear: () => setPrice("any"),
     });
   }
-
+  
   return (
     <div className="bg-[#171f3a] min-h-[20vh]" id="search">
       <div className="py-8 px-[5%]">
@@ -122,12 +120,9 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
             let displayLabel = filter.label;
             if (displayLabel.includes("-")) {
               const [min, max] = displayLabel.split("-");
-              console.log(max);
               
               displayLabel =
                 max === " 7,777,777$" ? `${min} - More` : `${min} - ${max}`;
-                console.log(displayLabel);
-                
             }
 
             return (
@@ -239,9 +234,9 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                               )}
                             </p>
                           </div>
-                        <Link to={`/cars/${_id}`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
+                        <HashLink to={`/cars/${_id}/#detail`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
                           View Details
-                        </Link>
+                        </HashLink>
                       </div>
                   </div>
                 </div>
