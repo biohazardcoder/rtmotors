@@ -10,7 +10,7 @@ export const CarDetailSkeleton = () => {
         <Skeleton className="h-8 w-48" />
         <div className="flex items-center justify-between">
           <Skeleton className="h-6 w-2/3" />
-          <Skeleton className="h-9 w-28 rounded-md" />
+          <Skeleton className="h-9 w-8 rounded-md" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">

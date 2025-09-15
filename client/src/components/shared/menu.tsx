@@ -4,7 +4,7 @@ import { Separator } from "../ui/separator"
 import { SignOutButton, useUser } from "@clerk/clerk-react"
 import { Link } from "react-router-dom"
 import { Button } from "../ui/button"
-import { CarFront,  Earth,  FileText,  Home, LogOut, MenuIcon,  Newspaper, User  } from "lucide-react"
+import { CarFront,  Link2,  FileText,  Home, LogOut, MenuIcon,  Newspaper, User  } from "lucide-react"
 
 export const Menu = () => {
   const {user, isLoaded,isSignedIn} = useUser()
@@ -95,43 +95,43 @@ export const Menu = () => {
         </Button>
         </Link>
         <Separator className="my-2"/>
-        <Link to={"https://t.me/RTMotors"}>
+        <Link to={"https://t.me/rtmotors_trade"}>
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
-          <Earth/>
+          <Link2/>
           Telegram
           </div>
         </Button>
         </Link>
-        <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAac3f2TQT2NU3SmYEoJ2A7tCmZQmDK620yabGiU9J0KRQfXYevmMiR7avEuoNA_aem_SlM0LQvY9eK1891aSFwn9w"}>
+        <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?mode=ems_copy_t"}>
           <Button variant={"ghost"} className="w-auto h-auto rounded-full">
           <div className="flex items-center gap-2">
-          <Earth/>
+          <Link2/>
           Whatsapp
           </div>
         </Button>
         </Link>
-         <Link to={"https://www.instagram.com/rtmotors_trade"}>
+         <Link to={"https://www.youtube.com/@rtmotorstrade"}>
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
-          <Earth/>
-          Tik Tok
-          </div>
-        </Button>
-        </Link>
-         <Link to={"https://www.instagram.com/rtmotors_trade"}>
-        <Button variant="ghost" className="w-full block">
-          <div className="flex items-center gap-2">
-          <Earth/>
+          <Link2/>
           YouTube
           </div>
         </Button>
         </Link>
-        <Link to={"https://www.instagram.com/rtmotors_trade"}>
+        <Link to={"https://www.instagram.com/rtmotors_trade?igsh=bjBuNWYzN2cwcG8%3D&utm_source=qr"}>
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
-          <Earth/>
+          <Link2/>
           Instagram
+          </div>
+        </Button>
+        </Link>
+         <Link to={"https://www.tiktok.com/@rt.motors.trade?_t=ZS-8zkQ7huqwnC&_r=1"}>
+        <Button variant="ghost" className="w-full block">
+          <div className="flex items-center gap-2">
+          <Link2/>
+          Tik Tok
           </div>
         </Button>
         </Link>

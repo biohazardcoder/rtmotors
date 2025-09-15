@@ -12,11 +12,11 @@ export const ContainerLoadings = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-[#e7e7e7] min-h-screen pt-20">
+      <div className="min-h-screen pt-20">
         <Menus/>
         <Navbar />
         <div className="py-8 px-[5%]">
-          <h1 className="text-xl md:text-3xl font-bold">Container loadings</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">Container loadings</h1>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="w-full h-56">
@@ -31,11 +31,11 @@ export const ContainerLoadings = () => {
   }
 
   return (
-    <div className="bg-[#e7e7e7] min-h-screen pt-20">
+      <div className="min-h-screen pt-20">
       <Navbar />
       <div className="py-8 px-[5%]" id="all">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl md:text-3xl font-bold">Container loadings</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">Container loadings</h1>
         </div>
 
         {logistics.length === 0 ? (

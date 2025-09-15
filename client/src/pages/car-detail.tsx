@@ -168,9 +168,9 @@ return (
       <Menus/>
       <Navbar />
       <div className="py-8 px-[5%]" id="detail">
-          <h1 className="text-xl md:text-3xl font-bold text-white">{name}</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white text-shadow-sm  text-shadow-muted-foreground">{name}</h1>
           <div className="flex items-center justify-between">
-            <h1 className="text-sm md:text-lg text-muted-foreground">{description}</h1>
+            <h1 className="text-sm md:text-lg text-white">{description}</h1>
             <div className="flex items-center gap-2">
                 <Button className="block md:hidden bg-blue-500 text-white hover:bg-blue-600"
                 onClick={handleCopy}
@@ -202,7 +202,7 @@ return (
                           <img
                             src={image}
                             alt={name}
-                            className="w-full h-40 md:h-80 object-cover rounded-md md:rounded-lg"
+                            className="w-full h-60 md:h-80 object-cover rounded-md md:rounded-lg"
                           />
                         </CarouselItem>
                       ))}
@@ -216,7 +216,7 @@ return (
                   </span>) : status && status?.text?.length > 0 ? (
                     <span
                       className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-full shadow"
-                      style={{ color: `#${status?.color}`, backgroundColor: `#${status?.bg}` }}
+                      style={{ color: `#${status?.color}`,             backgroundColor: status?.bg === "0f0" ? "#003939" : `#${status?.bg}`}}
                     >
                       {status?.text}
                     </span>
@@ -225,7 +225,7 @@ return (
 
                 <div className="p-6 bg-white col-span-2 space-y-2 rounded-md md:rounded-lg mt-4 md:mt-0">
                     <div className="flex items-center justify-between">
-                      <h1 className="text-2xl font-semibold">Car Details</h1>
+                      <h1 className="text-2xl font-bold">Car Details</h1>
                         <Button 
                     onClick={() => setMenu(true)} 
                     disabled={stock === 0}

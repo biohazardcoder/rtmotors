@@ -36,13 +36,13 @@ interface Team {
 export const About = () => {
 
   return (
-    <div className="w-full bg-[#171f3a] pt-20">
+    <div className="w-full bg-[#171f3a] overflow-hidden pt-20">
       <Menus/>
       <Navbar />
       <div className="pb-8">
   <section className="grid grid-cols-1 md:grid-cols-2 h-[calc(100vh-75px)]">
   <div
-    className="relative bg-cover bg-center"
+    className="relative bg-cover bg-center hidden md:block"
     style={{
       backgroundImage: `url('https://images.squarespace-cdn.com/content/v1/55f37d4ae4b06a2b4bf597a0/1675203467875-0HVGHRZSFU5O6M24OPDQ/IM5_0441.jpg')`,
     }}
@@ -59,7 +59,7 @@ export const About = () => {
     <h5 className="text-2xl  font-extrabold mb-6  tracking-wide text-white">
       RT Motors Company
     </h5>
-    <p className="max-w-xl text-white  font-semibold text-lg leading-relaxed ">
+    <p className="max-w-xl text-white text-sm  font-semibold md:text-lg leading-relaxed ">
       RT MOTORS specializes in delivering high-quality vehicles from South Korea
       to customers worldwide. With years of experience, we have established strong
       partnerships with Korea’s top manufacturers and maintain reliable connections
@@ -117,7 +117,7 @@ export const About = () => {
 
       
 
-   <section className="">
+   <section>
             <h2 className="text-2xl font-bold text-center mb-6 text-white">How We Work</h2>
       <Hww/>
     </section>
@@ -136,7 +136,7 @@ export const About = () => {
         </div>
       </section>
 
-      <section className="py-12" id="contact">
+      <section className="py-12 px-[5%]" id="contact">
         <h2 className="text-2xl font-bold text-center mb-6 text-white">Contact Us</h2>
         <div className="max-w-5xl mx-auto space-y-4">
           <div className="flex flex-col md:flex-row gap-2">

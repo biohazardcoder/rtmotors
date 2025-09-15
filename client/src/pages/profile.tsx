@@ -106,11 +106,11 @@ if (!isLoaded ) {
     <div>
       <Navbar />
       <div className="h-screen p-2 pt-28  px-[5%]">
-        <h1 className="text-2xl font-bold">Your Profile</h1>
+        <h1 className="text-2xl font-bold text-white">Your Profile</h1>
         <div className="mt-2 flex items-center gap-2 text-sm">
-          <h1>First Name:</h1>
+          <h1 className="text-white">First Name:</h1>
           {
-            firstNameLoading ? <div><Loader /> </div> : <div className="flex items-center gap-4">
+            firstNameLoading ? <div><Loader /> </div> : <div className="flex items-center gap-4 text-white">
               {!editName && <h1>{user?.firstName}</h1>}
               <div>
                 {editName ? <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ if (!isLoaded ) {
                   <Button onClick={handleChangeFirstName}><CheckCheck /></Button>
                   <Button onClick={() => setEditName(false)} variant={'destructive'}><PencilOff /></Button>
                 </div> :
-                  <Button variant={"outline"} onClick={() => setEditName(true)}><Pencil /> Edit</Button>
+                  <Button className="text-black" variant={"outline"} onClick={() => setEditName(true)}><Pencil /> Edit</Button>
                 }
               </div>
             </div>
@@ -126,17 +126,17 @@ if (!isLoaded ) {
         </div>
         <Separator className="mt-2" />
         <div className="mt-2 flex items-center gap-2 text-sm">
-          <h1>Last Name:</h1>
+          <h1 className="text-white">Last Name:</h1>
           {
-            lastNameLoading ? <div><Loader /> </div> : <div className="flex items-center gap-4">
-              {!editLastName && <h1>{user?.lastName}</h1>}
+            lastNameLoading ? <div><Loader /> </div> : <div className="flex items-center gap-4 text-white">
+              {!editLastName && <h1 className="text-white">{user?.lastName}</h1>}
               <div>
                 {editLastName ? <div className="flex items-center gap-2">
                   <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)} />
                   <Button onClick={handleChangeLastName}><CheckCheck /></Button>
                   <Button onClick={() => setEditLastName(false)} variant={'destructive'}><PencilOff /></Button>
                 </div> :
-                  <Button variant={"outline"} onClick={() => setEditLastName(true)}><Pencil /> Edit</Button>
+                  <Button className="text-black" variant={"outline"} onClick={() => setEditLastName(true)}><Pencil /> Edit</Button>
                 }
               </div>
             </div>
@@ -145,7 +145,7 @@ if (!isLoaded ) {
         <Separator className="my-2" />
 
         <div className="flex items-center gap-2 text-sm">
-          <h1>Sign out:</h1>
+          <h1 className="text-white">Sign out:</h1>
           <div className="flex items-center gap-4">
             <div>
               <label htmlFor="profile-upload" className="cursor-pointer">
@@ -160,7 +160,7 @@ if (!isLoaded ) {
           </div>
         </div>
       <div className="mt-6 pb-10">
-        <h1 className="text-2xl font-bold">Your Orders</h1>
+        <h1 className="text-2xl font-bold text-white">Your Orders</h1>
         {isLoading ? (
            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-4">
       {[...Array(2)].map((_, i) => (
@@ -208,9 +208,15 @@ if (!isLoaded ) {
                 #{order.orderId}
               </span>
             </p>
-            <p className="text-sm text-muted-foreground">
-              Tracking:{" "}
-              <span className="font-medium text-black">${Number(order.trackingNumber).toLocaleString()}</span>
+            <p className="text-sm  text-black font-medium">
+             <span className="text-muted-foreground">Tracking:{" "}</span>
+               {Number(order.trackingNumber) === 777 ? (
+                        "Price Consultation"
+                      ) : (
+                        <>
+                          ${order.trackingNumber.toLocaleString()}
+                        </>
+                      )}
             </p>
             <p className="text-sm text-muted-foreground">
               Contact:{" "}

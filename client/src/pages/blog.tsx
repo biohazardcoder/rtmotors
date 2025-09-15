@@ -70,15 +70,23 @@ export const Blog = () => {
                   <img
                   src={image}
                   alt={title}
-                  className="w-full group-hover:scale-105 transition-all duration-300  h-56 md:h-64 object-cover"
+                  className="w-full group-hover:scale-105 transition-all duration-300 h-44 object-cover"
                 />
                 )}
                 <div className="px-6 py-4">
                   <h6 className="text-lg text  font-semibold ">
                     {title}
                   </h6>
-                  <p className="text-secondary text-sm mb-3">{text}</p>
-                  </div>
+               <p className="text-secondary text-sm mb-3 whitespace-pre-line">
+                  {text.split("•").map((item, i) =>
+                    item.trim() ? (
+                      <li key={i} className="list-disc ml-5 mb-1">
+                        {item.trim()}
+                      </li>
+                    ) : null
+                  )}
+                </p>                 
+                </div>
                 </div>
                 
               </div>

@@ -1,5 +1,6 @@
 article {
   display: grid;
+  padding: 5%;
 }
 
 
@@ -81,4 +82,21 @@ article {
   display: grid;
   place-items: center;
   background: rgba(255, 255, 255, 0.05);
+}
+@media (max-width: 768px) {
+.timeline__content {
+  padding: 8px;
+}
+.timeline__icon{
+  width: 30%;
+}
+.timeline h1 {
+  font-size: 16px;
+}
+.timeline p {
+  font-size: 12px;
+}
+.timeline article {
+  grid-gap: 0.5rem;
+}
 }

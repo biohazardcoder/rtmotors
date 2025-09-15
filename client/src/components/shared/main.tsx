@@ -81,11 +81,8 @@
                                    <SelectContent>
                                         <SelectItem value="any">Any Price</SelectItem>
                                         <SelectItem value="25000-50000">25,000$ - 50,000$</SelectItem>
-                                        <SelectItem value="50000-75000">50,000$ - 75,000$</SelectItem>
-                                        <SelectItem value="75000-100000">75,000$ - 100,000$</SelectItem>
-                                        <SelectItem value="100000-200000">100,000$ - 200,000$</SelectItem>
-                                        <SelectItem value="100000-1000000">100,000$ - 1,000,000$</SelectItem>
-                                        <SelectItem value="100000-7777777">1,000,000$ - MORE</SelectItem>
+                                        <SelectItem value="50000-100000">50,000$ - 100,000$</SelectItem>
+                                        <SelectItem value="100000-7777777">100,000$ - MORE</SelectItem>
                                    </SelectContent>    
                             </Select>
                             <a href={"./#search"} className="scroll-smooth">

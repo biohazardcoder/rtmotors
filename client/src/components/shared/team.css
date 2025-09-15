@@ -30,6 +30,7 @@
 	perspective: 1000px;
 	margin-top: 80px;
   margin: auto;
+  padding: 0 5%;
   z-index: 50;
 }
 
@@ -220,36 +221,36 @@
 
 @media (max-width: 768px) {
 	.about-title {
-		font-size: 4.5rem;
+		font-size: 3rem;
 	}
 
 	.card {
-		width: 200px;
-		height: 280px;
+		width: 140px;
+		height: 200px;
 	}
 
 	.card.left-2 {
-		transform: translateX(-250px) scale(0.8) translateZ(-300px);
+		transform: translateX(-200px) scale(0.8) translateZ(-300px);
 	}
 
 	.card.left-1 {
-		transform: translateX(-120px) scale(0.9) translateZ(-100px);
+		transform: translateX(-100px) scale(0.9) translateZ(-100px);
 	}
 
 	.card.right-1 {
-		transform: translateX(120px) scale(0.9) translateZ(-100px);
+		transform: translateX(100px) scale(0.9) translateZ(-100px);
 	}
 
 	.card.right-2 {
-		transform: translateX(250px) scale(0.8) translateZ(-300px);
+		transform: translateX(200px) scale(0.8) translateZ(-300px);
 	}
 
 	.member-name {
-		font-size: 2rem;
+		font-size: 1.5rem;
 	}
 
 	.member-role {
-		font-size: 1.2rem;
+		font-size: 1rem;
 	}
 
 	.member-name::before,

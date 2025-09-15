@@ -18,7 +18,7 @@ export const Menus = () => {
 
     return (
         <div className="fixed bottom-20 right-5 z-50 flex flex-col items-center gap-1">
-            <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank">
+            <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?mode=ems_copy_t"} target="_blank">
                 <img src="/3d/whatsapp.png" alt="" className="w-16 h-16 object-center" />
             </Link>
             <Link to={"https://t.me/rtmotors_trade"} target="_blank">
