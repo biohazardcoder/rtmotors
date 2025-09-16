@@ -16,7 +16,7 @@ import VideoPlayer from "./video-player";
 export const Logistic = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
   const logistics = (data as LogisticTypes[]) || [];
-  const firstEigth = logistics
+  const firstSix = logistics.slice(0, 6)
 
   if (isLoading) {
     return (
@@ -50,7 +50,7 @@ export const Logistic = () => {
       <div className="py-8 px-[5%]" data-aos="fade-up">
         
 
-        {firstEigth.length === 0 ? (
+        {firstSix.length === 0 ? (
           <div
             className="pt-4 text-center text-muted-foreground"
             data-aos="fade-up"
@@ -72,7 +72,7 @@ export const Logistic = () => {
               <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[18px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
               <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
             <CarouselContent>
-              {firstEigth.map(({ _id, image,video}) => (
+              {firstSix.map(({ _id, image,video}) => (
                <CarouselItem
                 key={_id}
                 className="basis-1/1 md:basis-1/3 lg:basis-1/4"

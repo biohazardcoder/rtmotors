@@ -5,6 +5,7 @@ import { Navbar } from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Menus } from "@/components/shared/menus";
+import VideoPlayer from "@/components/shared/video-player";
 
 export const ContainerLoadings = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
@@ -47,13 +48,22 @@ export const ContainerLoadings = () => {
           </div>
         ) : (
           <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
-            {logistics.map(({ _id, image }) => (
+            {logistics.map(({ _id, image,video }) => (
               <div key={_id}>
-                <img
-                  src={image}
-                  alt="logistic"
-                  className="w-full h-56 object-cover object-center rounded-lg"
-                />
+                  {video ? (
+                  <VideoPlayer videoUrl={video} />
+                ) : (
+                  <div className="group relative overflow-hidden rounded-xl">
+                    <img
+                      src={image}
+                      alt="image"
+                      className="w-full h-56 md:h-64 object-cover shadow-lg 
+                                transition-all duration-300 rounded-xl
+                                group-hover:scale-105 
+                                group-hover:shadow-[0px_4px_15px_rgba(255,255,255,0.6)]"
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </div>

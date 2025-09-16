@@ -70,7 +70,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
   const vehicles = (data as VehicleTypes[]) || [];
   const inStock = vehicles.filter((item) => item.stock > 0);
   const soldOutCars = vehicles.filter((item) => item.stock === 0);
-  const soldOut = soldOutCars;
+  const soldOut = soldOutCars.slice(0, 6);
 
   const filteredVehicles = inStock.filter((vehicle) => {
     let priceMatch = true;
@@ -260,18 +260,25 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
             <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[18px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
             <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
             <CarouselContent>
-              {soldOut.map(({ _id, images, name }) => (
+              {soldOut.map(({ _id, images, name,video }) => (
                 <CarouselItem key={_id} className="basis-1/1 md:basis-1/3 lg:basis-1/4">
                   <div className="group relative overflow-hidden rounded-xl">
-                    <img
-                    src={images[0]}
-                    alt={name}
-                    className="w-full h-64 object-cover object-center rounded-xl shadow-lg 
+                     {
+                          video? (<VideoPlayer videoUrl={video} />) : (
+                            <CarouselContent>
+                          {  images.map((image, index) => (
+                          <CarouselItem key={index}>
+                            <img src={image} alt={name} className="w-full h-64 object-cover object-center rounded-xl shadow-lg 
                                 transition-all duration-300 hover:rounded-xl
                                 group-hover:scale-105 
-                                group-hover:shadow-[0px_4px_15px_rgba(255,255,255,0.6)]"
-                  />
-                  </div>
+                                group-hover:shadow-[0px_4px_15px_rgba(255,255,255,0.6)]" />
+                          </CarouselItem>
+                        ))
+                      }
+                        </CarouselContent>
+                          )
+                        }
+                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
