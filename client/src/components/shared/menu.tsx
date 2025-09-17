@@ -71,7 +71,7 @@ export const Menu = () => {
               <Button variant="ghost" className="w-full block">
                 <div className="flex items-center gap-2">
                   <User/>
-                  Sign In
+                  Login
                 </div>
               </Button>
             </Link>

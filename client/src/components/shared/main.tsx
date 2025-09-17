@@ -24,11 +24,12 @@
 
     return (
             <div 
-            className="w-full h-[70vh] md:h-screen overflow-hidden relative bg-cover bg-center flex flex-col items-center justify-end pb-10 space-y-4">
+            className="w-full h-[70vh] md:h-screen relative bg-cover bg-center flex flex-col items-center justify-end pb-10 space-y-4">
                 <img src="/main/m1.jpg" className="absolute w-full h-full object-cover top-0 left-0"/>
                     {/* <h1 className="text-white font-bold text-3xl md:text-5xl lg:text-6xl">RT MOTORS</h1>
                     <h1 className="text-white font-bold text-xl md:text-3xl lg:text-4xl">FROM KOREA TO THE WORLD</h1> */}
-                    <div className="flex gap-4 mt-4 items-center text-white">
+                      <div className="flex flex-col absolute items-center m-auto -bottom-[150px] md:-bottom-[35px] z-40">
+                          <div className="flex gap-4 mt-4 items-center  text-white">
                             <Button variant="ghost" onClick={() => setType("all")} className={cn(type === "all" && "border-b-4 pb-2", "rounded-none hover:bg-transparent hover:text-white")}>
                                     All
                             </Button>
@@ -39,23 +40,33 @@
                                     Used
                             </Button>
                     </div>
-                    <div className="grid grid-cols-1 w-3/4 md:w-auto md:flex md:items-center rounded-lg md:rounded-full md:p-4  gap-2 md:gap-4 p-3 mt-4 z-20  bg-white">
+                    <div className="grid  grid-cols-1 w-full md:w-auto md:flex md:items-center rounded-lg md:rounded-full md:p-4  gap-2 md:gap-4 p-3 mt-4 z-20  bg-white">
                             <Select value={brand} onValueChange={setBrand} >
                                     <SelectTrigger className="md:w-[180px] md:text-base  flex items-center justify-center w-full">
                                             <SelectValue placeholder="Any Makes" />
                                     </SelectTrigger>
                                     <SelectContent>
                                             <SelectItem value="all">Any Makes</SelectItem>
-                                            <SelectItem value="audi">Audi</SelectItem>
+                                            <SelectItem value="mercedes-benz">Mercedes Benz</SelectItem>
                                             <SelectItem value="bmw">BMW</SelectItem>
-                                            <SelectItem value="bugatti">Bugatti</SelectItem>
-                                            <SelectItem value="ferrari">Ferrari</SelectItem>
-                                            <SelectItem value="lamborghini">Lamborghini</SelectItem>
+                                            <SelectItem value="volkswagen">Volkswagen</SelectItem>
                                             <SelectItem value="lexus">Lexus</SelectItem>
-                                            <SelectItem value="mclaren">McLaren</SelectItem>
-                                            <SelectItem value="mercedes-benz">Mercedes-Benz</SelectItem>
-                                            <SelectItem value="rolls-royce">Rolls-Royce</SelectItem>
-                                            <SelectItem value="range-rover">Range-Rover</SelectItem>
+                                            <SelectItem value="toyota">Toyota</SelectItem>
+                                            <SelectItem value="hyundai">Hyundai</SelectItem>
+                                            <SelectItem value="kia">KIA</SelectItem>
+                                            <SelectItem value="ford">Ford</SelectItem>
+                                            <SelectItem value="land-rover">Land Rover</SelectItem>
+                                            <SelectItem value="audi">Audi</SelectItem>
+                                            <SelectItem value="ferrari">Ferrari</SelectItem>
+                                            <SelectItem value="lambo">Lambo</SelectItem>
+                                            <SelectItem value="porsche">Porsche</SelectItem>
+                                            <SelectItem value="rolls-royce">Rolls Royce</SelectItem>
+                                            <SelectItem value="tesla">Tesla</SelectItem>
+                                            <SelectItem value="bugatti">Bugatti</SelectItem>
+                                            <SelectItem value="cadillac">Cadillac</SelectItem>
+                                            <SelectItem value="bently">Bently</SelectItem>        
+                                            <SelectItem value="aston-martin">Aston Martin</SelectItem>        
+                                            <SelectItem value="chevrolet">Chevrolet</SelectItem>        
                                     </SelectContent>    
                             </Select>
                             <Separator orientation="vertical" />
@@ -92,6 +103,7 @@
                                 </Button>
                             </a>
                     </div>
+                      </div>
             </div>
     )
     }

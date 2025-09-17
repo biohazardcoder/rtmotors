@@ -102,7 +102,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
   }
   
   return (
-    <div className="bg-[#171f3a] min-h-[20vh]" id="search">
+    <div className="bg-[#171f3a] min-h-[20vh] mt-40 md:mt-0" id="search">
       <div className="py-8 px-[5%]">
         <div className="flex items-center justify-between border-b-2 pb-6 border-primary-foreground" data-aos="fade-up">
           <h1 className="text-lg md:text-3xl font-bold text-white">
@@ -140,9 +140,17 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+      <Carousel >
+        <CarouselPrevious data-aos="fade-up" className="bg-blue-500 text-white md:hidden hover:bg-blue-600 -top-[43px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
+            <CarouselNext data-aos="fade-up" className="bg-blue-500 text-white md:hidden hover:bg-blue-600 -top-[43px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
+        <CarouselContent className="pb-10 pt-6 ">
           {filteredVehiclesToShow.length === 0 ? (
-            <p data-aos="fade-up" className="text-muted-foreground col-span-4 text-center">No vehicles found</p>
+            <p
+              data-aos="fade-up"
+              className="text-muted-foreground w-full text-center"
+            >
+              No vehicles found
+            </p>
           ) : (
             filteredVehiclesToShow.map(
               ({
@@ -156,102 +164,101 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                 video,
                 status,
               }) => (
-                <div
+                <CarouselItem
                   key={_id}
-                  className="bg-[#e6e6e7]  rounded-xl overflow-hidden shadow-[#fff] hover:scale-105  hover:shadow-xl  transition-transform duration-300 ease-in-out"
                   data-aos="fade-up"
+                  className="basis-1/1 sm:basis-1/2 lg:basis-1/4" 
                 >
-                  <div className="relative ">
-                    <Carousel>
-                        {
-                          video? (<VideoPlayer videoUrl={video} />) : (
-                            <CarouselContent>
-                          {  images.map((image, index) => (
-                          <CarouselItem key={index}>
-                            <img src={image} alt={name} className="w-full h-56 md:h-64 object-cover" />
-                          </CarouselItem>
-                        ))
-                      }
-                        </CarouselContent>
-                          )
-                        }
-                      {
-                        !video && <>
-                      <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
-                      <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
-                      </>
-                      }
-                    </Carousel>
+                  <div className="bg-[#e6e6e7] rounded-xl overflow-hidden shadow-[#fff] hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out">
+                    <div className="relative">
+                      {video ? (
+                        <VideoPlayer videoUrl={video} />
+                      ) : (
+                        <Carousel>
+                          <CarouselContent>
+                            {images.map((image, index) => (
+                              <CarouselItem key={index}>
+                                <img
+                                  src={image}
+                                  alt={name}
+                                  className="w-full h-56 md:h-64 object-cover"
+                                />
+                              </CarouselItem>
+                            ))}
+                          </CarouselContent>
+                          <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
+                          <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
+                        </Carousel>
+                      )}
 
-                    {stock === 0 ? (
-                      <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-md shadow">
-                        Sold out
-                      </span>
-                    ) : status && status?.text?.length > 0 ? (
-                      <span
-                        className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-md shadow"
-                      style={{
-                          color: `#${status?.color}`,
-                          backgroundColor: status?.bg === "0f0" ? "#003939" : `#${status?.bg}`,
-                        }}
-                      >
-                        {status?.text}
-                      </span>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-
-                  <div className="p-4 h-auto justify-between   flex flex-col">
-                    <div>
-                      <h2
-                        className="text-sm uppercase mb-1 font-semibold text-[#4ecdc4] "
-                      
-                      >
-                        {brand}
-                      </h2>
-                    <h2
-                      className="text-base mb-1 text-black capitalize font-semibold truncate"
-                      title={name}
-                    >
-                      {name.length > 30 ? name.slice(0, 30) + "..." : name}
-                    </h2>
+                      {stock === 0 ? (
+                        <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-md shadow">
+                          Sold out
+                        </span>
+                      ) : status && status?.text?.length > 0 ? (
+                        <span
+                          className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-md shadow"
+                          style={{
+                            color: `#${status?.color}`,
+                            backgroundColor:
+                              status?.bg === "0f0" ? "#003939" : `#${status?.bg}`,
+                          }}
+                        >
+                          {status?.text}
+                        </span>
+                      ) : null}
                     </div>
+
+                    <div className="p-4 flex flex-col justify-between">
+                      <div>
+                        <h2 className="text-sm uppercase mb-1 font-semibold text-[#4ecdc4]">
+                          {brand}
+                        </h2>
+                        <h2
+                          className="text-base mb-1 text-black capitalize font-semibold truncate"
+                          title={name}
+                        >
+                          {name.length > 30 ? name.slice(0, 30) + "..." : name}
+                        </h2>
+                      </div>
                       <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-base font-bold text-black">
-                              {currentPrice === 777 ? (
-                                "Price Consultation"
-                              ) : (
-                                <>
-                                  ${currentPrice.toLocaleString()}{" "}
-                                  {oldPrice > 0 && (
-                                    <span className="text-sm text-gray-500 line-through ml-2">
-                                      ${oldPrice.toLocaleString()}
-                                    </span>
-                                  )}
-                                </>
+                        <p className="text-base font-bold text-black">
+                          {currentPrice === 777 ? (
+                            "Price Consultation"
+                          ) : (
+                            <>
+                              ${currentPrice.toLocaleString()}{" "}
+                              {oldPrice > 0 && (
+                                <span className="text-sm text-gray-500 line-through ml-2">
+                                  ${oldPrice.toLocaleString()}
+                                </span>
                               )}
-                            </p>
-                          </div>
-                        <HashLink to={`/cars/${_id}/#detail`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
+                            </>
+                          )}
+                        </p>
+                        <HashLink
+                          to={`/cars/${_id}/#detail`}
+                          className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md"
+                        >
                           View Details
                         </HashLink>
                       </div>
+                    </div>
                   </div>
-                </div>
+                </CarouselItem>
               )
             )
           )}
-        </div>
+        </CarouselContent>
+      </Carousel>
       </div>
 
       {soldOut.length > 0 && (
-        <div className="py-8 px-[5%]" data-aos="fade-up">
+        <div className="px-[5%]" data-aos="fade-up">
           <Carousel>
             <div className="flex items-center justify-between border-b-2 border-primary-foreground text-white pb-6  mb-6">
               <h1 className="text-xl md:text-3xl font-bold">Sold Out</h1>
-              <HashLink smooth to="/cars/#sold-out">
+              <HashLink smooth to="/sold-out/#all">
                 <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
                   More
                 </Button>

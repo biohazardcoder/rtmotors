@@ -19,7 +19,7 @@ export const Brands = () => {
 
   if (isLoading) {
     return (
-      <div className="hidden md:block">
+      <div className="hidden md:block mt-10">
         <div className="py-8 px-[5%]">
           <h1
             className="text-lg md:text-3xl font-bold text-white"
@@ -56,7 +56,7 @@ export const Brands = () => {
   const brands = (data as BrandTypes[]) || [];
   
   return (
-    <div className="bg-[#171f3a] hidden md:block">
+    <div className="bg-[#171f3a] hidden md:block mt-10">
       <div className="py-8 px-[5%]">
         <h1
           className="text-lg text-white md:text-3xl font-bold"

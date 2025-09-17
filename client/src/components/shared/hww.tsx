@@ -7,6 +7,12 @@ const howWeWork = [
     description:
       "Browse and discover cars through RT Motors – from reliable dealers, verified platforms, and official auto auctions.",
   },
+   {
+      image: "https://media.istockphoto.com/id/1777759316/photo/3d-videocamera-icon-movie-camera-video-memory-movie-camera-with-with-lens-and-video-reel-3d.jpg?s=612x612&w=0&k=20&c=cnGZqhkiqgD7TMeM33ZdGY7GIRawa0SjBe3pxfqXdbU=",
+    title: "Photo Video Inspection",
+    description:
+      "In the second stage, we will personally inspect the car you have selected in detail and send you a full video and photos in the format you prefer!",
+  },
   {
     image: "https://cdn3d.iconscout.com/3d/premium/thumb/transfer-money-3d-icon-png-download-4797151.png",
     title: "Get an Estimate",

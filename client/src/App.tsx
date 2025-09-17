@@ -9,13 +9,12 @@ import { CarDetail } from "./pages/car-detail";
 import { About } from "./pages/about";
 import { Blog } from "./pages/blog";
 import { ContainerLoadings } from "./pages/container-loadings";
-// import { Header } from "./components/shared/header";
 import { Faq } from "./pages/faq";
+import { SoldOut } from "./pages/sold-out";
 
 const App = () => {
   return (
     <div>
-      {/* <Header/> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in/*" element={<SignInPage />} />
@@ -25,6 +24,7 @@ const App = () => {
         <Route path="/faq" element={<Faq />} />
         <Route path="/cars" element={<Cars />} />
         <Route path="/container-loadings" element={<ContainerLoadings />} />
+        <Route path="/sold-out" element={<SoldOut />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/cars/:id" element={<CarDetail />} />
         <Route path="*" element={<Error />} />

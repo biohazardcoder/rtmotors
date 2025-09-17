@@ -59,7 +59,6 @@ export const Cars = () => {
       : vehicles.filter((vehicle) => vehicle.brand === selectedBrand);
 
   const availableCars = filteredVehicles.filter((car) => car.stock > 0);
-  const soldOutCars = filteredVehicles.filter((car) => car.stock === 0);
 
   const renderCarCard = ({
     _id,
@@ -171,14 +170,26 @@ export const Cars = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Any brand</SelectItem>
-                <SelectItem value="audi">Audi</SelectItem>
+                <SelectItem value="mercedes-benz">Mercedes Benz</SelectItem>
                 <SelectItem value="bmw">BMW</SelectItem>
-                <SelectItem value="mercedes">Mercedes-Benz</SelectItem>
-                <SelectItem value="bugatti">Bugatti</SelectItem>
+                <SelectItem value="volkswagen">Volkswagen</SelectItem>
+                <SelectItem value="lexus">Lexus</SelectItem>
+                <SelectItem value="toyota">Toyota</SelectItem>
+                <SelectItem value="hyundai">Hyundai</SelectItem>
+                <SelectItem value="kia">KIA</SelectItem>
+                <SelectItem value="ford">Ford</SelectItem>
+                <SelectItem value="land-rover">Land Rover</SelectItem>
+                <SelectItem value="audi">Audi</SelectItem>
                 <SelectItem value="ferrari">Ferrari</SelectItem>
-                <SelectItem value="lamborghini">Lamborghini</SelectItem>
-                <SelectItem value="mclaren">McLaren</SelectItem>
-                <SelectItem value="rolls-royce">Rolls-Royce</SelectItem>
+                <SelectItem value="lambo">Lambo</SelectItem>
+                <SelectItem value="porsche">Porsche</SelectItem>
+                <SelectItem value="rolls-royce">Rolls Royce</SelectItem>
+                <SelectItem value="tesla">Tesla</SelectItem>
+                <SelectItem value="bugatti">Bugatti</SelectItem>
+                <SelectItem value="cadillac">Cadillac</SelectItem>
+                <SelectItem value="bently">Bently</SelectItem>        
+                <SelectItem value="aston-martin">Aston Martin</SelectItem>        
+                <SelectItem value="chevrolet">Chevrolet</SelectItem>  
               </SelectContent>
             </Select>
           </div>
@@ -191,43 +202,6 @@ export const Cars = () => {
             availableCars.map(renderCarCard)
           )}
         </div>
-
-               {
-            soldOutCars.length >0 && (
-        <div className="py-8">
-          <Carousel>
-            <div className="flex items-center justify-between border-b-2 border-primary-foreground pb-6  mb-6">
-              <h1 className="text-xl md:text-3xl font-bold text-white">Sold Out</h1>
-            </div>
-            <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[18px]  right-[45px] rounded-md  left-[100%-20px]" />
-            <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[18px] right-[0px] rounded-md  left-[100%-30px]" />
-            <CarouselContent>
-              {soldOutCars.map(({ _id, images, name,video }) => (
-               <CarouselItem key={_id} className="basis-1/1 md:basis-1/3 lg:basis-1/4">
-                  <div className="group relative overflow-hidden rounded-xl">
-                        {
-                          video? (<VideoPlayer videoUrl={video} />) : (
-                            <CarouselContent>
-                          {  images.map((image, index) => (
-                          <CarouselItem key={index}>
-                            <img src={image} alt={name} className="w-full h-64 object-cover object-center rounded-xl shadow-lg 
-                                transition-all duration-300 hover:rounded-xl
-                                group-hover:scale-105 
-                                group-hover:shadow-[0px_4px_15px_rgba(255,255,255,0.6)]" />
-                          </CarouselItem>
-                        ))
-                      }
-                        </CarouselContent>
-                          )
-                        }
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
-            )
-       }
       </div>
       <Footer />
     </div>
