@@ -4,7 +4,8 @@ import { Separator } from "../ui/separator"
 import { SignOutButton, useUser } from "@clerk/clerk-react"
 import { Link } from "react-router-dom"
 import { Button } from "../ui/button"
-import { CarFront,  Link2,  FileText,  Home, LogOut, MenuIcon,  Newspaper, User  } from "lucide-react"
+import { CarFront,  Link2,  FileText,  Home, LogOut, MenuIcon,  Newspaper, User, Headset  } from "lucide-react"
+import { HashLink } from "react-router-hash-link"
 
 export const Menu = () => {
   const {user, isLoaded,isSignedIn} = useUser()
@@ -94,6 +95,14 @@ export const Menu = () => {
           </div>
         </Button>
         </Link>
+         <HashLink to={"/about/#contact"}>
+        <Button variant="ghost" className="w-full block">
+          <div className="flex items-center gap-2">
+          <Headset/>
+          Contact
+          </div>
+        </Button>
+        </HashLink>
         <Separator className="my-2"/>
         <Link to={"https://t.me/rtmotors_trade"}>
         <Button variant="ghost" className="w-full block">

@@ -1,5 +1,4 @@
 import { Mail, MapPin, PhoneCall } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
 function Footer() {
@@ -59,7 +58,7 @@ function Footer() {
                 <div className=' flex justify-between'>
                     <span className='text-white text-sm font-semibold'>All Rights Reserved © 2025.</span>
                 <div className='flex  flex-col gap-1 md:flex-row'>
-                    <Link to='/faq' className='text-white text-sm font-semibold'>Frequently Asked Question(FAQ)</Link>
+                    <HashLink to='/faq/#all' className='text-white text-sm font-semibold'>Frequently Asked Question(FAQ)</HashLink>
                 </div>
                 </div>
             </div>

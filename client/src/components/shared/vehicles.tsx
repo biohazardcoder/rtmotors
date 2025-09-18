@@ -37,7 +37,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
 
   if (isLoading) {
     return (
-      <div className="min-h-[20vh]">
+      <div className="min-h-[20vh] mt-40 md:mt-0">
         <div className="py-8 px-[5%]">
          <div className="flex items-center justify-between border-b-2 pb-6 border-primary-foreground" data-aos="fade-up">
           <h1 className="text-lg md:text-3xl font-bold text-white">
@@ -140,9 +140,9 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
           </div>
         )}
 
-      <Carousel >
-        <CarouselPrevious data-aos="fade-up" className="bg-blue-500 text-white md:hidden hover:bg-blue-600 -top-[43px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
-            <CarouselNext data-aos="fade-up" className="bg-blue-500 text-white md:hidden hover:bg-blue-600 -top-[43px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
+      <Carousel data-aos="fade-up" >
+        <CarouselPrevious className="bg-blue-500 text-white md:hidden hover:bg-blue-600 -top-[43px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
+            <CarouselNext className="bg-blue-500 text-white md:hidden hover:bg-blue-600 -top-[43px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
         <CarouselContent className="pb-10 pt-6 ">
           {filteredVehiclesToShow.length === 0 ? (
             <p

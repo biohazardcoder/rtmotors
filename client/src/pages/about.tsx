@@ -44,7 +44,7 @@ export const About = () => {
   <div
     className="relative bg-cover bg-center hidden md:block"
     style={{
-      backgroundImage: `url('https://images.squarespace-cdn.com/content/v1/55f37d4ae4b06a2b4bf597a0/1675203467875-0HVGHRZSFU5O6M24OPDQ/IM5_0441.jpg')`,
+      backgroundImage: `url('/about.jpg')`,
     }}
   >
     <div className="absolute inset-0 bg-black/40"></div>
