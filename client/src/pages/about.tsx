@@ -1,14 +1,12 @@
 import { Navbar } from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {  BadgeDollarSign,   Factory, Globe, SearchCheck, Text, Truck    } from "lucide-react";
 import { Menus } from "@/components/shared/menus";
 import { Team } from "@/components/shared/team";
 import { Hww } from "@/components/shared/hww";
 import { Header } from "@/components/shared/header";
 import { AutoCarousel } from "@/components/shared/carousels";
+import { ContactForm } from "@/components/shared/contact";
 interface Team {
     _id: string;
     name: string;
@@ -53,9 +51,9 @@ export const About = () => {
           <img
             src="/logo.png"
             alt="Company Logo"
-            className="w-48 h-48 drop-shadow-lg "
+            className="w-32 h-32 md:w-48 md:h-48 drop-shadow-lg "
           />
-          <h5 className="text-2xl  font-extrabold mb-6  tracking-wide text-white">
+          <h5 className="text-xl  font-extrabold mb-6  tracking-wide text-white">
             RT Motors Company
           </h5>
           <p className="max-w-xl text-white text-sm  font-semibold md:text-lg leading-relaxed ">
@@ -164,35 +162,7 @@ export const About = () => {
       </section>
       <section className="py-12 px-[5%]" id="contact">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 text-white">Contact Us</h2>
-        <div className="max-w-5xl mx-auto space-y-4">
-          <div className="flex flex-col md:flex-row gap-2">
-            <Input
-            type="text"
-            placeholder="Name"
-            className="w-full bg-white"
-          />
-          <Input
-            type="email"
-            placeholder="Email"
-            className="w-full bg-white"
-          />
-            <Input
-            type="text"
-            placeholder="Phone"
-            className="w-full bg-white"
-          />
-          </div>
-          <Textarea
-            placeholder="Message"
-            className="w-full bg-white min-h-40"
-            rows={5}
-          ></Textarea>
-          <Button
-            className="bg-blue-600 text-whitehover:text-white w-full md:w-auto hover:bg-blue-700"
-          >
-            Send Message
-          </Button>
-        </div>
+        <ContactForm/>
       </section>
       <section className="py-6 flex px-[5%] md:px-0 flex-col md:flex-row items-center gap-12 max-w-5xl m-auto">
         <iframe  height="290"  className="rounded-xl w-full" src="https://www.youtube.com/embed/EaIQ97_20zs?si=sWraZmvErSEGEOhy" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>

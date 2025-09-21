@@ -24,7 +24,7 @@ export const AutoCarousel = () => {
       className="w-full max-w-3xl mx-auto rounded-xl overflow-hidden" 
     >
       <CarouselContent>
-        {["/about.jpg", "/about2.jpg", "/about3.jpg", "/about4.jpg", "/about5.jpg", "/about7.jpg", "/about8.jpg"].map((src, i) => (
+        {["/about.jpg", "/about4.jpg", "/about7.jpg", "/about8.jpg"].map((src, i) => (
           <CarouselItem key={i}>
             <img
               src={src}

@@ -48,7 +48,7 @@ export const Main = ({type,year,price, brand, setType, setYear, setPrice, setBra
   ]
 
   return (
-    <div>
+    <div className="relative flex items-center justify-center">
         <Carousel
       opts={{ loop: true, align: "center" }}
       setApi={setApi}
@@ -63,13 +63,13 @@ export const Main = ({type,year,price, brand, setType, setYear, setPrice, setBra
                 alt={`main-${idx}`}
                 className="absolute w-full h-full object-cover object-center rounded-none"
               />
-                <div className="absolute inset-0 rounded-xl bg-black/20"></div>
+                <div className="absolute inset-0  bg-black/20"></div>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
     </Carousel>
-        <div className="flex flex-col absolute items-center m-auto -bottom-[150px] md:-bottom-[35px] z-40 w-full">
+        <div className="flex flex-col absolute items-center  -bottom-[150px] md:-bottom-[35px] z-40 w-auto m-auto">
         <div className="flex gap-4 mt-4 items-center text-white">
                 <Button variant="ghost" onClick={() => setType("all")} className={cn(type === "all" && "border-b-4 pb-2", "rounded-none hover:bg-transparent hover:text-white")}>
                 All

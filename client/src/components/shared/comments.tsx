@@ -59,7 +59,7 @@ export const Comments = () => {
             {comments.map((comment) => {
             const [displayName, country] = comment.name.split("#");
             const flagUrl = country
-              ? `https://flagcdn.com/w40/${country.toLowerCase()}.png`
+              ? `https://flagsapi.com/${country.toUpperCase()}/flat/48.png`
               : null;
 
             return (
@@ -69,18 +69,18 @@ export const Comments = () => {
                 data-aos="fade-up"
               >
                 <div className="bg-white text-primary h-full py-4 rounded-md shadow px-4 flex flex-col justify-between">
-                  <div>
+                  <div >
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
                         {flagUrl && (
                           <img
                             src={flagUrl}
                             alt={country}
-                            className="shadow "                          />
+                            className="shadow object-cover w-8 h-[22px] object-center"                          />
                         )}
-                        <p className="font-semibold text-sm ">{displayName}</p>
+                        <p className="font-semibold text-sm">{displayName}</p>
                       </div>
-                      <div className="flex items-center mt-1 gap-2">
+                      <div className="flex items-center  gap-2">
                         {[...Array(5)].map((_, i) => {
                           const percent =
                             5 >= i + 1 ? 100 : 5 > i ? (5 - i) * 100 : 0;
