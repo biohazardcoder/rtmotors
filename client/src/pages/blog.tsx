@@ -6,6 +6,7 @@ import Footer from "@/components/shared/footer";
 import VideoPlayer from "@/components/shared/video-player";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Menus } from "@/components/shared/menus";
+import { Header } from "@/components/shared/header";
 
 export const Blog = () => {
     const { data,isLoading} = useSWR("/blog", fetcher)
@@ -33,6 +34,7 @@ export const Blog = () => {
           </div>
         </div>
         <Footer />
+        <Header/>
       </div>
     );
   }
@@ -95,6 +97,7 @@ export const Blog = () => {
         </div>
       </div>
       <Footer/>
+      <Header/>   
     </div>
   );
 };

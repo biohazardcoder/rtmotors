@@ -6,6 +6,7 @@ import Footer from "@/components/shared/footer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Menus } from "@/components/shared/menus";
 import VideoPlayer from "@/components/shared/video-player";
+import { Header } from "@/components/shared/header";
 
 export const SoldOut = () => {
 
@@ -28,6 +29,7 @@ export const SoldOut = () => {
           </div>
         </div>
         <Footer />
+        <Header/>
       </div>
     );
   }
@@ -71,6 +73,7 @@ export const SoldOut = () => {
         )}
       </div>
       <Footer />
+      <Header/>
     </div>
   );
 };

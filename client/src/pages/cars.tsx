@@ -16,6 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Menus } from "@/components/shared/menus";
 import VideoPlayer from "@/components/shared/video-player";
 import { HashLink } from "react-router-hash-link";
+import { Header } from "@/components/shared/header";
 
 export const Cars = () => {
   const { data, isLoading } = useSWR("/car", fetcher);
@@ -204,6 +205,7 @@ export const Cars = () => {
         </div>
       </div>
       <Footer />
+      <Header/>
     </div>
   );
 };

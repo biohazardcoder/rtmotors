@@ -72,19 +72,43 @@ export const Brands = () => {
             No brands found
           </div>
         ) : (
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            {brands.map(({ _id, image, height,width }) => (
+          <div className="mt-8 flex flex-wrap items-center gap-2">
+            {brands.map(({ _id, image, height, width }, idx) => {
+
+                const naturalIndexes = [5, 3,2,4,10,6,7,16,9]; 
+
+               const isNatural = naturalIndexes.includes(idx);
+
+              return (
               <div key={_id} data-aos="fade-up">
                 <div className="flex flex-col font-bold items-center p-4 rounded-md">
                   <img
                     src={image}
-                    alt={"image"}
-                    style={{width:`${width}px`, height:`${height}px`}}
-                    className={`w-[${width}px] h-[${height}px] object-cover`}
+                    alt="image"
+                    style={
+                      isNatural 
+                        ? {}
+                        : { width: `${width}px`, height: `${height}px` } 
+                    }
+                    className={
+                      idx === 5 ? "w-28" 
+                      : idx === 9 ? "w-28" 
+                      : idx === 4 ? "w-22" 
+                      : idx === 3 ? "w-23" 
+                      : idx === 2 ? "w-16"
+                      : idx === 10 ? "w-12"
+                      : idx === 6 ? "w-28"
+                      : idx === 7 ? "w-34"
+                      : idx === 16 ? "w-52"
+                      
+                      : "object-cover"}
                   />
                 </div>
               </div>
-            ))}
+            )
+
+            })}
+
           </div>
         )}
       </div>

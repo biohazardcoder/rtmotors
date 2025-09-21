@@ -3,6 +3,7 @@ import { Brands } from "@/components/shared/brands"
 import { Comments } from "@/components/shared/comments"
 import { Exchange } from "@/components/shared/exchange"
 import Footer from "@/components/shared/footer"
+import { Header } from "@/components/shared/header"
 import { Logistic } from "@/components/shared/logistics"
 import { Main } from "@/components/shared/main"
 import { Menus } from "@/components/shared/menus"
@@ -30,6 +31,7 @@ export const Home = () => {
         <Auction/>
         <Comments />
         <Footer/>
+        <Header/>
       <Menus/>
 
     </div>

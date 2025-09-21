@@ -39,7 +39,6 @@ function useCarousel() {
 
   return context
 }
-
 function Carousel({
   orientation = "horizontal",
   opts,

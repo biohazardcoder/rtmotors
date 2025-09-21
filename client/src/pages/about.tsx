@@ -3,10 +3,12 @@ import Footer from "@/components/shared/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {  CheckCircle2    } from "lucide-react";
+import {  BadgeDollarSign,   Factory, Globe, SearchCheck, Text, Truck    } from "lucide-react";
 import { Menus } from "@/components/shared/menus";
 import { Team } from "@/components/shared/team";
 import { Hww } from "@/components/shared/hww";
+import { Header } from "@/components/shared/header";
+import { AutoCarousel } from "@/components/shared/carousels";
 interface Team {
     _id: string;
     name: string;
@@ -40,93 +42,90 @@ export const About = () => {
       <Menus/>
       <Navbar />
       <div className="pb-8">
-  <section className="grid grid-cols-1 md:grid-cols-2 h-[calc(100vh-75px)]">
-  <div
-    className="relative bg-cover bg-center hidden md:block"
-    style={{
-      backgroundImage: `url('/about.jpg')`,
-    }}
-  >
-    <div className="absolute inset-0 bg-black/40"></div>
-  </div>
-
-<div className="flex flex-col justify-center items-center text-center px-8 py-12 bg-[#1e2550]">
-    <img
-      src="/logo.png"
-      alt="Company Logo"
-      className="w-48 h-48 drop-shadow-lg"
-    />
-    <h5 className="text-2xl  font-extrabold mb-6  tracking-wide text-white">
-      RT Motors Company
-    </h5>
-    <p className="max-w-xl text-white text-sm  font-semibold md:text-lg leading-relaxed ">
-      RT MOTORS specializes in delivering high-quality vehicles from South Korea
-      to customers worldwide. With years of experience, we have established strong
-      partnerships with Korea’s top manufacturers and maintain reliable connections
-      with trusted and competitively priced dealers in the automotive sector.
-    </p>
-  </div>
-</section>
-
-<section className="relative">
-  <Team/>
-</section>
-     
+      <section className="grid grid-cols-1 md:grid-cols-2 p-8 bg-[#1e2550] h-[calc(100vh-75px)]">
+      <div
+        className="relative bg-cover bg-center rounded-xl  hidden md:block"
+      >
+        <AutoCarousel/>
+        <div className="absolute inset-0 rounded-xl bg-black/20"></div>
+      </div>
+      <div className="flex flex-col justify-center items-center text-center px-8 py-12 bg-[#1e2550]">
+          <img
+            src="/logo.png"
+            alt="Company Logo"
+            className="w-48 h-48 drop-shadow-lg "
+          />
+          <h5 className="text-2xl  font-extrabold mb-6  tracking-wide text-white">
+            RT Motors Company
+          </h5>
+          <p className="max-w-xl text-white text-sm  font-semibold md:text-lg leading-relaxed ">
+            RT MOTORS specializes in delivering high-quality vehicles from South Korea
+            to customers worldwide. With years of experience, we have established strong
+            partnerships with Korea’s top manufacturers and maintain reliable connections
+            with trusted and competitively priced dealers in the automotive sector.
+          </p>
+        </div>
+      </section>
+      <section className="relative">
+        <Team/>
+      </section>
        <section className="py-16 px-6">
-  <h1 className="mt-4 text-3xl font-bold text-center text-white">
-    Our Services and Strengths Include:
-  </h1>
+        <h1 className="mt-4 text-3xl font-bold text-center text-white">
+          Our Services and Strengths Include:
+        </h1>
+        <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
+            <Factory size={60} className="text-[#edb324]" />
+            <p className="text-white font-medium text-sm">
+              Direct sourcing from top Korean manufacturers and verified auctions
+            </p>
+          </div>
 
-  <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-    <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
-     <CheckCircle2  size={60} className="text-[#edb324]"/>
-      <p className="text-white font-medium text-sm">
-        Direct sourcing from top Korean manufacturers and verified auctions
-      </p>
-    </div>
+          <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
+            <Truck size={60} className="text-[#edb324]" />
+            <p className="text-white font-medium">
+              Export of a wide range of vehicles: sedans, SUVs, EVs
+            </p>
+          </div>
 
-    <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
-      <CheckCircle2  size={60} className="text-[#edb324]"/>
-      <p className="text-white font-medium">
-        Export of a wide range of vehicles: sedans, SUVs, EVs
-      </p>
-    </div>
+          <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
+            <SearchCheck size={60} className="text-[#edb324]" />
+            <p className="text-white font-medium">
+              Personalized vehicle sourcing based on your market demand
+            </p>
+          </div>
 
-    <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
-       <CheckCircle2  size={60} className="text-[#edb324]"/>
-      <p className="text-white font-medium">
-        Personalized vehicle sourcing based on your market demand
-      </p>
-    </div>
+          <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
+            <Globe size={60} className="text-[#edb324]" />
+            <p className="text-white font-medium">
+              Full customs clearance and international logistics support
+            </p>
+          </div>
 
-    <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
-       <CheckCircle2  size={60} className="text-[#edb324]"/>
-      <p className="text-white font-medium">
-        Full customs clearance and international logistics support
-      </p>
-    </div>
+          <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02] md:col-span-2 lg:col-span-1">
+            <BadgeDollarSign size={60} className="text-[#edb324]" />
+            <p className="text-white font-medium">
+              Competitive pricing and long-term partner incentives
+            </p>
+          </div>
 
-    <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02] md:col-span-2 lg:col-span-1">
-       <CheckCircle2  size={60} className="text-[#edb324]"/>
-      <p className="text-white font-medium">
-        Competitive pricing and long-term partner incentives
-      </p>
-    </div>
-  </div>
-</section>
+           <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02] md:col-span-2 lg:col-span-1">
+            <Text size={60} className="text-[#edb324]" />
+            <p className="text-white font-medium">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            </p>
+          </div>
+        </div>
 
-      
-
+      </section>
         <section>
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 text-white">How We Work</h2>
             <Hww/>
           </section>
-
       <section className="py-12 px-6">
       <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 text-white">
         Our Achievements
       </h2>
-
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto text-[#edb324]">
         <div className="bg-[#272f48]  border-2 border-white  backdrop-blur-md rounded-2xl shadow-lg p-8  text-center hover:scale-105 transition-transform">
           <h3 className="text-2xl md:text-4xl font-extrabold  mb-2">
@@ -195,8 +194,13 @@ export const About = () => {
           </Button>
         </div>
       </section>
+      <section className="py-6 flex px-[5%] md:px-0 flex-col md:flex-row items-center gap-12 max-w-5xl m-auto">
+        <iframe  height="290"  className="rounded-xl w-full" src="https://www.youtube.com/embed/EaIQ97_20zs?si=sWraZmvErSEGEOhy" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+        <iframe height="290" className="rounded-xl w-full" src="https://www.youtube.com/embed/JpzNKYTW8fA?si=hwnUrQbZOhL3KsGQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+      </section>
      </div>
       <Footer/>
+      <Header/>
     </div>
   );
 };

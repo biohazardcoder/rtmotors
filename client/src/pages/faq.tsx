@@ -1,7 +1,7 @@
 import Footer from "@/components/shared/footer"
+import { Header } from "@/components/shared/header"
 import { Menus } from "@/components/shared/menus"
 import { Navbar } from "@/components/shared/navbar"
-import { Separator } from "@/components/ui/separator"
 
 interface FaqTypes{
   question:string,
@@ -16,7 +16,7 @@ export const Faq = () => {
       answer:"We export vehicles from South Korea to almost every country in the world. Our main destinations include Central Asia, the Middle East, Europe, and Africa."
     },
     {
-      question:"How long does shipping take?",
+      question: "How long does shipping take and which factors influence it?",
       answer:"Delivery time depends on the destination. For Asia and the Middle East, it usually takes 2–4 weeks, while shipments to Europe and Africa may take 4–8 weeks."
     },
     {
@@ -55,20 +55,25 @@ export const Faq = () => {
           <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-6">
             {
               faqs.map(({answer,question})=>(
-                <div className="space-y-2 flex flex-col justify-between bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]">
-                  <h1 className="font-semibold text-lg   text-[#edb324]">
-                    {question}
-                  </h1> 
-                  <Separator/>
-                  <p className="text-sm text-white">
-                    {answer}
-                  </p>
-                </div>
+               <div 
+                key={answer} 
+                className="space-y-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02]"
+              >
+                <h1 className="font-semibold text-lg text-[#edb324]">
+                  {question}
+                </h1> 
+                <div className="h-[1px] w-full bg-white" />
+
+                <p className="text-sm text-white">
+                  {answer}
+                </p>
+              </div>
               ))
             }
           </div>
         </div>
         <Footer/>
+        <Header/>
     </div>
   )
 }

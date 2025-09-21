@@ -28,6 +28,7 @@ import { Menus } from "@/components/shared/menus";
 import { format, parse } from "date-fns";
 import VideoPlayer from "@/components/shared/video-player";
 import { HashLink } from "react-router-hash-link";
+import { Header } from "@/components/shared/header";
 
 
 export const CarDetail = () => {
@@ -623,6 +624,7 @@ return (
         )
       }
       <Footer/>
+      <Header/>
     </div>
   );
 };

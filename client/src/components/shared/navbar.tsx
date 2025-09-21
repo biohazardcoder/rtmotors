@@ -57,7 +57,7 @@ export const Navbar = () => {
               </Link>
           ) : (
              <Link className="font-semibold text-xl flex items-center gap-2" to={pathname === "/sign-in" ? "/sign-up" : "/sign-in"}>
-                    {isLoaded ? pathname === "/sign-in" ? "Register" : "Login" : <Loader2 className="animate-spin text-white" />}
+                    {isLoaded ? pathname === "/sign-in" ? "Register" : "Log in" : <Loader2 className="animate-spin text-white" />}
                    
               </Link>
           )
@@ -74,7 +74,7 @@ export const Navbar = () => {
           className="md:hidden flex items-center bg-blue-500 hover:bg-blue-600 text-white "
           >
             {isLoaded ? <User size={28} /> : <Loader2 className="animate-spin text-white" />}
-            {pathname === "/sign-in" ? "Register" : "Login"}
+            {pathname === "/sign-in" ? "Register" : "Log in"}
         </Button>
           </Link>
         )}

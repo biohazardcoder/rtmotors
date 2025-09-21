@@ -56,29 +56,49 @@ export const Comments = () => {
           <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[14px] md:top-5 right-10 rounded-md left-[100%-20px]" />
           <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[14px] md:top-5 right-0 rounded-md left-[100%-30px]" />
           <CarouselContent>
-            {comments.map((comment) => (
+            {comments.map((comment) => {
+            const [displayName, country] = comment.name.split("#");
+            const flagUrl = country
+              ? `https://flagcdn.com/w40/${country.toLowerCase()}.png`
+              : null;
+
+            return (
               <CarouselItem
                 key={comment._id}
-                className="md:basis-1/3 lg:basis-1/4 flex" 
+                className="md:basis-1/3 lg:basis-1/4 flex"
                 data-aos="fade-up"
               >
                 <div className="bg-white text-primary h-full py-4 rounded-md shadow px-4 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between">
-                      <p className="font-semibold">{comment.name}</p>
+                      <div className="flex items-center gap-2">
+                        {flagUrl && (
+                          <img
+                            src={flagUrl}
+                            alt={country}
+                            className="shadow "                          />
+                        )}
+                        <p className="font-semibold text-sm ">{displayName}</p>
+                      </div>
                       <div className="flex items-center mt-1 gap-2">
                         {[...Array(5)].map((_, i) => {
                           const percent =
                             5 >= i + 1 ? 100 : 5 > i ? (5 - i) * 100 : 0;
                           return (
-                            <span key={i} className="relative w-4 h-4">
-                              <Star className="text-[#BFBFBF] w-4 h-4" fill="currentColor" />
+                            <span key={i} className="relative w-3 h-3">
+                              <Star
+                                className="text-[#BFBFBF] w-3 h-3"
+                                fill="currentColor"
+                              />
                               {percent > 0 && (
                                 <span
                                   className="absolute top-0 left-0 h-full overflow-hidden"
                                   style={{ width: `${percent}%` }}
                                 >
-                                  <Star className="text-[#f48912] w-4 h-4" fill="currentColor" />
+                                  <Star
+                                    className="text-[#f38912] w-3 h-3"
+                                    fill="currentColor"
+                                  />
                                 </span>
                               )}
                             </span>
@@ -86,11 +106,12 @@ export const Comments = () => {
                         })}
                       </div>
                     </div>
-                    <p className="text-lg mt-2 flex-wrap">{comment.message}</p>
+                    <p className="text-base mt-2 flex-wrap">{comment.message}</p>
                   </div>
                 </div>
               </CarouselItem>
-            ))}
+            );
+          })}
           </CarouselContent>
         </Carousel>
         )}

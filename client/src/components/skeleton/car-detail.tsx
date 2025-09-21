@@ -1,6 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton"
 import { Navbar } from "@/components/shared/navbar"
 import Footer from "@/components/shared/footer"
+import { Header } from "../shared/header"
 
 export const CarDetailSkeleton = () => {
   return (
@@ -70,6 +71,7 @@ export const CarDetailSkeleton = () => {
         </div>
       </div>
       <Footer />
+      <Header/>
     </div>
   )
 }

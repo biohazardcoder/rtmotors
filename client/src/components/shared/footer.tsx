@@ -3,7 +3,7 @@ import { HashLink } from 'react-router-hash-link';
 
 function Footer() {
   return (
-    <div className='bg-[#1e2550] py-8 px-[5%]'>
+    <div className='bg-[#1e2550] pt-8 px-[5%]'>
         <section>
             <div className='grid grid-cols-1 md:grid-cols-6 py-5'>
                 <div className=''>
@@ -14,7 +14,7 @@ function Footer() {
                     <div>
                         <div className="mt-4 md:mt-0">
                             <h1 className='text-xl font-bold mb-3 text-white text-center'>Quick Links</h1>
-                            <ul className='flex items-center justify-evenly text-sm lg:justify-start text-white gap-4 '>
+                            <ul className='flex items-center flex-wrap justify-evenly text-sm lg:justify-start text-white gap-4 '>
                                 <li>
                                     <a href="#">Homepage</a>
                                 </li>
@@ -55,7 +55,7 @@ function Footer() {
                 </div>
             </div>
             <div className='border-t-2 py-8'>
-                <div className=' flex justify-between'>
+                <div className=' flex items-center flex-wrap gap-2 justify-between'>
                     <span className='text-white text-sm font-semibold'>All Rights Reserved © 2025.</span>
                 <div className='flex  flex-col gap-1 md:flex-row'>
                     <HashLink to='/faq/#all' className='text-white text-sm font-semibold'>Frequently Asked Question(FAQ)</HashLink>
