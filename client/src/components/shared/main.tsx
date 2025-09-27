@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Button } from "../ui/button"
 import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -17,6 +17,8 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
+import { fetcher } from "@/middlewares/Fetcher";
+import useSWR from "swr";
 
 interface MainProps {
   type: string;
@@ -31,6 +33,7 @@ interface MainProps {
 
 export const Main = ({type,year,price, brand, setType, setYear, setPrice, setBrand}:MainProps) => {
   const [api, setApi] = React.useState<any>(null)
+  const { data, isLoading } = useSWR("/car", fetcher);
 
   React.useEffect(() => {
     if (!api) return
@@ -46,6 +49,42 @@ export const Main = ({type,year,price, brand, setType, setYear, setPrice, setBra
     "/main/m3.jpg",
     "/main/m4.jpg",
   ]
+
+    const brands = [
+      { value: "mercedes-benz", label: "Mercedes Benz" },
+      { value: "bmw", label: "BMW" },
+      { value: "volkswagen", label: "Volkswagen" },
+      { value: "lexus", label: "Lexus" },
+      { value: "toyota", label: "Toyota" },
+      { value: "hyundai", label: "Hyundai" },
+      { value: "kia", label: "KIA" },
+      { value: "ford", label: "Ford" },
+      { value: "land-rover", label: "Land Rover" },
+      { value: "audi", label: "Audi" },
+      { value: "ferrari", label: "Ferrari" },
+      { value: "lambo", label: "Lambo" },
+      { value: "porsche", label: "Porsche" },
+      { value: "rolls-royce", label: "Rolls Royce" },
+      { value: "tesla", label: "Tesla" },
+      { value: "bugatti", label: "Bugatti" },
+      { value: "cadillac", label: "Cadillac" },
+      { value: "bently", label: "Bently" },
+      { value: "aston-martin", label: "Aston Martin" },
+      { value: "chevrolet", label: "Chevrolet" },
+    ];
+
+  const brandCounts: Record<string, number> = React.useMemo(() => {
+    if (!data) return {};
+    return data.reduce((acc: Record<string, number>, car: any) => {
+      if (car.stock > 0) {
+        const brand = car.brand?.toLowerCase();
+        if (!acc[brand]) acc[brand] = 0;
+        acc[brand]++;
+      }
+      return acc;
+    }, {});
+  }, [data]);
+
 
   return (
     <div className="relative flex items-center justify-center">
@@ -87,29 +126,17 @@ export const Main = ({type,year,price, brand, setType, setYear, setPrice, setBra
                 <SelectTrigger className="md:w-[180px] md:text-base flex items-center justify-center w-full">
                 <SelectValue placeholder="Any Makes" />
                 </SelectTrigger>
-                <SelectContent>
-                <SelectItem value="all">Any Makes</SelectItem>
-                <SelectItem value="mercedes-benz">Mercedes Benz</SelectItem>
-                <SelectItem value="bmw">BMW</SelectItem>
-                <SelectItem value="volkswagen">Volkswagen</SelectItem>
-                <SelectItem value="lexus">Lexus</SelectItem>
-                <SelectItem value="toyota">Toyota</SelectItem>
-                <SelectItem value="hyundai">Hyundai</SelectItem>
-                <SelectItem value="kia">KIA</SelectItem>
-                <SelectItem value="ford">Ford</SelectItem>
-                <SelectItem value="land-rover">Land Rover</SelectItem>
-                <SelectItem value="audi">Audi</SelectItem>
-                <SelectItem value="ferrari">Ferrari</SelectItem>
-                <SelectItem value="lambo">Lambo</SelectItem>
-                <SelectItem value="porsche">Porsche</SelectItem>
-                <SelectItem value="rolls-royce">Rolls Royce</SelectItem>
-                <SelectItem value="tesla">Tesla</SelectItem>
-                <SelectItem value="bugatti">Bugatti</SelectItem>
-                <SelectItem value="cadillac">Cadillac</SelectItem>
-                <SelectItem value="bently">Bently</SelectItem>        
-                <SelectItem value="aston-martin">Aston Martin</SelectItem>        
-                <SelectItem value="chevrolet">Chevrolet</SelectItem>        
-                </SelectContent>    
+               <SelectContent>
+                  <SelectItem value="all">Any Makes</SelectItem>
+                  {brands.map(b => {
+                    const count = brandCounts[b.value] ?? 0;
+                    return (
+                      <SelectItem key={b.value} value={b.value}>
+                        {b.label} {isLoading ? <Loader2 className="animate-spin text-blue-500"  size={6}/> : count > 0 ? <span className="bg-blue-500 py-0.5 px-[7px] text-white text-xs rounded-full">{count}</span> : ""}
+                      </SelectItem>
+                    );
+                  })}
+                </SelectContent>
                 </Select>
                 <Separator orientation="vertical" />
                 <Select value={year === "any" ? "any" : String(year)} onValueChange={val => setYear(val === "any" ? "any" : val)}>
