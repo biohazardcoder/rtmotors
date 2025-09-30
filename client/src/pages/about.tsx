@@ -49,7 +49,7 @@ export const About = () => {
       </div>
       <div className="flex flex-col justify-center items-center text-center px-8 py-12 bg-[#1e2550]">
           <img
-            src="/logo.png"
+            src="/head.png"
             alt="Company Logo"
             className="w-32 h-32 md:w-48 md:h-48 drop-shadow-lg "
           />

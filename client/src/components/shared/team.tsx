@@ -13,21 +13,21 @@ const teamMembers: Member[] = [
     name: "Akhliddin Teshaboev",
     role: "CEO",
     avatar:
-      "/team/ceo.jpg",
+      "/team/c1.jpg",
     contact : "+8210-2989-8641"
   },
   {
     name: "Rakhmatilla Akhmedov",
     role: "Operation Manager",
     avatar:
-      "/team/operation_m.jpg",
+      "/team/o1.jpg",
     contact : "+8210-9687-9796"
   },
   {
     name: "Bekmurod Abdullaev",
     role: "Marketing Manager",
     avatar:
-      "/team/sales_m.jpg",
+      "/team/sa1.jpg",
     contact : "+8210-8465-8085"
   },
   {
