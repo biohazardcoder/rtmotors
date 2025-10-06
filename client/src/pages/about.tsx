@@ -151,7 +151,7 @@ export const About = () => {
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 text-white">Our Location</h2>
         <div className="max-w-5xl mx-auto">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.7474014112335!2d69.27973771571658!3d41.311158979271846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE4JzQwLjIiTiA2OcKwMTYnNTAuOSJF!5e0!3m2!1sen!2s!4v1678979876543"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.766713158307!2d128.882603!3d35.2340604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3568c76a7d324709%3A0x41a57d1ac576f253!2zNSBCdW5zZW9uZy1ybyAzMzViZW9uLWdpbCwgR2ltaGFlLCBHeWVvbmdzYW5nbmFtLWRvLCDQrtC20L3QsNGPINCa0L7RgNC10Y8!5e1!3m2!1sru!2s!4v1759761259817!5m2!1sru!2s"
             width="100%"
             height="400"
             style={{ border: 0,borderRadius:"20px" }}

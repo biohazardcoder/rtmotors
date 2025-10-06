@@ -17,12 +17,12 @@ export const Navbar = () => {
       label: "Homepage"
     },
     {
-      url: "/blog",
-      label: "Blog Posts"
-    },
-    {
       url: "/cars",
       label: "Find Cars"
+    },
+    {
+      url: "/blog",
+      label: "Blog Posts"
     },
     {
       url: "/about",

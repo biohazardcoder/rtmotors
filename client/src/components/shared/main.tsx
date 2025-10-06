@@ -39,7 +39,7 @@ export const Main = ({type,year,price, brand, setType, setYear, setPrice, setBra
     if (!api) return
     const interval = setInterval(() => {
       api.scrollNext()
-    }, 4000)
+    }, 10000)
     return () => clearInterval(interval)
   }, [api])
 
@@ -48,6 +48,7 @@ export const Main = ({type,year,price, brand, setType, setYear, setPrice, setBra
     "/main/m2.jpg",
     "/main/m3.jpg",
     "/main/m4.jpg",
+    "/main/m5.jpg",
   ]
 
     const brands = [
@@ -102,7 +103,7 @@ export const Main = ({type,year,price, brand, setType, setYear, setPrice, setBra
                 alt={`main-${idx}`}
                 className="absolute w-full h-full object-cover object-center rounded-none"
               />
-                <div className="absolute inset-0  bg-black/20"></div>
+                <div className="absolute inset-0  bg-black/30"></div>
             </div>
           </CarouselItem>
         ))}

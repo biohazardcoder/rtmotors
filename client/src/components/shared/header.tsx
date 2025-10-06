@@ -21,7 +21,7 @@ export const Header = () => {
          <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" >
                 <img src="/3d/whatsapp.png" alt="" className="w-8 h-8 object-center rounded-md" />
             </Link>
-         <Link target="_blank" to={"https://www.instagram.com/rtmotors_trade"}>
+         <Link target="_blank" to={"https://www.youtube.com/@rtmotorstrade"}>
             <img src="/3d/youtube.webp"
              alt="YouTube" className="w-6 h-6 rounded-mdobject-contain mr-1"/>
         </Link>
@@ -29,7 +29,7 @@ export const Header = () => {
             <img src="/3d/instagram.webp" alt="Instagram" 
             className="w-6 h-6 rounded-md object-cover object-center "/>
         </Link>
-             <Link to={"https://chat.whatsapp.com/HSdW0bnRDdPFDV81GsgN85?fbclid=PAZXh0bgNhZW0CMTEAAadJPgnYNVo9GXHZ2qm3Eb9SgAMuzMYmUsGJWc_mNTVj9xYe7pXGoVn87W7Wag_aem_huhiPqYgunrY5PTzgGYFaA"} target="_blank" >
+             <Link to={"https://www.tiktok.com/@rt.motors.trade?_t=ZS-8zkQ7huqwnC&_r=1"} target="_blank" >
                 <img src="https://cdn3d.iconscout.com/3d/premium/thumb/tiktok-3d-icon-png-download-8550499.png" alt="" className="w-[26px] h-7 object-center rounded-md " />
             </Link>
         </div>
