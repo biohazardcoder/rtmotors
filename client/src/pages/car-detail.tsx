@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { BadgeDollarSign, CalendarCheck, CalendarDays,Fuel, Gauge, GitFork,  History,  Layers,  Loader2,  Share, Star, Trash2} from "lucide-react";
+import { BadgeDollarSign, CalendarCheck, CalendarDays,Fuel, Gauge, GitFork,  History,  Layers,  Loader2,  PaintBucket,  Share, Star, Trash2} from "lucide-react";
 import useSWR from "swr";
 import { fetcher } from "@/middlewares/Fetcher";
 import { Navbar } from "@/components/shared/navbar";
@@ -169,9 +169,8 @@ return (
       <Menus/>
       <Navbar />
       <div className="py-8 px-[5%]" id="detail">
-          <h1 className="text-xl md:text-3xl font-bold text-white text-shadow-sm  text-shadow-muted-foreground">{name}</h1>
           <div className="flex items-center justify-between">
-            <h1 className="text-sm md:text-lg text-white">{description}</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white text-shadow-sm  text-shadow-muted-foreground">{name}</h1>
             <div className="flex items-center gap-2">
                 <Button className="block md:hidden bg-blue-500 text-white hover:bg-blue-600"
                 onClick={handleCopy}
@@ -268,14 +267,20 @@ return (
                     <div className="font-semibold capitalize">
                       {transmission}
                     </div>
-                    <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                      <CalendarDays size={20}/> Release Year
+                    <div className="flex items-center gap-2 font-semibold  text-muted-foreground">
+                      <PaintBucket size={20}/> Color
+                    </div>
+                    <div className="font-semibold capitalize">
+                      {description}
+                    </div>
+                    <div className="flex items-center gap-2 font-semibold  text-muted-foreground">
+                      <CalendarDays size={20}/>  Year of manufacture
                     </div>
                     <div className="font-semibold capitalize">
                       {firstPart}
                     </div>
 
-                    <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
+                    <div className="flex items-center gap-2 font-semibold  text-muted-foreground">
                       <CalendarCheck size={20}/> Registration date
                     </div>
 

@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
-import {  BadgeDollarSign,   Factory, Globe, SearchCheck, Text, Truck    } from "lucide-react";
+import {  BadgeDollarSign,   Factory, Globe, SearchCheck,  Truck, Wrench    } from "lucide-react";
 import { Menus } from "@/components/shared/menus";
 import { Team } from "@/components/shared/team";
 import { Hww } from "@/components/shared/hww";
@@ -108,9 +108,9 @@ export const About = () => {
           </div>
 
            <div className="flex items-center gap-3 bg-[#272f48] border-2 border-white shadow-md rounded-xl p-5 hover:shadow-lg transition-transform hover:scale-[1.02] md:col-span-2 lg:col-span-1">
-            <Text size={60} className="text-[#edb324]" />
+            <Wrench size={60} className="text-[#edb324]" />
             <p className="text-white font-medium">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Quality inspection and pre-shipment vehicle check.
             </p>
           </div>
         </div>
