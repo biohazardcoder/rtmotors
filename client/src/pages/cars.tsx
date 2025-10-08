@@ -17,6 +17,7 @@ import { Menus } from "@/components/shared/menus";
 import VideoPlayer from "@/components/shared/video-player";
 import { HashLink } from "react-router-hash-link";
 import { Header } from "@/components/shared/header";
+import ProgressiveImage from "@/components/shared/progress-image";
 
 export const Cars = () => {
   const { data, isLoading } = useSWR("/car", fetcher);
@@ -83,7 +84,7 @@ export const Cars = () => {
               <CarouselContent>
             {  images.map((image, index) => (
             <CarouselItem key={index}>
-              <img src={image} alt={name} className="w-full h-56 md:h-64 object-cover" />
+              <ProgressiveImage height="h-56 md:h-64" src={image} alt={name} className="w-full h-56 md:h-64 object-cover" />
             </CarouselItem>
           ))
         }

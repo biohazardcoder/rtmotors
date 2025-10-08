@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/carousel"
 import { fetcher } from "@/middlewares/Fetcher";
 import useSWR from "swr";
+import type { VehicleTypes } from "@/types/types";
 
 interface MainProps {
   type: string;
@@ -34,7 +35,7 @@ interface MainProps {
 export const Main = ({ type, year, price, brand, setType, setYear, setPrice, setBrand }: MainProps) => {
   const [api, setApi] = React.useState<any>(null)
   const { data, isLoading } = useSWR("/car", fetcher);
-
+  
   React.useEffect(() => {
     if (!api) return
     const interval = setInterval(() => {
@@ -95,7 +96,7 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
 
   const brandCounts: Record<string, number> = React.useMemo(() => {
     if (!data) return {};
-    return data.reduce((acc: Record<string, number>, car: any) => {
+    return data.reduce((acc: Record<string, number>, car: VehicleTypes) => {
       if (car.stock > 0) {
         const brand = car.brand?.toLowerCase();
         if (!acc[brand]) acc[brand] = 0;
@@ -104,7 +105,7 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
       return acc;
     }, {});
   }, [data]);
-
+  
   return (
     <div className="relative flex items-center justify-center">
       <Carousel
@@ -143,18 +144,19 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
 
         <div className="grid grid-cols-1 w-full md:w-auto md:flex md:items-center rounded-lg md:rounded-full md:p-4 gap-2 md:gap-4 p-3 mt-4 z-[100] bg-white">
           <Select value={brand} onValueChange={setBrand}>
-            <SelectTrigger className="md:w-[180px] md:text-base flex items-center justify-center w-full">
-              <SelectValue placeholder="Any Makes" />
+            <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
+              <SelectValue placeholder="Brands" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Any Makes</SelectItem>
+              <SelectItem value="all">Brands</SelectItem>
               {brands.map(b => {
                 const count = brandCounts[b.value] ?? 0;
+                
                 return (
                   <SelectItem key={b.value} value={b.value}>
                     {b.label}{" "}
                     {isLoading ? <Loader2 className="animate-spin text-blue-500" size={6} /> :
-                      count > 0 ? <span className="bg-blue-500 py-0.5 px-[7px] text-white text-xs rounded-full">{count}</span> : ""}
+                      count > 0 ? <span className="bg-[#171f3a] py-[1px] px-[5px] text-white text-[10px] rounded-full">{count}</span> : ""}
                   </SelectItem>
                 );
               })}
@@ -162,11 +164,11 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
           </Select>
           <Separator orientation="vertical" />
           <Select value={year === "any" ? "any" : String(year)} onValueChange={val => setYear(val === "any" ? "any" : val)}>
-            <SelectTrigger className="md:w-[180px] md:text-base flex items-center justify-center w-full">
-              <SelectValue placeholder="Any Years" />
+            <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
+              <SelectValue placeholder="Years" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="any">Any Years</SelectItem>
+              <SelectItem value="any">Years</SelectItem>
               <SelectItem value="2020">2020</SelectItem>
               <SelectItem value="2021">2021</SelectItem>
               <SelectItem value="2022">2022</SelectItem>
@@ -177,11 +179,11 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
           </Select>
           <Separator orientation="vertical" />
           <Select value={price === "any" ? "any" : String(price)} onValueChange={val => setPrice(val === "any" ? "any" : val)}>
-            <SelectTrigger className="md:w-[180px] md:text-base flex items-center justify-center w-full">
-              <SelectValue placeholder="Any Price" />
+            <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
+              <SelectValue placeholder="Prices" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="any">Any Price</SelectItem>
+              <SelectItem value="any">Prices</SelectItem>
               <SelectItem value="25000-50000">25,000$ - 50,000$</SelectItem>
               <SelectItem value="50000-100000">50,000$ - 100,000$</SelectItem>
               <SelectItem value="100000-7777777">100,000$ - MORE</SelectItem>

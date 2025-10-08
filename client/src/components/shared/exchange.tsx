@@ -40,9 +40,11 @@ export const Exchange = () => {
       <div 
       data-aos="fade-up"
       className="flex flex-col gap-2 md:flex-row md:justify-between md:items-center">
-        <h1 className="text-lg md:text-3xl font-bold">Exchange Rates</h1>
+        <h1 className="text-lg md:text-3xl font-bold">
+          Exchange Rates
+        </h1>
         <div className="flex items-center gap-2">
-          <h1 className="text-sm font-semibold">Enter amount in USD:</h1>
+          <h1 className="text-sm font-semibold">Enter amount in USD (Estimated amount):</h1>
          <Input
           type="text"
           className="w-32 bg-secondary border-primary text-black"

@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
-import {  BadgeDollarSign,   Factory, Globe, SearchCheck,  Truck, Wrench    } from "lucide-react";
+import {  BadgeDollarSign,   Factory, Globe, SearchCheck, Truck, Wrench } from "lucide-react";
 import { Menus } from "@/components/shared/menus";
 import { Team } from "@/components/shared/team";
 import { Hww } from "@/components/shared/hww";
@@ -127,23 +127,23 @@ export const About = () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto text-[#edb324]">
         <div className="bg-[#272f48]  border-2 border-white  backdrop-blur-md rounded-2xl shadow-lg p-8  text-center hover:scale-105 transition-transform">
           <h3 className="text-2xl md:text-4xl font-extrabold  mb-2">
-            1000+
+            15+
+          </h3>
+          <p className="text-white text-xl md:text-2xl font-medium">Countries</p>
+        </div>
+
+        <div className="bg-[#272f48] border-2 border-white backdrop-blur-md rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition-transform">
+          <h3 className="text-2xl md:text-4xl font-extrabold  mb-2">
+            500+
+          </h3>
+          <p className="text-white text-xl md:text-2xl font-medium">Cars sold</p>
+        </div>
+
+        <div className="bg-[#272f48] border-2 border-white backdrop-blur-md rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition-transform">
+          <h3 className="text-2xl md:text-4xl font-extrabold  mb-2">
+            300+
           </h3>
           <p className="text-white text-xl md:text-2xl font-medium">Clients</p>
-        </div>
-
-        <div className="bg-[#272f48] border-2 border-white backdrop-blur-md rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition-transform">
-          <h3 className="text-2xl md:text-4xl font-extrabold  mb-2">
-            1000+
-          </h3>
-          <p className="text-white text-xl md:text-2xl font-medium">Cars</p>
-        </div>
-
-        <div className="bg-[#272f48] border-2 border-white backdrop-blur-md rounded-2xl shadow-lg p-8 text-center hover:scale-105 transition-transform">
-          <h3 className="text-2xl md:text-4xl font-extrabold  mb-2">
-            1000+
-          </h3>
-          <p className="text-white text-xl md:text-2xl font-medium">Orders</p>
         </div>
       </div>
       </section>

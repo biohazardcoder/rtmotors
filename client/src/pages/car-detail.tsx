@@ -29,6 +29,7 @@ import { format, parse } from "date-fns";
 import VideoPlayer from "@/components/shared/video-player";
 import { HashLink } from "react-router-hash-link";
 import { Header } from "@/components/shared/header";
+import ProgressiveImage from "@/components/shared/progress-image";
 
 
 export const CarDetail = () => {
@@ -199,7 +200,8 @@ return (
                     <CarouselContent>
                       {images.map((image, index) => (
                         <CarouselItem key={index}>
-                          <img
+                          <ProgressiveImage
+                            height="h-60 md:h-80"
                             src={image}
                             alt={name}
                             className="w-full h-60 md:h-80 object-cover rounded-md md:rounded-lg"
@@ -511,7 +513,7 @@ return (
                             <CarouselContent>
                           {  images.map((image, index) => (
                           <CarouselItem key={index}>
-                            <img src={image} alt={name} className="w-full h-56 md:h-64 object-cover" />
+                            <ProgressiveImage height="h-56 md:h-64" src={image} alt={name} className="w-full h-56 md:h-64 object-cover" />
                           </CarouselItem>
                         ))
                       }
@@ -594,7 +596,7 @@ return (
           <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6">
                 <div className="flex items-center gap-2">
-                  <img src={images[0]} alt="" className="w-32 h-20 object-center object-cover" />
+                  <ProgressiveImage height="h-20" src={images[0]} alt="" className="w-32 h-20 object-center object-cover" />
                   <div className="flex flex-col">
                     <span className="font-semibold">{name}</span>
                     <p className="text-base font-bold text-black">

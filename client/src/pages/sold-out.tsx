@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Menus } from "@/components/shared/menus";
 import VideoPlayer from "@/components/shared/video-player";
 import { Header } from "@/components/shared/header";
+import ProgressiveImage from "@/components/shared/progress-image";
 
 export const SoldOut = () => {
 
@@ -57,7 +58,8 @@ export const SoldOut = () => {
                   <VideoPlayer videoUrl={video} />
                 ) : (
                   <div className="group relative overflow-hidden rounded-xl">
-                    <img
+                    <ProgressiveImage
+                      height="h-56 md:h-64"
                       src={images[0]}
                       alt="image"
                       className="w-full h-56 md:h-64 object-cover shadow-lg 

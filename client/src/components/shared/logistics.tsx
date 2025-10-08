@@ -12,6 +12,7 @@ import {
 import { Button } from "../ui/button";
 import { HashLink } from "react-router-hash-link";
 import VideoPlayer from "./video-player";
+import ProgressiveImage from "./progress-image";
 
 export const Logistic = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
@@ -81,7 +82,8 @@ export const Logistic = () => {
                   <VideoPlayer videoUrl={video} />
                 ) : (
                   <div className="group relative overflow-hidden rounded-xl">
-                    <img
+                    <ProgressiveImage
+                      height="h-56 md:h-64"
                       src={image}
                       alt="image"
                       className="w-full h-56 md:h-64 object-cover shadow-lg 

@@ -16,6 +16,7 @@ import "aos/dist/aos.css";
 import { Button } from "../ui/button";
 import { HashLink } from "react-router-hash-link";
 import VideoPlayer from "./video-player";
+import ProgressiveImage from "./progress-image";
 
 interface VehiclesProps {
   type: string;
@@ -71,7 +72,10 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
   const inStock = vehicles.filter((item) => item.stock > 0);
   const soldOutCars = vehicles.filter((item) => item.stock === 0);
   const soldOut = soldOutCars.slice(0, 6);
-
+  const newCars = inStock.filter((item) => item.type === "new").slice(0, 4);
+  const allCars = inStock
+    .filter((item) => !newCars.some((newCar) => newCar._id === item._id)) 
+    .slice(0, 6);
   const filteredVehicles = inStock.filter((vehicle) => {
     let priceMatch = true;
     if (price !== "any") {
@@ -86,9 +90,6 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
     );
   });
 
-  const shuffledVehicles = filteredVehicles.filter((item) => item.type === "new").slice(0, 4);
-  const filteredVehiclesToShow = shuffledVehicles;
-
   const activeFilters: { label: string; clear: () => void }[] = [];
   if (year !== "any") activeFilters.push({ label: `${year}`, clear: () => setYear("any") });
   if (brand !== "all") activeFilters.push({ label: brand, clear: () => setBrand("all") });
@@ -100,13 +101,22 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
       clear: () => setPrice("any"),
     });
   }
-  
+
+  const hasActiveFilters = activeFilters.length > 0;
+
+  const shuffledVehicles = hasActiveFilters
+    ? filteredVehicles.slice(0, 4)
+    : newCars
+
+  const filteredVehiclesToShow = shuffledVehicles;
   return (
     <div className="bg-[#171f3a] min-h-[20vh] mt-40 md:mt-0" id="search">
       <div className="py-8 px-[5%]">
         <div className="flex items-center justify-between border-b-2 pb-6 border-primary-foreground" data-aos="fade-up">
           <h1 className="text-lg md:text-3xl font-bold text-white">
-            Our Cars
+            {
+              activeFilters.length > 0 ? "Filtered Cars" : "New Cars"
+            }
           </h1>
           <HashLink to="/cars/#all">
             <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
@@ -178,9 +188,10 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                           <CarouselContent>
                             {images.map((image, index) => (
                               <CarouselItem key={index}>
-                                <img
+                                <ProgressiveImage
                                   src={image}
                                   alt={name}
+                                  height="h-56 md:h-64"
                                   className="w-full h-56 md:h-64 object-cover"
                                 />
                               </CarouselItem>
@@ -253,6 +264,113 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
       </Carousel>
       </div>
 
+       {allCars.length > 0 && (
+  <div className="px-[5%] pb-10" data-aos="fade-up">
+    <div className="flex items-center justify-between border-b-2 border-primary-foreground text-white pb-6 mb-6">
+      <h1 className="text-xl md:text-3xl font-bold">All Cars</h1>
+      <HashLink smooth to="/cars/#all">
+        <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
+          More
+        </Button>
+      </HashLink>
+    </div>
+
+    <Carousel>
+      <CarouselContent>
+        {allCars.map(({ _id, images, name, video ,brand,currentPrice,oldPrice,stock,status}) => (
+           <CarouselItem
+                  key={_id}
+                  data-aos="fade-up"
+                  className="basis-1/1 sm:basis-1/2 lg:basis-1/4" 
+                >
+                  <div className="bg-[#e6e6e7] rounded-xl overflow-hidden shadow-[#fff] hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out">
+                    <div className="relative">
+                      {video ? (
+                        <VideoPlayer videoUrl={video} />
+                      ) : (
+                        <Carousel>
+                          <CarouselContent>
+                            {images.map((image, index) => (
+                              <CarouselItem key={index}>
+                                <ProgressiveImage
+                                  src={image}
+                                  alt={name}
+                                  height="h-56 md:h-64"
+                                  className="w-full h-56 md:h-64 object-cover"
+                                />
+                              </CarouselItem>
+                            ))}
+                          </CarouselContent>
+                          <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600" />
+                          <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600" />
+                        </Carousel>
+                      )}
+
+                      {stock === 0 ? (
+                        <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-md shadow">
+                          Sold out
+                        </span>
+                      ) : status && status?.text?.length > 0 ? (
+                        <span
+                          className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-md shadow"
+                          style={{
+                            color: `#${status?.color}`,
+                            backgroundColor:
+                              status?.bg === "0f0" ? "#003939" : `#${status?.bg}`,
+                          }}
+                        >
+                          {status?.text}
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <div className="p-4 flex flex-col justify-between">
+                      <div>
+                        <h2 className="text-sm uppercase mb-1 font-semibold text-[#4ecdc4]">
+                          {brand}
+                        </h2>
+                        <h2
+                          className="text-base mb-1 text-black capitalize font-semibold truncate"
+                          title={name}
+                        >
+                          {name.length > 30 ? name.slice(0, 30) + "..." : name}
+                        </h2>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="text-base font-bold text-black">
+                          {currentPrice === 777 ? (
+                            "Price Consultation"
+                          ) : (
+                            <>
+                              ${currentPrice.toLocaleString()}{" "}
+                              {oldPrice > 0 && (
+                                <span className="text-sm text-gray-500 line-through ml-2">
+                                  ${oldPrice.toLocaleString()}
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </p>
+                        <HashLink
+                          to={`/cars/${_id}/#detail`}
+                          className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md"
+                        >
+                          View Details
+                        </HashLink>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+        ))}
+      </CarouselContent>
+
+      <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 -top-[68px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
+            <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 -top-[68px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
+    </Carousel>
+  </div>
+)}
+
+
       {soldOut.length > 0 && (
         <div className="px-[5%]" data-aos="fade-up">
           <Carousel>
@@ -275,7 +393,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                             <CarouselContent>
                           {  images.map((image, index) => (
                           <CarouselItem key={index}>
-                            <img src={image} alt={name} className="w-full h-64 object-cover object-center rounded-xl shadow-lg 
+                            <ProgressiveImage height="h-64"  src={image} alt={name} className="w-full h-64 object-cover object-center rounded-xl shadow-lg 
                                 transition-all duration-300 hover:rounded-xl
                                 group-hover:scale-105 
                                 group-hover:shadow-[0px_4px_15px_rgba(255,255,255,0.6)]" />
