@@ -4,11 +4,14 @@ import { Separator } from "../ui/separator"
 import { SignOutButton, useUser } from "@clerk/clerk-react"
 import { Link } from "react-router-dom"
 import { Button } from "../ui/button"
-import { CarFront,  Link2,  FileText,  Home, LogOut, MenuIcon,  Newspaper, User, Headset  } from "lucide-react"
+import { CarFront,  Link2,  FileText,  Home, LogOut, MenuIcon,  Newspaper, User, Headset, Languages  } from "lucide-react"
 import { HashLink } from "react-router-hash-link"
+import { useTranslation } from "react-i18next"
+import { LangChanger } from "./lang-changer"
 
 export const Menu = () => {
   const {user, isLoaded,isSignedIn} = useUser()
+      const { t} = useTranslation();
   
   return (
   <Popover>
@@ -43,7 +46,7 @@ export const Menu = () => {
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
           <Home/>
-          Home
+          {t("home")}
           </div>
         </Button>
         </Link>
@@ -51,7 +54,7 @@ export const Menu = () => {
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
           <CarFront/>
-          Cars
+          {t("find")}
           </div>
         </Button>
         </Link>
@@ -62,7 +65,7 @@ export const Menu = () => {
             <Button variant="ghost" className="w-full block">
               <div className="flex items-center gap-2">
                 <User/>
-                Dashboard
+                {t("dashboard")}
               </div>
           </Button>
           </Link>
@@ -72,7 +75,7 @@ export const Menu = () => {
               <Button variant="ghost" className="w-full block">
                 <div className="flex items-center gap-2">
                   <User/>
-                  Log in
+                  {t("login")}
                 </div>
               </Button>
             </Link>
@@ -83,7 +86,7 @@ export const Menu = () => {
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
           <FileText/>
-          About
+          {t("about")}
           </div>
         </Button>
         </Link>
@@ -91,7 +94,7 @@ export const Menu = () => {
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
           <Newspaper/>
-          Blog
+          {t("blog")}
           </div>
         </Button>
         </Link>
@@ -99,10 +102,15 @@ export const Menu = () => {
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
           <Headset/>
-          Contact
+          {t("contact")}
           </div>
         </Button>
         </HashLink>
+        <Separator className="my-2"/>
+         <Button variant="ghost" className="w-full  flex items-center justify-start gap-2">
+              <Languages className="ml-2"/>
+              <LangChanger />
+        </Button>
         <Separator className="my-2"/>
         <Link to={"https://t.me/rtmotors_trade"}>
         <Button variant="ghost" className="w-full block">
@@ -149,7 +157,7 @@ export const Menu = () => {
         <Button variant="ghost" className="w-full block">
           <div className="flex items-center gap-2">
           <LogOut/>
-          Logout
+          {t("logout")}
           </div>
         </Button>
         </SignOutButton>

@@ -6,13 +6,14 @@ import { fetcher } from "@/middlewares/Fetcher";
 import type { BrandTypes } from "@/types/types";
 import useSWR from "swr";
 import { Skeleton } from "../ui/skeleton";
-import { useEffect } from "react";
+import {  useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslation } from "react-i18next";
 
 export const Brands = () => {
   const { data, isLoading } = useSWR("/brand", fetcher);
-
+  const {t} = useTranslation();
   useEffect(() => {
     AOS.init({ duration: 800 });
   }, []);
@@ -25,7 +26,7 @@ export const Brands = () => {
             className="text-lg md:text-3xl font-bold text-white"
             data-aos="fade-up"
           >
-            Our Premium Brands
+            {t("our_brands")}
           </h1>
           <div className="block mt-8">
             <Carousel
@@ -62,14 +63,14 @@ export const Brands = () => {
           className="text-lg text-white md:text-3xl font-bold"
           data-aos="fade-up"
         >
-          Our Premium Brands
+          {t("our_brands")}
         </h1>
         {brands.length === 0 ? (
           <div
             className="pt-4 text-center text-muted-foreground"
             data-aos="fade-up"
           >
-            No brands found
+            {t("no_brands")}
           </div>
         ) : (
           <div className="mt-8 flex flex-wrap items-center gap-2">

@@ -5,8 +5,11 @@ import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
 import { Menu } from "./menu";
 import { HashLink } from "react-router-hash-link";
+import { useTranslation } from "react-i18next";
+import { LangChanger } from "./lang-changer";
 
 export const Navbar = () => {
+    const { t} = useTranslation();
 
   const { isLoaded,isSignedIn } = useUser()
 
@@ -14,54 +17,55 @@ export const Navbar = () => {
   const items = [
     {
       url: "/",
-      label: "Homepage"
+      label: t("home")
     },
     {
       url: "/cars",
-      label: "Find Cars"
+      label: t("find")
     },
     {
       url: "/blog",
-      label: "Blog Posts"
+      label: t("blog")
     },
     {
       url: "/about",
-      label: "About Us"
+      label: t("about")
     },
     {
       url: "/about/#contact",
-      label: "Contact Us"
+      label: t("contact")
     },
   ]
 
   return (
   <div className={cn("absolute bg-transparent  left-0 w-full top-0 h-[12vh]  flex items-center justify-between px-[5%] z-50", pathname === "/" ? "text-white" : "text-black")}>
       <Link to={"/"}>
-       <img src="/white.png" alt="RT Motors" className="w-40" />
+       <img src="/white.png" alt="RT Motors" className="w-36 md:w-40" />
        </Link>
       <div className="hidden md:flex items-center gap-4">
         <ul className="flex items-center gap-8 text-white">
           {items.map(item => (
             <li key={item.label}>
-              <HashLink to={item.url} className="font-semibold text-xl">{item.label}</HashLink>
+              <HashLink to={item.url} className="font-semibold text-lg">{item.label}</HashLink>
             </li>
           ))}
         {
           isLoaded && isSignedIn ? (
                          <Link to={"/dashboard"}>
-                    {isLoaded ? (<div className="flex items-center gap-2 font-semibold text-xl">
+                    {isLoaded ? (<div className="flex items-center gap-2 font-semibold text-lg">
                     <li >
-              <Link to={"/dashboard"} className="font-semibold">Dashboard</Link>
+              <Link to={"/dashboard"} className="font-semibold">{t("dashboard")}</Link>
             </li>
                     </div>) : <Loader2 className="animate-spin text-white" />}
               </Link>
           ) : (
-             <Link className="font-semibold text-xl flex items-center gap-2" to={pathname === "/sign-in" ? "/sign-up" : "/sign-in"}>
-                    {isLoaded ? pathname === "/sign-in" ? "Register" : "Log in" : <Loader2 className="animate-spin text-white" />}
+             <Link className="font-semibold text-lg flex items-center gap-2" to={pathname === "/sign-in" ? "/sign-up" : "/sign-in"}>
+                    {isLoaded ? pathname === "/sign-in" ? t("register") : t("login") : <Loader2 className="animate-spin text-white" />}
                    
               </Link>
           )
         }
+        <LangChanger />
         </ul>
       </div>
    
@@ -74,7 +78,7 @@ export const Navbar = () => {
           className="md:hidden flex items-center bg-blue-500 hover:bg-blue-600 text-white "
           >
             {isLoaded ? <User size={28} /> : <Loader2 className="animate-spin text-white" />}
-            {pathname === "/sign-in" ? "Register" : "Log in"}
+            {pathname === "/sign-in" ? <>{t("register")}</> : t("login")}
         </Button>
           </Link>
         )}

@@ -20,6 +20,7 @@ import {
 import { fetcher } from "@/middlewares/Fetcher";
 import useSWR from "swr";
 import type { VehicleTypes } from "@/types/types";
+import { useTranslation } from "react-i18next";
 
 interface MainProps {
   type: string;
@@ -35,6 +36,7 @@ interface MainProps {
 export const Main = ({ type, year, price, brand, setType, setYear, setPrice, setBrand }: MainProps) => {
   const [api, setApi] = React.useState<any>(null)
   const { data, isLoading } = useSWR("/car", fetcher);
+      const { t} = useTranslation();
   
   React.useEffect(() => {
     if (!api) return
@@ -47,9 +49,6 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
   const desktopImages = [
     "/main/m1.jpg",
     "/main/m2.jpg",
-    "/main/m3.jpg",
-    "/main/m4.jpg",
-    "/main/m5.jpg",
   ]
 
   const mobileImages = [
@@ -117,6 +116,7 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
           {activeImages.map((src, idx) => (
             <CarouselItem key={idx}>
               <div className="relative w-full h-[70vh] md:h-screen">
+                <h5 className="absolute z-40 hidden md:block text-center w-screen uppercase top-32 text-4xl">{t("from_korea_to_the_world")}</h5>
                 <img
                   src={src}
                   alt={`main-${idx}`}
@@ -132,13 +132,13 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
       <div className="flex flex-col absolute items-center -bottom-[150px] md:-bottom-[35px] z-40 w-auto m-auto">
         <div className="flex gap-4 mt-4 items-center text-white">
           <Button variant="ghost" onClick={() => setType("all")} className={cn(type === "all" && "border-b-4 pb-2", "rounded-none hover:bg-transparent hover:text-white")}>
-            All
+            {t("all")}
           </Button>
           <Button variant="ghost" onClick={() => setType("new")} className={cn(type === "new" && "border-b-4 pb-2", "rounded-none hover:bg-transparent hover:text-white")}>
-            New
+            {t("new")}
           </Button>
           <Button variant="ghost" onClick={() => setType("used")} className={cn(type === "used" && "border-b-4 pb-2", "rounded-none hover:bg-transparent hover:text-white")}>
-            Used
+            {t("used")}
           </Button>
         </div>
 
@@ -148,7 +148,7 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
               <SelectValue placeholder="Brands" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Brands</SelectItem>
+              <SelectItem value="all">{t("brands")}</SelectItem>
               {brands.map(b => {
                 const count = brandCounts[b.value] ?? 0;
                 
@@ -165,10 +165,10 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
           <Separator orientation="vertical" />
           <Select value={year === "any" ? "any" : String(year)} onValueChange={val => setYear(val === "any" ? "any" : val)}>
             <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
-              <SelectValue placeholder="Years" />
+              <SelectValue placeholder={t("years")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="any">Years</SelectItem>
+              <SelectItem value="any">{t("years")}</SelectItem>
               <SelectItem value="2020">2020</SelectItem>
               <SelectItem value="2021">2021</SelectItem>
               <SelectItem value="2022">2022</SelectItem>
@@ -180,19 +180,19 @@ export const Main = ({ type, year, price, brand, setType, setYear, setPrice, set
           <Separator orientation="vertical" />
           <Select value={price === "any" ? "any" : String(price)} onValueChange={val => setPrice(val === "any" ? "any" : val)}>
             <SelectTrigger className="md:w-[180px] md:text-lg flex items-center justify-center w-full">
-              <SelectValue placeholder="Prices" />
+              <SelectValue placeholder={t("prices")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="any">Prices</SelectItem>
+              <SelectItem value="any">{t("prices")}</SelectItem>
               <SelectItem value="25000-50000">25,000$ - 50,000$</SelectItem>
               <SelectItem value="50000-100000">50,000$ - 100,000$</SelectItem>
-              <SelectItem value="100000-7777777">100,000$ - MORE</SelectItem>
+              <SelectItem value="100000-7777777">100,000$ - {t("more")}</SelectItem>
             </SelectContent>
           </Select>
           <a href={"./#search"} className="scroll-smooth">
             <Button className="bg-blue-500 w-full md:w-auto text-white hover:bg-blue-600 ">
               <Search />
-              Search
+              {t("search")}
             </Button>
           </a>
         </div>

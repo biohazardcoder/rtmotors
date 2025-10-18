@@ -84,7 +84,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
     }
     return (
       (type === "all" || vehicle.type === type) &&
-      (year === "any" || vehicle.year === Number(year)) &&
+      (year === "any" || vehicle.year?.toString().slice(0, 4) === year) &&
       priceMatch &&
       (brand === "all" || vehicle.brand === brand)
     );
@@ -101,7 +101,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
       clear: () => setPrice("any"),
     });
   }
-
+  
   const hasActiveFilters = activeFilters.length > 0;
 
   const shuffledVehicles = hasActiveFilters
@@ -125,7 +125,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
           </HashLink>
         </div>
         {activeFilters.length > 0 && (
-          <div className="flex flex-wrap mt-6 gap-2 mb-4" data-aos="fade-up">
+          <div className="flex overflow-hidden mt-6 gap-2 mb-4" data-aos="fade-up">
            {activeFilters.map((filter, i) => {
             let displayLabel = filter.label;
             if (displayLabel.includes("-")) {
@@ -151,8 +151,8 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
         )}
 
       <Carousel data-aos="fade-up" >
-        <CarouselPrevious className="bg-blue-500 text-white md:hidden hover:bg-blue-600 -top-[43px]  right-[110px] rounded-md md:right-[120px] left-[100%-20px]" />
-            <CarouselNext className="bg-blue-500 text-white md:hidden hover:bg-blue-600 -top-[43px] right-[68px] rounded-md md:right-[78px] left-[100%-30px]" />
+        <CarouselPrevious className={`bg-blue-500 text-white md:hidden hover:bg-blue-600 ${activeFilters.length > 0 ? "-top-[120px]" :  "-top-[43px]" }  right-[110px] rounded-md md:right-[120px] left-[100%-20px]`} />
+        <CarouselNext className={`bg-blue-500 text-white md:hidden hover:bg-blue-600 ${activeFilters.length > 0 ? "-top-[120px]" :  "-top-[43px]"} right-[68px] rounded-md md:right-[78px] left-[100%-30px]`} />
         <CarouselContent className="pb-10 pt-6 ">
           {filteredVehiclesToShow.length === 0 ? (
             <p

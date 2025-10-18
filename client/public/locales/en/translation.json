@@ -1,0 +1,23 @@
+{
+  "home": "Homepage",
+  "contact": "Contact Us",
+  "about": "About Us",
+  "find": "Find Cars",
+  "blog": "Blog Posts",
+  "login" : "Login",
+  "register": "Register",
+  "dashboard": "Dashboard",
+  "logout": "Logout",
+  "from_korea_to_the_world": "From Korea to the World",
+  "all": "All",
+  "new": "New",
+  "used": "Used",
+  "brands": "Brands",
+  "years": "Years",
+  "prices": "Prices",
+  "more": "More",
+  "search": "Search",
+
+  "our_brands":"Our Premium Brands",
+  "no_brands":"No brands found"
+}
