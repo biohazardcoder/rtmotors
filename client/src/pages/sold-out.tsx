@@ -8,9 +8,10 @@ import { Menus } from "@/components/shared/menus";
 import VideoPlayer from "@/components/shared/video-player";
 import { Header } from "@/components/shared/header";
 import ProgressiveImage from "@/components/shared/progress-image";
+import { useTranslation } from "react-i18next";
 
 export const SoldOut = () => {
-
+  const { t } = useTranslation();
   const { data, isLoading } = useSWR("/car", fetcher);
   const cars = (data as VehicleTypes[]) || [];
   const soldout = cars.filter(item=>item.stock === 0)
@@ -20,7 +21,7 @@ export const SoldOut = () => {
         <Menus/>
         <Navbar />
         <div className="py-8 px-[5%]">
-          <h1 className="text-xl md:text-3xl font-bold text-white">Sold Out</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">{t("soldOut")}</h1>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="w-full h-56">
@@ -40,7 +41,7 @@ export const SoldOut = () => {
       <Navbar />
       <div className="py-8 px-[5%]" id="all">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl md:text-3xl font-bold text-white">Sold Out</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">{t("soldOut")}</h1>
         </div>
 
         {soldout.length === 0 ? (
@@ -48,7 +49,7 @@ export const SoldOut = () => {
             className="pt-4 text-center text-muted-foreground"
         
           >
-            No container loading found
+            {t("noVehiclesFound")}
           </div>
         ) : (
           <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">

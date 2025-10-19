@@ -17,6 +17,7 @@ import { Button } from "../ui/button";
 import { HashLink } from "react-router-hash-link";
 import VideoPlayer from "./video-player";
 import ProgressiveImage from "./progress-image";
+import { useTranslation } from "react-i18next";
 
 interface VehiclesProps {
   type: string;
@@ -31,7 +32,7 @@ interface VehiclesProps {
 
 export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice, setBrand }: VehiclesProps) => {
   const { data, isLoading } = useSWR("/car", fetcher);
-
+  const {t} = useTranslation();
   useEffect(() => {
     AOS.init({ duration: 800 });
   }, []);
@@ -42,11 +43,11 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
         <div className="py-8 px-[5%]">
          <div className="flex items-center justify-between border-b-2 pb-6 border-primary-foreground" data-aos="fade-up">
           <h1 className="text-lg md:text-3xl font-bold text-white">
-            Our Cars
+            {t("ourCars")}
           </h1>
           <HashLink to="/cars/#all">
             <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
-              More
+              {t("more")}
             </Button>
           </HashLink>
         </div>
@@ -113,14 +114,14 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
     <div className="bg-[#171f3a] min-h-[20vh] mt-40 md:mt-0" id="search">
       <div className="py-8 px-[5%]">
         <div className="flex items-center justify-between border-b-2 pb-6 border-primary-foreground" data-aos="fade-up">
-          <h1 className="text-lg md:text-3xl font-bold text-white">
+          <h1 className="text-sm md:text-3xl font-bold text-white">
             {
-              activeFilters.length > 0 ? "Filtered Cars" : "New Cars"
+              activeFilters.length > 0 ? <>{t("filteredCars")}</> : <>{t("newCars")}</>
             }
           </h1>
           <HashLink to="/cars/#all">
             <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
-              More
+              {t("more")}
             </Button>
           </HashLink>
         </div>
@@ -159,7 +160,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
               data-aos="fade-up"
               className="text-muted-foreground w-full text-center"
             >
-              No vehicles found
+              {t("noVehiclesFound")}
             </p>
           ) : (
             filteredVehiclesToShow.map(
@@ -204,7 +205,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
 
                       {stock === 0 ? (
                         <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-md shadow">
-                          Sold out
+                          {t("soldOut")}
                         </span>
                       ) : status && status?.text?.length > 0 ? (
                         <span
@@ -235,7 +236,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                       <div className="flex items-center justify-between">
                         <p className="text-base font-bold text-black">
                           {currentPrice === 777 ? (
-                            "Price Consultation"
+                           <>{t("priceConsultation")}</>
                           ) : (
                             <>
                               ${currentPrice.toLocaleString()}{" "}
@@ -251,7 +252,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                           to={`/cars/${_id}/#detail`}
                           className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md"
                         >
-                          View Details
+                          {t("viewDetails")}
                         </HashLink>
                       </div>
                     </div>
@@ -267,10 +268,10 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
        {allCars.length > 0 && (
   <div className="px-[5%] pb-10" data-aos="fade-up">
     <div className="flex items-center justify-between border-b-2 border-primary-foreground text-white pb-6 mb-6">
-      <h1 className="text-xl md:text-3xl font-bold">All Cars</h1>
+      <h1 className="text-sm md:text-3xl font-bold">{t("allCars")}</h1>
       <HashLink smooth to="/cars/#all">
         <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
-          More
+          {t("more")}
         </Button>
       </HashLink>
     </div>
@@ -308,7 +309,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
 
                       {stock === 0 ? (
                         <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-md shadow">
-                          Sold out
+                          {t("soldOut")}
                         </span>
                       ) : status && status?.text?.length > 0 ? (
                         <span
@@ -339,7 +340,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                       <div className="flex items-center justify-between">
                         <p className="text-base font-bold text-black">
                           {currentPrice === 777 ? (
-                            "Price Consultation"
+                            <>{t("priceConsultation")}</>
                           ) : (
                             <>
                               ${currentPrice.toLocaleString()}{" "}
@@ -355,7 +356,7 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
                           to={`/cars/${_id}/#detail`}
                           className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md"
                         >
-                          View Details
+                          {t("viewDetails")}
                         </HashLink>
                       </div>
                     </div>
@@ -375,10 +376,10 @@ export const Vehicles = ({ type, year, price, brand, setType, setYear, setPrice,
         <div className="px-[5%]" data-aos="fade-up">
           <Carousel>
             <div className="flex items-center justify-between border-b-2 border-primary-foreground text-white pb-6  mb-6">
-              <h1 className="text-xl md:text-3xl font-bold">Sold Out</h1>
+              <h1 className="text-sm md:text-3xl font-bold">{t("soldOut")}</h1>
               <HashLink smooth to="/sold-out/#all">
                 <Button className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base ">
-                  More
+                  {t("more")}
                 </Button>
               </HashLink>
             </div>

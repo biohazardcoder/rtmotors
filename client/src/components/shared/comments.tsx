@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { Skeleton } from "../ui/skeleton";
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Comment {
   _id: string;
@@ -11,15 +12,19 @@ interface Comment {
   message: string;
 }
 
+
 export const Comments = () => {
   const { data, isLoading } = useSWR("/customer", fetcher);
+  const { t,i18n } = useTranslation();
 
+  
+  
   if (isLoading) {
     return (
       <div>
         <div className="py-8 px-[5%]" data-aos="fade-up">
-          <h1 className="text-lg md:text-3xl font-bold text-white">
-            What our customers say
+          <h1 className="text-sm md:text-3xl font-bold text-white">
+            {t("what_our_customers_say")}
           </h1>
           <Carousel className="mt-4">
             <CarouselContent>
@@ -84,11 +89,11 @@ export const Comments = () => {
       <div className="py-8 px-[5%]" data-aos="fade-up">
         {comments?.length === 0 ? (
           <div className="pt-4 text-center text-muted-foreground">
-            No comments found
+            {t("no_testimonials_found")}
           </div>
         ) : (
           <Carousel>
-            <h1 className="text-lg md:text-3xl font-bold mb-4">What our customers say</h1>
+            <h1 className="text-sm md:text-3xl font-bold mb-4">{t("what_our_customers_say")}</h1>
             <CarouselPrevious className="bg-blue-500 text-white hover:bg-blue-600 top-[14px] md:top-5 right-10 rounded-md left-[100%-20px]" />
             <CarouselNext className="bg-blue-500 text-white hover:bg-blue-600 top-[14px] md:top-5 right-0 rounded-md left-[100%-30px]" />
             <CarouselContent>
@@ -121,8 +126,16 @@ export const Comments = () => {
                             ))}
                           </div>
                         </div>
-                        <p className="text-base mt-2 flex-wrap">{comment.message}</p>
-                      </div>
+                      <p className="text-base mt-2 flex-wrap">
+                        {(() => {
+                          const parts = comment.message.split("@"); 
+                          const lang = i18n.language;
+
+                          if (lang === "ru") return parts[1] || parts[0];
+                          return parts[0]; 
+                        })()}
+                      </p>                    
+                    </div>
                     </div>
                   </CarouselItem>
                 );

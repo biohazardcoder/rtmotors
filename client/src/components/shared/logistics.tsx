@@ -13,23 +13,24 @@ import { Button } from "../ui/button";
 import { HashLink } from "react-router-hash-link";
 import VideoPlayer from "./video-player";
 import ProgressiveImage from "./progress-image";
+import { useTranslation } from "react-i18next";
 
 export const Logistic = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
   const logistics = (data as LogisticTypes[]) || [];
   const firstSix = logistics.slice(0, 6)
-
+  const {t} = useTranslation();
   if (isLoading) {
     return (
       <div className="">
         <div className="py-8 px-[5%]" data-aos="fade-up">
           <div className="flex items-center justify-between pb-6 border-b-2 border-primary-foreground  mb-6" >
-          <h1 className="text-lg md:text-3xl font-bold text-white">Container loadings</h1>
+          <h1 className="text-sm md:text-3xl font-bold text-white">{t("container_loadings")}</h1>
           <HashLink to="/container-loadings/#all">
             <Button
             className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
             >
-              More
+              {t("more")}
             </Button>
           </HashLink>
           </div>
@@ -56,17 +57,17 @@ export const Logistic = () => {
             className="pt-4 text-center text-muted-foreground"
             data-aos="fade-up"
           >
-            No container loading found
+            {t("no_found_container_loadings")}
           </div>
         ) : (
           <Carousel className="mt-8 relative">
             <div className="flex items-center justify-between pb-6 border-b-2 border-primary-foreground  mb-6" >
-          <h1 className="text-lg md:text-3xl font-bold">Container loadings</h1>
+          <h1 className="text-sm md:text-3xl font-bold">{t("container_loadings")}</h1>
           <HashLink to="/container-loadings/#all">
             <Button
             className="text-xs bg-blue-500 text-white hover:bg-blue-600 md:text-base "
             >
-              More
+              {t("more")}
             </Button>
           </HashLink>
         </div>

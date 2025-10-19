@@ -13,6 +13,7 @@ import useSWR from "swr"
 import type { OrderTypes } from "@/types/types"
 import { fetcher } from "@/middlewares/Fetcher"
 import { format } from "date-fns";
+import { useTranslation } from "react-i18next"
 
 export const Profile = () => {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -23,10 +24,10 @@ export const Profile = () => {
   const [lastName, setLastName] = useState('')
   const [lastNameLoading, setLastNameLoading] = useState(false)
   const [editLastName, setEditLastName] = useState(false)
-  
+  const { t } = useTranslation();
 
   const handleChangeFirstName = async () => {
-    if (!firstName.trim()) return toast.warning("First name cannot be empty")
+    if (!firstName.trim()) return toast.warning(t("first_name_required"))
     try {
       setFirstNameLoading(true)
       await user?.update({
@@ -35,17 +36,17 @@ export const Profile = () => {
       })
       setFirstName("")
       setEditName(false)
-      toast.success("First name updated successfully!")
+      toast.success(t("first_name_updated_successfully"))
     } catch (error) {
       console.error("Error updating first name:", error)
-      toast.error("There was a problem updating the first name.")
+      toast.error(t("problem_updating_first_name"))
     } finally {
       setFirstNameLoading(false)
     }
   }
 
   const handleChangeLastName = async () => {
-    if (!lastName.trim()) return toast.warning("Last name cannot be empty")
+    if (!lastName.trim()) return toast.warning(t("last_name_required"))
     try {
       setLastNameLoading(true)
       await user?.update({
@@ -54,10 +55,10 @@ export const Profile = () => {
       })
       setLastName("")
       setEditLastName(false)
-      toast.success("Last name updated successfully!")
+      toast.success(t("last_name_updated_successfully"))
     } catch (error) {
       console.error("Error updating last name:", error)
-      toast.error("There was a problem updating the last name.")
+      toast.error(t("problem_updating_last_name"))
     } finally {
       setLastNameLoading(false)
     }
@@ -106,9 +107,9 @@ if (!isLoaded ) {
     <div>
       <Navbar />
       <div className="h-screen p-2 pt-28  px-[5%]">
-        <h1 className="text-2xl font-bold text-white">Your Profile</h1>
+        <h1 className="text-2xl font-bold text-white">{t("your_profile")}</h1>
         <div className="mt-2 flex items-center gap-2 text-sm">
-          <h1 className="text-white">First Name:</h1>
+          <h1 className="text-white">{t("first_name")}:</h1>
           {
             firstNameLoading ? <div><Loader /> </div> : <div className="flex items-center gap-4 text-white">
               {!editName && <h1>{user?.firstName}</h1>}
@@ -118,7 +119,7 @@ if (!isLoaded ) {
                   <Button onClick={handleChangeFirstName}><CheckCheck /></Button>
                   <Button onClick={() => setEditName(false)} variant={'destructive'}><PencilOff /></Button>
                 </div> :
-                  <Button className="text-black" variant={"outline"} onClick={() => setEditName(true)}><Pencil /> Edit</Button>
+                  <Button className="text-black" variant={"outline"} onClick={() => setEditName(true)}><Pencil /> {t("edit")}</Button>
                 }
               </div>
             </div>
@@ -126,7 +127,7 @@ if (!isLoaded ) {
         </div>
         <Separator className="mt-2" />
         <div className="mt-2 flex items-center gap-2 text-sm">
-          <h1 className="text-white">Last Name:</h1>
+          <h1 className="text-white">{t("last_name")}:</h1>
           {
             lastNameLoading ? <div><Loader /> </div> : <div className="flex items-center gap-4 text-white">
               {!editLastName && <h1 className="text-white">{user?.lastName}</h1>}
@@ -136,7 +137,7 @@ if (!isLoaded ) {
                   <Button onClick={handleChangeLastName}><CheckCheck /></Button>
                   <Button onClick={() => setEditLastName(false)} variant={'destructive'}><PencilOff /></Button>
                 </div> :
-                  <Button className="text-black" variant={"outline"} onClick={() => setEditLastName(true)}><Pencil /> Edit</Button>
+                  <Button className="text-black" variant={"outline"} onClick={() => setEditLastName(true)}><Pencil /> {t("edit")}</Button>
                 }
               </div>
             </div>
@@ -145,14 +146,14 @@ if (!isLoaded ) {
         <Separator className="my-2" />
 
         <div className="flex items-center gap-2 text-sm">
-          <h1 className="text-white">Sign out:</h1>
+          <h1 className="text-white">{t("sign_out")}:</h1>
           <div className="flex items-center gap-4">
             <div>
               <label htmlFor="profile-upload" className="cursor-pointer">
                 <SignOutButton>
                   <Button variant={"outline"}>
                     <LogOut />
-                    Sign out
+                    {t("sign_out")}
                   </Button>
                 </SignOutButton>
               </label>
@@ -160,7 +161,7 @@ if (!isLoaded ) {
           </div>
         </div>
       <div className="mt-6 pb-10">
-        <h1 className="text-2xl font-bold text-white">Your Orders</h1>
+        <h1 className="text-2xl font-bold text-white">{t("your_orders")}</h1>
         {isLoading ? (
            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-4">
       {[...Array(2)].map((_, i) => (
@@ -190,7 +191,7 @@ if (!isLoaded ) {
       ))}
     </div>
         ) : error ? (
-          <div>Error loading orders</div>
+          <div>{t("error_loading_orders")}</div>
         ) : (
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mt-4">
       {myOrders.map((order: OrderTypes) => (
@@ -203,15 +204,15 @@ if (!isLoaded ) {
               {order.car?.name}
             </h2>
             <p className="text-sm text-muted-foreground">
-              Order ID:{" "}
+              {t("id")}:{" "}
               <span className="uppercase font-medium text-black ">
                 #{order.orderId}
               </span>
             </p>
             <p className="text-sm  text-black font-medium">
-             <span className="text-muted-foreground">Tracking:{" "}</span>
+             <span className="text-muted-foreground">{t("tracking")}:{" "}</span>
                {Number(order.trackingNumber) === 777 ? (
-                        "Price Consultation"
+                        <>{t("price_consultation")}</>
                       ) : (
                         <>
                           ${order.trackingNumber.toLocaleString()}
@@ -219,11 +220,11 @@ if (!isLoaded ) {
                       )}
             </p>
             <p className="text-sm text-muted-foreground">
-              Contact:{" "}
+              {t("contact")}:{" "}
               <span className="font-medium text-black">{order.contact}</span>
             </p>
             <p className="text-sm text-muted-foreground">
-              Date:{" "}
+              {t("date")}:{" "}
               <span className="font-medium text-black">
                 {order.createdAt ? format(new Date(order.createdAt), "dd MMMM yyyy") : ""}
               </span>

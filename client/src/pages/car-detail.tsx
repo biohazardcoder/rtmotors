@@ -30,6 +30,7 @@ import VideoPlayer from "@/components/shared/video-player";
 import { HashLink } from "react-router-hash-link";
 import { Header } from "@/components/shared/header";
 import ProgressiveImage from "@/components/shared/progress-image";
+import { useTranslation } from "react-i18next";
 
 
 export const CarDetail = () => {
@@ -42,18 +43,18 @@ export const CarDetail = () => {
     const [contact,setContact] = useState("");
     const [menu,setMenu] = useState(false);
     const[loading,setLoading] = useState(false);
-  const [commentPage, setCommentPage] = useState(1);
-
+    const [commentPage, setCommentPage] = useState(1);
+    const {t} = useTranslation();
     if (error) {
         return   <div >
             <Navbar />
             <div className="w-full h-[100vh] flex flex-col gap-2 items-center justify-center text-2xl" id="detail">
                 <div className="flex flex-col items-center gap-2">
-                     Error loading car details
+                     {t("error_loading_car_details")}
                 </div>
                 <Link to={"/"}>
                     <Button className="bg-blue-500 hover:bg-blue-600 text-white">
-                        Go Back
+                        {t("go_back")}
                     </Button>
                 </Link>
             </div>
@@ -67,22 +68,22 @@ export const CarDetail = () => {
     
     const handleCopy = () => {
       navigator.clipboard.writeText(window.location.href)
-      toast.success("Link copied to clipboard");
+      toast.success(t("link_copied"));
     }
     
     
     
     const handleAddComment = async () => {
       if (!user) {
-        toast.error("You must be logged in to comment");
+        toast.error(t("you_must_be_logged_in_to_comment"));
     return;
   }
   if (!commentText) {
-    toast.error("You must enter a comment");
+    toast.error(t("you_must_enter_a_comment"));
     return;
   }
   if (!commentRating) {
-    toast.error("You must select a rating");
+    toast.error(t("you_must_select_a_rating"));
     return;
   }
   try {
@@ -92,12 +93,12 @@ export const CarDetail = () => {
       message: commentText,
       rating: commentRating || 5,
     });
-    toast.success("Comment added successfully");
+    toast.success(t("comment_added_successfully"));
     setCommentText("");
     setCommentRating(0);
     mutate();
   } catch (error) {
-    toast.error("Error adding comment");
+    toast.error(t("error_adding_comment"));
     console.error(error);
   }
 };
@@ -105,15 +106,15 @@ export const CarDetail = () => {
 
 const handleDeleteComment = async (commentId: string) => {
   if (!user) {
-    toast.error("You must be logged in to delete a comment");
+    toast.error(t("you_must_be_logged_in_to_comment"));
     return;
   }
   try {
     await Fetch.delete(`/car/${_id}/comment/${commentId}`);
-    toast.success("Comment deleted successfully");
+    toast.success(t("comment_deleted_successfully"));
     mutate();
   } catch (error) {
-    toast.error("Error deleting comment");
+    toast.error(t("error_deleting_comment"));
     console.error(error);
   }
 }
@@ -133,11 +134,11 @@ const filteredCars = sameBrand.filter(car => car.brand === brand);
   
     const handleBuyCar = async () => {
       if (!user) {
-        toast.error("You must be logged in to buy a car");
+        toast.error(t("you_must_be_logged_in_to_buy_a_car"));
         return;
       }
       if (!contact) {
-        toast.error("You must enter your phone number");
+        toast.error(t("you_must_enter_your_phone_number"));
         return;
       }
       try {
@@ -149,11 +150,11 @@ const filteredCars = sameBrand.filter(car => car.brand === brand);
           contact,
         });
         mutate()
-        toast.success("Car purchased successfully");
+        toast.success(t("car_purchase_successful_we_will_contact_you_soon"));
         setContact("");
         setMenu(false);
       } catch (error) {
-        toast.error("Error purchasing car");
+        toast.error(t("error_purchasing_car"));
       }finally {
         setLoading(false);
       }
@@ -181,7 +182,7 @@ return (
                 <Button className="hidden md:flex bg-blue-500 text-white hover:bg-blue-600"
                 onClick={handleCopy}
                 >
-                    <Share/> Share
+                    <Share/> {t("share")}
                 </Button>
             </div>
           </div>
@@ -189,7 +190,7 @@ return (
         <div className=" mt-8">
           {
             !car ? (
-              <p className="text-white">No car found</p>
+              <p className="text-white">{t("no_car_found")}</p>
             ) : (
              <div
                 key={_id}
@@ -214,7 +215,7 @@ return (
                   </Carousel>
 
                     {stock === 0 ? (<span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-full shadow">
-                    Sold out
+                    {t("soldOut")}
                   </span>) : status && status?.text?.length > 0 ? (
                     <span
                       className="absolute top-3 left-3 text-black text-sm font-semibold px-3 py-1 rounded-full shadow"
@@ -227,75 +228,75 @@ return (
 
                 <div className="p-6 bg-white col-span-2 space-y-2 rounded-md md:rounded-lg mt-4 md:mt-0">
                     <div className="flex items-center justify-between">
-                      <h1 className="text-2xl font-bold">Car Details</h1>
+                      <h1 className="text-xl font-bold">{t("car_details")}</h1>
                         <Button 
                     onClick={() => setMenu(true)} 
                     disabled={stock === 0}
                     className={`${stock === 0 ? "bg-red-500 text-white hover:bg-red-600" : "bg-blue-500 text-white hover:bg-blue-600"}`}>
                         {
-                          stock === 0 ? "Sold out" : "Buy Now"
+                          stock === 0 ? t("soldOut") : t("buy_now")
                         }
                     </Button>
                     </div>
                     <Separator/>
                     <div className="space-y-4 grid grid-cols-2 md:grid-cols-4 text-xs md:text-sm mt-4">
                          <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                          <Layers size={20}/> Brand
+                          <Layers size={20}/> {t("brand")}
                         </div>
                       <div className="font-semibold uppercase">
                       {brand}
                     </div>
                      <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                          <History size={20}/> Condition
+                          <History size={20}/> {t("condition")}
                         </div>
                       <div className="font-semibold capitalize">
                       {type}
                     </div>
                         <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                          <Gauge size={20}/> Distance
+                          <Gauge size={20}/> {t("distance")}
                         </div>
                       <div className="font-semibold">
-                      {miles.toLocaleString()} km
+                      {miles.toLocaleString()} {t("km")}
                     </div>
                     <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                      <Fuel size={20}/> Fuel Type
+                      <Fuel size={20}/> {t("fuelType")}
                     </div>
                     <div className="font-semibold capitalize">
                       {fuelType}
                     </div>
                     <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                      <GitFork size={20}/> Transmission
+                      <GitFork size={20}/> {t("transmission")}
                     </div>
                     <div className="font-semibold capitalize">
                       {transmission}
                     </div>
                     <div className="flex items-center gap-2 font-semibold  text-muted-foreground">
-                      <PaintBucket size={20}/> Color
+                      <PaintBucket size={20}/> {t("color")}
                     </div>
                     <div className="font-semibold capitalize">
                       {description}
                     </div>
                     <div className="flex items-center gap-2 font-semibold  text-muted-foreground">
-                      <CalendarDays size={20}/>  Year of manufacture
+                      <CalendarDays size={20}/>  {t("year_of_manufacture")}
                     </div>
                     <div className="font-semibold capitalize">
                       {firstPart}
                     </div>
 
                     <div className="flex items-center gap-2 font-semibold  text-muted-foreground">
-                      <CalendarCheck size={20}/> Registration date
+                      <CalendarCheck size={20}/> {t("registration_year")}
                     </div>
 
                     <div className="font-semibold capitalize">
                       {formattedDate}
                     </div>
                      <div className="flex items-center gap-2 font-semibold capitalize text-muted-foreground">
-                      <BadgeDollarSign size={20}/> Price
+                      <BadgeDollarSign size={20}/> {t("price")}
                     </div>
 
                     <div className="font-semibold capitalize">
                        {currentPrice === 777 ? (
-                        "Price Consultation"
+                        <>{t("priceConsultation")}</>
                       ) : (
                         <>
                           ${currentPrice.toLocaleString()}{" "}
@@ -318,7 +319,7 @@ return (
         </div>
       <div className="grid grid-cols-1 md:grid-cols-3">
   <div>
-    <h1 className="font-bold text-xl mt-10 text-white">Comments</h1>
+    <h1 className="font-bold text-xl mt-10 text-white">{t("comments")}</h1>
     {(() => {
       const ratingCounts = [0, 0, 0, 0, 0];
       let totalRating = 0;
@@ -447,7 +448,7 @@ return (
   </div>
    <div className="md:mt-10">
       <div className="flex items-center gap-2  ">
-        <h1 className="text-xl font-bold text-white">Your Rating</h1>
+        <h1 className="text-xl font-bold text-white">{t("your_rating")}</h1>
         <div className="flex items-center mt-1 gap-2">
           {[...Array(5)].map((_, i) => (
             <button
@@ -474,7 +475,7 @@ return (
         className="text-white bg-blue-500 hover:bg-blue-600 mt-4 rounded-[4px]"
         onClick={handleAddComment}
       >
-        Submit
+        {t("submit")}
       </Button>
     </div>
 </div>
@@ -484,12 +485,12 @@ return (
       <div className="py-8 px-[5%]">
         <div className="flex items-center justify-between">
           <h1 className="text-xl text-white md:text-3xl font-bold">
-            {brand && <span><span className="uppercase">{brand}</span> cars</span>}
+            {brand && <span><span className="uppercase">{brand}</span> {t("cars")}</span>}
           </h1>
-        </div>       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        </div>       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {
             filteredCars.length === 0 ? (
-              <p>No vehicles found</p>
+              <p>{t("noVehiclesFound")}</p>
             ) : (
                 filteredCars.map(
             ({
@@ -530,7 +531,7 @@ return (
 
                     {stock === 0 ? (
                       <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-md shadow">
-                        Sold out
+                        {t("soldOut")}
                       </span>
                     ) : status && status?.text?.length > 0 ? (
                       <span
@@ -580,7 +581,7 @@ return (
                             </p>
                           </div>
                         <HashLink to={`/cars/${_id}/#detail`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
-                          View Details
+                          {t("viewDetails")}
                         </HashLink>
                       </div>
                   </div>
@@ -616,14 +617,14 @@ return (
                   </div>
                 </div>
                 <Separator className="my-4 "/>
-                <h2 className="font-semibold mb-2">Phone</h2>
-                <Input value={contact} onChange={(e) => setContact(e.target.value)} placeholder="Enter your phone number" />
-                <p className="text-xs text-center text-muted-foreground mt-2 ">We will contact you shortly</p>
+                <h2 className="font-semibold mb-2">{t("phone")}</h2>
+                <Input value={contact} onChange={(e) => setContact(e.target.value)} placeholder={t("enter_your_phone_number")} />
+                <p className="text-xs text-center text-muted-foreground mt-2 ">{t("we_will_contact_you_shortly")}</p>
                 <Separator className="my-4 "/>
                 <div className="flex items-center justify-between gap-2">
-                  <Button disabled={loading} onClick={() => setMenu(false)} className="mt-2" variant={"destructive"}>Cancel</Button>
+                  <Button disabled={loading} onClick={() => setMenu(false)} className="mt-2" variant={"destructive"}>{t("cancel")}</Button>
                 <Button onClick={handleBuyCar} disabled={loading} className="mt-2 bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
-                  {loading ? (<Loader2 className="animate-spin" />) : "Buy"}
+                  {loading ? (<Loader2 className="animate-spin" />) : (t("buy_now"))}
                 </Button>
                 </div>
             </div>

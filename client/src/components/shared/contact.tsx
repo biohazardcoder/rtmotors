@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 export const ContactForm = () => {
   const [form, setForm] = useState({
@@ -13,7 +14,7 @@ export const ContactForm = () => {
     message: "",
   });
   const [loading, setLoading] = useState(false);
-
+  const {t} = useTranslation();
   const BOT_TOKEN = "7705882088:AAGCJ_2Evhi7s76dRnaswtCRn0qSCPkmQ0U";
   const CHAT_ID = "-1002363441340";
 
@@ -25,15 +26,15 @@ export const ContactForm = () => {
 
   const validateForm = () => {
     if (form.name.trim().length < 2) {
-      toast.error("Name must be at least 2 characters long.");
+      toast.error(t("name_required"));
       return false;
     }
     if (!form.email.includes("@")) {
-      toast.error("Please enter a valid email address.");
+      toast.error(t("email_required"));
       return false;
     }
     if (form.message.trim().length < 10) {
-      toast.error("Message must be at least 10 characters long.");
+      toast.error(t("message_required"));
       return false;
     }
     return true;
@@ -64,7 +65,6 @@ export const ContactForm = () => {
       );
 
       toast.success("Message sent!");
-      // Reset form after success ✅
       setForm({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
       console.error(error);
@@ -81,21 +81,21 @@ export const ContactForm = () => {
           name="name"
           value={form.name}
           onChange={handleChange}
-          placeholder="Name"
+          placeholder={t("name")}
           className="bg-white"
         />
         <Input
           name="email"
           value={form.email}
           onChange={handleChange}
-          placeholder="Email"
+          placeholder={t("email")}
           className="bg-white"
         />
         <Input
           name="phone"
           value={form.phone}
           onChange={handleChange}
-          placeholder="Phone"
+          placeholder={t("phone")}
           className="bg-white"
         />
       </div>
@@ -103,7 +103,7 @@ export const ContactForm = () => {
         name="message"
         value={form.message}
         onChange={handleChange}
-        placeholder="Message"
+        placeholder={t("message")}
         className="bg-white min-h-40"
       />
       <Button
@@ -111,7 +111,7 @@ export const ContactForm = () => {
         disabled={loading}
         className="bg-blue-600 text-white w-full md:w-auto hover:bg-blue-700"
       >
-        {loading ? "Sending..." : "Send Message"}
+        {loading ? t("sending") : t("send_message")}
       </Button>
     </div>
   );

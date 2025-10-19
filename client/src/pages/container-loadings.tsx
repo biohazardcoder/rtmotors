@@ -8,18 +8,19 @@ import { Menus } from "@/components/shared/menus";
 import VideoPlayer from "@/components/shared/video-player";
 import { Header } from "@/components/shared/header";
 import ProgressiveImage from "@/components/shared/progress-image";
+import { useTranslation } from "react-i18next";
 
 export const ContainerLoadings = () => {
   const { data, isLoading } = useSWR("/logistic", fetcher);
   const logistics = (data as LogisticTypes[]) || [];
-
+  const {t} = useTranslation();
   if (isLoading) {
     return (
       <div className="min-h-screen pt-20">
         <Menus/>
         <Navbar />
         <div className="py-8 px-[5%]">
-          <h1 className="text-xl md:text-3xl font-bold text-white">Container loadings</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">{t("container_loadings")}</h1>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="w-full h-56">
@@ -39,7 +40,7 @@ export const ContainerLoadings = () => {
       <Navbar />
       <div className="py-8 px-[5%]" id="all">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl md:text-3xl font-bold text-white">Container loadings</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">{t("container_loadings")}</h1>
         </div>
 
         {logistics.length === 0 ? (
@@ -47,7 +48,7 @@ export const ContainerLoadings = () => {
             className="pt-4 text-center text-muted-foreground"
         
           >
-            No container loading found
+            {t("no_found_container_loadings")}
           </div>
         ) : (
           <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">

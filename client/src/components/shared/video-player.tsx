@@ -1,26 +1,32 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Player } from "video-react";
 import "video-react/dist/video-react.css";
 
-const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
+interface VideoPlayerProps {
+  videoUrl: string;
+}
+
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl }) => {
   const [progress, setProgress] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [videoSrc, setVideoSrc] = useState<string>("");
-
+  const { t } = useTranslation();
   useEffect(() => {
+    let isMounted = true; 
     const xhr = new XMLHttpRequest();
     xhr.open("GET", videoUrl, true);
     xhr.responseType = "blob";
 
     xhr.onprogress = (event) => {
-      if (event.lengthComputable) {
+      if (event.lengthComputable && isMounted) {
         const percent = Math.round((event.loaded / event.total) * 100);
         setProgress(percent);
       }
     };
 
     xhr.onload = () => {
-      if (xhr.status === 200) {
+      if (xhr.status === 200 && isMounted) {
         const blobUrl = URL.createObjectURL(xhr.response);
         setVideoSrc(blobUrl);
         setProgress(100);
@@ -28,10 +34,16 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
       }
     };
 
-    xhr.onerror = () => setLoaded(true);
+    xhr.onerror = () => {
+      if (isMounted) setLoaded(true);
+    };
+
     xhr.send();
 
-    return () => xhr.abort();
+    return () => {
+      isMounted = false;
+      xhr.abort();
+    };
   }, [videoUrl]);
 
   return (
@@ -44,26 +56,26 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
               {progress}%
             </span>
           </div>
-          <p className="text-sm font-medium text-gray-600">Loading video...</p>
+          <p className="text-sm font-medium text-gray-600">{t("loading_video")}</p>
         </div>
       )}
 
-      <div
-        style={{
-          opacity: loaded ? 1 : 0,
-          transition: "opacity 0.5s ease-in-out",
-        }}
-      >
-        {videoSrc && (
+      {videoSrc && (
+        <div
+          style={{
+            opacity: loaded ? 1 : 0,
+            transition: "opacity 0.5s ease-in-out",
+          }}
+        >
           <Player
             src={videoSrc}
-            aspectRatio="1:0.8"
+            aspectRatio="16:9"
             fluid
             muted
             playsInline
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

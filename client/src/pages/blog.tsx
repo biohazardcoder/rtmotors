@@ -7,16 +7,17 @@ import VideoPlayer from "@/components/shared/video-player";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Menus } from "@/components/shared/menus";
 import { Header } from "@/components/shared/header";
+import { useTranslation } from "react-i18next";
 
 export const Blog = () => {
     const { data,isLoading} = useSWR("/blog", fetcher)
-
+    const {t, i18n} = useTranslation();
   if (isLoading) {
     return (
       <div className="pt-24">
         <Navbar />
         <div className="py-8 px-[5%]">
-          <h1 className="text-xl md:text-3xl font-bold text-white">Blogs</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">{t("blogs")}</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
             {[...Array(4)].map((_, i) => (
               <div
@@ -47,11 +48,11 @@ export const Blog = () => {
         <Menus/>
         <Navbar />
       <div className="py-8 px-[5%]">
-          <h1 className="text-xl md:text-3xl font-bold text-white">Blogs</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">{t("blogs")}</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {
             blog.length === 0 ? (
-              <p className="text-white">No blog found</p>
+              <p className="text-white">{t("no_blogs_found")}</p>
             ) : (
                 blog.map(
             ({
@@ -80,14 +81,26 @@ export const Blog = () => {
                     {title}
                   </h6>
                <p className="text-secondary text-sm mb-3 whitespace-pre-line">
-                  {text.split("•").map((item, i) =>
-                    item.trim() ? (
-                      <li key={i} className="list-disc ml-5 mb-1">
-                        {item.trim()}
-                      </li>
-                    ) : null
-                  )}
-                </p>                 
+                  {(() => {
+                    const lang = i18n.language;
+                    const parts = text?.split("@") || []; 
+
+                    const selected =
+                      lang === "ru"
+                        ? parts[1]?.trim() || parts[0]?.trim() || ""
+                        : parts[0]?.trim() || "";
+
+                    return selected
+                      .split("•")
+                      .map((item, i) =>
+                        item.trim() ? (
+                          <li key={i} className="list-disc ml-5 mb-1">
+                            {item.trim()}
+                          </li>
+                        ) : null
+                      );
+                  })()}
+                </p>
                 </div>
                 </div>
                 

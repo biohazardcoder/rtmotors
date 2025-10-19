@@ -15,9 +15,206 @@
   "brands": "Brands",
   "years": "Years",
   "prices": "Prices",
-  "more": "More",
   "search": "Search",
 
   "our_brands":"Our Premium Brands",
-  "no_brands":"No brands found"
+  "no_brands":"No brands found",
+
+  "ourCars": "Our Cars",
+  "more": "More",
+  "filteredCars": "Filtered Cars",
+  "newCars": "New Cars",
+  "noVehiclesFound": "No vehicles found",
+  "soldOut": "Sold out",
+  "priceConsultation": "Price Consultation",
+  "viewDetails": "View Details",
+  "allCars": "All Cars",
+
+  "container_loadings": "Container Loadings",
+  "no_found_container_loadings": "No container loadings found",
+
+  "exchange_rates": "Exchange Rates",
+  "enter_amount": "Enter amount in USD (Estimated amount)",
+
+  "our_partners": "Our Partners",
+  "no_partners": "No partners found",
+
+  "auction_holders" : "Auction Holders",
+  "no_auction_holders": "No auction holders found",
+
+  "what_our_customers_say": "What our customers say",
+  "no_testimonials_found": "No testimonials found",
+
+  "quick_links": "Quick Links",
+  "all_rights_reserved": "All Rights Reserved",
+  "frequently_asked_questions": "Frequently Asked Question(FAQ)",
+
+  "location": "Gimhae, South Korea",
+
+  "blogs": "Blogs",
+  "no_blogs_found": "No blogs found",
+
+  "rt_motors_company": "RT Motors Company",
+  "about_rt_motors": "RT MOTORS specializes in delivering high-quality vehicles from South Korea to customers worldwide. With years of experience, we have established strong partnerships with Korea’s top manufacturers and maintain reliable connections with trusted and competitively priced dealers in the automotive sector.",
+  "our_services": "Our Services and Strengths Include",
+  "first_service": "Direct sourcing from top Korean manufacturers and verified auctions",
+  "second_service": "Export of a wide range of vehicles: sedans, SUVs, EVs",
+  "third_service": "Personalized vehicle sourcing based on your market demand",
+  "fourth_service": "Full customs clearance and international logistics support",
+  "fifth_service": "Competitive pricing and long-term partner incentives",
+  "sixth_service": "Quality inspection and pre-shipment vehicle check.",
+
+  "our_achievements": "Our Achievements",
+  "countries":"Countries",
+  "cars_sold":"Cars sold",
+  "clients":"Clients",
+
+  "our_location": "Our Location",
+  "name":"Name",
+  "email":"Email",
+  "phone":"Phone",
+  "message":"Message",
+  "send_message":"Send Message",
+  "sending":"Sending...",
+  "name_required":"Name must be at least 2 characters long.",
+  "email_required":"Please enter a valid email address.",
+  "message_required":"Message must be at least 10 characters long.",
+
+  "how_we_work": "How We Work",
+  "hww": {
+    "steps": [
+      {
+        "image": "https://media.istockphoto.com/id/1356054725/vector/3d-vector-render-search-icon-cartoon-character-hand-holds-big-magnifying-glass-lens-business.jpg?s=612x612&w=0&k=20&c=UHLg8FC8HIBJKLGHVbf3O6uwSVu8uNz7LTlNu30dXkw=",
+        "title": "Explore Vehicles",
+        "description": "Browse and discover cars through RT Motors – from reliable dealers, verified platforms, and official auto auctions."
+      },
+      {
+        "image": "https://media.istockphoto.com/id/1777759316/photo/3d-videocamera-icon-movie-camera-video-memory-movie-camera-with-with-lens-and-video-reel-3d.jpg?s=612x612&w=0&k=20&c=cnGZqhkiqgD7TMeM33ZdGY7GIRawa0SjBe3pxfqXdbU=",
+        "title": "Photo Video Inspection",
+        "description": "In the second stage, we will personally inspect the car you have selected in detail and send you a full video and photos in the format you prefer!"
+      },
+      {
+        "image": "https://cdn3d.iconscout.com/3d/premium/thumb/transfer-money-3d-icon-png-download-4797151.png",
+        "title": "Get an Estimate",
+        "description": "Request a detailed cost estimate in USD or EUR, covering both the vehicle price and shipping charges, prepared by our team."
+      },
+      {
+        "image": "https://media.istockphoto.com/id/1427330624/vector/3d-credit-card-secure-payment-with-chackmark-money-financial-security-for-online-shopping.jpg?s=612x612&w=0&k=20&c=XuRKnfWBKB0vmcCfV5VrecBlMIIdl2PhewVaggesSwQ=",
+        "title": "Confirm & Pay",
+        "description": "Finalize your order and complete the payment securely via international bank transfer for the provided invoice."
+      },
+      {
+        "image": "https://cdn3d.iconscout.com/3d/premium/thumb/container-ship-3d-icon-png-download-4288058.png",
+        "title": "Arrange Shipment",
+        "description": "We organize the quickest and most efficient shipping option for you, whether via container or Ro-Ro service."
+      },
+      {
+        "image": "https://img.freepik.com/premium-vector/document-3d-icon-sheet-paper-clipboard-todo-list-with-check-marks-3d-realistic-design-element_363543-556.jpg",
+        "title": "Track & Receive Documents",
+        "description": "Monitor your shipment with the container number and receive all necessary import documents through express courier for customs clearance."
+      }
+    ]
+  },
+  "loading_video": "Loading video...",
+
+  "error_loading_car_details": "Error loading car details",
+  "go_back": "Go Back",
+  "link_copied": "Link copied to clipboard",
+  "you_must_be_logged_in_to_comment": "You must be logged in to comment",
+  "you_must_enter_a_comment": "You must enter a comment",
+  "you_must_select_a_rating": "You must select a rating",
+   "comment_added_successfully": "Comment added successfully",
+  "error_adding_comment": "Error adding comment",
+  "you_must_be_logged_in_to_delete_comment": "You must be logged in to delete a comment",
+  "comment_deleted_successfully": "Comment deleted successfully",
+  "error_deleting_comment": "Error deleting comment",
+  "you_must_be_logged_in_to_buy_a_car": "You must be logged in to buy a car",
+  "you_must_enter_your_phone_number": "You must enter your phone number",
+  "car_purchase_successful_we_will_contact_you_soon": "Car purchased successfully, we will contact you soon",
+  "error_purchasing_car": "Error purchasing car",
+
+  "share": "Share",
+  "no_car_found": "No car found",
+  "car_details": "Car Details",
+  "buy_now": "Buy Now",
+  "comments": "Comments",
+  "add_comment": "Add Comment",
+  "your_rating": "Your Rating",
+  "submit": "Submit",
+  "cars":"cars",
+  "we_will_contact_you_shortly": "We will contact you shortly",
+  "enter_your_phone_number": "Enter your phone number",
+  "cancel": "Cancel",
+
+  "brand": "Brand",
+  "condition": "Condition",
+  "year": "Year",
+  "distance": "Distance",
+  "km": "km",
+  "fuelType": "Fuel Type",
+  "transmission": "Transmission",
+  "color": "Color",
+  "year_of_manufacture": "Year of Manufacture",
+  "registration_year": "Registration Year",
+  "price": "Price",
+
+  "faq": {
+    "title": "Frequently Asked Questions (FAQ)",
+    "items": [
+      {
+        "question": "Which countries does RT MOTORS export vehicles to?",
+        "answer": "We export vehicles from South Korea to almost every country in the world. Our main destinations include Central Asia, the Middle East, Europe, and Africa."
+      },
+      {
+        "question": "How long does shipping take and which factors influence it?",
+        "answer": "Delivery time depends on the destination. For Asia and the Middle East, it usually takes 2–4 weeks, while shipments to Europe and Africa may take 4–8 weeks."
+      },
+      {
+        "question": "What documents will I receive after the vehicle is shipped?",
+        "answer": "We provide all necessary documents, including the sales contract, invoice, vehicle registration, Bill of Lading (BL), and customs clearance papers."
+      },
+      {
+        "question": "Can I check the condition of the vehicle before purchase?",
+        "answer": "Yes, our team inspects every selected vehicle and provides detailed photos and videos. This way, you can verify the real condition of the car before making your purchase."
+      },
+      {
+        "question": "Can RT MOTORS help me find a specific vehicle model?",
+        "answer": "Yes, if you are looking for a particular brand, model, or specification, our team will search and source it directly from trusted Korean markets and auctions."
+      },
+      {
+        "question": "Do you offer warranty on exported vehicles?",
+        "answer": "Since vehicles are sold as export units, official warranty is not provided. However, we guarantee that the vehicle’s condition matches the inspection report, photos, and videos we share with you."
+      },
+      {
+        "question": "What shipping options are available?",
+        "answer": "We provide two main shipping methods: Ro-Ro (Roll-on/Roll-off) — cost-effective for multiple cars; and Container shipping — secure and suitable for high-value or luxury vehicles."
+      },
+      {
+        "question": "Why should I choose RT MOTORS over other exporters?",
+        "answer": "We ensure transparency, professional inspections, reliable shipping, and full document support. Our goal is to make car importing safe, fast, and hassle-free for our clients worldwide."
+      }
+    ]
+  },
+
+
+  "your_profile": "Your Profile",
+  "sign_out": "Sign out",
+  "your_orders": "Your Orders",
+  "error_loading_orders": "Error loading orders",
+  "id": "ID",
+  "tracking": "Tracking",
+  "price_consultation": "Price Consultation",
+  "contact_info": "Contact",
+  "date": "Date",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "edit": "Edit",
+  "save": "Save",
+  "first_name_required": "First name cannot be empty",
+  "first_name_updated_successfully": "First name updated successfully!",
+  "problem_updating_first_name": "There was a problem updating the first name.",
+  "last_name_required": "Last name cannot be empty",
+  "last_name_updated_successfully": "Last name updated successfully!",
+  "problem_updating_last_name": "There was a problem updating the last name."
+
 }

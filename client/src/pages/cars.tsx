@@ -18,18 +18,19 @@ import VideoPlayer from "@/components/shared/video-player";
 import { HashLink } from "react-router-hash-link";
 import { Header } from "@/components/shared/header";
 import ProgressiveImage from "@/components/shared/progress-image";
+import { useTranslation } from "react-i18next";
 
 export const Cars = () => {
   const { data, isLoading } = useSWR("/car", fetcher);
   const [selectedBrand, setSelectedBrand] = useState("all");
-
+  const {t} = useTranslation();
   if (isLoading) {
     return (
       <div className="min-h-screen pt-24">
         <Navbar />
         <div className="py-8 px-[5%]">
         <div className="flex items-center justify-between border-b-2 border-primary-foreground pb-6">
-            <h1 className="text-xl md:text-3xl font-bold text-white">All Cars</h1>
+            <h1 className="text-xl md:text-3xl font-bold text-white">{t("allCars")}</h1>
             <Skeleton className="w-36 h-10" />
           </div>
 
@@ -101,7 +102,7 @@ export const Cars = () => {
 
       {stock === 0 ? (
         <span className="absolute top-3 left-3 bg-red-500 text-white text-sm font-semibold px-3 py-1 rounded-md shadow">
-          Sold out
+          {t("soldOut")}
         </span>
       ) : status && status?.text?.length > 0 ? (
         <span
@@ -137,7 +138,7 @@ export const Cars = () => {
           <div>
               <p className="text-base font-bold text-black">
                 {currentPrice === 777 ? (
-                  "Price Consultation"
+                  <>{t("priceConsultation")}</>
                 ) : (
                   <>
                     ${currentPrice.toLocaleString()}{" "}
@@ -151,7 +152,7 @@ export const Cars = () => {
               </p>
             </div>
           <HashLink to={`/cars/${_id}/#detail`}   className="bg-gradient-to-l from-[#ff6b6b] to-[#ff8e8e] text-sm text-white px-3 py-1 rounded-md ">
-            View Details
+            {t("viewDetails")}
           </HashLink>
         </div>
     </div>
@@ -164,14 +165,14 @@ export const Cars = () => {
       <Navbar />
       <div className="py-8 px-[5%]" id="all">
         <div className="flex items-center justify-between border-b-2 border-primary-foreground pb-6">
-          <h1 className="text-xl md:text-3xl font-bold text-white">All Cars</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-white">{t("allCars")}</h1>
           <div>
             <Select onValueChange={setSelectedBrand}>
               <SelectTrigger className="bg-white">
-                <SelectValue placeholder="Filter by brand" />
+                <SelectValue placeholder={t("brands")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Any brand</SelectItem>
+                <SelectItem value="all">{t("brands")}</SelectItem>
                 <SelectItem value="mercedes-benz">Mercedes Benz</SelectItem>
                 <SelectItem value="bmw">BMW</SelectItem>
                 <SelectItem value="volkswagen">Volkswagen</SelectItem>
@@ -199,7 +200,7 @@ export const Cars = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
           {availableCars.length === 0 ? (
-            <p className="text-white">No available cars</p>
+            <p className="text-white">{t("noVehiclesFound")}</p>
           ) : (
             availableCars.map(renderCarCard)
           )}

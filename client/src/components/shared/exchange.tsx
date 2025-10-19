@@ -5,11 +5,12 @@ import { Input } from "../ui/input";
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslation } from "react-i18next";
 
 export const Exchange = () => {
   const { data, isLoading } = useSWR("/exchange", fetcher, { refreshInterval: 10000 });
   const [amount, setAmount] = useState(1);
-
+  const {t} = useTranslation();
   useEffect(() => {
     AOS.init({ duration: 800});
   }, []);
@@ -20,7 +21,7 @@ export const Exchange = () => {
         className="py-8 px-[5%]  rounded-xl"
         data-aos="fade-up"
       >
-        <h1 className="text-lg md:text-3xl font-bold text-white">Exchange Rates</h1>
+        <h1 className="text-sm md:text-3xl font-bold text-white">{t("exchange_rates")}</h1>
         <ul className="flex flex-col gap-4 mt-12 text-xl font-semibold md:flex-row md:items-center md:justify-between">
           {[...Array(5)].map((_, i) => (
             <li key={i} className="flex items-center gap-2">
@@ -40,11 +41,11 @@ export const Exchange = () => {
       <div 
       data-aos="fade-up"
       className="flex flex-col gap-2 md:flex-row md:justify-between md:items-center">
-        <h1 className="text-lg md:text-3xl font-bold">
-          Exchange Rates
+        <h1 className="text-sm md:text-3xl font-bold">
+          {t("exchange_rates")}
         </h1>
         <div className="flex items-center gap-2">
-          <h1 className="text-sm font-semibold">Enter amount in USD (Estimated amount):</h1>
+          <h1 className="text-xs font-semibold">{t("enter_amount")}:</h1>
          <Input
           type="text"
           className="w-32 bg-secondary border-primary text-black"

@@ -12,11 +12,12 @@ import { Skeleton } from "../ui/skeleton";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslation } from "react-i18next";
 
 export const Partners = () => {
   const { data, isLoading } = useSWR("/partner", fetcher);
   const partners = (data as PartnerTypes[]) || [];
-
+  const {t} = useTranslation();
   useEffect(() => {
     AOS.init({ duration: 800, });
   }, []);
@@ -25,7 +26,7 @@ export const Partners = () => {
     return (
       <div className="">
         <div className="py-8 px-[5%]" data-aos="fade-up">
-          <h1 className="text-lg md:text-3xl font-bold text-white">Our Partners</h1>
+          <h1 className="text-sm md:text-3xl font-bold text-white">{t("our_partners")}</h1>
           <div className="mt-8">
             <Carousel
               opts={{
@@ -53,7 +54,7 @@ export const Partners = () => {
   return (
     <div className="bg-[#171f3a] text-white">
       <div className="py-8 px-[5%]" data-aos="fade-up">
-        <h1 className="text-lg md:text-3xl font-bold">Our Partners</h1>
+        <h1 className="text-sm md:text-3xl font-bold">{t("our_partners")}</h1>
         <div className="mt-8">
           <Carousel
             opts={{
@@ -68,7 +69,7 @@ export const Partners = () => {
             ]}
           >
             <CarouselContent>
-              {partners.map(({ _id, image, url }) => (
+              {partners?.map(({ _id, image, url }) => (
                 <CarouselItem
                   key={_id}
                   className="basis-1/2 md:basis-1/4 lg:basis-1/5"
